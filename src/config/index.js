@@ -1,5 +1,4 @@
-import Production from './env_prod.js'
-import Development from './env_dev.js'
+import env from '@/config/env.js'
 
 //definir configuraciones de la aplicacion
 
@@ -7,18 +6,17 @@ const Config = {
 
     'version':'1.0.0.0 03-11-2022 19:22',
 
-    // dev o prod
-    'status': 'dev',
-
+    // development o production
+    'status': 'development',
 
     'get': function(key,value){
 
-        if(this.status === 'dev'){
-            return Development[key][value]
+        if(this.status === 'development'){
+            return env.development[key][value]
         }
 
-        if (this.status === 'prod'){
-            return Production[key][value]
+        if (this.status === 'production'){
+            return env.production[key][value]
         }
     }
 

@@ -56,7 +56,6 @@
             
             }
       
-            const pokemons = computed(()=> Store.state.pokemon )
             const urlsf = computed(()=> Store.state.urlsf )
 
             watch(listado,(value) => {
@@ -68,7 +67,6 @@
             })
       
             return {
-                pokemons,
                 urlsf,
                 listado,
                 consultar_anterior

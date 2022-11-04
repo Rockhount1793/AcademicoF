@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import Config from '../config/index.js'
+import Config from '@/config'
 
 const _urlsf = ()=>{ return Config.get('app','urlsf') }
 const _urlsb = ()=>{ return Config.get('app','urlsb') }
@@ -9,17 +9,22 @@ const store = createStore({
     
     state () {
         return {
+            
             version: _version(),
             urlsf: _urlsf(),
             urlsb: _urlsb(),
-            pokemon: []
+            user:{},
+            token: '',
+            login: false
+
         }
     },
     
     mutations: {
         
-        increment (state) {
-            state.count++
+        set_user(state,json){ 
+            state.login = true
+            state.user = json 
         }
 
     

@@ -1,8 +1,8 @@
 <template>
-    
-    <BarraInicio></BarraInicio>
 
     <div class="h-auto min-h-screen relative max-w-8xl bg-gradient-to-r from-cyan-600  to-cyan-800">
+  
+        <BarraInicio></BarraInicio>
   
         <div class="pt-5 lg:w-2/4 mx-auto">
   
@@ -24,7 +24,7 @@
                 </div>
   
                 <div class="z-0 fixed mx-auto w-3/4 sm:w-3/5 lg:w-2/5 xl:w-2/6 2xl:w-1/5 max-w-2xl">
-                    <img class="mx-auto w-full" :src="ursf+'/images/logo.svg' " />
+                    <img class="mx-auto w-full" :src="urlsf+'/images/logo.svg' " />
                 </div>
 
             </div>
@@ -43,15 +43,17 @@
 
     export default defineComponent({
 
+        name:'Acerca',
+
         components:{ BarraInicio },
 
         setup(){
 
-            const ursf = computed(()=> Store.state.urlsf )
+            const urlsf = computed(()=> Store.state.urlsf )
             const version = computed(()=> Store.state.version )
 
             return{
-                ursf,
+                urlsf,
                 version
             }
 
