@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Bienvenida from '../views/Bienvenida.vue'
+import Index from '@/components/general/Index.vue'
+import Sedes from '@/components/general/Sedes.vue'
+import Crear from '@/components/general/CrearSede.vue'
 
 const router = createRouter({
     
@@ -9,22 +12,25 @@ const router = createRouter({
 
         {
             path: '/',
-            name: 'bienvenida',
+            name: 'Bienvenida',
             component: Bienvenida
         },
-
         {
             path: '/entrar',
-            name: 'entrar',
+            name: 'Entrar',
             component: () => import(/* webpackChunkName: "entrar" */'../views/Entrar.vue')
         },
-
         {
             path: '/acerca',
-            name: 'acerca',
+            name: 'Acerca',
             component: () => import(/* webpackChunkName: "acerca" */'../views/Acerca.vue')
         },
-        
+        {
+            path: '/sedes',
+            name:'Sedes',
+            component: () => import(/* webpackChunkName: "sedes" */'../components/general/Sedes.vue'),
+            
+        },
         {
             path: '/:pathMatch(.*)*',
             name: 'Error',
@@ -32,6 +38,7 @@ const router = createRouter({
         }
       
     ]
+    
 })
 
 export default router

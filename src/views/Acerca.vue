@@ -43,9 +43,9 @@
 
     export default defineComponent({
 
-        name:'Acerca',
+        'name':'Acerca',
 
-        components:{ BarraInicio },
+        'components':{ BarraInicio },
 
         setup(){
 

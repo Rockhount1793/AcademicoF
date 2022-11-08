@@ -17,15 +17,15 @@
                 <form class="bg-gray-900 z-10 opacity-75 w-full shadow-lg rounded-lg px-8 pt-10 pb-3">
                     <div class="mb-4">
   
-                        <label for="username" class="sr-only">usuario</label>
-                        <input id="username" name="username" autocomplete="on" placeholder="usuario" type="text" class="text-center mt-2 border rounded w-full p-2 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" />
+                        <label for="email" class="sr-only">usuario</label>
+                        <input id="email" name="email" autocomplete="on" v-model="email" placeholder="usuario" type="text" class="text-center mt-2 border rounded w-full p-2 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" />
     
                         <label for="password" class="sr-only">contraseña</label>
-                        <input id="password" name="password" autocomplete="current-password" placeholder="contraseña" type="password" class="text-center mt-2 border rounded w-full p-2 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" />
+                        <input id="password" name="password" v-model="password" autocomplete="current-password" placeholder="contraseña" type="password" class="text-center mt-2 border rounded w-full p-2 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" />
   
                         <div class="flex mt-3 items-center justify-between">
                            <div class="flex items-center">
-                                <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
+                                <input id="remember-me" name="remember-me" v-model="sesion" type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" />
                                 <label for="remember-me" class="ml-2 block text-sm text-cyan-500">
                                   Mantener sesión iniciada
                                 </label>
@@ -67,27 +67,31 @@
 
     export default defineComponent({
 
-        name:'Entrar',
+        'name':'Entrar',
 
-        components:{
+        'components':{
             BarraInicio
         },
 
         setup(){
             // data 
-            const username = ref('leocj')
-            const password = ref('123456')
+            let email = ref('nzcaicedo@gmail.com')
+            let password = ref('123456')
+            let sesion = ref (true)
 
             // methods
             const entrar = ()=>{
-                Aplicacion.login({'username':username.value, 'password': password.value})
+                Aplicacion.login({'email':email.value, 'password': password.value, 'sesion': sesion})
             }
             
             const urlsf = computed(()=> Store.state.urlsf )
             
             return{
                 urlsf,
-                entrar
+                entrar,
+                email,
+                password,
+                sesion
             }
 
         },

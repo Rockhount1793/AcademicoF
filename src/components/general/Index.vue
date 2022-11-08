@@ -1,9 +1,7 @@
 
 <template>
 
-    <div class="h-auto min-h-screen relative max-w-8xl bg-gradient-to-r from-cyan-600  to-cyan-800">
-        
-        <BarraInicio></BarraInicio>
+    <div class="h-auto min-h-screen relative max-w-2xl bg-gradient-to-r from-cyan-600  to-cyan-800">
         
         <div class="h-4/6 pt-5 lg:w-2/4 mx-auto flex ">
   
@@ -12,11 +10,11 @@
                 <div class="flex-1 z-10 ">
     
                     <h1 class="z-10 text-7xl md:text-8xl text-white opacity-90 font-bold leading-tight text-center">
-                        Academico
+                        Index
                     </h1>
     
                     <p class="z-10 opacity-90 text-gray-300 leading-normal font-semibold text-base md:text-2xl mb-8 text-center">
-                       Plataforma de calificaciones
+                       Listado
                     </p>
     
                 </div>
@@ -35,17 +33,16 @@
   
 <script lang="js">
   
-    import BarraInicio from '@/components/framework/Barra_Inicio.vue'
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from '@/store'
   //import Aplicacion from "@/controller/index"
   
     export default defineComponent({
     
-        'name':'Bienvenida',
+        'name':'Sedes',
 
         'components':{
-            BarraInicio
+            
         },
 
         setup(){

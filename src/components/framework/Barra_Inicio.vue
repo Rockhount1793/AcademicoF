@@ -1,7 +1,7 @@
 
 <template>
 
-    <div class="border-b-2 border-cyan-800 max-w-8xl bg-gradient-to-r from-cyan-600  to-cyan-800 z-0">
+    <div class="border-b-2 border-cyan-800 max-w-8xl z-0">
     
         <div class="flow-root">
 
