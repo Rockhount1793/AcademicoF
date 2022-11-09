@@ -26,7 +26,20 @@
         },
 
         'store': async function(json){
-            console.log(json)
+
+            
+            const response = await Fetch.post('/sede/store',json)
+
+            if(response.error === 0){
+
+                Store.dispatch('add_sede',response.sede)
+
+            }
+
+            if(response.error == 500){
+                Aplicacion.redirect_home(response)
+            }
+            
         }
 
 

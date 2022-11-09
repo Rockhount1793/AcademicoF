@@ -22,6 +22,15 @@
     
         },
 
+        'erase_token': function(error){
+        
+            console.log(error)
+            localStorage.removeItem('token')
+            this.loading(false)
+            this.mini_loading(false)
+    
+        },
+
         'login': async function(json){
             
            const response = await Fetch.post('/login', json)
@@ -74,6 +83,36 @@
 
             }else{
                 cb()
+            }
+    
+        },
+
+        'check_login_home': async function(cb){
+
+            let status = Store.state.login
+            let bool_token = localStorage.getItem('token') ? true : false
+            
+            if( status || bool_token ){
+    
+                this.loading(true)
+    
+                const response = await Fetch.get('/index')
+
+                if(response.error === 0){
+    
+                    Store.commit('set_usuario',response.usuario)
+                    Store.commit('set_login',true)
+                    this.loading(false)
+                    cb()
+                }
+
+                if(response.error == 500){
+
+                    //console.log('consulta fallo')
+                    this.erase_token(response)
+            
+                }
+
             }
     
         },

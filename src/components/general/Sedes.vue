@@ -18,10 +18,10 @@
                     <p @click="seccion = 0" v-if="seccion == 1" class="shadow w-32 shadow-cyan-800 cursor-pointer rounded border bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-thin text-md"> Lista</p>
                 </div>
 
-                <div v-if="seccion == 0">
+                <div v-if="seccion == 0" class="mt-3">
                     <ul>
                         <li :key="index" v-for="(item, index,key) in  sedes ">
-                            <span>item</span>
+                            <span class="cursor-pointer px-2 h-5 rounded border border-gray-300 bg-indigo-100 capitalize text-gray-500 font-semibold">{{item.nombre_sede}}</span>
                         </li>
                     </ul>
                 </div>
@@ -112,14 +112,14 @@
                 }else{
                     
                     Sede.store({
-                        'nombre': nombre.value,
-                        'direccion': direccion.value,
-                        'telefono':  telefono.value,
-                        'email': email.value
+                        'nombre_sede': nombre.value,
+                        'direccion_sede': direccion.value,
+                        'telefono_sede':  telefono.value,
+                        'email_sede': email.value,
+                        'principal_sede': nombre.value,
+                        'estado_sede':1
                     })
                 }
-
-                
 
             }
       
@@ -155,9 +155,7 @@
                 
                 Aplicacion.check_login(()=>{
                     if(!Store.state.sedes.length){
-                        
                         Sede.index()
-                        
                     }
                 })
 

@@ -58,6 +58,18 @@ const store = createStore({
         },
 
     
+    },
+
+    actions:{
+
+        add_sede(state, json){
+            
+            let sedes = this.state.sedes
+            const result = [...sedes, json]
+            this.commit('set_sedes',result)
+        
+        }
+
     }
 
 })
