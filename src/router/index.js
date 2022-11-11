@@ -32,6 +32,18 @@ const router = createRouter({
             
         },
         {
+            path: '/lectivos',
+            name:'Lectivos',
+            component: () => import(/* webpackChunkName: "lectivos" */'../components/general/Lectivos.vue'),
+            
+        },
+        {
+            path: '/directores',
+            name:'Directores',
+            component: () => import(/* webpackChunkName: "directores" */'../components/general/Directores.vue'),
+            
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'Error',
             component: () => import(/* webpackChunkName: "error" */ '../views/Error.vue')

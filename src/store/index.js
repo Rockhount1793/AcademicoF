@@ -14,15 +14,19 @@ const store = createStore({
             version: _version(),
             urlsf: _urlsf(),
             urlsb: _urlsb(),
-            loading:false,
+            loading: false,
             mini_loading: false,
-            usuario:{'usuario_id':0, 'avatar':'default.png'},
+            usuario: {'usuario_id':0, 'avatar':'default.png'},
             token: '',
             login: false,
             seccion_num: [1,0],
 
             //# aplicacion
-            sedes:[]
+            sedes: [],
+            actual_sede: {'sede_id': 0, 'nombre_sede':'No seleccionada!'},
+            actual_lectivo: {'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0},
+            lectivos: [],
+            directores: []
 
         }
     },
@@ -57,6 +61,22 @@ const store = createStore({
             state.sedes = array
         },
 
+        set_actual_sede(state,json){ 
+            state.actual_sede = json
+        },
+
+        set_lectivos(state,array){ 
+            state.lectivos = array
+        },
+
+        set_actual_lectivo(state,json){ 
+            state.actual_lectivo = json
+        },
+
+        set_directores(state,array){ 
+            state.directores = array
+        },
+
     
     },
 
@@ -67,6 +87,22 @@ const store = createStore({
             let sedes = this.state.sedes
             const result = [...sedes, json]
             this.commit('set_sedes',result)
+        
+        },
+
+        add_lectivo(state, json){
+            
+            let lectivos = this.state.lectivos
+            const result = [...lectivos, json]
+            this.commit('set_lectivos',result)
+        
+        },
+
+        add_director(state, json){
+            
+            let directores = this.state.directores
+            const result = [...directores, json]
+            this.commit('set_directores',result)
         
         }
 

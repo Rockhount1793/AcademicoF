@@ -1,6 +1,6 @@
 <template>
 
-    <div class="h-auto min-h-screen relative max-w-8xl bg-gradient-to-r from-cyan-600  to-cyan-800">
+    <div class="h-auto min-h-screen relative max-w-8xl">
   
         <BarraInicio></BarraInicio>
   
@@ -17,7 +17,7 @@
                     <div class="flex-1 text-sm text-gray-100 items-center p-3">
     
                         <h2 class="text-center">versión {{ version}}</h2>
-                        <h2 class="text-center">2023 - NZCAICEDO</h2>
+                        <h2 class="text-center text-lg font-semibold text-pink-500">2023 - Leo Caicedo</h2>
     
                     </div>
     

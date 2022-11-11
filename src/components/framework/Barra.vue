@@ -1,18 +1,18 @@
 <template>
 
-    <div class="border-b border-cyan-600 max-w-8xl z-0">
+    <div class="p-1 z-0">
       
         <div class="flow-root ">
   
             <div class="flex items-center w-auto float-left mr-3">
   
                 <Router-link to="/" class="ml-2 mr-2">
-                    <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" :src="urlsf+'/images/logo.svg'" alt="Kardex logo" />
+                    <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" :src="urlsf+'/images/logo.svg'" alt="logo" />
                 </Router-link>
     
                 <div class="font-semibold text-sm text-gray-100 ">
-                    <p class="h-4">Principal</p>
-                    <p class="h-4">Sede</p>
+                    <p class="h-4">Sede: {{sede.nombre_sede}}</p>
+                    <p class="h-4">Lectivo: {{lectivo.numero_lectivo}}</p>
                 </div>
     
             </div>
@@ -114,11 +114,8 @@
             const version = computed(()=> Store.state.version )
             const user = computed(()=> Store.state.usuario )
             const seccion_num = computed(()=> Store.state.seccion_num )
-
-
-            watch(urlsf,(value) => {
-
-            })
+            const sede = computed(()=> Store.state.actual_sede )
+            const lectivo = computed(()=> Store.state.actual_lectivo )
       
             return {
                 version,
@@ -129,6 +126,8 @@
                 set_seccion_num,
                 set_route,
                 seccion_num,
+                sede,
+                lectivo,
                 cerrar_sesion
             }
       

@@ -11,7 +11,7 @@
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg"> Sedes</p>
+                <p class="text-gray-100 text-center font-semibold text-lg"> Directores</p>
 
                 <div class="px-2">
                     <p @click="seccion = 1" v-if="seccion == 0" class="shadow-md w-32 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>
@@ -22,43 +22,31 @@
 
                 <div v-if="seccion == 0" class="mt-3">
                     <ul>
-                        <li :key="index" v-for="(item, index,key) in  sedes ">
+                        <li :key="index" v-for="(item, index,key) in  directores">
                             
-                            <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center">
-
-                                <div>
-                                    
-                                    <button v-if="actual_sede.sede_id == item.sede_id" class="shadow-md w-28 shadow-cyan-500 rounded bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Actual
-                                    </button>
-                                    
-                                    <button v-else @click="set_sede(item)" class="shadow-md w-28 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Seleccionar
-                                    </button>
-
-                                </div>
-                                
-                                <div class="w-full lg:w-1/3 truncate">
-                                    <p class="mt-2 lg:mt-0.5 cursor-pointer px-2 p-0.5 rounded border border-gray-300 bg-indigo-100 capitalize text-gray-500 font-semibold">{{item.nombre_sede}}</p>
-                                </div>
-
+                            <div class="p-2 w-full lg:w-1/2 truncate">
+                                <p class="px-2 h-7 rounded border border-gray-300 bg-indigo-100 capitalize text-gray-500 font-semibold">{{item.nombres}} {{item.apellidos}} : {{item.telefono}}</p>
                             </div>
                         
                         </li>
-
                     </ul>
                 </div>
 
                 <div v-if="seccion == 1" class="mt-3 flex-1 lg:grid lg:grid-cols-2 gap-2 rounded p-1 px-2">
 
                     <div class="flex-1 py-2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="nombre">Nombre</p>
-                        <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="nombre" type="text" placeholder=" Nombre"/>
+                        <p class="font-semibold text-gray-100 text-md px-2">Nombres</p>
+                        <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="nombre" type="text" placeholder=" Nombres"/>
                     </div>
 
                     <div class="flex-1 py-2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="direccion">Dirección</p>
-                        <input v-model="direccion" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="direccion" type="text" placeholder=" K0 #0-0"/>
+                        <p class="font-semibold text-gray-100 text-md px-2">Apellidos</p>
+                        <input v-model="apellido" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="apellido" type="text" placeholder=" Apellidos"/>
+                    </div>
+
+                    <div class="flex-1 py-2">
+                        <p class="font-semibold text-gray-100 text-md px-2">Identificación</p>
+                        <input v-model="identificacion" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="direccion" type="text" placeholder=" Identificación"/>
                     </div>
 
                     <div class="flex-1 py-2">
@@ -98,12 +86,12 @@
     import Store from '@/store'
     import Router from '@/router'
     import Aplicacion from '@/controllers/Aplicacion'
-    import Sede from '@/controllers/Sede'
+    import Director from '@/controllers/Director'
     import Utilities from '@/utilities'
   
     export default defineComponent({
     
-        'name':'Sedes',
+        'name':'Directores',
 
         'components':{
             Barra, Lateral
@@ -116,7 +104,8 @@
             const seccion = ref(0)
 
             let nombre = ref('')
-            let direccion = ref('')
+            let apellido = ref('')
+            let identificacion = ref('')
             let telefono = ref('')
             let email = ref('')
             let errores = ref([])
@@ -130,8 +119,9 @@
 
                 errores = []
 
-                if(!nombre.value.length){ errores.push('ingrese nombre') }
-                if(!direccion.value.length){ errores.push('ingrese dirección') }
+                if(!nombre.value.length){ errores.push('ingrese nombres') }
+                if(!apellido.value.length){ errores.push('ingrese apellidos') }
+                if(!identificacion.value.length){ errores.push('ingrese identificación') }
                 if(!telefono.value.length){ errores.push('ingrese teléfono') }
                 if(!email.value.length){ errores.push('ingrese email') }
                 if(!Utilities.check_email(email.value)){ errores.push('formato de email incorrecto!') }
@@ -140,40 +130,34 @@
                     alert(errores[0])
                 }else{
                     
-                    Sede.store({
-                        'nombre_sede': nombre.value,
-                        'direccion_sede': direccion.value,
-                        'telefono_sede':  telefono.value,
-                        'email_sede': email.value,
-                        'principal_sede': nombre.value,
-                        'estado_sede':1
+                    Director.store({
+                        'nombres': nombre.value,
+                        'apellidos': apellido.value,
+                        'identificacion': identificacion.value,
+                        'telefono':  telefono.value,
+                        'email': email.value,
+                        'estado':1
                     })
+
                 }
 
             }
-
-            const set_sede = (json)=>{
-                Store.commit('set_actual_sede',json)
-            }
       
-            //# computed
             const urlsf = computed(()=> Store.state.urlsf )
-            const sedes = computed(()=> Store.state.sedes )
-            const actual_sede = computed(()=> Store.state.actual_sede )
+            const directores = computed(()=> Store.state.directores )
       
             return {
                 urlsf,
                 listado,
                 set_route,
-                actual_sede,
-                sedes,
+                directores,
                 seccion,
                 nombre,
-                direccion,
+                apellido,
+                identificacion,
                 telefono,
                 email,
-                guardar,
-                set_sede
+                guardar
             }
       
         },
@@ -183,8 +167,8 @@
             this.$nextTick(()=>{
                 
                 Aplicacion.check_login(()=>{
-                    if(!Store.state.sedes.length){
-                        Sede.index()
+                    if(!Store.state.directores.length){
+                        Director.index()
                     }
                 })
 

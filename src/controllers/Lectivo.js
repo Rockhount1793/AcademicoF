@@ -6,13 +6,13 @@
 
     const Controller = {
 
-        'index': async function(){
+        'index': async function(json){
             
-            const response = await Fetch.get('/sede/index')
+            const response = await Fetch.post('/lectivo/index',json)
            
             if(response.error === 0){
 
-                Store.commit('set_sedes', response.sedes)
+                Store.commit('set_lectivos', response.lectivos)
 
             }
 
@@ -26,11 +26,11 @@
         'store': async function(json){
 
             
-            const response = await Fetch.post('/sede/store',json)
+            const response = await Fetch.post('/lectivo/store',json)
 
             if(response.error === 0){
 
-                Store.dispatch('add_sede',response.sede)
+                Store.dispatch('add_lectivo',response.lectivo)
 
             }
 

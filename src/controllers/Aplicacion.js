@@ -74,9 +74,8 @@
                     cb()
                 }
 
-                if(response.error == 500){
+                if(response.error > 0){
 
-                    //console.log('consulta fallo')
                     this.redirect_home(response)
             
                 }
@@ -106,9 +105,8 @@
                     cb()
                 }
 
-                if(response.error == 500){
+                if(response.error > 0){
 
-                    //console.log('consulta fallo')
                     this.erase_token(response)
             
                 }

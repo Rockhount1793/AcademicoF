@@ -1,7 +1,7 @@
 
 <template>
 
-    <div class="h-auto min-h-screen relative max-w-8xl bg-gradient-to-r from-cyan-600  to-cyan-800">
+    <div class="h-auto min-h-screen relative max-w-8xl ">
         
         <BarraInicio></BarraInicio>
         

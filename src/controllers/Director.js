@@ -7,13 +7,11 @@
     const Controller = {
 
         'index': async function(){
-            
-            const response = await Fetch.get('/sede/index')
-           
+
+            const response = await Fetch.get('/director/index')
+
             if(response.error === 0){
-
-                Store.commit('set_sedes', response.sedes)
-
+                Store.commit('set_directores', response.directores)
             }
 
             if(response.error > 0){
@@ -25,12 +23,11 @@
 
         'store': async function(json){
 
-            
-            const response = await Fetch.post('/sede/store',json)
+            const response = await Fetch.post('/director/store',json)
 
             if(response.error === 0){
 
-                Store.dispatch('add_sede',response.sede)
+                Store.dispatch('add_director',response.director)
 
             }
 
