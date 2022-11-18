@@ -8,19 +8,9 @@
 
         'index': async function(cb){
             
-            let config = Aplicacion.read_config('sede_id')
             let json = Store.state.actual_sede
-            if(config.status){
-                json = config
-            }
             
-            if(json.sede_id == 0){
-
-                alert('No hay una sede seleccionada!')
-                return 0
-            }
-
-            const response = await Fetch.post('/lectivo/index',config)
+            const response = await Fetch.post('/lectivo/index',json)
            
             if(response.error === 0){
 

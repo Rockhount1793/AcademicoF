@@ -25,7 +25,7 @@
                         <li :key="index" v-for="(item, index,key) in  directores">
                             
                             <div class="p-2 w-full lg:w-1/2 truncate">
-                                <p class="px-2 h-7 rounded border border-gray-300 bg-indigo-100 capitalize text-gray-500 font-semibold">{{item.nombres}} {{item.apellidos}} : {{item.telefono}}</p>
+                                <p class="px-2 h-7 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.nombres}} {{item.apellidos}} : {{item.telefono}}</p>
                             </div>
                         
                         </li>

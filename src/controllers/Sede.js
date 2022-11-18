@@ -15,6 +15,7 @@
 
                 Store.commit('set_sedes', response.sedes)
 
+                //existe la configurtación 'sede_id' ? 
                 const config = Aplicacion.read_config('sede_id')
                 
                 if(config.status){

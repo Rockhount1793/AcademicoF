@@ -72,6 +72,7 @@
     
                     Store.commit('set_usuario',response.usuario)
                     Store.commit('set_login',true)
+                    this.load_default_config()
                     this.loading(false)
                     cb()
                 }
@@ -141,6 +142,20 @@
                 }
             },200)
 
+
+        },
+
+        'load_default_config': function(){
+
+            
+            const sede_id = this.read_config('sede_id')
+            const nombre_sede = this.read_config('nombre_sede')
+
+            if(sede_id.status && nombre_sede.status){
+
+                Store.commit('set_actual_sede', { 'sede_id': sede_id.sede_id,'nombre_sede': nombre_sede.nombre_sede})
+
+            }
 
         }
     }

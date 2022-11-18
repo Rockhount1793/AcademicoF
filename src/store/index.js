@@ -106,6 +106,7 @@ const store = createStore({
                 if(res){
 
                     Utilities.set_config({"sede_id": json.sede_id})
+                    Utilities.set_config({"nombre_sede": json.nombre_sede})
                     this.commit('set_actual_sede',json)
                     
                 }
@@ -113,7 +114,7 @@ const store = createStore({
             })
             .catch((err)=>{
                 console.log(err)
-               // window.location.reload()
+                //window.location.reload()
             })
             .finally(()=>{
 
