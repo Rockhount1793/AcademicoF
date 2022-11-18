@@ -181,12 +181,12 @@ const funciones = {
     },
 
     set_config(json){
-        
+       
         let bool_config = localStorage.getItem('config') ? true : false
   
         if(!bool_config){
 
-           localStorage.setItem('config',JSON.stringify([json]))
+           localStorage.setItem('config',JSON.stringify(json))
 
         }else{
 
@@ -194,32 +194,8 @@ const funciones = {
     
           if( typeof config_ == 'object'){
 
-              let bool_exist = false
-              var index = 0
-
-              for (let index_ = 0; index_ < config_.length; index_++){
-
-                  if( Object.keys(config_[index_])[0] == Object.keys(json)[0] ){
-                      index = index_
-                      bool_exist = true  
-                      break  
-                  }
-
-              }
-
-              if(bool_exist){
-
-                let new_config1 = config_.splice(index,0)     
-                new_config1.push(json)
-                localStorage.setItem('config',JSON.stringify(new_config1))
-
-              }else{
-  
-
-                let new_config0 = config_.push(json)
-                localStorage.setItem('config',JSON.stringify(new_config0))
-    
-              }
+              config_[ Object.keys(json)[0] ] = Object.values(json)[0]
+              localStorage.setItem('config',JSON.stringify(config_))
 
           }
 
@@ -230,8 +206,6 @@ const funciones = {
 
     check_config(string_key){
 	
-        //{'sede_id': 0}
-  
         let bool_config = localStorage.getItem('config') ? true : false
   
         let result = {'status':false }
@@ -240,19 +214,11 @@ const funciones = {
   
             let config_ = JSON.parse(localStorage.getItem('config'))
     
-            if( typeof config_ == 'object'){
-                for (let index_ = 0; index_ < config_.length; index_++){
-
-                  if( Object.keys(config_[index_])[0] == string_key ){
-
-                      result.status = true
-                      result[string_key] = Object.values(config_[index_])[0]
-                    
-                      break  
-                  }
-
-              }
-
+            if( typeof config_ == 'object' && config_[string_key]){
+              
+                result.status = true
+                result[string_key] = config_[string_key]    
+              
             }
   
         }

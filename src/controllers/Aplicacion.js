@@ -1,7 +1,9 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import Router from "@/router"
+    import  Router  from "@/router"
+    import {  useRoute, useRouter }  from "vue-router"
+    import Utilities from '@/utilities'
     
     const token = ()=>{ return Store.state.token }
 
@@ -115,6 +117,32 @@
     
         },
 
+        'read_config': function(string_config){
+
+            try {
+                
+                return Utilities.check_config(string_config)
+                
+            } catch (error) {
+
+                console.log(error)
+                return {'status':false }
+            }
+
+        },
+
+        'check_seccion': function(){
+
+            setTimeout(()=>{
+                if(Store.state.seccion_num[0] == 0){
+                    const secciones = Store.state.secciones
+                    const num = secciones[Router.currentRoute.value.name]
+                    Store.commit('set_seccion_num',[num,0])
+                }
+            },200)
+
+
+        }
     }
 
     export default Controller

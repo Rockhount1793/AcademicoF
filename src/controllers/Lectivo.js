@@ -6,14 +6,26 @@
 
     const Controller = {
 
-        'index': async function(json){
+        'index': async function(cb){
             
-            const response = await Fetch.post('/lectivo/index',json)
+            let config = Aplicacion.read_config('sede_id')
+            let json = Store.state.actual_sede
+            if(config.status){
+                json = config
+            }
+            
+            if(json.sede_id == 0){
+
+                alert('No hay una sede seleccionada!')
+                return 0
+            }
+
+            const response = await Fetch.post('/lectivo/index',config)
            
             if(response.error === 0){
 
                 Store.commit('set_lectivos', response.lectivos)
-
+                cb()
             }
 
             if(response.error > 0){

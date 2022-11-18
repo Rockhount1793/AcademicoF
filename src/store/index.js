@@ -20,7 +20,21 @@ const store = createStore({
             usuario: {'usuario_id':0, 'avatar':'default.png'},
             token: '',
             login: false,
-            seccion_num: [1,0],
+            secciones:{
+                'Sedes': 1,  
+                'Lectivos': 2,  
+                'Grados': 3,  
+                'Asignaturas': 4,  
+                'Logros': 5,  
+                'Calificaciones': 6,  
+                'Matriculas': 7,  
+                'Docentes': 8,  
+                'Estudiantes': 9,  
+                'Personas': 10, 
+                'Directores': 11, 
+                'Generables': 12 
+            },
+            seccion_num: [0,0],
             config:[{ 'name':'sede_id','valor':0}],
 
             //# aplicacion
@@ -91,7 +105,7 @@ const store = createStore({
 
                 if(res){
 
-                    Utilities.set_config({'sede_id':json.sede_id})
+                    Utilities.set_config({"sede_id": json.sede_id})
                     this.commit('set_actual_sede',json)
                     
                 }
@@ -99,12 +113,18 @@ const store = createStore({
             })
             .catch((err)=>{
                 console.log(err)
-                window.location.reload()
+               // window.location.reload()
             })
             .finally(()=>{
 
             })
+        },
 
+        async change_lectivo(state,json){
+
+            Utilities.set_config({'numero_lectivo':json.numero_lectivo})
+            this.commit('set_actual_lectivo',json)
+                    
         },
 
         async clear_data(){

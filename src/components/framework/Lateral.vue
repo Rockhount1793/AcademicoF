@@ -204,6 +204,7 @@
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from '@/store'
     import Router from "@/router"
+    import Aplicacion from '@/controllers/Aplicacion'
   
     export default defineComponent({
     
@@ -260,7 +261,11 @@
         },
     
         mounted(){
-        
+            this.$nextTick(()=>{
+                
+                Aplicacion.check_seccion()
+                
+            })
         }
   
     })

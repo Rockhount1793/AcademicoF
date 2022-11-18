@@ -15,20 +15,14 @@
 
                 Store.commit('set_sedes', response.sedes)
 
-                try {
+                const config = Aplicacion.read_config('sede_id')
                 
-                    const config = Utilities.check_config('sede_id')
+                if(config.status){
+    
+                    let array_result = response.sedes.filter((s)=> s.sede_id == config.sede_id )
                     
-                    if(config.status){
-
-                        let array_result = response.sedes.filter((s)=> s.sede_id == config.sede_id )
-                        
-                        if(array_result.length){ Store.commit('set_actual_sede',array_result[0]) }
-
-                    }
-
-                } catch (error) {
-                    console.log(error)
+                    if(array_result.length){ Store.commit('set_actual_sede',array_result[0]) }
+    
                 }
                       
             }
@@ -56,7 +50,6 @@
             }
             
         }
-
 
     }
 

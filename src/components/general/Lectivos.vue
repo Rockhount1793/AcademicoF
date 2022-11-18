@@ -28,7 +28,7 @@
                             <p class="px-2 font-semibold text-gray-100"> No hay lectivos creados</p>
                         </li>
                     
-                        <li :key="index" v-for="(item, index,key) in lectivos ">
+                        <li :key="index" v-for="(item, index, key) in lectivos ">
             
                             <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center">
                                 
@@ -145,13 +145,20 @@
             const filter_director = (director_id)=>{
 
                 let array = directores.value
-                let res = array.filter((d)=>{ return d.director_id == director_id })
-                return res[0].nombres +' '+ res[0].apellidos
 
+                if(array.length){
+                    let res = array.filter((d)=>{ return d.director_id == director_id })
+                    return res[0].nombres +' '+ res[0].apellidos
+                }else{
+                    return ''
+                }
+                
             }
 
             const set_lectivo = (json)=>{
-                Store.commit('set_actual_lectivo',json)
+
+                Store.dispatch('change_lectivo',json)
+                
             }
       
             //# computed
@@ -185,18 +192,11 @@
                 Aplicacion.check_login(()=>{
                     
                     if(!Store.state.lectivos.length){
-                        
-                        if(Store.state.actual_sede.sede_id){
-                            Lectivo.index({'sede_id': Store.state.actual_sede.sede_id})
-                        }else{
-                            alert('Por favor seleccione una sede!')
-                        }
-
+                        Lectivo.index(()=>{
+                            Director.index()
+                        })   
                     }
 
-                    if(!Store.state.directores.length){
-                       setTimeout(()=>{ Director.index() },500) 
-                    }
 
                 })
 
