@@ -21,8 +21,14 @@
                 <hr class="mt-3 border border-gray-500" />
 
                 <div v-if="seccion == 0" class="mt-3">
+
                     <ul>
-                        <li :key="index" v-for="(item, index,key) in  lectivos ">
+
+                        <li v-if="!lectivos.length">
+                            <p class="px-2 font-semibold text-gray-100"> No hay lectivos creados</p>
+                        </li>
+                    
+                        <li :key="index" v-for="(item, index,key) in lectivos ">
             
                             <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center">
                                 
@@ -39,7 +45,7 @@
                                 </div>
                                 
                                 <div class="w-full lg:w-1/3 truncate">
-                                    <p class="mt-2 lg:mt-0.5 px-2 p-0.5 rounded border border-gray-300 bg-indigo-100 capitalize text-gray-500 font-semibold">{{filter_director(item.director_id)}}</p>
+                                    <p class="mt-2 lg:mt-0.5 cursor-pointer px-2 p-0.5 bg-gray-800 capitalize text-gray-100 font-semibold">{{filter_director(item.director_id)}}</p>
                                 </div>
 
                             </div>

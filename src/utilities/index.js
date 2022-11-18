@@ -1,8 +1,8 @@
-import Store from '@/store'
-import Router from '@/router'
-import Aplicacion from '@/controllers/Aplicacion'
+     import Store from '@/store'
+     import Router from '@/router'
+     import Aplicacion from '@/controllers/Aplicacion'
 
-const funciones ={
+const funciones = {
 
     check_login(){ if(!Store.state.user.id >= 1 && !Store.state.token.length && !Store.state.login){ Router.push({'name':'Home'}); return false }else{ return true } },  
     check_email(i){ var e = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); return e.test(i); },
@@ -94,52 +94,6 @@ const funciones ={
       } 
     },
 
-    color_milestone(i){
-    
-      let temp = []
-
-      switch(i.color){
-          //grd
-        case 1: temp = ['bg-gradient-to-r from-gray-100 to-red-400','text-red-500','text-gray-600']; break;
-        case 3: temp = ['bg-gradient-to-r from-gray-100 to-yellow-400','text-yellow-500','text-gray-600']; break;
-        case 5: temp = ['bg-gradient-to-r from-gray-100 to-green-400','text-green-500','text-gray-600']; break;
-        case 7: temp = ['bg-gradient-to-r from-gray-100 to-blue-400','text-blue-500','text-gray-600']; break;
-        case 9: temp = ['bg-gradient-to-r from-gray-100 to-indigo-400','text-indigo-500','text-gray-600']; break;
-        case 11: temp = ['bg-gradient-to-r from-gray-100 to-purple-400','text-purple-500','text-gray-600']; break;
-        case 13: temp = ['bg-gradient-to-r from-gray-100 to-pink-400','text-pink-500','text-gray-600']; break;
-        case 15: temp = ['bg-gradient-to-r from-gray-100 to-gray-400','text-gray-500','text-black']; break;
-          //lgrd
-        case 2: temp = ['bg-gradient-to-r from-gray-100 to-red-300','text-red-400','text-gray-500']; break;
-        case 4: temp = ['bg-gradient-to-r from-gray-100 to-yellow-300','text-yellow-400','text-gray-500']; break;
-        case 6: temp = ['bg-gradient-to-r from-gray-100 to-green-300','text-green-400','text-gray-500']; break;
-        case 8: temp = ['bg-gradient-to-r from-gray-100 to-blue-300','text-blue-400','text-gray-500']; break;
-        case 10: temp = ['bg-gradient-to-r from-gray-100 to-indigo-300','text-indigo-400','text-gray-500']; break;
-        case 12: temp = ['bg-gradient-to-r from-gray-100 to-purple-300','text-purple-400','text-gray-500']; break;
-        case 14: temp = ['bg-gradient-to-r from-gray-100 to-pink-300','text-pink-400','text-gray-500']; break;
-        case 16: temp = ['bg-gradient-to-r from-gray-100 to-gray-300','text-gray-400','text-gray-700']; break;
-          //solid
-        case 17: temp = ['bg-red-500','text-red-500','text-white']; break;
-        case 18: temp = ['bg-yellow-500','text-yellow-500','text-white']; break;
-        case 19: temp = ['bg-green-500','text-green-500','text-white']; break;
-        case 20: temp = ['bg-blue-500','text-blue-500','text-white']; break;
-        case 21: temp = ['bg-indigo-500','text-indigo-500','text-white']; break;
-        case 22: temp = ['bg-purple-500','text-purple-500','text-white']; break;
-        case 23: temp = ['bg-pink-500','text-pink-500','text-white']; break;
-        case 24: temp = ['bg-gray-500','text-gray-500','text-white']; break;
-          //lsolid
-        case 25: temp = ['bg-red-400','text-red-400','text-gray-700']; break;
-        case 26: temp = ['bg-yellow-400','text-yellow-400','text-gray-700']; break;
-        case 27: temp = ['bg-green-400','text-green-400','text-gray-700']; break;
-        case 28: temp = ['bg-blue-400','text-blue-400','text-gray-700']; break;
-        case 29: temp = ['bg-indigo-400','text-indigo-400','text-gray-700']; break;
-        case 30: temp = ['bg-purple-400','text-purple-400','text-gray-700']; break;
-        case 31: temp = ['bg-pink-400','text-pink-400','text-gray-700']; break;
-        case 32: temp = ['bg-gray-400','text-gray-100','text-white']; break;
-
-      }
-
-      return temp
-    },
 
     // palabra_buscada, arreglo en que buscar, key del arreglo a comparar //
     buscador_texto(word,array,clave){ 
@@ -158,109 +112,36 @@ const funciones ={
         return temp
     },
 
-    codigo_sugerido(nombre,mark,referencia){
-
-        var nombre_i = nombre.toString()
-        var marca_i = mark.toString()
-        let referencia_i = referencia.toString()
-
-        var codigo= ''
-        var bloques_n = nombre_i.split(' ')
-
-        if(bloques_n.length >= 2){
-
-            for(let index = 0; index <bloques_n.length; index++){
-
-              codigo = codigo + bloques_n[index].charAt(0).toUpperCase()
-
-            }
-
-        }else{
-            if(nombre_i.length >= 2){
-                codigo = nombre_i.charAt(0).toUpperCase() + nombre_i.charAt(nombre_i.length - 1).toUpperCase()
-            }else{
-                codigo = nombre_i.charAt(0).toUpperCase()
-            }
-        }
-
-        var marca= ''
-        var bloques_m = marca_i.split(' ')
-
-        if(bloques_m.length >= 2){
-
-            for(let index = 0; index <bloques_m.length; index++){
-
-              marca = marca + bloques_m[index].charAt(0).toUpperCase()
-
-            }
-
-        }else{
-            if(marca_i.length >= 2){
-                marca = marca_i.charAt(0).toUpperCase() + marca_i.charAt(marca_i.length - 1).toUpperCase()
-            }
-            else{
-                marca = marca_i.charAt(0).toUpperCase()
-            }
-        }
-
-        var code = ''
-        
-        if(nombre_i.length && marca_i.length && referencia_i){
-            code = codigo +'-'+marca+'-'+ referencia_i.toUpperCase()
-        }
-        
-        return code.slice(0,99)
-
-    },
-
-    generar_id(){
-
-      let chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";  
-
-      let string_length = 8
-      let randomstringGenerator = ''
-  
-      for (let i=0; i<string_length; i++){
-
-          let rnum = Math.floor(Math.random() * chars.length)
-          randomstringGenerator += chars.substring(rnum,rnum+1)
-
-      }
-
-      return randomstringGenerator
-
-    },
-
-    check_config(vista,name_config){
+    check_config_vista(vista,name_config){
 	
-      var vista_config = vista ? vista:[]
-      var config = []
-
-      let bool_config = localStorage.getItem(name_config) ? true : false
-
-      if(bool_config){
-
-        let config_ = JSON.parse(localStorage.getItem(name_config))
-
-        if( typeof config_ == 'object'){
-          config = config_
+        var vista_config = vista ? vista:[]
+        var config = []
+  
+        let bool_config = localStorage.getItem(name_config) ? true : false
+  
+        if(bool_config){
+  
+            let config_ = JSON.parse(localStorage.getItem(name_config))
+    
+            if( typeof config_ == 'object'){
+                config = config_
+            }
+  
         }
 
-      }
-
-      var control0 = true 
-      var control1 = true
+        var control0 = true 
+        var control1 = true
       
-      for (let index1 = 0; index1 < vista_config.length; index1++){
+        for (let index1 = 0; index1 < vista_config.length; index1++){
           
             let value_item_config = config[index1]
             let value_item_vista = vista_config[index1]
             
             if(typeof value_item_config == 'object' &&  Object.keys(value_item_config).length == Object.keys(value_item_vista).length){
     
-                 var variables = Object.keys(value_item_vista).length
+                var variables = Object.keys(value_item_vista).length
                 
-                  for(let index = 0; index < variables; index++){
+                for(let index = 0; index < variables; index++){
                   
                    if(Object.keys(value_item_vista)[index] == Object.keys(value_item_config)[index]){
                    
@@ -280,23 +161,107 @@ const funciones ={
                    }
                    
     
-                 }
+                }
+
             }else{
                control0 = false
                control1 = false
                 
             }
     
-      }
+        }
       
-      if(control0 && control1){
-          return config
-      }else{
-          return vista_config   
-      }
+        if(control0 && control1){
+            return config
+        }else{
+            return vista_config   
+        }
       
     
+    },
+
+    set_config(json){
+        
+        let bool_config = localStorage.getItem('config') ? true : false
+  
+        if(!bool_config){
+
+           localStorage.setItem('config',JSON.stringify([json]))
+
+        }else{
+
+          let config_ = JSON.parse(localStorage.getItem('config'))
+    
+          if( typeof config_ == 'object'){
+
+              let bool_exist = false
+              var index = 0
+
+              for (let index_ = 0; index_ < config_.length; index_++){
+
+                  if( Object.keys(config_[index_])[0] == Object.keys(json)[0] ){
+                      index = index_
+                      bool_exist = true  
+                      break  
+                  }
+
+              }
+
+              if(bool_exist){
+
+                let new_config1 = config_.splice(index,0)     
+                new_config1.push(json)
+                localStorage.setItem('config',JSON.stringify(new_config1))
+
+              }else{
+  
+
+                let new_config0 = config_.push(json)
+                localStorage.setItem('config',JSON.stringify(new_config0))
+    
+              }
+
+          }
+
+        }
+      
+
+    },
+
+    check_config(string_key){
+	
+        //{'sede_id': 0}
+  
+        let bool_config = localStorage.getItem('config') ? true : false
+  
+        let result = {'status':false }
+
+        if(bool_config){
+  
+            let config_ = JSON.parse(localStorage.getItem('config'))
+    
+            if( typeof config_ == 'object'){
+                for (let index_ = 0; index_ < config_.length; index_++){
+
+                  if( Object.keys(config_[index_])[0] == string_key ){
+
+                      result.status = true
+                      result[string_key] = Object.values(config_[index_])[0]
+                    
+                      break  
+                  }
+
+              }
+
+            }
+  
+        }
+      
+        return result
+    
     }
+
+
 }
 
 export default funciones

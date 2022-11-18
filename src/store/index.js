@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import Config from '@/config'
+import Utilities from '@/utilities'
 
 const _urlsf = ()=>{ return Config.get('app','urlsf') }
 const _urlsb = ()=>{ return Config.get('app','urlsb') }
@@ -20,6 +21,7 @@ const store = createStore({
             token: '',
             login: false,
             seccion_num: [1,0],
+            config:[{ 'name':'sede_id','valor':0}],
 
             //# aplicacion
             sedes: [],
@@ -81,6 +83,43 @@ const store = createStore({
     },
 
     actions:{
+
+        async change_sede(state,json){
+
+            const result = await this.dispatch('clear_data')
+            .then((res)=>{
+
+                if(res){
+
+                    Utilities.set_config({'sede_id':json.sede_id})
+                    this.commit('set_actual_sede',json)
+                    
+                }
+
+            })
+            .catch((err)=>{
+                console.log(err)
+                window.location.reload()
+            })
+            .finally(()=>{
+
+            })
+
+        },
+
+        async clear_data(){
+
+            return await new Promise((res,rej)=>{
+                
+                this.commit('set_actual_lectivo',{'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0})
+                this.commit('set_lectivos',[])
+                this.commit('set_directores',[])
+
+                res(true)
+
+            })
+
+        },
 
         add_sede(state, json){
             

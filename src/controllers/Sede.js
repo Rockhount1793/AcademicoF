@@ -3,6 +3,7 @@
     import Fetch from "@/fetch"
     import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
+    import Utilities from '@/utilities'
 
     const Controller = {
 
@@ -14,6 +15,22 @@
 
                 Store.commit('set_sedes', response.sedes)
 
+                try {
+                
+                    const config = Utilities.check_config('sede_id')
+                    
+                    if(config.status){
+
+                        let array_result = response.sedes.filter((s)=> s.sede_id == config.sede_id )
+                        
+                        if(array_result.length){ Store.commit('set_actual_sede',array_result[0]) }
+
+                    }
+
+                } catch (error) {
+                    console.log(error)
+                }
+                      
             }
 
             if(response.error > 0){

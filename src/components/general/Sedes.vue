@@ -39,7 +39,7 @@
                                 </div>
                                 
                                 <div class="w-full lg:w-1/3 truncate">
-                                    <p class="mt-2 lg:mt-0.5 cursor-pointer px-2 p-0.5 rounded border border-gray-300 bg-indigo-100 capitalize text-gray-500 font-semibold">{{item.nombre_sede}}</p>
+                                    <p class="mt-2 lg:mt-0.5 cursor-pointer px-2 p-0.5 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.nombre_sede}}</p>
                                 </div>
 
                             </div>
@@ -112,6 +112,7 @@
         setup(){
         
             //# data 
+
             const listado = ref(false)
             const seccion = ref(0)
 
@@ -153,7 +154,7 @@
             }
 
             const set_sede = (json)=>{
-                Store.commit('set_actual_sede',json)
+                Store.dispatch('change_sede',json)
             }
       
             //# computed
