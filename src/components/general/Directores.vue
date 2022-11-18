@@ -22,6 +22,11 @@
 
                 <div v-if="seccion == 0" class="mt-3">
                     <ul>
+
+                        <li v-if="!directores.length">
+                            <p class="px-2 font-semibold text-gray-100"> No hay directores creados</p>
+                        </li>
+
                         <li :key="index" v-for="(item, index,key) in  directores">
                             
                             <div class="p-2 w-full lg:w-1/2 truncate">
@@ -101,7 +106,7 @@
         
             //# data 
             const listado = ref(false)
-            const seccion = ref(0)
+            let seccion = ref(0)
 
             let nombre = ref('')
             let apellido = ref('')
@@ -138,6 +143,8 @@
                         'email': email.value,
                         'estado':1
                     })
+
+                    seccion.value = 0
 
                 }
 

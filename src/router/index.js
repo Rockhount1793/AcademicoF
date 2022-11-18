@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Bienvenida from '../views/Bienvenida.vue'
-import Index from '@/components/general/Index.vue'
-import Sedes from '@/components/general/Sedes.vue'
-import Crear from '@/components/general/CrearSede.vue'
 
 const router = createRouter({
     

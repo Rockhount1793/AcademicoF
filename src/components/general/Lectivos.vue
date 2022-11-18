@@ -34,7 +34,7 @@
                                 
                                 <div>
                                     
-                                    <button v-if="actual_lectivo.lectivo_id == item.lectivo_id" class="shadow-md w-64 shadow-cyan-500 rounded bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                    <button v-if="actual_lectivo.numero_lectivo == item.numero_lectivo" class="shadow-md w-64 shadow-cyan-500 rounded bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                                         Actual : {{item.numero_lectivo}}
                                     </button>
                                     

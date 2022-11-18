@@ -22,6 +22,11 @@
 
                 <div v-if="seccion == 0" class="mt-3">
                     <ul>
+                        
+                        <li v-if="!sedes.length">
+                            <p class="px-2 font-semibold text-gray-100"> No hay sedes creadas</p>
+                        </li>
+
                         <li :key="index" v-for="(item, index,key) in  sedes ">
                             
                             <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center">
@@ -114,7 +119,7 @@
             //# data 
 
             const listado = ref(false)
-            const seccion = ref(0)
+            let seccion = ref(0)
 
             let nombre = ref('')
             let direccion = ref('')
@@ -149,6 +154,8 @@
                         'principal_sede': nombre.value,
                         'estado_sede':1
                     })
+
+                    seccion.value = 0
                 }
 
             }

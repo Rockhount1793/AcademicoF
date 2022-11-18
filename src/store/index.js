@@ -17,7 +17,7 @@ const store = createStore({
             urlsb: _urlsb(),
             loading: false,
             mini_loading: false,
-            usuario: {'usuario_id':0, 'avatar':'default.png'},
+            usuario: {'usuario_id':0, 'avatar':'default.png','configuracion':{}},
             token: '',
             login: false,
             secciones:{
@@ -105,8 +105,12 @@ const store = createStore({
 
                 if(res){
 
-                    Utilities.set_config({"sede_id": json.sede_id})
-                    Utilities.set_config({"nombre_sede": json.nombre_sede})
+                    //Utilities.set_config({"sede_id": json.sede_id})
+                    
+                    let usuario = this.state.usuario
+                    usuario.configuracion['sede_id'] = json.sede_id
+                    this.commit('set_usuario',usuario)
+
                     this.commit('set_actual_sede',json)
                     
                 }
@@ -123,7 +127,10 @@ const store = createStore({
 
         async change_lectivo(state,json){
 
-            Utilities.set_config({'numero_lectivo':json.numero_lectivo})
+            let usuario = this.state.usuario
+            usuario.configuracion['lectivo_id'] = json.lectivo_id
+            this.commit('set_usuario',usuario)
+
             this.commit('set_actual_lectivo',json)
                     
         },

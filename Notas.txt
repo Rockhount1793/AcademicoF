@@ -1,7 +1,6 @@
 pendientes
 
--configurar los directores por cada usuario
-
--guardar la sede actual en localstorage, al recargar una vista y traer el usuario, traer las sedes,
- si hay una sede seleccionada configurarla y traer los datos de la vista 
+- Guardar configuracion y cargarla al cargar perfil
+-configurar los directores por cada usuario OK
+ 
  
