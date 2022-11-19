@@ -225,6 +225,23 @@ const funciones = {
       
         return result
     
+    },
+
+    check_usuario_config(usuario,string_key){
+      
+      let result = {'status':false }
+
+      let config_ = usuario.configuracion
+  
+      if( typeof config_ == 'object' && config_[string_key]){
+        
+          result.status = true
+          result[string_key] = config_[string_key]    
+        
+      }
+
+      return result
+  
     }
 
 

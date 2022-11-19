@@ -103,8 +103,8 @@
         setup(){
         
             //# data 
-            const listado = ref(false)
-            const seccion = ref(0)
+            let listado = ref(false)
+            let seccion = ref(0)
 
             let numero = ref(2023)
             let director_id = ref(0)
@@ -137,6 +137,8 @@
                         'sede_id':  actual_sede.value.sede_id,
                         'estado_lectivo':1
                     })
+
+                    seccion.value = 0
 
                 }
 

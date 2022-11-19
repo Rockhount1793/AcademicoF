@@ -1,6 +1,7 @@
 import { createStore } from 'vuex'
 import Config from '@/config'
 import Utilities from '@/utilities'
+import Usuario from '@/controllers/Usuario'
 
 const _urlsf = ()=>{ return Config.get('app','urlsf') }
 const _urlsb = ()=>{ return Config.get('app','urlsb') }
@@ -109,7 +110,11 @@ const store = createStore({
                     
                     let usuario = this.state.usuario
                     usuario.configuracion['sede_id'] = json.sede_id
+                    usuario.configuracion['nombre_sede'] = json.nombre_sede
+                    usuario.configuracion['numero_lectivo'] = 0
                     this.commit('set_usuario',usuario)
+
+                    Usuario.update(usuario)
 
                     this.commit('set_actual_sede',json)
                     
@@ -128,8 +133,10 @@ const store = createStore({
         async change_lectivo(state,json){
 
             let usuario = this.state.usuario
-            usuario.configuracion['lectivo_id'] = json.lectivo_id
+            usuario.configuracion['numero_lectivo'] = json.numero_lectivo
             this.commit('set_usuario',usuario)
+
+            Usuario.update(usuario)
 
             this.commit('set_actual_lectivo',json)
                     

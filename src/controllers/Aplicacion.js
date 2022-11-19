@@ -17,6 +17,7 @@
             console.log(error)
             localStorage.removeItem('token')
             Store.commit('set_login',false)
+            Store.commit('set_seccion_num',[0,0])
             Store.commit('set_usuario',{'usuario_id':0, 'avatar': 'default.png'})
             Router.push({'name':'Bienvenida'})
             this.loading(false)
@@ -43,6 +44,20 @@
                 Store.commit('set_token', response.token)
                 Store.commit('set_login',true)
 
+                let check_sede_id = Utilities.check_usuario_config(response.usuario,'sede_id')
+                let check_nombre_sede = Utilities.check_usuario_config(response.usuario,'nombre_sede')
+                let check_numero_lectivo = Utilities.check_usuario_config(response.usuario,'numero_lectivo')
+
+                    
+                if(check_sede_id.status && check_nombre_sede.status){
+                
+                    Store.commit('set_actual_sede',{ 'sede_id': check_sede_id.sede_id ,'nombre_sede': check_nombre_sede.nombre_sede} )
+                }
+
+                if(check_numero_lectivo.status){
+                    Store.commit('set_actual_lectivo',{ 'sede_id': 0 ,'numero_lectivo': check_numero_lectivo.numero_lectivo} )
+                }
+                
                 if(json.sesion){
                     localStorage.setItem('token',response.token)
                 }
@@ -72,7 +87,22 @@
     
                     Store.commit('set_usuario',response.usuario)
                     Store.commit('set_login',true)
-                    this.load_default_config()
+                    
+                    
+                    let check_sede_id = Utilities.check_usuario_config(response.usuario,'sede_id')
+                    let check_nombre_sede = Utilities.check_usuario_config(response.usuario,'nombre_sede')
+                    let check_numero_lectivo = Utilities.check_usuario_config(response.usuario,'numero_lectivo')
+
+                    
+                    if(check_sede_id.status && check_nombre_sede.status){
+                    
+                        Store.commit('set_actual_sede',{ 'sede_id': check_sede_id.sede_id ,'nombre_sede': check_nombre_sede.nombre_sede} )
+                    }
+
+                    if(check_numero_lectivo.status){
+                        Store.commit('set_actual_lectivo',{ 'sede_id': 0 ,'numero_lectivo': check_numero_lectivo.numero_lectivo} )
+                    }
+
                     this.loading(false)
                     cb()
                 }

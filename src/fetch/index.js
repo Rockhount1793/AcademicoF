@@ -96,6 +96,42 @@
 
             return res
 
+        },
+
+        'put' : async function(ext, body){
+            
+            let options = {
+            
+                method: 'PUT',
+
+                headers: {
+                    'Accept': "application/json",
+                    'Content-Type': "application/json;charset=UTF-8",
+                    '_token': this.token()
+                },
+
+                body: JSON.stringify(body)
+
+            }
+            
+
+            const res = await fetch(_urlsb() + '/api' + ext , options)
+            .then((response) => response.json())
+            .then((data) => {
+                
+                return data
+
+            })
+            .catch((error) => {
+
+                console.log(error)
+                console.error('timeout exceeded') 
+                return {'error': 500, 'message':'query failed' }
+
+            })
+
+            return res
+
         }
 
     }
