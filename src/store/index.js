@@ -43,6 +43,8 @@ const store = createStore({
             actual_sede: {'sede_id': 0, 'nombre_sede':'No seleccionada!'},
             actual_lectivo: {'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0},
             lectivos: [],
+            grados:[],
+            docentes:[],
             directores: []
 
         }
@@ -78,6 +80,10 @@ const store = createStore({
             state.sedes = array
         },
 
+        set_grados(state,array){ 
+            state.grados = array
+        },
+
         set_actual_sede(state,json){ 
             state.actual_sede = json
         },
@@ -88,6 +94,10 @@ const store = createStore({
 
         set_actual_lectivo(state,json){ 
             state.actual_lectivo = json
+        },
+
+        set_docentes(state,array){ 
+            state.docentes = array
         },
 
         set_directores(state,array){ 
@@ -169,6 +179,22 @@ const store = createStore({
             let lectivos = this.state.lectivos
             const result = [...lectivos, json]
             this.commit('set_lectivos',result)
+        
+        },
+
+        add_grado(state, json){
+            
+            let grados = this.state.lectivos
+            const result = [...grados, json]
+            this.commit('set_grados',result)
+        
+        },
+
+        add_docente(state, json){
+            
+            let directores = this.state.docentes
+            const result = [...directores, json]
+            this.commit('set_docentes',result)
         
         },
 

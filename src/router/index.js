@@ -35,6 +35,12 @@ const router = createRouter({
             
         },
         {
+            path: '/grados',
+            name:'Grados',
+            component: () => import(/* webpackChunkName: "lectivos" */'../components/general/Grados.vue'),
+            
+        },
+        {
             path: '/directores',
             name:'Directores',
             component: () => import(/* webpackChunkName: "directores" */'../components/general/Directores.vue'),

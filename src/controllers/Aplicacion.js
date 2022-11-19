@@ -25,6 +25,25 @@
     
         },
 
+        'set_config_user': function(usuario){
+
+            let check_sede_id = Utilities.check_usuario_config(usuario,'sede_id')
+            let check_nombre_sede = Utilities.check_usuario_config(usuario,'nombre_sede')
+
+            let check_lectivo_id = Utilities.check_usuario_config(usuario,'lectivo_id')
+            let check_numero_lectivo = Utilities.check_usuario_config(usuario,'numero_lectivo')
+        
+            if(check_sede_id.status && check_nombre_sede.status){
+            
+                Store.commit('set_actual_sede',{ 'sede_id': check_sede_id.sede_id ,'nombre_sede': check_nombre_sede.nombre_sede} )
+            }
+
+            if(check_lectivo_id.status && check_numero_lectivo.status){
+                Store.commit('set_actual_lectivo',{ 'lectivo_id': check_lectivo_id.lectivo_id ,'numero_lectivo': check_numero_lectivo.numero_lectivo} )
+            }
+
+        },
+
         'erase_token': function(error){
         
             console.log(error)
@@ -44,19 +63,7 @@
                 Store.commit('set_token', response.token)
                 Store.commit('set_login',true)
 
-                let check_sede_id = Utilities.check_usuario_config(response.usuario,'sede_id')
-                let check_nombre_sede = Utilities.check_usuario_config(response.usuario,'nombre_sede')
-                let check_numero_lectivo = Utilities.check_usuario_config(response.usuario,'numero_lectivo')
-
-                    
-                if(check_sede_id.status && check_nombre_sede.status){
-                
-                    Store.commit('set_actual_sede',{ 'sede_id': check_sede_id.sede_id ,'nombre_sede': check_nombre_sede.nombre_sede} )
-                }
-
-                if(check_numero_lectivo.status){
-                    Store.commit('set_actual_lectivo',{ 'sede_id': 0 ,'numero_lectivo': check_numero_lectivo.numero_lectivo} )
-                }
+                this.set_config_user(response.usuario)
                 
                 if(json.sesion){
                     localStorage.setItem('token',response.token)
@@ -88,20 +95,7 @@
                     Store.commit('set_usuario',response.usuario)
                     Store.commit('set_login',true)
                     
-                    
-                    let check_sede_id = Utilities.check_usuario_config(response.usuario,'sede_id')
-                    let check_nombre_sede = Utilities.check_usuario_config(response.usuario,'nombre_sede')
-                    let check_numero_lectivo = Utilities.check_usuario_config(response.usuario,'numero_lectivo')
-
-                    
-                    if(check_sede_id.status && check_nombre_sede.status){
-                    
-                        Store.commit('set_actual_sede',{ 'sede_id': check_sede_id.sede_id ,'nombre_sede': check_nombre_sede.nombre_sede} )
-                    }
-
-                    if(check_numero_lectivo.status){
-                        Store.commit('set_actual_lectivo',{ 'sede_id': 0 ,'numero_lectivo': check_numero_lectivo.numero_lectivo} )
-                    }
+                    this.set_config_user(response.usuario)
 
                     this.loading(false)
                     cb()
