@@ -6,12 +6,17 @@
 
     const Controller = {
 
-        'index': async function(){
+        'index': async function(cb){
 
-            const response = await Fetch.get('/grado/index')
+            let sede = Store.state.actual_sede
+            let lectivo = Store.state.actual_lectivo
+            let json = {'sede_id': sede.sede_id, 'lectivo_id': lectivo.lectivo_id}
+
+            const response = await Fetch.post('/grado/index',json)
 
             if(response.error === 0){
                 Store.commit('set_grados', response.grados)
+                cb()
             }
 
             if(response.error > 0){
@@ -23,7 +28,6 @@
         'store': async function(json){
 
             const response = await Fetch.post('/grado/store',json)
-
             if(response.error === 0){
 
                 Store.dispatch('add_grado',response.grado)

@@ -1,6 +1,7 @@
     
     import Store from '@/store/'
     import Config from '@/config/'
+    import Aplicacion from '@/controllers/Aplicacion'
 
     // 'Content-Type': 'application/x-www-form-urlencoded',
     
@@ -43,6 +44,8 @@
 
             }
             
+            Aplicacion.loading(true)
+
             const res = await fetch(_urlsb() + '/api' + ext , options)
             .then((response) => response.json())
             .then((data) => {
@@ -56,7 +59,10 @@
                 console.error('timeout exceeded') 
                 return {'error': 500 }
 
+            }).finally(()=>{
+                Aplicacion.loading(false)
             })
+
 
             return res
 
@@ -78,6 +84,7 @@
 
             }
             
+            Aplicacion.loading(true)
 
             const res = await fetch(_urlsb() + '/api' + ext , options)
             .then((response) => response.json())
@@ -92,6 +99,8 @@
                 console.error('timeout exceeded') 
                 return {'error': 500 }
 
+            }).finally(()=>{
+                Aplicacion.loading(false)
             })
 
             return res
@@ -113,8 +122,9 @@
                 body: JSON.stringify(body)
 
             }
-            
 
+            Aplicacion.loading(true)
+            
             const res = await fetch(_urlsb() + '/api' + ext , options)
             .then((response) => response.json())
             .then((data) => {

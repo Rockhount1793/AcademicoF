@@ -20,8 +20,8 @@
             Store.commit('set_seccion_num',[0,0])
             Store.commit('set_usuario',{'usuario_id':0, 'avatar': 'default.png'})
             Router.push({'name':'Bienvenida'})
-            this.loading(false)
-            this.mini_loading(false)
+            //this.loading(false)
+            //this.mini_loading(false)
     
         },
 
@@ -86,8 +86,6 @@
             
             if(!status && bool_token ){
     
-                this.loading(true)
-    
                 const response = await Fetch.get('/index')
 
                 if(response.error === 0){
@@ -97,7 +95,6 @@
                     
                     this.set_config_user(response.usuario)
 
-                    this.loading(false)
                     cb()
                 }
 
@@ -120,8 +117,6 @@
             
             if( status || bool_token ){
     
-                this.loading(true)
-    
                 const response = await Fetch.get('/index')
 
                 if(response.error === 0){
@@ -129,7 +124,6 @@
                     Store.commit('set_usuario',response.usuario)
                     this.set_config_user(response.usuario)
                     Store.commit('set_login',true)
-                    this.loading(false)
                     cb()
                 }
 

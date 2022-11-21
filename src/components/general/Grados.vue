@@ -34,18 +34,14 @@
                                 
                                 <div>
                                     
-                                    <button v-if="actual_lectivo.numero_grado == item.numero_grado" class="shadow-md w-64 shadow-cyan-500 rounded bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Actual : {{item.nombre_grado}} : {{item.numero_grado}}
-                                    </button>
+                                    <div class="w-64 rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                        {{item.nombre}} : {{item.numero}}
+                                    </div>
                                     
-                                    <button v-else @click="set_lectivo(item)" class="shadow-md w-64 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Seleccionar : {{item.numero_grado}}
-                                    </button>
-
                                 </div>
                                 
-                                <div class="w-full lg:w-1/3 truncate">
-                                    <p class="mt-2 lg:mt-0.5 cursor-pointer px-2 p-0.5 bg-gray-800 capitalize text-gray-100 font-semibold">{{filter_director(item.director_id)}}</p>
+                                <div class="w-full md:w-1/2 lg:w-1/3 truncate">
+                                    <p class="mt-2 lg:mt-0.5 px-2 p-0.5 rounded bg-cyan-900 capitalize text-gray-100 font-semibold"><span class="hidden lg:inline">Director:</span> {{filter_director(item.director_id)}}</p>
                                 </div>
 
                             </div>
@@ -95,7 +91,7 @@
     import Router from '@/router'
     import Aplicacion from '@/controllers/Aplicacion'
     import Grado from '@/controllers/Grado'
-    import Director from '@/controllers/Docente'
+    import Docente from '@/controllers/Docente'
   
     export default defineComponent({
     
@@ -121,7 +117,7 @@
                 director_id.value = number
             }
 
-            const set_route = (json)=>{ 
+            const set_route = (json)=>{
                 Router.push(json)
             }
 
@@ -159,17 +155,11 @@
                 let array = directores.value
 
                 if(array.length){
-                    let res = array.filter((d)=>{ return d.director_id == director_id })
+                    let res = array.filter((d)=>{ return d.docente_id == director_id })
                     return res[0].nombres +' '+ res[0].apellidos
                 }else{
                     return ''
                 }
-                
-            }
-
-            const set_lectivo = (json)=>{
-
-                Store.dispatch('change_lectivo',json)
                 
             }
       
@@ -178,13 +168,12 @@
             const grados = computed(()=> Store.state.grados )
             const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
-            const directores = computed(()=> Store.state.directores )
+            const directores = computed(()=> Store.state.docentes )
 
             return {
                 urlsf,
                 listado,
                 set_route,
-                set_lectivo,
                 grados,
                 seccion,
                 nombre,
@@ -206,8 +195,8 @@
                     
                     if(!Store.state.grados.length){
                         Grado.index(()=>{
-                            Director.index()
-                        })   
+                            Docente.index()
+                        })
                     }
 
                 })
