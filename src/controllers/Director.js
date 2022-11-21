@@ -31,7 +31,11 @@
 
             }
 
-            if(response.error > 0){
+            if(response.error == 400){
+                alert(response.message)
+            }
+
+            if(response.error == 500){
                 Aplicacion.redirect_home(response)
             }
             
