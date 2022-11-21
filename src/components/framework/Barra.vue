@@ -2,9 +2,9 @@
 
     <div class="p-1 z-0">
       
-        <div class="flow-root ">
+        <div class="flex justify-between">
   
-            <div class="flex items-center w-auto float-left mr-3">
+            <div class="flex items-center w-auto mr-3">
   
                 <Router-link to="/" class="ml-2 mr-2">
                     <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" :src="urlsf+'/images/logo.svg'" alt="logo" />
@@ -16,8 +16,12 @@
                 </div>
     
             </div>
+            
+            <div class=" w-12 h-10">
+                <img v-if="cargador" class="rounded-full" :src="urlsf+'/images/cargador.gif'" alt="cargador" />
+            </div>
   
-            <div class="float-right flex items-center p-0.5">
+            <div class="flex items-center p-0.5">
   
                 
                 <div class="mr-2">
@@ -95,6 +99,7 @@
     import { useRoute, RouterLink, RouterView } from 'vue-router'
     import Store from '@/store'
 
+
     export default defineComponent({
 
         name: 'Barra',
@@ -116,6 +121,7 @@
             const seccion_num = computed(()=> Store.state.seccion_num )
             const sede = computed(()=> Store.state.actual_sede )
             const lectivo = computed(()=> Store.state.actual_lectivo )
+            const cargador = computed(()=> Store.state.loading )
       
             return {
                 version,
@@ -128,7 +134,8 @@
                 seccion_num,
                 sede,
                 lectivo,
-                cerrar_sesion
+                cerrar_sesion,
+                cargador
             }
       
         },

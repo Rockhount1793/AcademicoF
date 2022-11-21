@@ -11,7 +11,7 @@
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg"> Directores</p>
+                <p class="text-gray-100 text-center font-semibold text-lg"> Docentes</p>
 
                 <div class="px-2">
                     <p @click="seccion = 1" v-if="seccion == 0" class="shadow-md w-32 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>
@@ -23,11 +23,11 @@
                 <div v-if="seccion == 0" class="mt-3">
                     <ul>
 
-                        <li v-if="!directores.length">
-                            <p class="px-2 font-semibold text-gray-100"> No hay directores creados</p>
+                        <li v-if="!docentes.length">
+                            <p class="px-2 font-semibold text-gray-100"> No hay docentes creados</p>
                         </li>
 
-                        <li :key="index" v-for="(item, index,key) in  directores">
+                        <li :key="index" v-for="(item, index,key) in  docentes">
                             
                             <div class="p-2 w-full lg:w-1/2 truncate">
                                 <p class="px-2 h-7 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.nombres}} {{item.apellidos}}</p>
@@ -91,12 +91,12 @@
     import Store from '@/store'
     import Router from '@/router'
     import Aplicacion from '@/controllers/Aplicacion'
-    import Director from '@/controllers/Director'
+    import Docente from '@/controllers/Docente'
     import Utilities from '@/utilities'
   
     export default defineComponent({
     
-        'name':'Directores',
+        'name':'Docentes',
 
         'components':{
             Barra, Lateral
@@ -130,16 +130,18 @@
                 if(!telefono.value.length){ errores.push('ingrese teléfono') }
                 if(!email.value.length){ errores.push('ingrese email') }
                 if(!Utilities.check_email(email.value)){ errores.push('formato de email incorrecto!') }
+                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
 
                 if(errores.length){
                     alert(errores[0])
                 }else{
                     
-                    Director.store({
+                    Docente.store({
                         'nombres': nombre.value,
                         'apellidos': apellido.value,
                         'identificacion': identificacion.value,
                         'telefono':  telefono.value,
+                        'sede_id':  actual_sede.value.sede_id,
                         'email': email.value,
                         'estado':1
                     })
@@ -151,13 +153,14 @@
             }
       
             const urlsf = computed(()=> Store.state.urlsf )
-            const directores = computed(()=> Store.state.directores )
-      
+            const docentes = computed(()=> Store.state.docentes )
+            const actual_sede = computed(()=> Store.state.actual_sede )
+            
             return {
                 urlsf,
                 listado,
                 set_route,
-                directores,
+                docentes,
                 seccion,
                 nombre,
                 apellido,
@@ -174,8 +177,8 @@
             this.$nextTick(()=>{
                 
                 Aplicacion.check_login(()=>{
-                    if(!Store.state.directores.length){
-                        Director.index()
+                    if(!Store.state.docentes.length){
+                        Docente.index()
                     }
                 })
 

@@ -41,6 +41,12 @@ const router = createRouter({
             
         },
         {
+            path: '/docentes',
+            name:'Docentes',
+            component: () => import(/* webpackChunkName: "directores" */'../components/general/Docentes.vue'),
+            
+        },
+        {
             path: '/directores',
             name:'Directores',
             component: () => import(/* webpackChunkName: "directores" */'../components/general/Directores.vue'),

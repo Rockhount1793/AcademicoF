@@ -158,6 +158,7 @@ const store = createStore({
                 
                 this.commit('set_actual_lectivo',{'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0})
                 this.commit('set_lectivos',[])
+                this.commit('set_docentes',[])
                 this.commit('set_directores',[])
 
                 res(true)

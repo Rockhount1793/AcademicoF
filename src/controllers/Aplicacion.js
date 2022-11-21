@@ -2,7 +2,7 @@
     import Store  from "@/store"
     import Fetch from "@/fetch"
     import  Router  from "@/router"
-    import {  useRoute, useRouter }  from "vue-router"
+    import { useRoute, useRouter }  from "vue-router"
     import Utilities from '@/utilities'
     
     const token = ()=>{ return Store.state.token }
@@ -127,6 +127,7 @@
                 if(response.error === 0){
     
                     Store.commit('set_usuario',response.usuario)
+                    this.set_config_user(response.usuario)
                     Store.commit('set_login',true)
                     this.loading(false)
                     cb()
