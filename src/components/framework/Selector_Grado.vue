@@ -4,18 +4,20 @@
 
         <div class="relative col-span-12 lg:col-span-12 ">
 
-            <button type="button" @click="mostrar_menu()" class="w-full border border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-blue-900 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            <button type="button" @click="mostrar_menu()" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" class="w-full border border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-blue-900 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
 
                 <div class=" flex items-center justify-between space-x-1 w-full">
 
                     <span class="block capitalize font-semibold text-sm text-indigo-500 hover:text-indigo-400">
-                       {{director_select.nombres}}  {{director_select.apellidos}}
+                       {{grado_select.nombre}} : {{grado_select.numero}}
                     </span>
 
                     <span class="flex right-0 inset-y-0 items-center pr-2 pointer-events-none">
-                        <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-pink-600">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                        
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-pink-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
                         </svg>
+                          
                     </span>
 
                 </div>
@@ -46,18 +48,18 @@
                 
                 <div class="h-48 overflow-auto">
 
-                    <ul :key="dir.index" v-for="dir in directores_com" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="py-0 text-base leading-6 shadow-xs focus:outline-none sm:text-sm sm:leading-5">
+                    <ul :key="grd.index" v-for="grd in grados_com" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="py-0 text-base leading-6 shadow-xs focus:outline-none sm:text-sm sm:leading-5">
 
-                        <li  @click="set_director(dir);mostrar_menu();" id="listbox-item-0" role="option" class="h-6 text-gray-900 cursor-pointer hover:bg-gray-200 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out select-none py-1 pl-3 pr-9">
+                        <li  @click="set_grado(grd);mostrar_menu();" id="listbox-item-0" role="option" class="h-6 text-gray-900 cursor-pointer hover:bg-gray-200 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out select-none py-1 pl-3 pr-9">
                         
                             <div class="flex items-center space-x-3">
 
-                                <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 text-pink-600">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-pink-600">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 3.75V16.5L12 14.25 7.5 16.5V3.75m9 0H18A2.25 2.25 0 0120.25 6v12A2.25 2.25 0 0118 20.25H6A2.25 2.25 0 013.75 18V6A2.25 2.25 0 016 3.75h1.5m9 0h-9" />
                                 </svg>
-
+                                
                                 <span class="font-semibold text-gray-700 text-sm ">
-                                    {{dir.nombres}} - {{dir.apellidos}}       
+                                    {{grd.nombre}} : {{grd.numero}}       
                                 </span>
 
                             </div>
@@ -80,12 +82,13 @@
     
     import Store from '@/store'
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
-    import Director from '@/controllers/Director'
+    import Grado from '@/controllers/Grado'
     import Utilities from '@/utilities'
+    import Docente from '@/controllers/Docente'
 
     export default defineComponent({
 
-        name: 'Selector-Director',
+        name: 'Selector-Grado',
 
         components:{  },
 
@@ -95,15 +98,17 @@
 
         setup(props, { emit }){
 
-
             //# data
-            const director_id = ref(0)
+            const grado_id = ref(0)
             const buscador_nombre = ref('')
             let modulo = ref(false)
 
             //# methods
-            const set_director = (json)=>{
-                director_id.value = json.director_id
+            const set_grado = (json)=>{
+
+                grado_id.value = json.grado_id
+                Store.commit('set_actual_grado',json)
+
             }
 
             const mostrar_menu = ()=>{
@@ -112,7 +117,11 @@
 
                     modulo.value = true 
                     
-                    if(!Store.state.directores.length){ Director.index() }
+                    if(!Store.state.grados.length){ 
+                        Grado.index(()=>{
+                            if(!Store.state.docentes.length){ Docente.index(()=>{}) }
+                        }) 
+                    }
                 
                     setTimeout(() => {
                         document.getElementById('nombre').focus()
@@ -125,7 +134,7 @@
             }
 
             const emitir = (number)=>{
-               emit('set_director',number)
+              // emit('set_grado',number)
             }
             
             const color_chart = (number, contador_charts)=>{
@@ -157,44 +166,48 @@
 
             })
 
-            const directores = computed(()=>{ return Store.state.directores })
+            const grados = computed(()=>{ return Store.state.grados })
             
-            const directores_com = computed(()=>{
+            const grados_com = computed(()=>{
 
                 let todos = []
 
                 var count_nombre = buscador_nombre.value.toString()
 
                 if(count_nombre.length > 4){
-                    todos = Store.state.directores
+                    todos = Store.state.grados
                 }
 
                 let temp_n = todos
-                if(count_nombre.length > 4){ temp_n = Utilities.buscador_texto(count_nombre,todos,'nombres') }
+                if(count_nombre.length > 4){ temp_n = Utilities.buscador_texto(count_nombre,todos,'nombre') }
 
                 if(temp_n.length >= 1){
                     return temp_n.slice(0,10)
                 }else{
-                    return Store.state.directores.slice(0,500)
+                    return Store.state.grados.slice(0,100)
                 }
 
             })
 
-            const director_select = computed(()=>{
+            const grado_select = computed(()=>{
 
-                let directores = Store.state.directores
+                let grados = Store.state.grados
 
-                let temp = {'director_id':0,'nombres':'Director','apellidos':''}
+                let temp = {'grado_id':0,'nombre':'Grado','numero': '#'}
 
-                if(director_id.value > 0){
-                    temp = directores.find((p)=>p.director_id == director_id.value)
+                if(grado_id.value > 0){
+                    temp = grados.find((p)=>p.grado_id == grado_id.value)
                 }
             
                 return temp
 
             })
 
-            watch(director_id,(value) => {
+            const grado = computed(()=>{
+                return Store.state.actual_grado
+            })
+
+            watch(grado_id,(value) => {
       
                 if(value > 0) {
                     emitir(value)
@@ -204,11 +217,11 @@
 
             watch(buscador_nombre,(value)=>{
                 if(value.toString().length > 4){
-                    if(!Store.state.directores.length){ Director.index() }
+                    if(!Store.state.grados.length){ Grado.index() }
                 }
             })
 
-            watch(directores_com,(value)=>{
+            watch(grados_com,(value)=>{
 
                 let count_nombre = buscador_nombre.value.toString()
 
@@ -217,34 +230,35 @@
                     if(value.length){
                     
                         let _id = value[0].id
-                        director_id.value = _id
+                        grado_id.value = _id
                         emitir(_id )
                     
                     }else{
                     
-                        director_id.value = 0
+                        grado_id.value = 0
 
                     }
                 
                 }else{
                 
-                    director_id.value = 0
+                    grado_id.value = 0
 
                 }
             })
 
             return{
-                director_id,
+                grado_id,
                 buscador_nombre,
                 modulo,
-                set_director,
+                set_grado,
                 mostrar_menu,
                 emitir,
                 color_chart,
                 counter_letras_nombre,
-                directores,
-                directores_com,
-                director_select
+                grado,
+                grados,
+                grados_com,
+                grado_select
             }
 
         },
@@ -252,7 +266,10 @@
 
         mounted(){
             this.$nextTick(()=>{
-              
+                if(Store.state.actual_grado.grado_id > 0){
+                   this.grado_id = this.grado.grado_id
+                }
+
             })
         }
 

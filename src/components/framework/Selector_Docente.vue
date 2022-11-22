@@ -204,7 +204,7 @@
 
             watch(buscador_nombre,(value)=>{
                 if(value.toString().length > 4){
-                    if(!Store.state.docentes.length){ Director.index() }
+                    if(!Store.state.docentes.length){ Docente.index() }
                 }
             })
 

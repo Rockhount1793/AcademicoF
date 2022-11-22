@@ -178,7 +178,7 @@
                 
                 Aplicacion.check_login(()=>{
                     if(!Store.state.docentes.length){
-                        Docente.index()
+                        Docente.index(()=>{})
                     }
                 })
 

@@ -42,8 +42,10 @@ const store = createStore({
             sedes: [],
             actual_sede: {'sede_id': 0, 'nombre_sede':'No seleccionada!'},
             actual_lectivo: {'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0},
+            actual_grado: { 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 },
             lectivos: [],
             grados:[],
+            asignaturas:[],
             docentes:[],
             directores: []
 
@@ -80,10 +82,6 @@ const store = createStore({
             state.sedes = array
         },
 
-        set_grados(state,array){ 
-            state.grados = array
-        },
-
         set_actual_sede(state,json){ 
             state.actual_sede = json
         },
@@ -94,6 +92,18 @@ const store = createStore({
 
         set_actual_lectivo(state,json){ 
             state.actual_lectivo = json
+        },
+
+        set_grados(state,array){ 
+            state.grados = array
+        },
+
+        set_actual_grado(state, json){
+            state.actual_grado = json
+        },
+
+        set_asignaturas(state,array){
+            state.asignaturas = array
         },
 
         set_docentes(state,array){ 
@@ -111,7 +121,7 @@ const store = createStore({
 
         async change_sede(state,json){
 
-            const result = await this.dispatch('clear_data')
+            const result = await this.dispatch('clear_data_sede')
             .then((res)=>{
 
                 if(res){
@@ -138,30 +148,63 @@ const store = createStore({
             .finally(()=>{
 
             })
+
         },
 
         async change_lectivo(state,json){
 
-            let usuario = this.state.usuario
-            usuario.configuracion['numero_lectivo'] = json.numero_lectivo
-            this.commit('set_usuario',usuario)
+            const result = await this.dispatch('clear_data_lectivo')
+            .then((res)=>{
 
-            Usuario.update(usuario)
-
-            this.commit('set_actual_lectivo',json)
+                if(res){
                     
+                    let usuario = this.state.usuario
+                    usuario.configuracion['numero_lectivo'] = json.numero_lectivo
+                    this.commit('set_usuario',usuario)
+        
+                    Usuario.update(usuario)
+        
+                    this.commit('set_actual_lectivo',json)
+                    
+                }
+
+            })
+            .catch((err)=>{
+                console.log(err)
+                //window.location.reload()
+            })
+            .finally(()=>{
+
+            })
+
         },
 
-        async clear_data(){
+        async clear_data_sede(){
 
             return await new Promise((res,rej)=>{
                 
                 this.commit('set_actual_lectivo',{'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0})
                 this.commit('set_lectivos',[])
                 this.commit('set_grados',[])
+                this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
+                this.commit('set_asignaturas',[])
                 this.commit('set_docentes',[])
                 this.commit('set_directores',[])
 
+                res(true)
+
+            })
+
+        },
+
+        async clear_data_lectivo(){
+
+            return await new Promise((res,rej)=>{
+                
+                this.commit('set_grados',[])
+                this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
+                this.commit('set_asignaturas',[])
+            
                 res(true)
 
             })
@@ -189,15 +232,23 @@ const store = createStore({
             let grados = this.state.grados
             const result = [...grados, json]
             this.commit('set_grados',result)
-        
+
+        },
+
+        add_asignatura(state,json){
+
+            let asignaturas = this.state.asignaturas
+            const result = [...asignaturas, json]
+            this.commit('set_asignaturas',result)
+
         },
 
         add_docente(state, json){
-            
+
             let directores = this.state.docentes
             const result = [...directores, json]
             this.commit('set_docentes',result)
-        
+
         },
 
         add_director(state, json){

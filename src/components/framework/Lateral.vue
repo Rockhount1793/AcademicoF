@@ -198,7 +198,7 @@
 
 </template>
   
-<script lang="js">
+<script>
   
     import { RouterView } from 'vue-router'
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"

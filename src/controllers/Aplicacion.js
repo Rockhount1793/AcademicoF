@@ -68,7 +68,8 @@
                 if(json.sesion){
                     localStorage.setItem('token',response.token)
                 }
-
+                
+                Store.commit('set_seccion_num',[1,0])
                 Router.push({ 'name':'Sedes' })
 
             }else{

@@ -4,6 +4,7 @@
     import  Router  from "@/router"
     import {  useRoute, useRouter }  from "vue-router"
     import Utilities from '@/utilities'
+    import Aplicacion from '@/controllers/Aplicacion'
     
     const token = ()=>{ return Store.state.token }
 
@@ -15,10 +16,11 @@
 
                 if(response.error === 0){
                     console.log(response)
+                    Aplicacion.loading(false)
                 }
 
                 if(response.error > 0){
-
+                    Aplicacion.redirect_home(response)
                 }
 
         },

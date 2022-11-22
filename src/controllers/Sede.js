@@ -25,6 +25,8 @@
                     if(array_result.length){ Store.commit('set_actual_sede',array_result[0]) }
     
                 }
+
+                Aplicacion.loading(false)
                       
             }
 

@@ -15,47 +15,53 @@ const router = createRouter({
         {
             path: '/entrar',
             name: 'Entrar',
-            component: () => import(/* webpackChunkName: "entrar" */'../views/Entrar.vue')
+            component: () => import('../views/Entrar.vue')
         },
         {
             path: '/acerca',
             name: 'Acerca',
-            component: () => import(/* webpackChunkName: "acerca" */'../views/Acerca.vue')
+            component: () => import('../views/Acerca.vue')
         },
         {
             path: '/sedes',
             name:'Sedes',
-            component: () => import(/* webpackChunkName: "sedes" */'../components/general/Sedes.vue'),
+            component: () => import('../components/general/Sedes.vue'),
             
         },
         {
             path: '/lectivos',
             name:'Lectivos',
-            component: () => import(/* webpackChunkName: "lectivos" */'../components/general/Lectivos.vue'),
+            component: () => import('../components/general/Lectivos.vue'),
             
         },
         {
             path: '/grados',
             name:'Grados',
-            component: () => import(/* webpackChunkName: "lectivos" */'../components/general/Grados.vue'),
+            component: () => import('../components/general/Grados.vue'),
+            
+        },
+        {
+            path: '/asignaturas',
+            name:'Asignaturas',
+            component: () => import('../components/general/Asignaturas.vue'),
             
         },
         {
             path: '/docentes',
             name:'Docentes',
-            component: () => import(/* webpackChunkName: "directores" */'../components/general/Docentes.vue'),
+            component: () => import('../components/general/Docentes.vue'),
             
         },
         {
             path: '/directores',
             name:'Directores',
-            component: () => import(/* webpackChunkName: "directores" */'../components/general/Directores.vue'),
+            component: () => import('../components/general/Directores.vue'),
             
         },
         {
             path: '/:pathMatch(.*)*',
             name: 'Error',
-            component: () => import(/* webpackChunkName: "error" */ '../views/Error.vue')
+            component: () => import('../views/Error.vue')
         }
       
     ]

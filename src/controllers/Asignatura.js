@@ -10,16 +10,19 @@
 
             let sede = Store.state.actual_sede
             let lectivo = Store.state.actual_lectivo
-            let json = {'sede_id': sede.sede_id, 'lectivo_id': lectivo.lectivo_id}
+            let grado = Store.state.actual_grado
+            let json = {'sede_id': sede.sede_id, 'lectivo_id': lectivo.lectivo_id, 'grado_id': grado.grado_id}
 
-            const response = await Fetch.post('/grado/index',json)
+            const response = await Fetch.post('/asignatura/index',json)
 
             if(response.error === 0){
-                Store.commit('set_grados', response.grados)
+                Store.commit('set_asignaturas', response.asignaturas)
+                Aplicacion.loading(false)
                 cb()
+
             }
 
-            if(response.error == 500){
+            if(response.error === 500){
                 Aplicacion.redirect_home(response)
             }
 
@@ -27,11 +30,11 @@
 
         'store': async function(json){
 
-            const response = await Fetch.post('/grado/store',json)
+            const response = await Fetch.post('/asignatura/store',json)
             if(response.error === 0){
 
-                Store.dispatch('add_grado',response.grado)
-
+                Store.dispatch('add_asignatura',response.asignatura)
+                Aplicacion.loading(false)
             }
 
             if(response.error > 0){

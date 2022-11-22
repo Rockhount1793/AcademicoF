@@ -10,9 +10,16 @@
                     <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" :src="urlsf+'/images/logo.svg'" alt="logo" />
                 </Router-link>
     
-                <div class="font-semibold text-sm text-gray-100 ">
-                    <p class="h-4">Sede: {{sede.nombre_sede}}</p>
-                    <p class="h-4">Lectivo: {{lectivo.numero_lectivo}}</p>
+                <div class="font-semibold text-sm text-gray-100 flex items-center">
+                    <div>
+                        <p class="h-4">Sede: {{sede.nombre_sede}}</p>
+                        <p class="h-4">Lectivo: {{lectivo.numero_lectivo}} </p>
+                    </div>
+
+                    <div class="px-2">
+                        <p class="h-4">&nbsp;</p>
+                        <p class="h-4">Grado: {{grado.nombre}}</p>
+                    </div>
                 </div>
     
             </div>
@@ -121,6 +128,7 @@
             const seccion_num = computed(()=> Store.state.seccion_num )
             const sede = computed(()=> Store.state.actual_sede )
             const lectivo = computed(()=> Store.state.actual_lectivo )
+            const grado = computed(()=> Store.state.actual_grado )
             const cargador = computed(()=> Store.state.loading )
       
             return {
@@ -134,6 +142,7 @@
                 seccion_num,
                 sede,
                 lectivo,
+                grado,
                 cerrar_sesion,
                 cargador
             }

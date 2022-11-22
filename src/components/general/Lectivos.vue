@@ -13,9 +13,9 @@
 
                 <p class="text-gray-100 text-center font-semibold text-lg">Lectivos</p>
 
-                <div class="px-2">
-                    <p @click="seccion = 1" v-if="seccion == 0" class="shadow-md w-32 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>
-                    <p @click="seccion = 0" v-if="seccion == 1" class="shadow-md w-32 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
+                <div class="flex space-x-2 px-2">
+                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
+                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>
                 </div>
 
                 <hr class="mt-3 border border-gray-500" />
@@ -56,12 +56,15 @@
 
                 <div v-if="seccion == 1" class="mt-3 flex-1 rounded p-1 px-2">
 
-                    <div class="flex-1 mx-auto py-2 w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="direccion">Año</p>
+                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
+                        <p class="font-semibold text-gray-100 text-md px-2" for="year">Año</p>
                         <input v-model="numero" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="number" min="2023" max="2099" step="1" placeholder=" 2023"/>
                     </div>
                     
-                    <SelectorDirector @set_director="set_director" class="mx-auto w-1/2"></SelectorDirector>
+                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
+                        <p class="font-semibold text-gray-100 text-md px-2" for="director">Director</p>
+                        <SelectorDirector @set_director="set_director" id="director" class="mx-auto"></SelectorDirector>
+                    </div>
 
                     <div class="mx-auto w-1/2">
                         <button @click="guardar()" class="mx-auto mt-3 h-7 shadow-md w-full lg:w-32 shadow-pink-500 rounded float-right bg-pink-800 text-gray-100 px-2">
@@ -79,7 +82,7 @@
   
 </template>
   
-<script lang="js">
+<script>
   
     import Barra from '@/components/framework/Barra.vue'
     import Lateral from '@/components/framework/Lateral.vue'
