@@ -8,13 +8,15 @@
 
         'index': async function(){
 
-            const response = await Fetch.get('/director/index')
+            let json = Store.state.actual_sede
+
+            const response = await Fetch.post('/director/index',json)
 
             if(response.error === 0){
                 Store.commit('set_directores', response.directores)
             }
 
-            if(response.error > 0){
+            if(response.error === 500){
                 Aplicacion.redirect_home(response)
             }
 

@@ -51,7 +51,7 @@
 
                     <div class="flex-1 py-2">
                         <p class="font-semibold text-gray-100 text-md px-2">Identificación</p>
-                        <input v-model="identificacion" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="direccion" type="text" placeholder=" Identificación"/>
+                        <input v-model="identificacion" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="direccion" type="text" placeholder=" 0000000"/>
                     </div>
 
                     <div class="flex-1 py-2">
@@ -130,6 +130,7 @@
                 if(!telefono.value.length){ errores.push('ingrese teléfono') }
                 if(!email.value.length){ errores.push('ingrese email') }
                 if(!Utilities.check_email(email.value)){ errores.push('formato de email incorrecto!') }
+                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
 
                 if(errores.length){
                     alert(errores[0])
@@ -141,6 +142,7 @@
                         'identificacion': identificacion.value,
                         'telefono':  telefono.value,
                         'email': email.value,
+                        'sede_id':  actual_sede.value.sede_id,
                         'estado':1
                     })
 
@@ -151,6 +153,7 @@
             }
       
             const urlsf = computed(()=> Store.state.urlsf )
+            const actual_sede = computed(()=> Store.state.actual_sede )
             const directores = computed(()=> Store.state.directores )
       
             return {

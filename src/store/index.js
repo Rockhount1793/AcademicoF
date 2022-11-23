@@ -45,6 +45,7 @@ const store = createStore({
             actual_grado: { 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 },
             lectivos: [],
             grados:[],
+            logros:[],
             asignaturas:[],
             docentes:[],
             directores: []
@@ -106,6 +107,10 @@ const store = createStore({
             state.asignaturas = array
         },
 
+        set_logros(state,array){
+            state.logros = array
+        },
+
         set_docentes(state,array){ 
             state.docentes = array
         },
@@ -159,6 +164,7 @@ const store = createStore({
                 if(res){
                     
                     let usuario = this.state.usuario
+                    usuario.configuracion['lectivo_id'] = json.lectivo_id
                     usuario.configuracion['numero_lectivo'] = json.numero_lectivo
                     this.commit('set_usuario',usuario)
         

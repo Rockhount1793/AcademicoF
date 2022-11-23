@@ -96,15 +96,15 @@
   
 <script lang="js">
   
-    import Barra from '@/components/framework/Barra.vue'
-    import Lateral from '@/components/framework/Lateral.vue'
-    import { RouterView } from 'vue-router'
+    import Barra from "@/components/framework/Barra.vue"
+    import Lateral from "@/components/framework/Lateral.vue"
+    import { RouterView } from "vue-router"
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
-    import Store from '@/store'
-    import Router from '@/router'
-    import Aplicacion from '@/controllers/Aplicacion'
-    import Sede from '@/controllers/Sede'
-    import Utilities from '@/utilities'
+    import Store from "@/store"
+    import Router from "@/router"
+    import Aplicacion from "@/controllers/Aplicacion"
+    import Sede from "@/controllers/Sede"
+    import Utilities from "@/utilities"
   
     export default defineComponent({
     

@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Bienvenida from '../views/Bienvenida.vue'
+import Bienvenida from '@/views/Bienvenida.vue'
 
 const router = createRouter({
     
@@ -15,53 +15,59 @@ const router = createRouter({
         {
             path: '/entrar',
             name: 'Entrar',
-            component: () => import('../views/Entrar.vue')
+            component: () => import('@/views/Entrar.vue')
         },
         {
             path: '/acerca',
             name: 'Acerca',
-            component: () => import('../views/Acerca.vue')
+            component: () => import('@/views/Acerca.vue')
         },
         {
             path: '/sedes',
             name:'Sedes',
-            component: () => import('../components/general/Sedes.vue'),
+            component: () => import('@/components/general/Sedes.vue'),
             
         },
         {
             path: '/lectivos',
             name:'Lectivos',
-            component: () => import('../components/general/Lectivos.vue'),
+            component: () => import('@/components/general/Lectivos.vue'),
             
         },
         {
             path: '/grados',
             name:'Grados',
-            component: () => import('../components/general/Grados.vue'),
+            component: () => import('@/components/general/Grados.vue'),
             
         },
         {
             path: '/asignaturas',
             name:'Asignaturas',
-            component: () => import('../components/general/Asignaturas.vue'),
+            component: () => import('@/components/general/Asignaturas.vue'),
+            
+        },
+        {
+            path: '/logros',
+            name:'Logros',
+            component: () => import('@/components/general/Logros.vue'),
             
         },
         {
             path: '/docentes',
             name:'Docentes',
-            component: () => import('../components/general/Docentes.vue'),
+            component: () => import('@/components/general/Docentes.vue'),
             
         },
         {
             path: '/directores',
             name:'Directores',
-            component: () => import('../components/general/Directores.vue'),
+            component: () => import('@/components/general/Directores.vue'),
             
         },
         {
             path: '/:pathMatch(.*)*',
             name: 'Error',
-            component: () => import('../views/Error.vue')
+            component: () => import('@/views/Error.vue')
         }
       
     ]

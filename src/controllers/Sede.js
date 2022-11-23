@@ -3,7 +3,7 @@
     import Fetch from "@/fetch"
     import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
-    import Utilities from '@/utilities'
+    import Utilities from "@/utilities"
 
     const Controller = {
 
@@ -30,7 +30,7 @@
                       
             }
 
-            if(response.error > 0){
+            if(response.error === 500){
                 Aplicacion.redirect_home(response)
             }
 

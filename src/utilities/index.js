@@ -1,10 +1,10 @@
-     import Store from '@/store'
-     import Router from '@/router'
-     import Aplicacion from '@/controllers/Aplicacion'
+     import Store from "@/store"
+     import Router from "@/router"
+     import Aplicacion from "@/controllers/Aplicacion"
 
 const funciones = {
 
-    check_login(){ if(!Store.state.user.id >= 1 && !Store.state.token.length && !Store.state.login){ Router.push({'name':'Home'}); return false }else{ return true } },  
+    check_login(){ if(!Store.state.user.id >= 1 && !Store.state.token.length && !Store.state.login){ Router.push({'name':'Home'}); return false }else{ return true } },
     check_email(i){ var e = new RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/); return e.test(i); },
     format_tnumber(i){ if(i != 0 || i!='0'){ return i.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') }else{ return 0 } },
     format_tnumber_dec(i){ if(i){return parseInt( i.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.'))} },
@@ -15,11 +15,12 @@ const funciones = {
     fechaonly(i){ try { let x = i.split(" "); var y =x[0].split("-"); var f = y[2]+'-'+y[1]+'-'+y[0]; return f }catch(error){ return '' } },
     
     fecha_iso(i,x){
+
         let d = new Date(i);
         let temp = '';
     
-        if(x=='t'){ temp = d.getDate()+'-'+ (d.getMonth()+1) +'-'+d.getFullYear()} 
-        if(x=='l'){ temp = d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear()+'  '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds() } 
+        if(x=='t'){ temp = d.getDate()+'-'+ (d.getMonth()+1) +'-'+d.getFullYear() } 
+        if(x=='l'){ temp = d.getDate()+'-'+(d.getMonth()+1)+'-'+d.getFullYear()+'  '+d.getHours()+':'+d.getMinutes()+':'+d.getSeconds() }
         
         return temp
     },
@@ -200,7 +201,6 @@ const funciones = {
           }
 
         }
-      
 
     },
 

@@ -5,27 +5,32 @@
         
         <Barra></Barra>
         
-        <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
+        <div class="mt-2 min-h-full flex w-auto px-2 md:space-x-2">
             
             <Lateral></Lateral>
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg">Asignaturas</p>
+                <p class="text-gray-100 text-center font-semibold text-lg">Logros <span v-if="asignatura.asignatura_id > 0">{{asignatura.nombre}} </span></p>
 
-                <div class="flex space-x-2 px-2">
+                <div class="space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
                     <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Asignaturas</p>
-                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>
+                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Logros</p>
+                    <p v-if="logros.length" @click="set_aprobado(true)" :class="aprobado ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Aprobado</p>
+                    <p v-if="logros.length" @click="set_aprobado(false)" :class="!aprobado ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> No Aprobado</p>
                 </div>
+              
 
                 <hr class="mt-3 border border-gray-500" />
 
-                <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                    <p class="font-semibold text-gray-100 text-md px-2">Grado</p>
-                    <SelectorGrado class="mx-auto"></SelectorGrado>
-                </div>
-
+                <!-- Asignaturas -->
                 <div v-if="seccion == 0" class="mt-3">
+
+                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                        <p class="font-semibold text-gray-100 text-md px-2">Grado</p>
+                        <SelectorGrado class="mx-auto"></SelectorGrado>
+                    </div>
+
                     <ul>
 
                         <li v-if="!asignaturas.length">
@@ -43,9 +48,11 @@
                                     </div>
                                     
                                 </div>
-                                
-                                <div class="w-full lg:w-1/2 truncate">
-                                    <p class="mt-2 lg:mt-0.5 px-2 p-0.5 rounded bg-gray-900 capitalize text-gray-100 font-semibold"> Director: {{filter_director(item.docente_id)}}</p>
+
+                                <div class="w-full h-8 lg:w-1/2 truncate">
+                                    <button @click="get_logros(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
+                                       ver logros
+                                    </button>
                                 </div>
 
                             </div>
@@ -55,33 +62,35 @@
                     </ul>
                 </div>
 
-                <div v-if="seccion == 1" class="mt-0 flex-1 rounded px-2">
-
-                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="nombre">Nombre</p>
-                        <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="text" placeholder=" Asignatura"/>
-                    </div>
+                <!-- Logros -->
+                <div v-if="seccion == 1" class="mt-3">
                     
-                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="numero_ih">IH</p>
-                        <input v-model="numero_ih" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="number" min="0" max="999" step="1" placeholder=" 0"/>
-                    </div>
-
-                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="numero_hcd">HCD</p>
-                        <input v-model="numero_hcd" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="number" min="0" max="999" step="1" placeholder=" 0"/>
-                    </div>
-                    
-                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="director">Director</p>
-                        <SelectorDirector @set_director="set_director" class="mx-auto"></SelectorDirector>
-                    </div>
-
-                    <div class="mx-auto w-1/2">
-                        <button @click="guardar()" class="mx-auto mt-3 h-7 shadow-md w-full lg:w-32 shadow-pink-500 rounded float-right bg-pink-800 text-gray-100 px-2">
-                            Guardar
-                        </button>
-                    </div>
+                        <div v-if="!logros.length">
+                            <p class="px-2 font-semibold text-gray-100 mt-3"> No hay logros creados </p>
+                        </div>
+                        
+                        <div v-else class="flex-1 lg:grid lg:grid-cols-2 space-y-4 lg:space-y-0 gap-2">
+                            
+                            <div :key="index" v-for="(item, index, key) in logros" class="pb-3 w-full lg:w-3/4 px-2">
+    
+                                <div class="w-full rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                    Periodo: {{item.periodo}}
+                                </div>
+    
+                                <div class="mt-1">
+                                    <textarea v-if="aprobado" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" name="" id="edit_apro" v-model="item.aprobado" rows="3"></textarea>
+                                    <textarea v-else name="" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="edit_no_apr" v-model="item.no_aprobado" rows="3"></textarea>
+                                </div>
+    
+                                <div class="flow-root">
+                                    <button @click="update_logro(item)" class="float-right h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
+                                        Guardar
+                                    </button>
+                                </div>
+    
+                            </div>
+                            
+                        </div>
 
                 </div>
 
@@ -99,14 +108,15 @@
     import Lateral from '@/components/framework/Lateral.vue'
     import SelectorDirector from '@/components/framework/Selector_Docente.vue'
     import SelectorGrado from '@/components/framework/Selector_Grado.vue'
-    import { RouterView } from 'vue-router'
+    import { RouterView } from "vue-router"
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
-    import Store from '@/store'
-    import Router from '@/router'
-    import Aplicacion from '@/controllers/Aplicacion'
-    import Asignartura from '@/controllers/Asignatura'
-    import Grado from '@/controllers/Grado'
-    import Docente from '@/controllers/Docente'
+    import Store from "@/store"
+    import Router from "@/router"
+    import Aplicacion from "@/controllers/Aplicacion"
+    import Asignartura from "@/controllers/Asignatura"
+    import Grado from "@/controllers/Grado"
+    import Docente from "@/controllers/Docente"
+    import Logro from "@/controllers/Logro"
   
     export default defineComponent({
     
@@ -120,15 +130,24 @@
         
             //# data 
             let listado = ref(false)
+            let asignatura = ref({'asignatura_id': 0, 'nombre':''}) 
             let seccion = ref(0)
-
+            let aprobado = ref(true)
             let nombre = ref('')
-            let numero_ih = ref(1)
-            let numero_hcd = ref(1)
+            let numero_ih = ref(0)
+            let numero_hcd = ref(0)
             let director_id = ref(0)
             let errores = ref([])
 
             //# methods
+            const update_logro = (_logro)=>{
+                Logro.update(_logro)
+            }
+
+            const set_aprobado = (bool)=>{
+                aprobado.value = bool
+            }
+
             const set_director = (number)=>{ 
                 director_id.value = number
             }
@@ -181,10 +200,18 @@
                 }
                 
             }
+
+            const get_logros = (_asignatura)=>{
+                Logro.index(_asignatura.asignatura_id,()=>{
+                    asignatura.value = _asignatura
+                    seccion.value = 1
+                })
+            }
       
             //# computed
             const urlsf = computed(()=> Store.state.urlsf )
             const asignaturas = computed(()=> Store.state.asignaturas )
+            const logros = computed(()=> Store.state.logros )
             const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const actual_grado = computed(()=> Store.state.actual_grado )
@@ -202,6 +229,7 @@
                 urlsf,
                 listado,
                 asignaturas,
+                logros,
                 seccion,
                 nombre,
                 numero_ih,
@@ -211,7 +239,12 @@
                 actual_grado,
                 guardar,
                 set_director,
-                filter_director
+                filter_director,
+                get_logros,
+                asignatura,
+                aprobado,
+                set_aprobado,
+                update_logro
             }
       
         },

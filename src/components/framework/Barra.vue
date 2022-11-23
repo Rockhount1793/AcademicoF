@@ -10,7 +10,7 @@
                     <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" :src="urlsf+'/images/logo.svg'" alt="logo" />
                 </Router-link>
     
-                <div class="font-semibold text-sm text-gray-100 flex items-center">
+                <div class="font-semibold text-xs lg:text-sm text-gray-100 flex items-center">
                     <div>
                         <p class="h-4">Sede: {{sede.nombre_sede}}</p>
                         <p class="h-4">Lectivo: {{lectivo.numero_lectivo}} </p>
@@ -31,31 +31,31 @@
             <div class="flex items-center p-0.5">
   
                 
-                <div class="mr-2">
+                <div class="hidden lg:inline-flex mr-2 truncate">
                     <span class="text-xs font-thin text-gray-100">[ {{version}} ]</span>
                 </div>
 
                 <div class="flex-none">
   
-                    <div @click="menu_perfil = true" class="cursor-pointer w-9 h-9">
+                    <div @click="menu_perfil = !menu_perfil" class="cursor-pointer w-9 h-9">
     
                         <img class="rounded-full" :src="urlsf+'/images/avatar/'+user.avatar" alt="avatar" />
     
                     </div>
   
-                    <div v-if="menu_perfil" class="intro-b border border-green-100 rounded-md shadow-xl bg-green-800 mr-6 z-20 absolute right-0 mt-1 w-auto">
+                    <div v-if="menu_perfil" class="intro-b border border-pink-100 rounded-md shadow-xl bg-gray-900 mr-6 z-20 absolute right-0 mt-1 w-auto">
                         
                         <div class="text-white">
                             
                             <div class="p-2">
                                 
-                                <div @click="set_route('Perfil'); set_seccion_num([200,20]);" :class="seccion_num[0] == 200 ? 'border border-white bg-green-600 text-white':'' " class="cursor-pointer truncate flex items-center p-2 transition duration-300 ease-in-out group hover:bg-green-100 rounded-md">
+                                <div @click="set_route('Perfil'); set_seccion_num([200,20]);" :class="seccion_num[0] == 200 ? 'border border-white bg-pink-600 text-white':'' " class="cursor-pointer truncate flex items-center p-2 transition duration-300 ease-in-out group hover:bg-pink-100 rounded-md">
                                     
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 h-5 w-5 group-hover:text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 h-5 w-5 group-hover:text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                     </svg>
 
-                                    <p class="group-hover:text-green-700 text-sm font-semibold">
+                                    <p class="group-hover:text-gray-700 text-sm font-semibold">
                                         Perfil
                                     </p>
 
@@ -75,11 +75,11 @@
   
                             <div  class="pointer p-2 border-t">
                                 
-                                <div @click="cerrar_sesion()"  class="cursor-pointer truncate flex items-center p-2 transition duration-300 ease-in-out group hover:bg-green-100 rounded-md">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 h-6 w-6 group-hover:text-green-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <div @click="cerrar_sesion()"  class="cursor-pointer truncate flex items-center p-2 transition duration-300 ease-in-out group hover:bg-pink-100 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="mr-1 h-6 w-6 group-hover:text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                                     </svg>
-                                    <p class="group-hover:text-green-700 text-sm font-semibold">
+                                    <p class="group-hover:text-gray-700 text-sm font-semibold">
                                         Cerrar Sesión
                                     </p>
                                 </div>

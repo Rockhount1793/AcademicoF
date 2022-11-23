@@ -3,7 +3,7 @@
     import Fetch from "@/fetch"
     import  Router  from "@/router"
     import { useRoute, useRouter }  from "vue-router"
-    import Utilities from '@/utilities'
+    import Utilities from "@/utilities"
     
     const token = ()=>{ return Store.state.token }
 
