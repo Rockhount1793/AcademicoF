@@ -18,7 +18,6 @@
             if(response.error === 0){
                 Store.commit('set_asignaturas', response.asignaturas)
                 Store.commit('set_logros', [])
-                Aplicacion.loading(false)
                 cb()
 
             }
@@ -35,7 +34,7 @@
             if(response.error === 0){
 
                 Store.dispatch('add_asignatura',response.asignatura)
-                Aplicacion.loading(false)
+
             }
 
             if(response.error > 0){

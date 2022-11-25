@@ -53,9 +53,27 @@ const router = createRouter({
             
         },
         {
+            path: '/calificaciones',
+            name:'Calificaciones',
+            component: () => import('@/components/general/Calificaciones.vue'),
+            
+        },
+        {
+            path: '/matriculas',
+            name:'Matriculas',
+            component: () => import('@/components/general/Matriculas.vue'),
+            
+        },
+        {
             path: '/docentes',
             name:'Docentes',
             component: () => import('@/components/general/Docentes.vue'),
+            
+        },
+        {
+            path: '/estudiantes',
+            name:'Estudiantes',
+            component: () => import('@/components/general/Estudiantes.vue'),
             
         },
         {

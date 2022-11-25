@@ -26,7 +26,6 @@
     
                 }
 
-                Aplicacion.loading(false)
                       
             }
 

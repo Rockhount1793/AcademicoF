@@ -138,6 +138,8 @@
                 console.error('timeout exceeded') 
                 return {'error': 500, 'message':'query failed' }
 
+            }).finally(()=>{
+                Aplicacion.loading(false)
             })
 
             return res

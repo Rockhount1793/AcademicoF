@@ -16,7 +16,6 @@
 
                 if(response.error === 0){
                     console.log(response)
-                    Aplicacion.loading(false)
                 }
 
                 if(response.error > 0){

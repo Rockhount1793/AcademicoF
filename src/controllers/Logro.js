@@ -19,7 +19,7 @@
             if(response.error === 0){
                 
                 Store.commit('set_logros', response.logros)
-                Aplicacion.loading(false)
+
                 cb()
 
             }
@@ -35,7 +35,7 @@
             const response = await Fetch.put('/logro/update',json)
             if(response.error === 0){
                 console.log(response)
-                Aplicacion.loading(false)
+
             }
 
             if(response.error > 0){

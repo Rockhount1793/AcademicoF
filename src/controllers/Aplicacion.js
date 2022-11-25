@@ -2,8 +2,10 @@
     import Store  from "@/store"
     import Fetch from "@/fetch"
     import  Router  from "@/router"
-    import { useRoute, useRouter }  from "vue-router"
+    import { useRoute, useRouter } from "vue-router"
     import Utilities from "@/utilities"
+    import Config from "@/config"
+
     
     const token = ()=>{ return Store.state.token }
 
@@ -14,7 +16,10 @@
 
         'redirect_home': function(error){
         
-            console.log(error)
+            if(Config.status === 'development'){
+                console.log(error)
+            }
+
             localStorage.removeItem('token')
             Store.commit('set_login',false)
             Store.commit('set_seccion_num',[0,0])

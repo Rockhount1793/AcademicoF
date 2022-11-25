@@ -43,10 +43,14 @@ const store = createStore({
             actual_sede: {'sede_id': 0, 'nombre_sede':'No seleccionada!'},
             actual_lectivo: {'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0},
             actual_grado: { 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 },
+            actual_asignatura: { 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 },
             lectivos: [],
             grados:[],
             logros:[],
             asignaturas:[],
+            calificaciones:[],
+            matriculas:[],
+            estudiantes:[],
             docentes:[],
             directores: []
 
@@ -103,8 +107,24 @@ const store = createStore({
             state.actual_grado = json
         },
 
+        set_actual_asignatura(state, json){
+            state.actual_asignatura = json
+        },
+
         set_asignaturas(state,array){
             state.asignaturas = array
+        },
+
+        set_calificaciones(state,array){
+            state.calificaciones = array
+        },
+
+        set_matriculas(state,array){
+            state.matriculas = array
+        },
+        
+        set_estudiantes(state,array){
+            state.estudiantes = array
         },
 
         set_logros(state,array){
@@ -194,7 +214,10 @@ const store = createStore({
                 this.commit('set_grados',[])
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
                 this.commit('set_asignaturas',[])
+                this.commit('set_actual_asignatura',{ 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 })
+                this.commit('set_calificaciones',[])
                 this.commit('set_docentes',[])
+                this.commit('set_estudiantes',[])
                 this.commit('set_directores',[])
 
                 res(true)
@@ -210,6 +233,8 @@ const store = createStore({
                 this.commit('set_grados',[])
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
                 this.commit('set_asignaturas',[])
+                this.commit('set_actual_asignatura',{ 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 })
+                this.commit('set_calificaciones',[])
             
                 res(true)
 
@@ -246,6 +271,22 @@ const store = createStore({
             let asignaturas = this.state.asignaturas
             const result = [...asignaturas, json]
             this.commit('set_asignaturas',result)
+
+        },
+
+        add_matricula(state,json){
+
+            let matriculas = this.state.matriculas
+            const result = [...matriculas, json]
+            this.commit('set_matriculas',result)
+
+        },
+
+        add_estudiante(state, json){
+
+            let estudiantes = this.state.estudiantes
+            const result = [...estudiantes, json]
+            this.commit('set_estudiantes',result)
 
         },
 
