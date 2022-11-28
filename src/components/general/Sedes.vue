@@ -44,7 +44,7 @@
                                 </div>
                                 
                                 <div class="w-full lg:w-1/3 truncate">
-                                    <p class="mt-2 lg:mt-0.5 cursor-pointer px-2 p-0.5 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.nombre_sede}}</p>
+                                    <p class="mt-2 lg:mt-0.5 cursor-pointer px-2 p-0.5 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.nombre}}</p>
                                 </div>
 
                             </div>
@@ -147,12 +147,11 @@
                 }else{
                     
                     Sede.store({
-                        'nombre_sede': nombre.value,
-                        'direccion_sede': direccion.value,
-                        'telefono_sede':  telefono.value,
-                        'email_sede': email.value,
-                        'principal_sede': nombre.value,
-                        'estado_sede':1
+                        'nombre': nombre.value,
+                        'direccion': direccion.value,
+                        'telefono':  telefono.value,
+                        'email': email.value,
+                        'estado':1
                     })
 
                     seccion.value = 0

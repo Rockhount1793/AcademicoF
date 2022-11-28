@@ -219,6 +219,7 @@ const store = createStore({
                 this.commit('set_docentes',[])
                 this.commit('set_estudiantes',[])
                 this.commit('set_directores',[])
+                this.commit('set_matriculas',[])
 
                 res(true)
 
@@ -235,7 +236,8 @@ const store = createStore({
                 this.commit('set_asignaturas',[])
                 this.commit('set_actual_asignatura',{ 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 })
                 this.commit('set_calificaciones',[])
-            
+                this.commit('set_matriculas',[])
+
                 res(true)
 
             })

@@ -108,7 +108,7 @@
         },
 
         'put' : async function(ext, body){
-            
+
             let options = {
             
                 method: 'PUT',

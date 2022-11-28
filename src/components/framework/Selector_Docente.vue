@@ -76,7 +76,7 @@
     
 </template>
     
-<script lang="js">
+<script>
     
     import Store from '@/store'
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
@@ -112,7 +112,7 @@
 
                     modulo.value = true 
                     
-                    if(!Store.state.docentes.length){ Docente.index() }
+                    if(!Store.state.docentes.length){ Docente.index(()=>{}) }
                 
                     setTimeout(() => {
                         document.getElementById('nombre').focus()
@@ -204,7 +204,7 @@
 
             watch(buscador_nombre,(value)=>{
                 if(value.toString().length > 4){
-                    if(!Store.state.docentes.length){ Docente.index() }
+                    if(!Store.state.docentes.length){ Docente.index(()=>{}) }
                 }
             })
 

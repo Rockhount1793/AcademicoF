@@ -23,6 +23,23 @@
 
         },
 
+        'index_identificacion': async function(json, cb){
+
+            const response = await Fetch.post('/estudiante/index/identificacion', json )
+
+            if(response.error === 0){
+
+                cb(response)
+                
+            }
+
+            if(response.error === 500){
+               Aplicacion.redirect_home(response)
+            }
+
+
+        },
+
         'store': async function(json){
 
             const response = await Fetch.post('/estudiante/store',json)

@@ -34,12 +34,12 @@
                                 
                                 <div>
                                     
-                                    <button v-if="actual_lectivo.numero_lectivo == item.numero_lectivo" class="shadow-md w-64 shadow-cyan-500 rounded bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Actual : {{item.numero_lectivo}}
+                                    <button v-if="actual_lectivo.numero == item.numero" class="shadow-md w-64 shadow-cyan-500 rounded bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                        Actual : {{item.numero}}
                                     </button>
                                     
                                     <button v-else @click="set_lectivo(item)" class="shadow-md w-64 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Seleccionar : {{item.numero_lectivo}}
+                                        Seleccionar : {{item.numero}}
                                     </button>
 
                                 </div>
@@ -135,10 +135,10 @@
                 }else{
                     
                     Lectivo.store({
-                        'numero_lectivo': numero.value,
+                        'numero': numero.value,
                         'director_id': director_id.value,
                         'sede_id':  actual_sede.value.sede_id,
-                        'estado_lectivo':1
+                        'estado':1
                     })
 
                     seccion.value = 0

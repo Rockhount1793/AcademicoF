@@ -52,7 +52,7 @@
 
                     <div class="flex-1 py-2">
                         <p class="font-semibold text-gray-100 text-md px-2">Identificación</p>
-                        <input v-model="identificacion" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="direccion" type="text" placeholder=" 0000000"/>
+                        <input v-model="identificacion" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="identificacion" type="text" placeholder=" 0000000"/>
                     </div>
 
                     <div class=""></div>

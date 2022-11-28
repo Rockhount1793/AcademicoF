@@ -12,8 +12,8 @@
     
                 <div class="font-semibold text-xs lg:text-sm text-gray-100 flex items-center">
                     <div>
-                        <p class="h-4">Sede: {{sede.nombre_sede}}</p>
-                        <p class="h-4">Lectivo: {{lectivo.numero_lectivo}} </p>
+                        <p class="h-4">Sede: {{sede.nombre}}</p>
+                        <p class="h-4">Lectivo: {{lectivo.numero}} </p>
                     </div>
 
                     <div class="px-2">
