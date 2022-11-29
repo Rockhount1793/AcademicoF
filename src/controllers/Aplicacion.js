@@ -39,12 +39,11 @@
             let check_numero_lectivo = Utilities.check_usuario_config(usuario,'numero_lectivo')
         
             if(check_sede_id.status && check_nombre_sede.status){
-            
-                Store.commit('set_actual_sede',{ 'sede_id': check_sede_id.sede_id ,'nombre_sede': check_nombre_sede.nombre_sede} )
+                Store.commit('set_actual_sede',{ 'sede_id': check_sede_id.sede_id ,'nombre': check_nombre_sede.nombre_sede} )
             }
 
             if(check_lectivo_id.status && check_numero_lectivo.status){
-                Store.commit('set_actual_lectivo',{ 'lectivo_id': check_lectivo_id.lectivo_id ,'numero_lectivo': check_numero_lectivo.numero_lectivo} )
+                Store.commit('set_actual_lectivo',{ 'lectivo_id': check_lectivo_id.lectivo_id, 'numero': check_numero_lectivo.numero_lectivo })
             }
 
         },

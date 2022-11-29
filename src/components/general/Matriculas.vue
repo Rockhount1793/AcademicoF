@@ -38,17 +38,19 @@
             
                             <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center mt-3">
                                 
-                                <div>
+                                <div class="w-full">
                                     
-                                    <div class="w-64 rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        {{item.estudiante_id}}
-                                    </div>
+                                    <p class="w-full truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                        {{item.nombres}}  {{item.apellidos}} : {{item.identificacion }}
+                                    </p>
                                     
                                 </div>
 
-                                <div class="w-full h-8 lg:w-1/2 truncate">
-                                    <button @click="delete_(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
-                                       eliminar
+                                <div class="w-full h-8 truncate">
+                                    <button title="eliminar matricula" @click="delete_(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-100 w-5 h-5">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                        </svg>                                          
                                     </button>
                                 </div>
 
@@ -57,42 +59,71 @@
                         </li>
 
                     </ul>
+
                 </div>
 
                 <!-- Crear -->
-                <div v-if="seccion == 1" class="mt-3 px-2">
+                <div v-if="seccion == 1" class="">
                     
-                    <div class="flex-1">
-                        <p class="font-semibold text-gray-100 text-md px-2">Buscar Identificación</p>
-                        <input v-model="_identificacion" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="identificacion" type="text" placeholder=" 0"/>
+                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                        <p class="font-semibold text-gray-100 text-md px-2">Buscar Identificación Estudiante</p>
+                        <input v-model="identificacion_" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="identificacion" type="text" placeholder=" 0"/>
                     </div>
 
-                    <div class="flow-root">
-                        <button @click="get_estudiante()" class="float-right w-32 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-100 px-2">
+                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1 flow-root">
+                        <button @click="get_estudiante()" class="float-right w-32 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-100 px-2">
                             Buscar
                         </button>
                     </div>                    
 
-                    <hr class="mt-3 border border-gray-500" />
-                    
-                    <div class="flex-1 py-2">
+                </div>
+                
+                <hr class="mt-3 border border-gray-500" />
+
+                <div v-if="seccion == 1" class="mt-3 px-2 lg:w-1/2 mx-auto">    
+                
+                    <p class="font-semibold text-gray-100 text-md text-center">Detalle registro</p>
+
+                    <div class="flex-1 lg:flex py-1">
+                        <p class="font-semibold text-gray-100 text-md px-2">Identificación:</p>
+                        <p class="font-semibold text-pink-500 text-md px-2">{{filter_identificacon(estudiante.identificacion)}}</p>
+                    </div>
+
+                    <div class="flex-1 lg:flex py-1">
                         <p class="font-semibold text-gray-100 text-md px-2">Nombres:</p>
                         <p class="font-semibold text-pink-500 text-md px-2">{{estudiante.nombres}}</p>
                     </div>
 
-                    <div class="flex-1 py-2">
+                    <div class="flex-1 lg:flex py-1">
                         <p class="font-semibold text-gray-100 text-md px-2">Apellidos:</p>
                         <p class="font-semibold text-pink-500 text-md px-2">{{estudiante.apellidos}}</p>
                     </div>
-
+                    
+                    <div class="flex-1 lg:flex py-1">
+                        <p class="font-semibold text-gray-100 text-md px-2">Sede:</p>
+                        <p class="font-semibold text-pink-500 text-md px-2">{{actual_sede.nombre}}</p>
+                    </div>
+                    
+                    <div class="flex-1 lg:flex py-1">
+                        <p class="font-semibold text-gray-100 text-md px-2">Lectivo:</p>
+                        <p class="font-semibold text-pink-500 text-md px-2">{{actual_lectivo.numero}}</p>
+                    </div>
+                    
+                    <div class="flex-1 lg:flex py-1">
+                        <p class="font-semibold text-gray-100 text-md px-2">Grado:</p>
+                        <p class="font-semibold text-pink-500 text-md px-2">{{actual_grado.nombre}}</p>
+                    </div>
+                    
                     <hr class="mt-3 border border-gray-500" />
 
-                    <div class=""></div>
+                    <div class="flow-root flex-1 pb-2">
+                        
+                        <div class="float-right">
+                            <button @click="guardar()" class="w-32 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-100 px-2">
+                                Guardar
+                            </button>
+                        </div>
 
-                    <div class="">
-                        <button @click="guardar()" class="w-32 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-100 px-2">
-                            Guardar
-                        </button>
                     </div>
 
                 </div>
@@ -118,6 +149,7 @@
     import Aplicacion from "@/controllers/Aplicacion"
     import Matricula from "@/controllers/Matricula"
     import Estudiante from "@/controllers/Estudiante"
+    import Utilitie from "@/utilities"
   
     export default defineComponent({
     
@@ -130,25 +162,24 @@
         setup(){
         
             //# data 
-            let _identificacion = ref('')
-            let estudiante = ref({'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': ''})
+            let identificacion_ = ref('654678987')
+            let estudiante = ref({'estudiante_id': 0, 'nombres': 'Nombres', 'apellidos': 'Apellidos', 'identificacion': '0'})
             let tipo_numero = ref(0)
             let tipos = ref({'tipo': 0, 'nombre':'Inicial'}, {'tipo': 1, 'nombre':'Extraordinario'}, {'tipo': 2, 'nombre':'Traslado'}, {'tipo': 3, 'nombre':'Desertor'})
             let seccion = ref(0)
-            let nombre = ref('')
             let errores = ref([])
 
             //# methods
 
-            const delete_ = (_matricula)=>{
-                Matricula.delete(_matricula)
+            const delete_ = (matricula_)=>{
+               // Matricula.delete(matricula_)
             }
 
             const guardar = ()=>{
 
                 errores = []
 
-                if(!_identificacion.value.length){ errores.push('identificación estudiante') }
+                if( Number(estudiante.value.identificacion) <= 0 ){ errores.push('identificación estudiante') }
                 if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
                 if(actual_lectivo.value.lectivo_id == 0){ errores.push('seleccione lectivo') }
                 if(actual_grado.value.grado_id == 0){ errores.push('seleccione grado') }
@@ -157,7 +188,7 @@
                     alert(errores[0])
                 }else{
                     
-                    Asignartura.store({
+                    Matricula.store({
 
                         'estudiante_id': estudiante.value.estudiante_id,
                         'sede_id':  actual_sede.value.sede_id,
@@ -169,7 +200,7 @@
                     })
 
                     seccion.value = 0
-                    estudiante.value = {'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': ''}
+                    estudiante.value = {'estudiante_id': 0, 'nombres': 'Nombres', 'apellidos': 'Apellidos', 'identificacion': '0'}
 
                 }
 
@@ -200,7 +231,7 @@
 
                     Estudiante.index_identificacion({
                         
-                        'identificacion': Number(_identificacion.value),
+                        'identificacion': Number(identificacion_.value),
                         'sede_id': actual_sede.value.sede_id
     
                     },(response)=>{
@@ -218,6 +249,10 @@
                 }
 
             }
+
+            const filter_identificacon = (number)=>{
+                return Utilitie.format_tnumber(number)
+            }
       
             //# computed
             const urlsf = computed(()=> Store.state.urlsf )
@@ -229,8 +264,14 @@
            
             watch(actual_grado,(value) => {
 
-                if(value.grado_id > 0) {
-                    //Asignartura.index(()=>{})
+                if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
+                    
+                    Matricula.index({
+                        'sede_id':  actual_sede.value.sede_id,
+                        'lectivo_id': actual_lectivo.value.lectivo_id,
+                        'grado_id': actual_grado.value.grado_id,
+                    },()=>{})
+                
                 }
                 
             })
@@ -238,17 +279,19 @@
             return {
                 urlsf,
                 delete_,
-                _identificacion,
+                identificacion_,
                 tipos,
                 tipo_numero,
+                actual_sede,
+                actual_lectivo,
                 actual_grado,
                 estudiante,
                 matriculas,
                 seccion,
-                nombre,
                 guardar,
                 filter_estudiante,
-                get_estudiante
+                get_estudiante,
+                filter_identificacon
             }
       
         },
@@ -259,9 +302,13 @@
                 
                 Aplicacion.check_login(()=>{
 
-                    if(!Store.state.matriculas.length && this.actual_grado.grado_id > 0){
+                    if(!Store.state.matriculas.length && this.actual_grado.grado_id > 0 && this.actual_sede.sede_id > 0 && this.actual_lectivo.lectivo_id > 0){
                                     
-                        //Matricula.index(()=>{})
+                        Matricula.index({
+                            'sede_id':  this.actual_sede.sede_id,
+                            'lectivo_id': this.actual_lectivo.lectivo_id,
+                            'grado_id': this.actual_grado.grado_id
+                        },()=>{})
 
                     }
 

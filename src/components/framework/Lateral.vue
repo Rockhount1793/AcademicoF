@@ -1,13 +1,13 @@
 
 <template>
             
-    <div :class="listado ? 'flex md:w-48':'w-12'" class="group h-4/6 ">
+    <div :class="listado ? 'flex w-12 md:w-48 ':'w-12' " class="group h-4/6 ">
     
         <div class="flex-1 z-10 space-y-3">
         
             <div class="rounded-t text-white flex items-center justify-between px-2">
                 
-                <p :class="listado ? 'block':'hidden'" class="text-md opacity-90 font-semibold text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="text-md opacity-90 font-semibold text-center">
                     Menu
                 </p>
 
@@ -27,7 +27,7 @@
                     </svg>
                 </div>
 
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Sedes
                 </p>
 
@@ -41,7 +41,7 @@
                     </svg>
                 </div>
                 
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Lectivos
                 </p>
 
@@ -56,7 +56,7 @@
                     </svg>
                 </div>
 
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Grados
                 </p>
 
@@ -70,7 +70,7 @@
                     </svg>
                 </div>
 
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Asignaturas
                 </p>
 
@@ -84,7 +84,7 @@
                     </svg>
                 </div>
 
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Logros
                 </p>
 
@@ -98,7 +98,7 @@
                     </svg>
                 </div>
 
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Calificaciones
                 </p>
 
@@ -112,7 +112,7 @@
                     </svg>
                 </div>
 
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Matriculas
                 </p>
 
@@ -128,7 +128,7 @@
                     </svg>
                 </div>
                   
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Docentes
                 </p>
 
@@ -142,7 +142,7 @@
                     </svg>
                 </div>
                   
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Estudiantes
                 </p>
 
@@ -156,7 +156,7 @@
                     </svg>
                 </div>
                     
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Personas
                 </p>
 
@@ -170,7 +170,7 @@
                     </svg>
                 </div>
                   
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Directores
                 </p>
 
@@ -186,7 +186,7 @@
                     </svg>
                 </div>
                   
-                <p :class="listado ? 'block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
                     Generables
                 </p>
 

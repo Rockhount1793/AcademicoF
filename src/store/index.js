@@ -155,7 +155,7 @@ const store = createStore({
                     
                     let usuario = this.state.usuario
                     usuario.configuracion['sede_id'] = json.sede_id
-                    usuario.configuracion['nombre_sede'] = json.nombre_sede
+                    usuario.configuracion['nombre_sede'] = json.nombre
                     usuario.configuracion['numero_lectivo'] = 0
                     this.commit('set_usuario',usuario)
 
@@ -185,7 +185,7 @@ const store = createStore({
                     
                     let usuario = this.state.usuario
                     usuario.configuracion['lectivo_id'] = json.lectivo_id
-                    usuario.configuracion['numero_lectivo'] = json.numero_lectivo
+                    usuario.configuracion['numero_lectivo'] = json.numero
                     this.commit('set_usuario',usuario)
         
                     Usuario.update(usuario)

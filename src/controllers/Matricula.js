@@ -18,7 +18,6 @@
             if(response.error === 0){
                 Store.commit('set_matriculas', response.matriculas)
                 cb()
-
             }
 
             if(response.error === 500){
@@ -30,13 +29,18 @@
         'store': async function(json){
 
             const response = await Fetch.post('/matricula/store',json)
+            
             if(response.error === 0){
 
                 Store.dispatch('add_matricula',response.matricula)
 
             }
 
-            if(response.error > 0){
+            if(response.error == 400){
+                alert(response.message)
+            }
+
+            if(response.error == 500){
                 Aplicacion.redirect_home(response)
             }
             

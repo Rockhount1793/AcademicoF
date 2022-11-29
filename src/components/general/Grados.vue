@@ -148,6 +148,8 @@
                         'estado':1
                     })
 
+                    nombre.value = ''
+                    numero.value = 0
                     seccion.value = 0
 
                 }
