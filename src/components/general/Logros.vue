@@ -113,7 +113,7 @@
     import Store from "@/store"
     import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
-    import Asignartura from "@/controllers/Asignatura"
+    import Asignatura from "@/controllers/Asignatura"
     import Grado from "@/controllers/Grado"
     import Docente from "@/controllers/Docente"
     import Logro from "@/controllers/Logro"
@@ -173,7 +173,7 @@
                     alert(errores[0])
                 }else{
                     
-                    Asignartura.store({
+                    Asignatura.store({
                         'nombre': nombre.value,
                         'ih': numero_ih.value,
                         'hcd': numero_hcd.value,
@@ -225,7 +225,7 @@
             watch(actual_grado,(value) => {
 
                 if(value.grado_id > 0) {
-                    Asignartura.index(()=>{})
+                    Asignatura.index(()=>{})
                 }
                 
             })
@@ -262,7 +262,7 @@
 
                     if(!Store.state.asignaturas.length && this.actual_grado.grado_id > 0){
                                     
-                        Asignartura.index(()=>{
+                        Asignatura.index(()=>{
                         
                         })
 

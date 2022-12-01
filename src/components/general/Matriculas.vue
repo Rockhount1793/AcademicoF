@@ -25,6 +25,8 @@
                     <SelectorGrado class="mx-auto"></SelectorGrado>
                 </div>
 
+                <hr class="mt-3 border border-gray-500" />
+
                 <!-- Matriculas -->
                 <div v-if="seccion == 0" class="">
 
@@ -78,15 +80,13 @@
 
                 </div>
                 
-                <hr class="mt-3 border border-gray-500" />
-
                 <div v-if="seccion == 1" class="mt-3 px-2 lg:w-1/2 mx-auto">    
                 
                     <p class="font-semibold text-gray-100 text-md text-center">Detalle registro</p>
 
                     <div class="flex-1 lg:flex py-1">
                         <p class="font-semibold text-gray-100 text-md px-2">Identificación:</p>
-                        <p class="font-semibold text-pink-500 text-md px-2">{{filter_identificacon(estudiante.identificacion)}}</p>
+                        <p class="font-semibold text-pink-500 text-md px-2">{{filter_identificacion(estudiante.identificacion)}}</p>
                     </div>
 
                     <div class="flex-1 lg:flex py-1">
@@ -250,7 +250,7 @@
 
             }
 
-            const filter_identificacon = (number)=>{
+            const filter_identificacion = (number)=>{
                 return Utilitie.format_tnumber(number)
             }
       
@@ -291,7 +291,7 @@
                 guardar,
                 filter_estudiante,
                 get_estudiante,
-                filter_identificacon
+                filter_identificacion
             }
       
         },
