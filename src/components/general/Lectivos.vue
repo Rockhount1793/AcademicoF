@@ -124,14 +124,14 @@
 
             const guardar = ()=>{
 
-                errores = []
+                errores.value = []
 
-                if(typeof numero.value != 'number' || numero.value < 2022 || numero.value > 2099){ errores.push('ingrese año') }
-                if(typeof director_id.value != 'number' || director_id.value < 1){ errores.push('seleccione director') }
-                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
+                if(typeof numero.value != 'number' || numero.value < 2022 || numero.value > 2099){ errores.value.push('ingrese año') }
+                if(typeof director_id.value != 'number' || director_id.value < 1){ errores.value.push('seleccione director') }
+                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
                 
-                if(errores.length){
-                    alert(errores[0])
+                if(errores.value.length){
+                    alert(errores.value[0])
                 }else{
                     
                     Lectivo.store({

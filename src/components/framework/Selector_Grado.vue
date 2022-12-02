@@ -107,7 +107,6 @@
             const set_grado = (json)=>{
 
                 grado_id.value = json.grado_id
-                Store.commit('set_calificaciones',[])
                 Store.commit('set_actual_grado',json)
 
             }

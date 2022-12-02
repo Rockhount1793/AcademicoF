@@ -133,20 +133,22 @@
             let asignatura = ref({'asignatura_id': 0, 'nombre':''}) 
             let seccion = ref(0)
             let aprobado = ref(true)
-            let nombre = ref('')
-            let numero_ih = ref(0)
-            let numero_hcd = ref(0)
-            let director_id = ref(0)
+            
             let errores = ref([])
 
             //# methods
             const update_logro = (_logro)=>{
 
-                if(_logro.aprobado.length == 0 || _logro.aprobado.length > 500){ errores.push('texto aprobado menor a 500 caracteres') } 
-                if(_logro.no_aprobado.length == 0 || _logro.no_aprobado.length > 500){ errores.push('texto no aprobado menor a 500 caracteres') } 
+                errores.value = []
 
-                Logro.update(_logro)
-            
+                if(_logro.aprobado.length == 0 || _logro.aprobado.length > 500){ errores.value.push('texto aprobado menor a 500 caracteres') } 
+                if(_logro.no_aprobado.length == 0 || _logro.no_aprobado.length > 500){ errores.value.push('texto no aprobado menor a 500 caracteres') } 
+
+                if(!errores.value.length){
+                    Logro.update(_logro)
+                }else{
+                    alert(errores.value[0])
+                }
             }
 
             const set_aprobado = (bool)=>{
@@ -155,55 +157,6 @@
 
             const set_director = (number)=>{ 
                 director_id.value = number
-            }
-
-            const guardar = ()=>{
-
-                errores = []
-
-                if(nombre.value.length < 0 || nombre.value.length > 100){ errores.push('ingrese nombre') }
-                if(typeof numero_ih.value != 'number' || numero_ih.value < 1 || numero_ih.value > 999 ){ errores.push('ingrese ih') }
-                if(typeof numero_hcd.value != 'number' || numero_hcd.value < 1 || numero_hcd.value > 999 ){ errores.push('ingrese hcd') }
-                if(typeof director_id.value != 'number' || director_id.value < 1){ errores.push('seleccione director') }
-                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
-                if(actual_lectivo.value.lectivo_id == 0){ errores.push('seleccione lectivo') }
-                if(actual_grado.value.grado_id == 0){ errores.push('seleccione grado') }
-                
-                if(errores.length){
-                    alert(errores[0])
-                }else{
-                    
-                    Asignatura.store({
-                        'nombre': nombre.value,
-                        'ih': numero_ih.value,
-                        'hcd': numero_hcd.value,
-                        'docente_id': director_id.value,
-                        'sede_id':  actual_sede.value.sede_id,
-                        'lectivo_id': actual_lectivo.value.lectivo_id,
-                        'grado_id': actual_grado.value.grado_id,
-                        'estado':1
-                    })
-
-                    seccion.value = 0
-                    nombre.value = ''
-                    numero_ih.value = 0
-                    numero_hcd.value = 0
-
-                }
-
-            }
-
-            const filter_director = (director_id)=>{
-
-                let array = directores.value
-
-                if(array.length){
-                    let res = array.filter((d)=>{ return d.docente_id == director_id })
-                    return res[0].nombres +' '+ res[0].apellidos
-                }else{
-                    return ''
-                }
-                
             }
 
             const get_logros = (_asignatura)=>{
@@ -220,15 +173,18 @@
             const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const actual_grado = computed(()=> Store.state.actual_grado )
-            const directores = computed(()=> Store.state.docentes )
-
+           
+            //# watch
             watch(actual_grado,(value) => {
 
                 if(value.grado_id > 0) {
                     Asignatura.index(()=>{})
                 }
-                
+
+                Store.commit('set_logros',[])
+            
             })
+
 
             return {
                 urlsf,
@@ -236,15 +192,8 @@
                 asignaturas,
                 logros,
                 seccion,
-                nombre,
-                numero_ih,
-                numero_hcd,
-                director_id,
                 actual_lectivo,
                 actual_grado,
-                guardar,
-                set_director,
-                filter_director,
                 get_logros,
                 asignatura,
                 aprobado,

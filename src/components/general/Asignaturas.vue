@@ -135,18 +135,18 @@
 
             const guardar = ()=>{
 
-                errores = []
+                errores.value = []
 
-                if(nombre.value.length < 0 || nombre.value.length > 100){ errores.push('ingrese nombre') }
-                if(typeof numero_ih.value != 'number' || numero_ih.value < 1 || numero_ih.value > 999 ){ errores.push('ingrese ih') }
-                if(typeof numero_hcd.value != 'number' || numero_hcd.value < 1 || numero_hcd.value > 999 ){ errores.push('ingrese hcd') }
-                if(typeof director_id.value != 'number' || director_id.value < 1){ errores.push('seleccione director') }
-                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
-                if(actual_lectivo.value.lectivo_id == 0){ errores.push('seleccione lectivo') }
-                if(actual_grado.value.grado_id == 0){ errores.push('seleccione grado') }
+                if(nombre.value.length <= 0 || nombre.value.length > 100){ errores.value.push('ingrese nombre') }
+                if(typeof numero_ih.value != 'number' || numero_ih.value < 1 || numero_ih.value > 999 ){ errores.value.push('ingrese ih') }
+                if(typeof numero_hcd.value != 'number' || numero_hcd.value < 1 || numero_hcd.value > 999 ){ errores.value.push('ingrese hcd') }
+                if(typeof director_id.value != 'number' || director_id.value < 1){ errores.value.push('seleccione director') }
+                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
+                if(actual_lectivo.value.lectivo_id == 0){ errores.value.push('seleccione lectivo') }
+                if(actual_grado.value.grado_id == 0){ errores.value.push('seleccione grado') }
                 
-                if(errores.length){
-                    alert(errores[0])
+                if(errores.value.length){
+                    alert(errores.value[0])
                 }else{
                     
                     Asignatura.store({

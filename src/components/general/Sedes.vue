@@ -134,16 +134,16 @@
 
             const guardar = ()=>{
 
-                errores = []
+                errores.value = []
 
-                if(!nombre.value.length){ errores.push('ingrese nombre') }
-                if(!direccion.value.length){ errores.push('ingrese dirección') }
-                if(!telefono.value.length){ errores.push('ingrese teléfono') }
-                if(!email.value.length){ errores.push('ingrese email') }
-                if(!Utilities.check_email(email.value)){ errores.push('formato de email incorrecto!') }
+                if(!nombre.value.length || nombre.value.length > 100){ errores.value.push('ingrese nombre') }
+                if(!direccion.value.length || direccion.value.length > 100){ errores.value.push('ingrese dirección') }
+                if(!telefono.value.length || telefono.value.length > 100){ errores.value.push('ingrese teléfono') }
+                if(!email.value.length || email.value.length > 100){ errores.value.push('ingrese email') }
+                if(!Utilities.check_email(email.value)){ errores.value.push('formato de email incorrecto!') }
 
-                if(errores.length){
-                    alert(errores[0])
+                if(errores.value.length){
+                    alert(errores.value[0])
                 }else{
                     
                     Sede.store({

@@ -177,15 +177,15 @@
 
             const guardar = ()=>{
 
-                errores = []
+                errores.value = []
 
-                if( Number(estudiante.value.identificacion) <= 0 ){ errores.push('identificación estudiante') }
-                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
-                if(actual_lectivo.value.lectivo_id == 0){ errores.push('seleccione lectivo') }
-                if(actual_grado.value.grado_id == 0){ errores.push('seleccione grado') }
+                if( Number(estudiante.value.identificacion) <= 0 ){ errores.value.push('identificación estudiante') }
+                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
+                if(actual_lectivo.value.lectivo_id == 0){ errores.value.push('seleccione lectivo') }
+                if(actual_grado.value.grado_id == 0){ errores.value.push('seleccione grado') }
                 
-                if(errores.length){
-                    alert(errores[0])
+                if(errores.value.length){
+                    alert(errores.value[0])
                 }else{
                     
                     Matricula.store({

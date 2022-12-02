@@ -127,16 +127,16 @@
 
             const guardar = ()=>{
 
-                errores = []
+                errores.value = []
 
-                if(nombre.value.length < 0 || nombre.value.length > 100){ errores.push('ingrese nombre') }
-                if(typeof numero.value != 'number' || numero.value < 0 || numero.value > 12 ){ errores.push('ingrese numero') }
-                if(typeof director_id.value != 'number' || director_id.value < 1){ errores.push('seleccione director') }
-                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
-                if(actual_lectivo.value.numero_lectivo == 0){ errores.push('seleccione lectivo') }
+                if(nombre.value.length < 0 || nombre.value.length > 100){ errores.value.push('ingrese nombre') }
+                if(typeof numero.value != 'number' || numero.value < 0 || numero.value > 12 ){ errores.value.push('ingrese numero') }
+                if(typeof director_id.value != 'number' || director_id.value < 1){ errores.value.push('seleccione director') }
+                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
+                if(actual_lectivo.value.numero_lectivo == 0){ errores.value.push('seleccione lectivo') }
                 
-                if(errores.length){
-                    alert(errores[0])
+                if(errores.value.length){
+                    alert(errores.value[0])
                 }else{
                     
                     Grado.store({

@@ -108,15 +108,15 @@
             
             const guardar = ()=>{
 
-                errores = []
+                errores.value = []
 
-                if(!nombre.value.length){ errores.push('ingrese nombres') }
-                if(!apellido.value.length){ errores.push('ingrese apellidos') }
-                if(!identificacion.value.length){ errores.push('ingrese identificación') }
-                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
+                if(!nombre.value.length){ errores.value.push('ingrese nombres') }
+                if(!apellido.value.length){ errores.value.push('ingrese apellidos') }
+                if(!identificacion.value.length){ errores.value.push('ingrese identificación') }
+                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
 
-                if(errores.length){
-                    alert(errores[0])
+                if(errores.value.length){
+                    alert(errores.value[0])
                 }else{
                     
                     Estudiante.store({

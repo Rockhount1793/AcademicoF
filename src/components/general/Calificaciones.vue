@@ -306,7 +306,6 @@
                 
                 }
 
-
             }
             
             const set_estudiante = (json)=>{
@@ -314,39 +313,6 @@
                 estudiante.value = json
                 seccion.value = 1
 
-            }
-
-            const guardar = ()=>{
-
-                errores.value = []
-
-                if(nombre.value.length < 0 || nombre.value.length > 100){ errores.push('ingrese nombre') }
-                if(typeof numero_ih.value != 'number' || numero_ih.value < 1 || numero_ih.value > 999 ){ errores.push('ingrese ih') }
-                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
-                if(actual_lectivo.value.lectivo_id == 0){ errores.push('seleccione lectivo') }
-                if(actual_grado.value.grado_id == 0){ errores.push('seleccione grado') }
-                
-                if(errores.value.length){
-                    alert(errores[0])
-                }else{
-                    
-                    Calificacion.update(json)
-
-                }
-
-            }
-
-            const filter_director = (director_id)=>{
-
-                let array = directores.value
-
-                if(array.length){
-                    let res = array.filter((d)=>{ return d.docente_id == director_id })
-                    return res[0].nombres +' '+ res[0].apellidos
-                }else{
-                    return ''
-                }
-                
             }
 
             const get_calificaciones = (item)=>{
@@ -391,8 +357,7 @@
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const actual_grado = computed(()=> Store.state.actual_grado )
             const actual_asignatura = computed(()=> Store.state.actual_asignatura )
-            const directores = computed(()=> Store.state.docentes )
-
+           
             const promedios_periodo = computed(()=>{
 
                 let promedios = {
@@ -487,6 +452,14 @@
             
             })
 
+            watch(matriculas,(value) => {
+
+                estudiante.value = {'estudiante_id': 0, 'nombres': 'Nombres', 'apellidos': 'Apellidos', 'identificacion': 0}
+                asignatura.value = {'asignatura_id': 0, 'nombre': 'Asignatura'}
+                Store.commit('set_calificaciones',[])
+
+            })
+
             return {
                 urlsf,
                 listado,
@@ -497,8 +470,6 @@
                 actual_lectivo,
                 actual_asignatura,
                 actual_grado,
-                guardar,
-                filter_director,
                 get_asignaturas,
                 set_estudiante,
                 get_calificaciones,
