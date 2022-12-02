@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Bienvenida from '@/views/Bienvenida.vue'
+import Error from '@/views/Error.vue'
 
 const router = createRouter({
     
@@ -83,9 +84,15 @@ const router = createRouter({
             
         },
         {
+            path: '/generables',
+            name:'Generables',
+            component: () => import('@/components/general/Generables.vue'),
+            
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'Error',
-            component: () => import('@/views/Error.vue')
+            component: Error
         }
       
     ]

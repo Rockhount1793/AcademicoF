@@ -221,11 +221,11 @@
 
             const get_estudiante = ()=>{
 
-                errores = []
+                errores.value = []
 
-                if(actual_sede.value.sede_id == 0){ errores.push('seleccione sede') }
+                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
              
-                if(!errores.length){
+                if(!errores.value.length){
 
                     estudiante.value = {'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': ''}
 
@@ -245,7 +245,7 @@
                     })
 
                 }else{
-                    alert(errores[0])
+                    alert(errores.value[0])
                 }
 
             }
@@ -266,11 +266,7 @@
 
                 if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
                     
-                    Matricula.index({
-                        'sede_id':  actual_sede.value.sede_id,
-                        'lectivo_id': actual_lectivo.value.lectivo_id,
-                        'grado_id': actual_grado.value.grado_id,
-                    },()=>{})
+                    Matricula.index(()=>{})
                 
                 }
                 
@@ -304,11 +300,7 @@
 
                     if(!Store.state.matriculas.length && this.actual_grado.grado_id > 0 && this.actual_sede.sede_id > 0 && this.actual_lectivo.lectivo_id > 0){
                                     
-                        Matricula.index({
-                            'sede_id':  this.actual_sede.sede_id,
-                            'lectivo_id': this.actual_lectivo.lectivo_id,
-                            'grado_id': this.actual_grado.grado_id
-                        },()=>{})
+                        Matricula.index(()=>{})
 
                     }
 
