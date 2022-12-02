@@ -27,12 +27,12 @@
 
         },
 
-        'store': async function(json){
+        'update': async function(json){
 
-            const response = await Fetch.post('/asignatura/store',json)
+            const response = await Fetch.put('/calificacion/update',json)
             if(response.error === 0){
 
-                Store.dispatch('add_asignatura',response.asignatura)
+                //console.log(response)
 
             }
 

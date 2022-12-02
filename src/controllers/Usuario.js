@@ -15,7 +15,7 @@
             const response = await Fetch.put('/usuario/update',json)
 
                 if(response.error === 0){
-                    console.log(response)
+                    //console.log(response)
                 }
 
                 if(response.error > 0){
@@ -26,7 +26,6 @@
 
         'load_default_config': function(){
 
-            
             const sede_id = this.read_config('sede_id')
             const nombre_sede = this.read_config('nombre_sede')
             const numero_lectivo = this.read_config('numero_lectivo')

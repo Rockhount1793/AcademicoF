@@ -11,7 +11,7 @@
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg">Calificaciones <span v-if="asignatura.asignatura_id > 0">{{asignatura.nombre}} </span></p>
+                <p class="text-gray-100 text-center font-semibold text-lg">Calificaciones</p>
 
                 <div class="mt-3 space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
                     <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Estudiantes</p>
@@ -125,6 +125,7 @@
                                       <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
                                     </svg>
                                 </div>
+
                             </div>
 
                             <section v-if="item.estado == 1" class="">
@@ -164,6 +165,7 @@
                                 </div>
 
                                 <div class="p-1 bg-gray-800 px-2 mt-1 rounded border border-gray-500">
+
                                     <div class="mt-1">
                                         <input id="nota_6" class="rounded w-16 text-center" type="number" v-model="item.nota_6" min="0" max="5" step="1">
                                         <label for="nota_6" class="px-2 font-semibold text-md text-gray-100">Puntualidad</label>
@@ -182,6 +184,7 @@
                                 </div>
 
                                 <div class="p-1 bg-gray-800 px-2 mt-1 rounded border border-gray-500">
+
                                     <div class="mt-1">
                                         <input id="nota_8" class="rounded w-16 text-center" type="number" v-model="item.nota_8" min="0" max="5" step="1">
                                         <label for="nota_8" class="px-2 font-semibold text-md text-gray-100">Comportamiento</label>
@@ -202,13 +205,14 @@
                                 <div class="flow-root pt-2">
     
                                     <div class="float-left flex-1 px-2">
-                                        <button id="primera" class="w-16 sahdow-md border border-cyan-800 text-cyan-500 rounded">{{promedios_periodo[index].primarias}}</button>
+                                        <button id="primera" class="w-16 sahdow-md border border-cyan-800 text-cyan-500 rounded">{{ ((promedios_periodo[index].primarias +promedios_periodo[index].secundarias + promedios_periodo[index].terciarias)/3).toFixed(2) }}</button>
                                         <span for="primera" class="px-2 font-semibold text-md text-pink-100">Final {{item.periodo}} periodo</span>
                                     </div>
     
                                     <button @click="update_calificacion(item)" class="float-right h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
                                         Guardar
                                     </button>
+
                                 </div>
     
                             </section>
@@ -242,10 +246,10 @@
   
 <script>
   
-    import Barra from '@/components/framework/Barra.vue'
-    import Lateral from '@/components/framework/Lateral.vue'
-    import SelectorDirector from '@/components/framework/Selector_Docente.vue'
-    import SelectorGrado from '@/components/framework/Selector_Grado.vue'
+    import Barra from "@/components/framework/Barra.vue"
+    import Lateral from "@/components/framework/Lateral.vue"
+    import SelectorDirector from "@/components/framework/Selector_Docente.vue"
+    import SelectorGrado from "@/components/framework/Selector_Grado.vue"
     import { RouterView } from "vue-router"
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from "@/store"
@@ -279,7 +283,30 @@
             //# methods
 
             const update_calificacion = (json)=>{
-                console.log(json)
+                
+                errores.value = []
+
+                if(typeof Number(json.nota_1) != 'number' || Number(json.nota_1) > 5 || Number(json.nota_1) < 0){ errores.value.push('nota 1 no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_2) != 'number' || Number(json.nota_2) > 5 || Number(json.nota_2) < 0){ errores.value.push('nota 2 no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_3) != 'number' || Number(json.nota_3) > 5 || Number(json.nota_3) < 0){ errores.value.push('nota 3 no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_4) != 'number' || Number(json.nota_4) > 5 || Number(json.nota_4) < 0){ errores.value.push('nota 4 no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_5) != 'number' || Number(json.nota_5) > 5 || Number(json.nota_5) < 0){ errores.value.push('nota 5 no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_6) != 'number' || Number(json.nota_6) > 5 || Number(json.nota_6) < 0){ errores.value.push('nota 6 no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_7) != 'number' || Number(json.nota_7) > 5 || Number(json.nota_7) < 0){ errores.value.push('nota 7 no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_8) != 'number' || Number(json.nota_8) > 5 || Number(json.nota_8) < 0){ errores.value.push('nota 8 no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_9) != 'number' || Number(json.nota_9) > 5 || Number(json.nota_9) < 0){ errores.value.push('nota 9 no debe ser menor a 0 o mayor a 5!') }
+                
+                if(!errores.value.length){
+
+                    Calificacion.update(json)
+
+                }else{
+
+                    alert(errores.value[0])
+                
+                }
+
+
             }
             
             const set_estudiante = (json)=>{
@@ -369,7 +396,7 @@
             const promedios_periodo = computed(()=>{
 
                 let promedios = {
-                    0: {'primarias': 0, 'secundarias': 0, 'terciarias': 0} ,
+                    0: {'primarias': 0, 'secundarias': 0, 'terciarias': 0},
                     1: {'primarias': 0, 'secundarias': 0, 'terciarias': 0},
                     2: {'primarias': 0, 'secundarias': 0, 'terciarias': 0},
                     3: {'primarias': 0, 'secundarias': 0, 'terciarias': 0}
