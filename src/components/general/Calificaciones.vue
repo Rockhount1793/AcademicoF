@@ -490,11 +490,9 @@
                 
                 Aplicacion.check_login(()=>{
 
-                    if(!Store.state.matriculas.length && this.actual_grado.grado_id > 0 && this.actual_asignatura.asignatura_id > 0){
-                                    
-                        Asignatura.index(()=>{
-                            
-                        })
+                    if(!Store.state.matriculas.length && this.actual_grado.grado_id > 0 && this.actual_lectivo.lectivo_id > 0){
+
+                        Matricula.index(()=>{})
 
                     }
 
