@@ -130,7 +130,8 @@
 
             const generar = (json)=>{
 
-               Generable[recurso.value]({'archivo': json.nombres+'_'+json.identificacion ,'estudiante_id': json.estudiante_id, 'recurso': recurso.value },()=>{})
+                Router.push({'name':'Boletin'})
+               //Generable[recurso.value]({'archivo': json.nombres+'_'+json.identificacion ,'estudiante_id': json.estudiante_id, 'recurso': recurso.value },()=>{})
             
             }
 

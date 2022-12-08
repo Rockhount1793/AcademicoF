@@ -96,6 +96,12 @@ const router = createRouter({
             
         },
         {
+            path: '/boletin',
+            name:'Boletin',
+            component: () => import('@/components/generables/Boletin.vue'),
+            
+        },
+        {
             path: '/:pathMatch(.*)*',
             name: 'Error',
             component: Error
