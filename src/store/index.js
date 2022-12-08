@@ -52,6 +52,7 @@ const store = createStore({
             matriculas:[],
             estudiantes:[],
             docentes:[],
+            personas:[],
             directores: []
 
         }
@@ -133,6 +134,10 @@ const store = createStore({
 
         set_docentes(state,array){ 
             state.docentes = array
+        },
+
+        set_personas(state,array){ 
+            state.personas = array
         },
 
         set_directores(state,array){ 
@@ -298,6 +303,14 @@ const store = createStore({
             const result = [...directores, json]
             this.commit('set_docentes',result)
 
+        },
+
+        add_persona(state, json){
+            
+            let personas = this.state.personas
+            const result = [...personas, json]
+            this.commit('set_personas',result)
+        
         },
 
         add_director(state, json){

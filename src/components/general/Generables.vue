@@ -28,19 +28,19 @@
                     </div>
 
                     <div class="mt-2">
-                        <button class="bg-cyan-700 shadow-cyan-500 shadow-md w-full lg:w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Tarjetas</button>
+                        <button @click="recurso = 'tarjeta' " :class="recurso == 'tarjeta' ? 'bg-pink-700 shadow-pink-500':'bg-cyan-700 shadow-cyan-500' " class="shadow-md w-full lg:w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Tarjetas</button>
                     </div>
 
                     <div class="mt-2">
-                        <button class="bg-cyan-700 shadow-cyan-500 shadow-md w-full lg:w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Planilla</button>
+                        <button @click="recurso = 'planilla' " :class="recurso == 'planilla' ? 'bg-pink-700 shadow-pink-500':'bg-cyan-700 shadow-cyan-500' " class=" shadow-md w-full lg:w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Planilla</button>
                     </div>
                     
                     <div class="mt-2">
-                        <button class="bg-cyan-700 shadow-cyan-500 shadow-md w-full lg:w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Informe</button>
+                        <button @click="recurso = 'informe' " :class="recurso == 'informe' ? 'bg-pink-700 shadow-pink-500':'bg-cyan-700 shadow-cyan-500' " class=" shadow-md w-full lg:w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Informe</button>
                     </div>
 
                     <div class="mt-2">
-                        <button class="bg-cyan-700 shadow-cyan-500 shadow-md w-full lg:w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Boletines</button>
+                        <button @click="recurso = 'boletin' " :class="recurso == 'boletin' ? 'bg-pink-700 shadow-pink-500':'bg-cyan-700 shadow-cyan-500' " class=" shadow-md w-full lg:w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Boletin</button>
                     </div>
 
                 </div>
@@ -68,10 +68,12 @@
                                     
                                 </div>
 
-                                <div class="w-full h-8 truncate">
-                                    <button title="eliminar matricula" @click="delete_(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
+                                <div class="w-full h-8 ">
+                                    <button title="generar pdf" @click="generar(item)" class="flex space-x-1 mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
                                         
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-gray-100 w-5 h-5">
+                                        <p class="capitalize">Generar {{ recurso }}</p>
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-1 text-gray-100 w-4 h-4">
                                           <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
                                         </svg>
                                          
@@ -107,7 +109,7 @@
     import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
     import Matricula from "@/controllers/Matricula"
-    import Estudiante from "@/controllers/Estudiante"
+    import Generable from "@/controllers/Generable"
     import Utilitie from "@/utilities"
   
     export default defineComponent({
@@ -121,17 +123,15 @@
         setup(){
         
             //# data 
-            let identificacion_ = ref('654678987')
-            let estudiante = ref({'estudiante_id': 0, 'nombres': 'Nombres', 'apellidos': 'Apellidos', 'identificacion': '0'})
-            let tipo_numero = ref(0)
-            let tipos = ref({'tipo': 0, 'nombre':'Inicial'}, {'tipo': 1, 'nombre':'Extraordinario'}, {'tipo': 2, 'nombre':'Traslado'}, {'tipo': 3, 'nombre':'Desertor'})
             let seccion = ref(0)
-            let errores = ref([])
+            let recurso = ref('boletin')
 
             //# methods
 
-            const delete_ = (matricula_)=>{
-               // Matricula.delete(matricula_)
+            const generar = (json)=>{
+
+               Generable[recurso.value]({'archivo': json.nombres+'_'+json.identificacion ,'estudiante_id': json.estudiante_id, 'recurso': recurso.value },()=>{})
+            
             }
 
 
@@ -173,13 +173,15 @@
 
             return {
                 urlsf,
+                generar,
                 actual_sede,
                 actual_lectivo,
                 actual_grado,
                 matriculas,
                 seccion,
                 filter_estudiante,
-                filter_identificacion
+                filter_identificacion,
+                recurso
             }
       
         },

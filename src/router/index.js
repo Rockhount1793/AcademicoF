@@ -84,6 +84,12 @@ const router = createRouter({
             
         },
         {
+            path: '/personas',
+            name:'Personas',
+            component: () => import('@/components/general/Personas.vue'),
+            
+        },
+        {
             path: '/generables',
             name:'Generables',
             component: () => import('@/components/general/Generables.vue'),

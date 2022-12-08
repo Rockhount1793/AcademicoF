@@ -29,7 +29,7 @@
             return token
 
         },
-
+        
         'get' : async function(ext){
 
             let options = {
@@ -144,8 +144,47 @@
 
             return res
 
-        }
+        },
 
+        'post_download' : async function(ext, body){
+            
+            let options = {
+            
+                method: 'POST',
+
+                headers: {
+                    'Accept': "application/json",
+                    'responseType': 'blob',
+                    'Content-Type': "application/json;charset=UTF-8",
+                    '_token': this.token()
+                },
+
+                body: JSON.stringify(body)
+
+            }
+            
+            Aplicacion.loading(true)
+
+            const res = await fetch(_urlsb() + '/api' + ext , options)
+            .then((response) => response.blob())
+            .then((data) => {
+                
+                return {'error':0, 'data': data }
+
+            })
+            .catch((error) => {
+
+                console.log(error)
+                console.error('timeout exceeded') 
+                return {'error': 500 }
+
+            }).finally(()=>{
+                Aplicacion.loading(false)
+            })
+
+            return res
+
+        },
     }
 
     export default request
