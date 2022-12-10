@@ -184,7 +184,8 @@
 
             return res
 
-        },
+        }
+        
     }
 
     export default request

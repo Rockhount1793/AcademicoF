@@ -6,7 +6,7 @@
 
     const Controller = {
 
-        'boletin': async function(params,cb){
+        'boletin_old': async function(params,cb){
 
             let sede = Store.state.actual_sede
             let lectivo = Store.state.actual_lectivo
@@ -34,17 +34,24 @@
 
         },
 
-        'store': async function(json){
+        'boletin': async function(params,cb){
 
-            const response = await Fetch.post('/asignatura/store',json)
+            let sede = Store.state.actual_sede
+            let lectivo = Store.state.actual_lectivo
+            let grado = Store.state.actual_grado
+            let json = {...params ,'sede_id': sede.sede_id, 'lectivo_id': lectivo.lectivo_id, 'grado_id': grado.grado_id}
+
+            const response = await Fetch.post('/generable/boletin',json)
+            
             if(response.error === 0){
-
-                Store.dispatch('add_asignatura',response.asignatura)
+                
+                Store.commit('set_boletin',response.boletin)
+                cb()
 
             }
 
-            if(response.error > 0){
-                Aplicacion.redirect_home(response)
+            if(response.error === 500){
+               // Aplicacion.redirect_home(response)
             }
             
         }

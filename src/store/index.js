@@ -21,6 +21,7 @@ const store = createStore({
             usuario: {'usuario_id':0, 'avatar':'default.png','configuracion':{}},
             token: '',
             login: false,
+            
             secciones:{
                 'Sedes': 1,  
                 'Lectivos': 2,  
@@ -35,6 +36,24 @@ const store = createStore({
                 'Directores': 11, 
                 'Generables': 12 
             },
+
+            periodos:[
+                { 'periodo': 1, 'nombre': 'Primero' },
+                { 'periodo': 2, 'nombre': 'Segundo' },
+                { 'periodo': 3, 'nombre': 'Tercero' },
+                { 'periodo': 4, 'nombre': 'Cuarto' },
+                { 'periodo': 5, 'nombre': 'Final' }
+            ],
+
+            generables:[
+                { 'recurso': 1, 'nombre': 'carnet' },
+                { 'recurso': 2, 'nombre': 'planilla' },
+                { 'recurso': 3, 'nombre': 'informe' },
+                { 'recurso': 4, 'nombre': 'boletin' },
+                { 'recurso': 5, 'nombre': 'constancia' }
+            ],
+
+
             seccion_num: [0,0],
             config:[{ 'name':'sede_id','valor':0}],
 
@@ -43,6 +62,8 @@ const store = createStore({
             actual_sede: {'sede_id': 0, 'nombre_sede':'No seleccionada!'},
             actual_lectivo: {'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0},
             actual_grado: { 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 },
+            actual_periodo: { 'periodo': 0, 'nombre': 'Periodo' },
+            actual_generable: { 'recurso': 0, 'nombre': 'Generable' },
             actual_asignatura: { 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 },
             lectivos: [],
             grados:[],
@@ -53,7 +74,10 @@ const store = createStore({
             estudiantes:[],
             docentes:[],
             personas:[],
-            directores: []
+            directores: [],
+
+            //# generables
+            boletin: { 'estudiante': {'estudiante_id': 0, 'identificacion': '0'} }
 
         }
     },
@@ -108,6 +132,14 @@ const store = createStore({
             state.actual_grado = json
         },
 
+        set_actual_periodo(state, json){
+            state.actual_periodo = json
+        },
+
+        set_actual_generable(state, json){
+            state.actual_generable = json
+        },
+
         set_actual_asignatura(state, json){
             state.actual_asignatura = json
         },
@@ -144,7 +176,10 @@ const store = createStore({
             state.directores = array
         },
 
-    
+        set_boletin(state,json){ 
+            state.boletin = json
+        }
+
     },
 
     actions:{
@@ -163,7 +198,7 @@ const store = createStore({
                     usuario.configuracion['nombre_sede'] = json.nombre
                     usuario.configuracion['numero_lectivo'] = 0
                     this.commit('set_usuario',usuario)
-
+                    
                     Usuario.update(usuario)
 
                     this.commit('set_actual_sede',json)
@@ -220,11 +255,13 @@ const store = createStore({
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
                 this.commit('set_asignaturas',[])
                 this.commit('set_actual_asignatura',{ 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 })
+                this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' } )
                 this.commit('set_calificaciones',[])
                 this.commit('set_docentes',[])
                 this.commit('set_estudiantes',[])
                 this.commit('set_directores',[])
                 this.commit('set_matriculas',[])
+                this.commit('set_boletin',{ 'estudiante': {'estudiante_id': 0, 'identificacion': '0'} })
 
                 res(true)
 
@@ -240,8 +277,10 @@ const store = createStore({
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
                 this.commit('set_asignaturas',[])
                 this.commit('set_actual_asignatura',{ 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 })
+                this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' } )
                 this.commit('set_calificaciones',[])
                 this.commit('set_matriculas',[])
+                this.commit('set_boletin',{ 'estudiante': {'estudiante_id': 0, 'identificacion': '0'} })
 
                 res(true)
 

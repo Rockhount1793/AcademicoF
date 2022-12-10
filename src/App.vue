@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<script setup>
+<script>
     import { RouterView } from 'vue-router'
 </script>
 
