@@ -41,7 +41,7 @@
                                 </div>
                                 
                                 <div class="w-full md:w-1/2 lg:w-1/3 truncate">
-                                    <p class="mt-2 lg:mt-0.5 px-2 p-0.5 rounded bg-gray-800 capitalize text-gray-100 font-semibold"><span class="hidden lg:inline">Director:</span> {{filter_director(item.director_id)}}</p>
+                                    <p class="mt-2 lg:mt-0.5 px-2 p-0.5 rounded bg-gray-800 capitalize text-gray-100 font-semibold"><span class="hidden lg:inline">Director:</span> {{filter_director(item.docente_id)}}</p>
                                 </div>
 
                             </div>
@@ -113,12 +113,12 @@
 
             let nombre = ref('')
             let numero = ref(0)
-            let director_id = ref(0)
+            let docente_id = ref(0)
             let errores = ref([])
 
             //# methods
             const set_director = (number)=>{ 
-                director_id.value = number
+                docente_id.value = number
             }
 
             const set_route = (json)=>{
@@ -131,7 +131,7 @@
 
                 if(nombre.value.length < 0 || nombre.value.length > 100){ errores.value.push('ingrese nombre') }
                 if(typeof numero.value != 'number' || numero.value < 0 || numero.value > 12 ){ errores.value.push('ingrese numero') }
-                if(typeof director_id.value != 'number' || director_id.value < 1){ errores.value.push('seleccione director') }
+                if(typeof docente_id.value != 'number' || docente_id.value < 1){ errores.value.push('seleccione director') }
                 if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
                 if(actual_lectivo.value.numero_lectivo == 0){ errores.value.push('seleccione lectivo') }
                 
@@ -142,7 +142,7 @@
                     Grado.store({
                         'nombre': nombre.value,
                         'numero': numero.value,
-                        'director_id': director_id.value,
+                        'docente_id': docente_id.value,
                         'sede_id':  actual_sede.value.sede_id,
                         'lectivo_id': actual_lectivo.value.lectivo_id,
                         'estado':1
@@ -156,12 +156,12 @@
 
             }
 
-            const filter_director = (director_id)=>{
+            const filter_director = (docente_id)=>{
 
                 let array = directores.value
 
                 if(array.length){
-                    let res = array.filter((d)=>{ return d.docente_id == director_id })
+                    let res = array.filter((d)=>{ return d.docente_id == docente_id })
                     return res[0].nombres +' '+ res[0].apellidos
                 }else{
                     return ''
@@ -184,7 +184,7 @@
                 seccion,
                 nombre,
                 numero,
-                director_id,
+                docente_id,
                 actual_lectivo,
                 guardar,
                 set_director,

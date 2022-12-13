@@ -165,7 +165,12 @@
 
                 if(!errores.value.length){
 
-                    Generable[actual_generable.value.nombre]({'periodo': actual_periodo.value.periodo,'estudiante_id': json.estudiante_id, 'recurso': actual_generable.value.nombre },
+                    Generable[actual_generable.value.nombre](
+                        {
+                            ...json,
+                            'periodo': actual_periodo.value.periodo,
+                            'recurso': actual_generable.value.nombre 
+                        },
                     ()=>{
                         
                         Router.push({ name: "Boletin" })

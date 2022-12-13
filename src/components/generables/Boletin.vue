@@ -62,15 +62,15 @@
                             </td>
                             
                             <td class="uppercase border border-gray-900">
-                                {{boletin.estudiante.nombres}}
+                                {{ boletin.estudiante.nombres }}
                             </td>
                             
                             <td class="uppercase border border-gray-900">
-                                {{boletin.estudiante.apellidos}}                        
+                                {{ boletin.estudiante.apellidos }}                        
                             </td>
                             
-                            <td class="border border-gray-900">
-                                PRIMERO
+                            <td class="uppercase border border-gray-900">
+                                {{boletin.grado}}
                             </td>
     
                         </tbody>
@@ -115,9 +115,9 @@
 
                         </thead>
     
-                        <tbody :key="index" v-for="(asignatura, index) in boletin.asignaturas">
+                        <tbody :key="index" v-for="(asignatura, index) in boletin.asignaturas" class="h-auto">
                             
-                            <td class="uppercase border w-28 border-gray-900">
+                            <td class="py-3 uppercase border w-28 border-gray-900">
                                 {{asignatura.nombre}}
                             </td>
                             
@@ -139,17 +139,25 @@
 
                 </div>
 
-                <div class="mt-5 flow-root text-black font-semibold text-xs px-5">
+                <div class="mx-auto py-5">
+                
+                    <p class="font-semibold">Observaciones:</p>
+
+                    <hr class="mt-5 border-gray-500" />
+
+                </div>
+
+                <div class="py-5 flow-root text-black font-semibold text-xs px-5">
                     
                     <div class="float-left">
-                        <hr class="border border-black w-32 md:w-64" />
-                        <p>OLGA LUCIA</p>
+                        <hr class="border-gray-500 w-32 md:w-64" />
+                        <p class="uppercase">{{ boletin.director }}</p>
                         <p>Director(a) de curso</p>
                     </div>
 
                     <div class="float-right text-right">
-                        <hr class="border border-black w-32 md:w-64" />
-                        <p>MARIA MELBA MUÑOZ</p>
+                        <hr class="border-gray-500 w-32 md:w-64" />
+                        <p class="uppercase">{{ boletin.rector }}</p>
                         <p>Rector(a)</p>
                     </div>                    
 
@@ -188,7 +196,7 @@
 
             const logro_comp = (asig)=>{
 
-                let nota = {'nota_1': 0, 'nota_2': 0,'nota_3': 0,'nota_4': 0,'nota_5': 0,'nota_6': 0,'nota_7': 0,'nota_8': 0, 'nota_9': 0,}
+                let nota = {'nota_1': 0, 'nota_2': 0,'nota_3': 0,'nota_4': 0,'nota_5': 0,'nota_6': 0,'nota_7': 0,'nota_8': 0, 'nota_9': 0 }
                 let nota_f = boletin.value.calificaciones.filter((c)=> c.asignatura_id == asig.asignatura_id )
 
                 if(nota_f.length){ nota = nota_f[0] }
