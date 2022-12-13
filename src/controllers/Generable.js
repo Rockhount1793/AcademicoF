@@ -51,7 +51,7 @@
             }
 
             if(response.error === 500){
-               // Aplicacion.redirect_home(response)
+               Aplicacion.redirect_home(response)
             }
             
         }

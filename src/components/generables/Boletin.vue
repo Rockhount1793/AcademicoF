@@ -189,15 +189,14 @@
             const logro_comp = (asig)=>{
 
                 let nota = {'nota_1': 0, 'nota_2': 0,'nota_3': 0,'nota_4': 0,'nota_5': 0,'nota_6': 0,'nota_7': 0,'nota_8': 0, 'nota_9': 0,}
-                let nota_f = boletin.value.calificaciones.filter((l)=>l.asignatura_id == asig.asignatura_id )
+                let nota_f = boletin.value.calificaciones.filter((c)=> c.asignatura_id == asig.asignatura_id )
 
-                if(nota_f.lenght){ nota = nota_f[0] }
+                if(nota_f.length){ nota = nota_f[0] }
 
                 let logro = { 'aprobado': 'calificaciones pendientes', 'no_aprobado': 'calificaciones pendientes' }
-                let logro_f = boletin.value.logros.filter((l)=>l.asignatura_id == asig.asignatura_id )
+                let logro_f = boletin.value.logros.filter((l)=> l.asignatura_id == asig.asignatura_id )
 
-                if(logro_f.lenght){ logro = logro_f[0] }
-
+                if(logro_f.length ){ logro = logro_f[0] }
 
                 // 70%
                 const promedio_15 = (nota.nota_1 + nota.nota_2 + nota.nota_3 + nota.nota_4 + nota.nota_5)/5

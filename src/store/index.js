@@ -77,7 +77,7 @@ const store = createStore({
             directores: [],
 
             //# generables
-            boletin: { 'estudiante': {'estudiante_id': 0, 'identificacion': '0'} }
+            boletin: { 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'calificaciones':[], 'logros':[] }
 
         }
     },
@@ -261,7 +261,7 @@ const store = createStore({
                 this.commit('set_estudiantes',[])
                 this.commit('set_directores',[])
                 this.commit('set_matriculas',[])
-                this.commit('set_boletin',{ 'estudiante': {'estudiante_id': 0, 'identificacion': '0'} })
+                this.commit('set_boletin',{ 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'calificaciones':[], 'logros':[] })
 
                 res(true)
 
@@ -280,7 +280,7 @@ const store = createStore({
                 this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' } )
                 this.commit('set_calificaciones',[])
                 this.commit('set_matriculas',[])
-                this.commit('set_boletin',{ 'estudiante': {'estudiante_id': 0, 'identificacion': '0'} })
+                this.commit('set_boletin',{ 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'calificaciones':[], 'logros':[] })
 
                 res(true)
 
