@@ -60,6 +60,12 @@ const router = createRouter({
             
         },
         {
+            path: '/faltas',
+            name:'Faltas',
+            component: () => import('@/components/general/Faltas.vue'),
+            
+        },
+        {
             path: '/matriculas',
             name:'Matriculas',
             component: () => import('@/components/general/Matriculas.vue'),

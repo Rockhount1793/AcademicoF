@@ -3,7 +3,7 @@
 
     <main class="bg-white h-auto min-h-screen max-w-8xl overflow-hidden">
         
-        <div class="h-4/6 lg:w-2/4 mx-auto px-5">
+        <div class="pt-2 h-4/6 lg:w-2/4 mx-auto px-5">
   
             <div class="mx-2 flex w-full items-center">
   

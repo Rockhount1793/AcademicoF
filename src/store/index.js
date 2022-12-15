@@ -34,7 +34,8 @@ const store = createStore({
                 'Estudiantes': 9,  
                 'Personas': 10, 
                 'Directores': 11, 
-                'Generables': 12 
+                'Generables': 12,
+                'Faltas': 13 
             },
 
             periodos:[
@@ -70,11 +71,13 @@ const store = createStore({
             logros:[],
             asignaturas:[],
             calificaciones:[],
+            faltas:[],
             matriculas:[],
             estudiantes:[],
             docentes:[],
             personas:[],
             directores: [],
+
 
             //# generables
             boletin: { 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'calificaciones':[], 'logros':[] }
@@ -150,6 +153,10 @@ const store = createStore({
 
         set_calificaciones(state,array){
             state.calificaciones = array
+        },
+
+        set_faltas(state,array){
+            state.faltas = array
         },
 
         set_matriculas(state,array){
@@ -257,6 +264,7 @@ const store = createStore({
                 this.commit('set_actual_asignatura',{ 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 })
                 this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' } )
                 this.commit('set_calificaciones',[])
+                this.commit('set_faltas',[])
                 this.commit('set_docentes',[])
                 this.commit('set_estudiantes',[])
                 this.commit('set_directores',[])
@@ -279,6 +287,7 @@ const store = createStore({
                 this.commit('set_actual_asignatura',{ 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 })
                 this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' } )
                 this.commit('set_calificaciones',[])
+                this.commit('set_faltas',[])
                 this.commit('set_matriculas',[])
                 this.commit('set_boletin',{ 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'calificaciones':[], 'logros':[] })
 
@@ -317,6 +326,14 @@ const store = createStore({
             let asignaturas = this.state.asignaturas
             const result = [...asignaturas, json]
             this.commit('set_asignaturas',result)
+
+        },
+
+        add_falta(state,json){
+
+            let faltas = this.state.faltas
+            const result = [...faltas, json]
+            this.commit('set_faltas',result)
 
         },
 

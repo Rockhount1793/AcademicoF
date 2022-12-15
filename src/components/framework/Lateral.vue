@@ -104,6 +104,22 @@
 
             </div>
 
+            <div @click="set_route({'name':'Faltas'});set_seccion_num([13,0]);" :class="seccion_num[0] == 13 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+
+                <div :class="seccion_num[0] == 13 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Calificaciones" class="p-2 rounded-md">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 8.25h15m-16.5 7.5h15m-1.8-13.5l-3.9 19.5m-2.1-19.5l-3.9 19.5" />
+                    </svg>
+
+                </div>
+
+                <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                    Faltas
+                </p>
+
+            </div>
+
             <div @click="set_route({'name':'Matriculas'});set_seccion_num([7,0]);" :class="seccion_num[0] == 7 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 7 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Matriculas" class="p-2 rounded-md">
