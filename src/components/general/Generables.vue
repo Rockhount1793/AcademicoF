@@ -165,16 +165,27 @@
 
                 if(!errores.value.length){
 
-                    Generable[actual_generable.value.nombre](
-                        {
-                            ...json,
-                            'periodo': actual_periodo.value.periodo,
-                            'recurso': actual_generable.value.nombre 
-                        },
-                    ()=>{
+                    if(actual_periodo.value.periodo < 5){
                         
-                        Router.push({ name: "Boletin" })
-                    })
+                        Generable[actual_generable.value.nombre](
+                            {
+                                ...json,
+                                'periodo': actual_periodo.value.periodo,
+                                'recurso': actual_generable.value.nombre 
+                            },
+                        ()=>{
+                            
+                            Router.push({ name: "Boletin" })
+                        })
+
+                    }
+
+                    if(actual_periodo.value.periodo == 5){
+
+                        alert('boletín final')
+
+                    }
+
 
                 }else{
                     alert(errores.value[0])

@@ -15,12 +15,12 @@
     
                     <p class=""> REPUBLICA DE COLOMBIA </p>
                     <p class=""> SECRETARÍA DE EDUCACIÓN DEPARTAMENTAL </p>
-                    <p class=""> INSTITUCION EDUCATIVA BELÉN - SEDE nombre_sede </p> 
+                    <p class="uppercase"> INSTITUCION EDUCATIVA BELÉN - SEDE {{boletin_info[0]}} </p> 
                     <p class=""> Decreto 706 de junio de 2004 </p>
                     <p class=""> I.E BELÉN RESOLUCIÓN DE APROBACIÓN 1953 de Abril 29 del 2021 </p> 
                     <p class=""> NIT: 813.011.815-2 DANE 241359000160 </p>
                     <p class=""> ISNOS - HUILA </p>
-                    <p class=""> BOLETÍN PRIMER PERIODO - LECTIVO 2022</p>
+                    <p class="uppercase"> BOLETÍN {{boletin_info[1]}} - {{boletin_info[2]}}</p>
                 </div>
   
                 <div class="">
@@ -82,11 +82,11 @@
                 <div class="mt-1 flow-root text-black font-semibold text-xs px-5">
                     
                     <div class="float-left">
-                        <p>Puesto 1 de 15</p>
+                        <p>Puesto #</p>
                     </div>
 
                     <div class="float-right">
-                        FLT. Total 10
+                        FLT. Total {{boletin.faltas.length}}
                     </div>                    
 
                 </div>
@@ -122,15 +122,15 @@
                             </td>
                             
                             <td class="border border-gray-900">
-                                {{ logro_comp(asignatura)[0] }}
+                                {{ info_comp(asignatura)[0] }}
                             </td>
                             
                             <td class="border w-10 border-gray-900">
-                                {{ logro_comp(asignatura)[1] }}
+                                {{ info_comp(asignatura)[1] }}
                             </td>
                             
                             <td class="border w-10 border-gray-900">
-                                1
+                                {{ info_comp(asignatura)[2] }}
                             </td>
     
                         </tbody>
@@ -194,7 +194,7 @@
       
             // # methods
 
-            const logro_comp = (asig)=>{
+            const info_comp = (asig)=>{
 
                 let nota = {'nota_1': 0, 'nota_2': 0,'nota_3': 0,'nota_4': 0,'nota_5': 0,'nota_6': 0,'nota_7': 0,'nota_8': 0, 'nota_9': 0 }
                 let nota_f = boletin.value.calificaciones.filter((c)=> c.asignatura_id == asig.asignatura_id )
@@ -218,9 +218,24 @@
                 let valor_nota = ((promedio_15 + promedio_67 + promedio_89)/3).toFixed(2)
                 let valor_logro = Number(valor_nota) > 3 ? logro.aprobado : logro.no_aprobado
 
-                return [ valor_logro , valor_nota ]
+
+                let falta_f = boletin.value.faltas.filter((f)=> f.asignatura_id == asig.asignatura_id ).length
+
+                return [ valor_logro , valor_nota, falta_f ]
  
             }
+
+            //# omputed
+
+            const boletin_info = computed(()=>{
+
+                let sede = Store.state.actual_sede.nombre
+                let periodo = 'Periodo '+ Store.state.actual_periodo.nombre
+                let lectivo = 'Lectivo '+ Store.state.actual_lectivo.numero
+
+                return [ sede, periodo, lectivo ]
+
+            })
 
             //# filters
             const filter_identificacion = (number)=>{
@@ -231,7 +246,8 @@
                 urlsf,
                 boletin,
                 filter_identificacion,
-                logro_comp
+                info_comp,
+                boletin_info
             }
       
         },

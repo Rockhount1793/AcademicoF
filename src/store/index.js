@@ -47,11 +47,11 @@ const store = createStore({
             ],
 
             generables:[
-                { 'recurso': 1, 'nombre': 'carnet' },
-                { 'recurso': 2, 'nombre': 'planilla' },
-                { 'recurso': 3, 'nombre': 'informe' },
+               // { 'recurso': 1, 'nombre': 'carnet' },
+               // { 'recurso': 2, 'nombre': 'planilla' },
+               // { 'recurso': 3, 'nombre': 'informe' },
                 { 'recurso': 4, 'nombre': 'boletin' },
-                { 'recurso': 5, 'nombre': 'constancia' }
+               // { 'recurso': 5, 'nombre': 'constancia' }
             ],
 
 
@@ -60,8 +60,8 @@ const store = createStore({
 
             //# aplicacion
             sedes: [],
-            actual_sede: {'sede_id': 0, 'nombre_sede':'No seleccionada!'},
-            actual_lectivo: {'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0},
+            actual_sede: {'sede_id': 0, 'nombre':'No seleccionada!'},
+            actual_lectivo: {'lectivo_id': 0, 'numero': 0, 'sede_id': 0, 'director_id': 0},
             actual_grado: { 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 },
             actual_periodo: { 'periodo': 0, 'nombre': 'Periodo' },
             actual_generable: { 'recurso': 0, 'nombre': 'Generable' },
@@ -256,7 +256,7 @@ const store = createStore({
 
             return await new Promise((res,rej)=>{
                 
-                this.commit('set_actual_lectivo',{'lectivo_id': 0, 'numero_lectivo': 0, 'sede_id': 0, 'director_id': 0})
+                this.commit('set_actual_lectivo',{'lectivo_id': 0, 'numero': 0, 'sede_id': 0, 'director_id': 0})
                 this.commit('set_lectivos',[])
                 this.commit('set_grados',[])
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
