@@ -11,7 +11,7 @@
             let sede = Store.state.actual_sede
             let lectivo = Store.state.actual_lectivo
             let grado = Store.state.actual_grado
-            let json = {...params ,'sede_id': sede.sede_id, 'lectivo_id': lectivo.lectivo_id, 'grado_id': grado.grado_id}
+            let json = {...params ,'sede_id': sede.sede_id, 'lectivo': lectivo.numero ,'lectivo_id': lectivo.lectivo_id, 'grado_id': grado.grado_id}
 
             if(params.esquema == 'pdf'){
 

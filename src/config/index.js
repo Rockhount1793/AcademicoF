@@ -4,11 +4,15 @@ import env from '@/config/env.js'
 
 const Config = {
 
-    'version':'1.0.0.0 26-12-2022 19:45',
+    'version':'1.0.0.0 27-12-2022 15:04',
 
     // development o production
     'status': 'development',
 
+    /**
+     * @param {String} key
+     * @param {String} value
+     */
     'get': function(key,value){
 
         if(this.status === 'development'){
