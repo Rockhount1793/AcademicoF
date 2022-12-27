@@ -86,7 +86,7 @@
                     </div>
 
                     <div class="float-right">
-                        FLT. Total {{boletin.faltas.length}}
+                        FLT. Total {{boletin.faltas.length }}
                     </div>                    
 
                 </div>

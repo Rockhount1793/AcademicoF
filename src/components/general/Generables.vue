@@ -73,8 +73,19 @@
                                     
                                 </div>
 
-                                <div v-if="actual_generable.nombre === 'boletin'" class="w-full h-8 ">
-                                    <button title="generar" @click="generar_estudiante(item)" class="flex space-x-1 mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
+                                <div v-if="actual_generable.nombre === 'boletin'" class="space-x-2 flex w-full h-8 ">
+                                    
+                                    <button title="generar" @click="generar_estudiante_pdf(item)" class="flex space-x-1 mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
+                                        
+                                        <p class="capitalize">PDF {{ actual_generable.nombre }}</p>
+
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mt-1 text-gray-100 w-4 h-4">
+                                          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                                        </svg>
+                                         
+                                    </button>
+
+                                    <button title="generar" @click="generar_estudiante_vista(item)" class="flex space-x-1 mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
                                         
                                         <p class="capitalize">Ver {{ actual_generable.nombre }}</p>
 
@@ -83,6 +94,7 @@
                                         </svg>
                                          
                                     </button>
+
                                 </div>
 
                             </div>
@@ -157,7 +169,7 @@
             
             }
 
-            const generar_estudiante = (json)=>{
+            const generar_estudiante_pdf = (json)=>{
 
                 errores.value = []
 
@@ -171,7 +183,41 @@
                             {
                                 ...json,
                                 'periodo': actual_periodo.value.periodo,
-                                'recurso': actual_generable.value.nombre 
+                                'recurso': actual_generable.value.nombre,
+                                'esquema': 'pdf' 
+
+                            },()=>{ })
+
+                    }
+
+                    if(actual_periodo.value.periodo == 5){
+
+                        alert('boletín final')
+
+                    }
+
+
+                }else{
+                    alert(errores.value[0])
+                }
+            }
+
+            const generar_estudiante_vista = (json)=>{
+
+                errores.value = []
+
+                if(actual_periodo.value.periodo === 0){ errores.value.push('Seleccione periodo') }
+
+                if(!errores.value.length){
+
+                    if(actual_periodo.value.periodo < 5){
+                        
+                        Generable[actual_generable.value.nombre](
+                            {
+                                ...json,
+                                'periodo': actual_periodo.value.periodo,
+                                'recurso': actual_generable.value.nombre,
+                                'esquema': 'vista' 
                             },
                         ()=>{
                             
@@ -232,7 +278,8 @@
             return {
                 urlsf,
                 generar,
-                generar_estudiante,
+                generar_estudiante_pdf,
+                generar_estudiante_vista,
                 actual_sede,
                 actual_lectivo,
                 actual_grado,
