@@ -162,7 +162,7 @@
         setup(){
         
             //# data 
-            let identificacion_ = ref('654678987')
+            let identificacion_ = ref('')
             let estudiante = ref({'estudiante_id': 0, 'nombres': 'Nombres', 'apellidos': 'Apellidos', 'identificacion': '0'})
             let tipo_numero = ref(0)
             let tipos = ref({'tipo': 0, 'nombre':'Inicial'}, {'tipo': 1, 'nombre':'Extraordinario'}, {'tipo': 2, 'nombre':'Traslado'}, {'tipo': 3, 'nombre':'Desertor'})

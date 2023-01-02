@@ -76,8 +76,8 @@
 
         setup(){
             // data 
-            let email = ref('nzcaicedo@gmail.com')
-            let password = ref('123456')
+            let email = ref('')
+            let password = ref('')
             let sesion = ref (true)
 
             // methods
