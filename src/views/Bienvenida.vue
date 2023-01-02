@@ -81,7 +81,7 @@
         
             this.$nextTick(()=>{
                 
-                Aplicacion.check_login_home(()=>{
+                Aplicacion.check_login(()=>{
                     Router.push({'name':'Sedes'})
                 })
 

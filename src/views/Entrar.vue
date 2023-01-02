@@ -65,7 +65,8 @@
     import Store from '@/store'
     import BarraInicio from '@/components/framework/Barra_Inicio.vue'
     import Aplicacion from '@/controllers/Aplicacion'
-
+    import Router from '@/router'
+    
     export default defineComponent({
 
         'name':'Entrar',
@@ -82,7 +83,7 @@
 
             // methods
             const entrar = ()=>{
-                Aplicacion.login({'email':email.value, 'password': password.value, 'sesion': sesion})
+                Aplicacion.login({'email':email.value, 'password': password.value, 'sesion': sesion.value})
             }
             
             const urlsf = computed(()=> Store.state.urlsf )
@@ -98,7 +99,13 @@
         },
 
         mounted(){
+            this.$nextTick(()=>{
+                
+                Aplicacion.check_login(()=>{
+                    Router.push({'name':'Sedes'})
+                })
 
+            })
         }
 
     })

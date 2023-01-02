@@ -104,6 +104,8 @@
 
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import { useRoute, RouterLink, RouterView } from 'vue-router'
+    import  Router  from "@/router"
+
     import Store from '@/store'
 
 
@@ -119,7 +121,31 @@
             const ocultar_menu_perfil = ()=>{ menu_perfil = false }
             const set_seccion_num = ()=>{  }
             const set_route = ()=>{  }
-            const cerrar_sesion = ()=>{  }
+
+            const cerrar_sesion = async ()=>{ 
+
+                const result = await Store.dispatch('clear_data_sede')
+                .then((res)=>{
+    
+                    if(res){
+    
+                        localStorage.removeItem('token')
+                        Store.commit('set_login',false)
+                        Store.commit('set_seccion_num',[0,0])
+                        Store.commit('set_usuario',{'usuario_id':0, 'avatar': 'default.png'})
+                        Router.push({'name':'Entrar'})
+                        
+                    }
+    
+                })
+                .catch((err)=>{
+                    console.log(err)
+                })
+                .finally(()=>{
+    
+                })
+
+            }
 
             // computed
             const urlsf = computed(()=> Store.state.urlsf )
