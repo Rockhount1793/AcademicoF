@@ -38,12 +38,13 @@
 
                 headers: {
                     'Accept': "application/json",
-                    'Content-Type': "application/json;charset=UTF-8",
-                    '_token': this.token()
+                    'Content-Type': "application/json;charset=UTF-8"
                 }
 
             }
-            
+
+            options.headers[ Config.get('app','token_header_key') ] = this.token()
+
             Aplicacion.loading(true)
 
             const res = await fetch(_urlsb() + '/api' + ext , options)
@@ -77,12 +78,13 @@
                 headers: {
                     'Accept': "application/json",
                     'Content-Type': "application/json;charset=UTF-8",
-                    '_token': this.token()
                 },
 
                 body: JSON.stringify(body)
 
             }
+
+            options.headers[ Config.get('app','token_header_key') ] = this.token()
             
             Aplicacion.loading(true)
 
@@ -115,13 +117,14 @@
 
                 headers: {
                     'Accept': "application/json",
-                    'Content-Type': "application/json;charset=UTF-8",
-                    '_token': this.token()
+                    'Content-Type': "application/json;charset=UTF-8"
                 },
 
                 body: JSON.stringify(body)
 
             }
+
+            options.headers[ Config.get('app','token_header_key') ] = this.token()
 
             Aplicacion.loading(true)
             
@@ -155,14 +158,15 @@
                 headers: {
                     'Accept': "application/json",
                     'responseType': 'blob',
-                    'Content-Type': "application/json;charset=UTF-8",
-                    '_token': this.token()
+                    'Content-Type': "application/json;charset=UTF-8"
                 },
 
                 body: JSON.stringify(body)
 
             }
             
+            options.headers[ Config.get('app','token_header_key') ] = this.token()
+
             Aplicacion.loading(true)
 
             const res = await fetch(_urlsb() + '/api' + ext , options)

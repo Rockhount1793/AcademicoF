@@ -22,7 +22,7 @@
                     var fileURL = window.URL.createObjectURL(new Blob([response.data]))
                     var fURL = document.createElement('a')
                     fURL.href = fileURL
-                    fURL.setAttribute('download', 'Boletin_'+params.archivo+'.pdf')
+                    fURL.setAttribute('download', 'Boletin_'+params.nombres.split(" ")[0] +'_'+ params.identificacion+'.pdf')
                     document.body.appendChild(fURL)
                     fURL.click()
     

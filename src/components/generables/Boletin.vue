@@ -15,12 +15,12 @@
     
                     <p class=""> REPUBLICA DE COLOMBIA </p>
                     <p class=""> SECRETARÍA DE EDUCACIÓN DEPARTAMENTAL </p>
-                    <p class="uppercase"> INSTITUCION EDUCATIVA BELÉN - SEDE {{boletin_info[0]}} </p> 
+                    <p class="uppercase"> INSTITUCION EDUCATIVA BELÉN - SEDE {{ boletin_info[0] }} </p> 
                     <p class=""> Decreto 706 de junio de 2004 </p>
                     <p class=""> I.E BELÉN RESOLUCIÓN DE APROBACIÓN 1953 de Abril 29 del 2021 </p> 
                     <p class=""> NIT: 813.011.815-2 DANE 241359000160 </p>
                     <p class=""> ISNOS - HUILA </p>
-                    <p class="uppercase"> BOLETÍN {{boletin_info[1]}} - {{boletin_info[2]}}</p>
+                    <p class="uppercase"> BOLETÍN {{ boletin_info[1] }} Periodo - Lectivo {{ boletin_info[2] }}</p>
                 </div>
   
                 <div class="">
@@ -70,7 +70,7 @@
                             </td>
                             
                             <td class="uppercase border border-gray-900">
-                                {{boletin.grado}}
+                                {{ boletin.grado }}
                             </td>
     
                         </tbody>
@@ -82,11 +82,11 @@
                 <div class="mt-1 flow-root text-black font-semibold text-xs px-5">
                     
                     <div class="float-left">
-                        <p>Puesto #</p>
+                        <p>Puesto {{ boletin.puesto[0] }} de {{ boletin.puesto[1] }}</p>
                     </div>
 
                     <div class="float-right">
-                        FLT. Total {{boletin.faltas.length }}
+                        FLT. Total {{boletin.faltas }}
                     </div>                    
 
                 </div>
@@ -118,19 +118,19 @@
                         <tbody :key="index" v-for="(asignatura, index) in boletin.asignaturas" class="h-auto">
                             
                             <td class="py-3 uppercase border w-28 border-gray-900">
-                                {{asignatura.nombre}}
+                                {{ asignatura.nombre }}
                             </td>
                             
                             <td class="border border-gray-900">
-                                {{ info_comp(asignatura)[0] }}
+                                {{ asignatura.logro }}
                             </td>
                             
                             <td class="border w-10 border-gray-900">
-                                {{ info_comp(asignatura)[1] }}
+                                {{ asignatura.nota }}
                             </td>
                             
                             <td class="border w-10 border-gray-900">
-                                {{ info_comp(asignatura)[2] }}
+                                {{ asignatura.faltas }}
                             </td>
     
                         </tbody>
@@ -192,46 +192,23 @@
             const urlsf = computed(()=> Store.state.urlsf )
             const boletin = computed(()=> Store.state.boletin )
       
-            // # methods
-
-            const info_comp = (asig)=>{
-
-                let nota = {'nota_1': 0, 'nota_2': 0,'nota_3': 0,'nota_4': 0,'nota_5': 0,'nota_6': 0,'nota_7': 0,'nota_8': 0, 'nota_9': 0 }
-                let nota_f = boletin.value.calificaciones.filter((c)=> c.asignatura_id == asig.asignatura_id )
-
-                if(nota_f.length){ nota = nota_f[0] }
-
-                let logro = { 'aprobado': 'calificaciones pendientes', 'no_aprobado': 'calificaciones pendientes' }
-                let logro_f = boletin.value.logros.filter((l)=> l.asignatura_id == asig.asignatura_id )
-
-                if(logro_f.length ){ logro = logro_f[0] }
-
-                // 70%
-                const promedio_15 = (nota.nota_1 + nota.nota_2 + nota.nota_3 + nota.nota_4 + nota.nota_5)/5
-                    
-                // 15%
-                const promedio_67 = (nota.nota_6 + nota.nota_7)/2 
-                    
-                // 15%
-                const promedio_89 = (nota.nota_8 + nota.nota_9 )/2 
-                    
-                let valor_nota = ((promedio_15 + promedio_67 + promedio_89)/3).toFixed(2)
-                let valor_logro = Number(valor_nota) > 3 ? logro.aprobado : logro.no_aprobado
-
-
-                let falta_f = boletin.value.faltas.filter((f)=> f.asignatura_id == asig.asignatura_id ).length
-
-                return [ valor_logro , valor_nota, falta_f ]
- 
-            }
-
-            //# omputed
+            //# computed
 
             const boletin_info = computed(()=>{
 
                 let sede = Store.state.actual_sede.nombre
-                let periodo = 'Periodo '+ Store.state.actual_periodo.nombre
-                let lectivo = 'Lectivo '+ Store.state.actual_lectivo.numero
+
+                let periodos = {
+                    'Periodo':'Periodo',
+                    'Primero':'Primer',
+                    'Segundo':'Segundo',
+                    'Tercero':'Tercer',
+                    'Cuarto': 'Cuarto',
+                    'Final': 'Final' 
+                }
+
+                let periodo = periodos[Store.state.actual_periodo.nombre]
+                let lectivo = Store.state.actual_lectivo.numero
 
                 return [ sede, periodo, lectivo ]
 
@@ -246,7 +223,6 @@
                 urlsf,
                 boletin,
                 filter_identificacion,
-                info_comp,
                 boletin_info
             }
       

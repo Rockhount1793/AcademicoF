@@ -162,7 +162,7 @@
                                 'periodo': actual_periodo.value.periodo,
                                 'periodo_nombre': actual_periodo.value.nombre,
                                 'recurso': actual_generable.value.nombre,
-                                'esquema': 'pdf' 
+                                'esquema': 'pdf'
 
                             },()=>{ })
 
