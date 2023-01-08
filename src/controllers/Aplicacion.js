@@ -87,6 +87,10 @@
 
             }
 
+            if(response.error == 403){
+                alert('¡Usuario no encontrado!')
+            }
+
             if(response.error == 401){
                 alert('¡Contraseña incorrecta!')
             }
