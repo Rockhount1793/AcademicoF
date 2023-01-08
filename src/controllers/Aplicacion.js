@@ -82,8 +82,13 @@
 
             }else{
 
+
                 this.redirect_home(response)
 
+            }
+
+            if(response.error == 401){
+                alert('¡Contraseña incorrecta!')
             }
 
         },
