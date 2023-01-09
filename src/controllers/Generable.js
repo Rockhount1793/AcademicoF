@@ -15,7 +15,7 @@
 
             if(params.esquema == 'pdf'){
 
-                const response = await Fetch.post_download('/generable/boletin_f',json)
+                const response = await Fetch.post_download('/generable/boletin_file',json)
 
                 if(response.error === 0){
     

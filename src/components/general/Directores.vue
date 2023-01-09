@@ -11,7 +11,7 @@
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg"> Directores</p>
+                <p class="text-gray-100 text-center font-semibold text-lg"> Rectores</p>
 
                 <div class="px-2">
                     <p @click="seccion = 1" v-if="seccion == 0" class="shadow-md w-32 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>

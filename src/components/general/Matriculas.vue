@@ -119,8 +119,8 @@
                     <div class="flow-root flex-1 pb-2">
                         
                         <div class="float-right">
-                            <button @click="guardar()" class="w-32 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-100 px-2">
-                                Guardar
+                            <button @click="guardar()" class="w-64 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-100 px-2">
+                                Guardar Matricula
                             </button>
                         </div>
 
