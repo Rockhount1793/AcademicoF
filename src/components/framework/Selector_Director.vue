@@ -184,7 +184,7 @@
 
                 let directores = Store.state.directores
 
-                let temp = {'director_id':0,'nombres':'Director','apellidos':''}
+                let temp = {'director_id':0,'nombres':'Rector','apellidos':''}
 
                 if(director_id.value > 0){
                     temp = directores.find((p)=>p.director_id == director_id.value)

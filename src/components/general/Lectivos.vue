@@ -62,7 +62,7 @@
                     </div>
                     
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="director">Director</p>
+                        <p class="font-semibold text-gray-100 text-md px-2" for="director">Rector</p>
                         <SelectorDirector @set_director="set_director" id="director" class="mx-auto"></SelectorDirector>
                     </div>
 

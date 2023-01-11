@@ -236,9 +236,7 @@
             //# data 
             let listado = ref(true)
             
-
             //# methods
-
             const set_route = (json)=>{ 
                 Router.push(json)
             }

@@ -98,6 +98,7 @@
               // emit('set_periodo',number)
             }
             
+
             //# computed
             
             const periodos = computed(()=>{ return Store.state.periodos })
@@ -114,14 +115,20 @@
 
             })
 
-            const actual_periodo = computed(()=>{
-                return Store.state.actual_periodo
-            })
+            const actual_periodo = computed(()=>{ return Store.state.actual_periodo })
 
             watch(periodo,(value) => {
       
                 if(value > 0) {
                     emitir(value)
+                }
+
+            })
+
+            watch(actual_periodo,(value) => {
+      
+                if(value.periodo > 0) {
+                    periodo.value = value.periodo
                 }
 
             })

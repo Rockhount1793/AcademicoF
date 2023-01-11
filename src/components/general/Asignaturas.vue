@@ -39,7 +39,7 @@
                                 <div>
                                     
                                     <div class="w-64 rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        {{item.nombre}}
+                                        {{ index+1 }}. {{item.nombre}}
                                     </div>
                                     
                                 </div>
@@ -162,8 +162,8 @@
 
                     seccion.value = 0
                     nombre.value = ''
-                    numero_ih.value = 0
-                    numero_hcd.value = 0
+                    numero_ih.value = 1
+                    numero_hcd.value = 1
 
                 }
 
@@ -184,7 +184,7 @@
       
             //# computed
             const urlsf = computed(()=> Store.state.urlsf )
-            const asignaturas = computed(()=> Store.state.asignaturas )
+            const asignaturas = computed(()=> Store.state.asignaturas.reverse() )
             const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const actual_grado = computed(()=> Store.state.actual_grado )

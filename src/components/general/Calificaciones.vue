@@ -5,167 +5,97 @@
         
         <Barra></Barra>
         
-        <div class="mt-2 min-h-full flex w-auto px-2 md:space-x-2">
+        <div class="mt-2 min-h-full flex px-2 md:space-x-2">
             
             <Lateral></Lateral>
 
-            <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
+            <div class="w-full ml-2 p-1 rounded border border-gray-600 h-auto">
 
                 <p class="text-gray-100 text-center font-semibold text-lg">Calificaciones</p>
-
-                <div class="mt-3 space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
-                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Estudiantes</p>
-                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Asignaturas</p>
-                    <p @click="seccion = 2" :class="seccion == 2 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Calificaciones</p>
-                </div>
-
-                <hr class="mt-3 border border-gray-500" />
-                
-                <div class="mt-3 space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
-                    <p class="text-center h-7 leading-6 text-pink-500 font-semibold text-md"> <span class="text-gray-100">Estudiante:</span> {{estudiante.nombres}} {{estudiante.apellidos}}</p>
-                    <p class="text-center h-7 leading-6 text-pink-500 font-semibold text-md"> <span class="text-gray-100">Identificación:</span> {{filter_identificacion(estudiante.identificacion)}}</p>
-                    <p class="text-center h-7 leading-6 text-pink-500 font-semibold text-md"> <span class="text-gray-100">Asignatura:</span> {{asignatura.nombre}}</p>
-                </div>
         
                 <hr class="mt-3 border border-gray-500" />
 
-                <!-- Estudiantes matriculados-->
-                <div v-if="seccion == 0" class="mt-0">
+                <div class="pr-12 lg:pr-0 mt-0">
 
-                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                        <p class="font-semibold text-gray-100 text-md px-2">Grado</p>
-                        <SelectorGrado class="mx-auto"></SelectorGrado>
+                    <div class="flex-1 lg:flex">
+
+                        <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                            <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-100 text-md px-2">Grado</p>
+                            <SelectorGrado class="mx-auto lg:w-1/2"></SelectorGrado>
+                        </div>
+    
+                        <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                            <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-100 text-md px-2">Periodo</p>
+                            <SelectorPeriodo class="mx-auto w-full lg:w-1/2"></SelectorPeriodo>
+                        </div>
+
                     </div>
 
-                    <ul>
-
-                        <li v-if="!matriculas.length">
-                            <p class="px-2 font-semibold text-gray-100 mt-3"> No hay matriculas creadas</p>
-                        </li>
-                    
-                        <li :key="index" v-for="(item, index, key) in matriculas ">
-            
-                            <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center mt-3">
-                                
-                                <div class="w-full">
-                                    
-                                    <div class="w-full px-2 truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        {{item.nombres}}  {{item.apellidos}} : {{item.identificacion }}
-                                    </div>
-                                    
-                                </div>
-
-                                <div class="w-full h-8 lg:w-1/2 truncate">
-                                    <button @click="set_estudiante(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
-                                       ver estudiante
-                                    </button>
-                                </div>
-
-                            </div>
-                        
-                        </li>
-
-                    </ul>
-
-                </div>
-
-                <!-- Asignaturas -->
-                <div v-if="seccion == 1" class="mt-0">
-
-                    <ul>
-            
-                        <li v-if="!asignaturas.length">
-                            <p class="px-2 font-semibold text-gray-100 mt-3"> No hay asignaturas creadas</p>
-                        </li>
-                    
-                        <li :key="index" v-for="(item, index, key) in asignaturas ">
-                
-                            <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center mt-3">
-                    
-                                <div class="w-full">
-                                    
-                                    <div class="w-full px-2 truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        {{item.nombre}}
-                                    </div>
-                                    
-                                </div>
-            
-                                <div class="w-full h-8 lg:w-1/2 truncate">
-                                    <button @click="get_calificaciones(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
-                                       ver calificaciones
-                                    </button>
-                                </div>
-            
-                            </div>
-                        
-                        </li>
-            
-                    </ul>
-            
                 </div>
 
                 <!-- Calificaciones -->
-                <div v-if="seccion == 2" class="mt-3">
+                <div class="pr-12 lg:px-10 mx-auto mt-3 max-w-7xl w-full">
                     
-                    <div v-if="!calificaciones.length">
-                        <p class="px-2 font-semibold text-gray-100 mt-3"> No hay calificaciones creadas </p>
+                    <div v-if="!matriculas_comp.length">
+                        <p class="px-2 font-semibold text-gray-100 mt-3"> No hay matriculas creadas </p>
                     </div>
 
-                    <!-- 4 periodos --->
-                    <div v-else class="flex-1 space-y-2">
-                        
-                        <div :key="index" v-for="(item, index, key) in calificaciones" class="pb-3 w-full lg:w-3/4 px-2">
+                    <!-- tabla 4 peridos y final --->
+                    <div v-else class="mx-auto w-full">
+                        <div class="p-1 rounded px-4 overflow-y-auto relative bg-pink-700 ">
     
-                            <div class="px-2 flow-root w-full rounded bg-cyan-900 h-7 leading-6 text-gray-100 font-semibold text-md">
-                                
-                                <p class="float-left">Periodo: {{item.periodo}}</p>
+                            <div style="margin-left: 150px;" class="px-1 overflow-x-scroll h-auto">
 
-                                <div @click="item.estado = ((valor)=>{ return valor == 1 ? 0 : 1 })(item.estado) " class="rounded-md border border-cyan-500 text-cyan-500 group float-right mt-0.5 cursor-pointer">
-                                    <svg :class="item.estado == 1 ? 'trasform rotate-180':'' " class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" >
-                                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
-                                    </svg>
-                                </div>
+                                <table class="" >
+                                    
+                                    <thead class="">
+
+                                        <tr class="bg-pink-700">
+
+                                            <th style="margin-left: -10rem;" class="pt-0 absolute w-40 text-gray-100 font-semibold text-sm">
+                                                <div class="h-7 py-1 min-w-full px-6">Nombre</div>
+                                            </th>
+                                        
+                                            <th class="h-7 table-cell border-r border-gray-100 text-gray-100 font-semibold text-sm" :key="key" v-for="(item,index,key) in matriculas_comp[0].calificaciones">
+                                                <p> {{ index+1 }}. {{item.nombre }}</p>
+                                            </th>
+                                        
+                                        </tr>
+                                        
+                                    </thead>
+
+                                    <tbody class="">
+
+                                        <tr class="even:bg-teal-200 odd:bg-gray-100" :key="key" v-for="(matricula, index_1, key) in matriculas_comp">
+                                            
+                                            <td style="margin-left: -10rem;" class="pt-0 absolute w-40 text-gray-500 font-semibold text-xs">
+                                                <div :class="index_1 % 2 == 0 ? 'bg-gray-100' : 'bg-teal-200' " class="px-1 py-1 text-center truncate h-7 min-w-full">{{matricula.apellidos}}, {{matricula.nombres}} </div>
+                                            </td>
+
+                                            <td class="table-cell" :key="key" v-for="(matri, index, key) in matricula.calificaciones">
+                                               
+                                                <input v-if="periodo != 'nota_5' " @keyup.enter="update_calificacion(matri)" :class="index_1 % 2 == 0 ? 'bg-gray-100' : 'bg-teal-200' " class="text-md font-semibold text-center" type="number" name="nota" v-model="matri[periodo]" id="">
+                                                
+                                                <button v-else class="text-center w-44" type="number" disabled > 
+
+                                                    <span :class="matricula.nota_5[index] > 4 ? 'text-green-600': matricula.nota_5[index] > 3 ? 'text-blue-500':matricula.nota_5[index] > 2 ? 'text-yellow-500':'text-red-500' "  >{{ matricula.nota_5[index] }} [{{ matricula.nota_5[index] - 5 }}] </span>
+                                                    
+                                                </button>
+
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                            
+                                </table>
 
                             </div>
 
-                            <section v-if="item.estado == 1" class="">
-
-                                <div class="p-1 bg-gray-800 px-2 mt-1 rounded border border-gray-500">
-    
-                                    <div class="mt-3">
-                                        <input id="nota" class="rounded w-16 text-center" type="number" v-model="item.nota" min="0" max="5" step="1">
-                                        <label for="nota" class="px-2 font-semibold text-md text-gray-100">Nota</label>
-                                    </div>
-             
-                                </div>
-
-                                <div class="flow-root pt-2">
-    
-                                    <button @click="update_calificacion(item)" class="float-right h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
-                                        Guardar Nota
-                                    </button>
-
-                                </div>
-    
-                            </section>
-
-                        </div>
                         
+                        </div>
                     </div>
         
-                    <!-- 5 periodo --->
-                    <div v-if="calificaciones.length" class="flex-1 space-y-2">
-                        
-                        <div class="pb-3 w-full lg:w-3/4 px-2">
-    
-                            <div class="w-full rounded bg-pink-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                Promedio Final {{promedio_final}}
-                            </div>
-    
-                        </div>
-                        
-                    </div>
-
                 </div>
 
             </div>
@@ -182,6 +112,7 @@
     import Lateral from "@/components/framework/Lateral.vue"
     import SelectorDirector from "@/components/framework/Selector_Docente.vue"
     import SelectorGrado from "@/components/framework/Selector_Grado.vue"
+    import SelectorPeriodo from "@/components/framework/Selector_Periodo.vue"
     import { RouterView } from "vue-router"
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from "@/store"
@@ -200,25 +131,23 @@
         'name': 'Calificaciones',
 
         'components': {
-            Barra, Lateral, SelectorDirector, SelectorGrado
+            Barra, Lateral, SelectorDirector, SelectorGrado, SelectorPeriodo
         },
 
         setup(){
         
-            //# data
-            let listado = ref(false)
-            let estudiante = ref({'estudiante_id': 0, 'nombres': 'Nombres', 'apellidos': 'Apellidos', 'identificacion': 0})
-            let asignatura = ref({'asignatura_id': 0, 'nombre': 'Asignatura'})
-            let seccion = ref(0)
+            //###### data
             let errores = ref([])
 
-            //# methods
-
+            //###### methods
             const update_calificacion = (json)=>{
                 
                 errores.value = []
 
-                if(typeof Number(json.nota) != 'number' || Number(json.nota) > 5 || Number(json.nota) < 0){ errores.value.push('valor de nota no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_1) != 'number' || Number(json.nota_1) > 5 || Number(json.nota_1) < 0){ errores.value.push('¡valor de nota primer periodo no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_2) != 'number' || Number(json.nota_2) > 5 || Number(json.nota_2) < 0){ errores.value.push('¡valor de nota segundo periodo no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_3) != 'number' || Number(json.nota_3) > 5 || Number(json.nota_3) < 0){ errores.value.push('¡valor de nota tercer periodo no debe ser menor a 0 o mayor a 5!') }
+                if(typeof Number(json.nota_4) != 'number' || Number(json.nota_4) > 5 || Number(json.nota_4) < 0){ errores.value.push('¡valor de nota cuarto periodo no debe ser menor a 0 o mayor a 5!') }
                 
                 if(!errores.value.length){
 
@@ -232,56 +161,56 @@
 
             }
             
-            const set_estudiante = (json)=>{
-
-                estudiante.value = json
-                seccion.value = 1
-
-            }
-
-            const get_calificaciones = (item)=>{
-                
-                let params = { 
-                    'estudiante_id': estudiante.value.estudiante_id,
-                    'asignatura_id': item.asignatura_id
-                }
-
-                if(estudiante.value.estudiante_id > 0 && item.asignatura_id > 0){
-
-                    Calificacion.index(params,()=>{
-                        asignatura.value = item
-                        seccion.value = 2
-                    })
-
-                }else{
-                    alert('Selecione un estudiante!') 
-                }
-
-
-            }
-            
-            const get_asignaturas = ()=>{
-        
-                Asignatura.index(()=>{
-                    
-                })
-
-            }
-
             const filter_identificacion = (number)=>{
                 return Utilitie.format_tnumber(number)
             }
       
-            //# computed
+            //###### computed
             const urlsf = computed(()=> Store.state.urlsf )
-            const matriculas = computed(()=> Store.state.matriculas )
-            const asignaturas = computed(()=> Store.state.asignaturas )
             const calificaciones = computed(()=> Store.state.calificaciones )
+            const matriculas = computed(()=> Store.state.matriculas )
             const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const actual_grado = computed(()=> Store.state.actual_grado )
             const actual_asignatura = computed(()=> Store.state.actual_asignatura )
+            const actual_periodo = computed(()=>{ return Store.state.actual_periodo })
            
+            const periodo = computed(()=>{
+
+                let periodos = {
+                    1: 'nota_1',
+                    2: 'nota_2',
+                    3: 'nota_3',
+                    4: 'nota_4',
+                    5: 'nota_5' 
+                }
+
+                return periodos[actual_periodo.value.periodo]
+            
+            })
+
+            const matriculas_comp = computed(()=>{
+
+                let calificaciones_all = calificaciones.value
+                let matriculas_all = matriculas.value
+
+                let m_comp = []
+                for (let index = 0; index < matriculas_all.length; index++){
+    
+                    let calificaciones_filter = calificaciones_all.filter((c)=> c.estudiante_id ==  matriculas_all[index].estudiante_id)
+
+                    let nota_5 = calificaciones_filter.map((c)=>{
+                       return (c.nota_1 + c.nota_2 + c.nota_3 + c.nota_4) / 4
+                    })
+
+                    let registro = { ...matriculas_all[index],'nota_5': nota_5 ,'calificaciones': calificaciones_filter.sort( function (x, y){ return y.asignatura_id - x.asignatura_id }) }
+                    m_comp.push(registro)
+            
+                }
+                
+                return m_comp
+
+            })
 
             const  promedio_final = computed(()=>{
 
@@ -299,82 +228,38 @@
 
             })
 
-            //# watch
-            watch(seccion,(value) => {
-
-                if(value == 1 && actual_grado.value.grado_id > 0 ) {
-                    Asignatura.index(()=>{})
-                }
-                
-            })
-
+            //###### watch
             watch(actual_grado,(value) => {
 
                 if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
                     
                     Matricula.index(()=>{})
-                
-                }
-            
-            })
-
-            watch(estudiante,(value) => {
-
-                let params = { 
-                    'estudiante_id': value.estudiante_id,
-                    'asignatura_id': asignatura.value.asignatura_id
-                }
-
-                if(value.estudiante_id > 0 && asignatura.value.asignatura_id > 0){
-
-                    Calificacion.index(params,()=>{
-                       seccion.value = 2
-                    })
-
-                }
-            
-            })
-
-            watch(asignatura,(value) => {
-
-                let params = { 
-                    'estudiante_id': estudiante.value.estudiante_id,
-                    'asignatura_id': value.asignatura_id
-                }
-
-                if(estudiante.value.estudiante_id > 0 && value.asignatura_id > 0){
-
-                    Calificacion.index(params,()=>{
-                       seccion.value = 2
-                    })
-
+                    
                 }
             
             })
 
             watch(matriculas,(value) => {
 
-                estudiante.value = {'estudiante_id': 0, 'nombres': 'Nombres', 'apellidos': 'Apellidos', 'identificacion': 0}
-                asignatura.value = {'asignatura_id': 0, 'nombre': 'Asignatura'}
-                Store.commit('set_calificaciones',[])
+                if(value.length && actual_grado.value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
+
+                    Calificacion.index_matriculas(()=>{
+                        Store.commit('set_actual_periodo', { 'periodo': 1, 'nombre': 'Primero' })
+                    })
+                
+                }
 
             })
 
             return {
                 urlsf,
-                listado,
-                estudiante,
+                periodo,
                 matriculas,
                 calificaciones,
-                seccion,
+                matriculas_comp,
                 actual_lectivo,
                 actual_asignatura,
                 actual_grado,
-                get_asignaturas,
-                set_estudiante,
-                get_calificaciones,
-                asignatura,
-                asignaturas,
                 filter_identificacion,
                 promedio_final,
                 update_calificacion
@@ -389,9 +274,17 @@
                 
                 Aplicacion.check_login(()=>{
 
-                    if(!Store.state.matriculas.length && this.actual_grado.grado_id > 0 && this.actual_lectivo.lectivo_id > 0){
+                    if(!Store.state.matriculas.length && Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0){
 
                         Matricula.index(()=>{})
+                    
+                    }
+
+                    if(Store.state.matriculas.length && Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0){
+
+                        Calificacion.index_matriculas(()=>{
+                            Store.commit('set_actual_periodo', { 'periodo': 1, 'nombre': 'Primero' })
+                        })
 
                     }
 
@@ -404,3 +297,7 @@
     })
   
 </script>
+
+<style scoped>
+
+</style>

@@ -68,13 +68,13 @@
                 <div v-if="seccion == 1" class="">
                     
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                        <p class="font-semibold text-gray-100 text-md px-2">Buscar Identificación Estudiante</p>
-                        <input v-model="identificacion_" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="identificacion" type="text" placeholder=" 0"/>
+                        <p class="font-semibold text-gray-100 text-md px-2">Identificación Estudiante</p>
+                        <input v-model="identificacion_" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="identificacion" type="text" placeholder=" Identificación estudiante"/>
                     </div>
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1 flow-root">
                         <button @click="get_estudiante()" class="float-right w-32 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-100 px-2">
-                            Buscar
+                            Consultar
                         </button>
                     </div>                    
 
@@ -83,6 +83,8 @@
                 <div v-if="seccion == 1" class="mt-3 px-2 lg:w-1/2 mx-auto">    
                 
                     <p class="font-semibold text-gray-100 text-md text-center">Detalle registro</p>
+
+                    <hr class="mb-3 border border-gray-500" />
 
                     <div class="flex-1 lg:flex py-1">
                         <p class="font-semibold text-gray-100 text-md px-2">Identificación:</p>
@@ -120,7 +122,7 @@
                         
                         <div class="float-right">
                             <button @click="guardar()" class="w-64 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-100 px-2">
-                                Guardar Matricula
+                                Matricular
                             </button>
                         </div>
 
@@ -163,7 +165,7 @@
         
             //# data 
             let identificacion_ = ref('')
-            let estudiante = ref({'estudiante_id': 0, 'nombres': 'Nombres', 'apellidos': 'Apellidos', 'identificacion': '0'})
+            let estudiante = ref({'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': '0'})
             let tipo_numero = ref(0)
             let tipos = ref({'tipo': 0, 'nombre':'Inicial'}, {'tipo': 1, 'nombre':'Extraordinario'}, {'tipo': 2, 'nombre':'Traslado'}, {'tipo': 3, 'nombre':'Desertor'})
             let seccion = ref(0)
