@@ -11,7 +11,7 @@
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg">Generables <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span></p>
+                <p class="text-gray-100 text-center font-semibold text-lg">Generables Grado <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span></p>
 
                 <!--<div class="mt-3 space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
                     <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
@@ -40,14 +40,16 @@
 
                     </div>
 
-                    <div v-if="actual_generable.nombre != 'boletin' " class="">
+                </div>
 
-                        <div class="mt-8">
-                            <button @click="generar()" class="bg-pink-700 shadow-pink-500 shadow-md w-full lg:w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Generar</button>
-                        </div>
+                <div v-if="actual_generable.nombre == 'boletin' " class="block">
 
+                    <div class="mt-3 w-64 mx-auto">
+                        <button @click="generar_boletines()" class="bg-pink-700 shadow-pink-500 shadow-md w-full cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                            Generar todos los boletines
+                        </button>
                     </div>
-
+                    
                 </div>
 
                 <hr class="mt-3 border border-gray-500" />
@@ -73,23 +75,21 @@
                                     
                                 </div>
 
-                                <div v-if="actual_generable.nombre === 'boletin'" class="space-x-2 flex w-full h-8 ">
+                                <!--<div v-if="actual_generable.nombre === 'boletin'" class="space-x-2 flex w-full h-8 ">
                                     
                                     <button title="generar" @click="generar_estudiante_pdf(item)" class="flex space-x-1 mt-0.5 h-7 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-100 font-semibold">
 
                                         <img title="pdf" class="mx-auto mt-0.5 w-6 h-6 " :src="urlsf+'/images/pdf.svg'" />
-                                        <!--<p class="capitalize"> {{ actual_generable.nombre }} </p>-->
                                          
                                     </button>
 
                                     <button title="generar" @click="generar_estudiante_vista(item)" class="flex space-x-1 mt-0.5 h-7 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-100 font-semibold">
                                         
                                         <img title="preview" class="mx-auto mt-0.5 w-6 h-6 " :src="urlsf+'/images/preview.svg'" />
-                                        <!--<p class="capitalize"> {{ actual_generable.nombre }} </p>-->
-
+                                      
                                     </button>
 
-                                </div>
+                                </div>-->
 
                             </div>
                         
@@ -142,6 +142,36 @@
 
             //# methods
 
+            const generar_boletines = ()=>{
+
+                errores.value = []
+                
+                if(actual_sede.value.sede_id === 0){ errores.value.push('Seleccione sede') }
+                if(actual_lectivo.value.lectivo_id === 0){ errores.value.push('Seleccione lectivo') }
+                if(actual_grado.value.grado_id === 0){ errores.value.push('Seleccione grado') }
+                if(actual_periodo.value.periodo === 0){ errores.value.push('Seleccione periodo') }
+                if(actual_generable.value.recurso === 0){ errores.value.push('Seleccione generable') }
+                
+                if(!errores.value.length){
+                
+                    if(actual_periodo.value.periodo < 5){
+                        
+                        Generable.boletin_todos_file(()=>{ })
+                
+                    }
+                
+                    if(actual_periodo.value.periodo == 5){
+                
+                        alert('boletín final')
+                
+                    }
+                
+                
+                }else{
+                    alert(errores.value[0])
+                }
+            }
+
             const generar_estudiante_pdf = (json)=>{
 
                 errores.value = []
@@ -156,15 +186,7 @@
 
                     if(actual_periodo.value.periodo < 5){
                         
-                        Generable[actual_generable.value.nombre](
-                            {
-                                ...json,
-                                'periodo': actual_periodo.value.periodo,
-                                'periodo_nombre': actual_periodo.value.nombre,
-                                'recurso': actual_generable.value.nombre,
-                                'esquema': 'pdf'
-
-                            },()=>{ })
+                        Generable.boletin_estudiante_file(json,()=>{ })
 
                     }
 
@@ -173,7 +195,6 @@
                         alert('boletín final')
 
                     }
-
 
                 }else{
                     alert(errores.value[0])
@@ -194,15 +215,7 @@
 
                     if(actual_periodo.value.periodo < 5){
                         
-                        Generable[actual_generable.value.nombre](
-                            {
-                                ...json,
-                                'periodo': actual_periodo.value.periodo,
-                                'periodo_nombre': actual_periodo.value.nombre,
-                                'recurso': actual_generable.value.nombre,
-                                'esquema': 'vista' 
-                            },
-                        ()=>{
+                        Generable.boletin_estudiante_vista(json,()=>{
 
                             Router.push({ name: "Boletin" })
 
@@ -262,6 +275,7 @@
             return {
             
                 urlsf,
+                generar_boletines,
                 generar_estudiante_pdf,
                 generar_estudiante_vista,
                 actual_sede,
