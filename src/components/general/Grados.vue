@@ -20,7 +20,7 @@
 
                 <hr class="mt-3 border border-gray-500" />
 
-                <div v-if="seccion == 0" class="mt-3">
+                <div v-if="seccion == 0" class="mt-3 h-5/6 overflow-y-auto">
 
                     <ul>
 
@@ -35,7 +35,7 @@
                                 <div>
                                     
                                     <div class="w-64 rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        {{item.nombre}} : {{item.numero}}
+                                        {{ index+1 }}. {{item.nombre}}
                                     </div>
                                     
                                 </div>
@@ -53,14 +53,14 @@
                 <div v-if="seccion == 1" class="mt-3 flex-1 rounded p-1 px-2">
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="nombre">Nombre</p>
-                        <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="text" placeholder=" Preescolar"/>
+                        <p class="font-semibold text-gray-100 text-md px-2" for="nombre">Nombre / Referencia</p>
+                        <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="text" placeholder=" Preescolar A"/>
                     </div>
 
-                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
+                   <!--<div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
                         <p class="font-semibold text-gray-100 text-md px-2" for="numero">Numero</p>
                         <input v-model="numero" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="number" min="0" max="12" step="1" placeholder=" 0"/>
-                    </div>
+                    </div>-->
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
                         <p class="font-semibold text-gray-100 text-md px-2" for="director">Director</p>
@@ -129,7 +129,7 @@
 
                 errores.value = []
 
-                if(nombre.value.length < 0 || nombre.value.length > 100){ errores.value.push('ingrese nombre') }
+                if(!nombre.value.length || nombre.value.length > 100){ errores.value.push('ingrese nombre') }
                 if(typeof numero.value != 'number' || numero.value < 0 || numero.value > 12 ){ errores.value.push('ingrese numero') }
                 if(typeof docente_id.value != 'number' || docente_id.value < 1){ errores.value.push('seleccione director') }
                 if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
@@ -146,11 +146,13 @@
                         'sede_id':  actual_sede.value.sede_id,
                         'lectivo_id': actual_lectivo.value.lectivo_id,
                         'estado':1
+                    },()=>{
+                        nombre.value = ''
+                        numero.value = 0
+                        seccion.value = 0
+                        docente_id.value = 0
                     })
 
-                    nombre.value = ''
-                    numero.value = 0
-                    seccion.value = 0
 
                 }
 

@@ -30,7 +30,7 @@
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]))
                 var fURL = document.createElement('a')
                 fURL.href = fileURL
-                fURL.setAttribute('download', 'Boletines_'+sede.nombre+'_'+grado.nombre+'.pdf')
+                fURL.setAttribute('download', 'Boletines_'+sede().nombre+'_'+grado().nombre+'.pdf')
                 document.body.appendChild(fURL)
                 fURL.click()
     

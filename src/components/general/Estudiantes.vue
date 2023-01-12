@@ -5,7 +5,7 @@
         
         <Barra></Barra>
         
-        <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
+        <div class="mt-2 h-5/6 flex w-auto px-2 md:space-x-2">
             
             <Lateral></Lateral>
 
@@ -20,7 +20,7 @@
 
                 <hr class="mt-3 border border-gray-500" />
 
-                <div v-if="seccion == 0" class="mt-3">
+                <div v-if="seccion == 0" class="mt-3 h-5/6 overflow-y-auto">
                     <ul>
 
                         <li v-if="!estudiantes.length">
@@ -30,7 +30,7 @@
                         <li :key="index" v-for="(item, index,key) in  estudiantes">
                             
                             <div class="p-2 w-full lg:w-1/2 truncate">
-                                <p class="px-2 h-7 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.nombres}} {{item.apellidos}} : {{item.identificacion}}</p>
+                                <p class="px-2 h-7 bg-gray-800 capitalize text-gray-100 font-semibold">{{ index+1 }}, {{item.apellidos}}, {{item.nombres}}, {{item.identificacion}}</p>
                             </div>
                         
                         </li>

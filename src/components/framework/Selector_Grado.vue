@@ -9,7 +9,7 @@
                 <div class=" flex items-center justify-between space-x-1 w-full">
 
                     <span class="block capitalize font-semibold text-sm text-indigo-500 hover:text-indigo-400">
-                       {{grado_select.nombre}} : {{grado_select.numero}}
+                       {{grado_select.nombre}}
                     </span>
 
                     <span class="flex right-0 inset-y-0 items-center pr-2 pointer-events-none">
@@ -59,7 +59,7 @@
                                 </svg>
                                 
                                 <span class="font-semibold text-gray-700 text-sm ">
-                                    {{grd.nombre}} : {{grd.numero}}       
+                                    {{grd.nombre}} 
                                 </span>
 
                             </div>

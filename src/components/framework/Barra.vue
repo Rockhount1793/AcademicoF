@@ -11,14 +11,25 @@
                 </Router-link>
     
                 <div class="font-semibold text-xs lg:text-sm text-gray-100 flex items-center">
-                    <div>
-                        <p class="h-4">Sede: {{sede.nombre}}</p>
-                        <p class="h-4">Lectivo: {{lectivo.numero}} </p>
+                    <div class="flex-1">
+
+                        <p class="h-4"> 
+                        
+                            Sede: <span class="text-pink-500">{{sede.nombre}}</span>
+                        
+                        </p>
+                        
+                        <p class="h-4">
+
+                            Año Lectivo: <span class="text-pink-500">{{lectivo.numero}} </span>
+                        
+                        </p>
+
                     </div>
 
                     <div class="px-2">
                         <p class="h-4">&nbsp;</p>
-                        <p class="h-4">Grado: {{grado.nombre}}</p>
+                        <p class="h-4">Grado: <span class="text-pink-500">{{grado.nombre}}</span></p>
                     </div>
                 </div>
     
@@ -32,7 +43,7 @@
   
                 
                 <div class="hidden lg:inline-flex mr-2 truncate">
-                    <span class="text-xs font-thin text-gray-100">[ {{version}} ]</span>
+                    <span class="text-xs font-xs text-gray-100"> {{user.email}} </span>
                 </div>
 
                 <div class="flex-none">

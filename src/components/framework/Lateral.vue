@@ -1,7 +1,7 @@
 
 <template>
             
-    <div :class="listado ? 'flex w-12 md:w-48 ':'w-12' " class="group h-4/6 ">
+    <div :class="listado ? 'flex w-12 md:w-48 ':'w-12' " class="group  ">
     
         <div class="flex-1 z-10 space-y-3">
         
@@ -28,6 +28,7 @@
                 </div>
 
                 <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                    <div v-if="sede.sede_id == 0" class="inline-flex bg-red-500 rounded-full h-2 w-2 mr-0.5"></div>
                     Sedes
                 </p>
 
@@ -42,6 +43,7 @@
                 </div>
                 
                 <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
+                    <div v-if="lectivo.lectivo_id == 0" class="inline-flex bg-red-500 rounded-full h-2 w-2 mr-0.5"></div>
                     Lectivos
                 </p>
 
@@ -208,6 +210,12 @@
 
             </div>
 
+            <hr/>
+
+            <div class="w-full hidden lg:inline-flex">
+                <p class="mx-auto text-xs font-thin text-pink-500"> {{version}} </p>
+            </div>
+
         </div>
         
     </div>
@@ -246,13 +254,18 @@
             }
 
             const set_seccion_num = function(array){
+                
                 Store.commit('set_seccion_num',array)
+                
             }
 
             //# computed
             const seccion_num = computed(()=> Store.state.seccion_num )
             const urlsf = computed(()=> Store.state.urlsf )
-
+            const sede = computed(()=> Store.state.actual_sede )
+            const lectivo = computed(()=> Store.state.actual_lectivo )
+            const grado = computed(()=> Store.state.actual_grado )       
+            const version = computed(()=> Store.state.version )
             //# watch
             watch(listado,(value) => {
 
@@ -264,6 +277,10 @@
       
             return {
                 urlsf,
+                sede,
+                version,
+                lectivo,
+                grado,
                 listado,
                 set_route,
                 set_listado,

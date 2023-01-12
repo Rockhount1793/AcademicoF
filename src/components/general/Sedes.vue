@@ -20,7 +20,7 @@
 
                 <hr class="mt-3 border border-gray-500" />
 
-                <div v-if="seccion == 0" class="mt-3">
+                <div v-if="seccion == 0" class="overflow-y-auto h-5/6 mt-3">
                     <ul>
                         
                         <li v-if="!sedes.length">
@@ -152,6 +152,11 @@
                         'telefono':  telefono.value,
                         'email': email.value,
                         'estado':1
+                    },()=>{
+                        nombre.value = ''
+                        direccion.value = ''
+                        telefono.value = ''
+                        email.value = ''
                     })
 
                     seccion.value = 0

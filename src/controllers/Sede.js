@@ -36,7 +36,7 @@
 
         },
 
-        'store': async function(json){
+        'store': async function(json,cb){
 
             
             const response = await Fetch.post('/sede/store',json)
@@ -44,7 +44,7 @@
             if(response.error === 0){
 
                 Store.dispatch('add_sede',response.sede)
-
+                cb()
             }
 
             if(response.error > 0){

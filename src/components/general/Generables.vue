@@ -70,7 +70,7 @@
                                 <div class="w-full">
                                     
                                     <p class="w-full truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        {{item.nombres}}  {{item.apellidos}} : {{item.identificacion }}
+                                        {{item.nombres}},  {{item.apellidos}}, {{item.identificacion }}
                                     </p>
                                     
                                 </div>

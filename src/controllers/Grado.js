@@ -25,13 +25,13 @@
 
         },
 
-        'store': async function(json){
+        'store': async function(json,cb){
 
             const response = await Fetch.post('/grado/store',json)
             if(response.error === 0){
 
                 Store.dispatch('add_grado',response.grado)
-
+                cb()
             }
 
             if(response.error > 0){

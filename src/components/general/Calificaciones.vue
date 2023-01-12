@@ -37,14 +37,14 @@
                 <div class="pr-12 lg:px-10 mx-auto mt-3 max-w-7xl w-full">
                     
                     <div v-if="!matriculas_comp.length">
-                        <p class="px-2 font-semibold text-gray-100 mt-3"> No hay matriculas creadas </p>
+                        <p class="px-2 font-semibold text-gray-100 mt-3"> No hay matriculas o asignaturas creadas </p>
                     </div>
 
                     <!-- tabla 4 peridos y final --->
                     <div v-else class="mx-auto w-full">
-                        <div class="p-1 rounded px-4 overflow-y-auto relative bg-pink-700 ">
+                        <div class="p-1 h-auto rounded px-4 overflow-y-auto relative bg-pink-700 ">
     
-                            <div style="margin-left: 150px;" class="px-1 overflow-x-scroll h-auto">
+                            <div style="margin-left: 150px;" class="px-1 overflow-x-auto h-auto">
 
                                 <table class="" >
                                     
@@ -56,7 +56,7 @@
                                                 <div class="h-7 py-1 min-w-full px-6">Nombre</div>
                                             </th>
                                         
-                                            <th class="h-7 table-cell border-r border-gray-100 text-gray-100 font-semibold text-sm" :key="key" v-for="(item,index,key) in matriculas_comp[0].calificaciones">
+                                            <th class="h-7 table-cell border-l border-gray-100 text-gray-100 font-semibold text-sm" :key="key" v-for="(item,index,key) in matriculas_comp[0].calificaciones">
                                                 <p> {{ index+1 }}. {{item.nombre }}</p>
                                             </th>
                                         
@@ -195,19 +195,24 @@
                 let matriculas_all = matriculas.value
 
                 let m_comp = []
-                for (let index = 0; index < matriculas_all.length; index++){
-    
-                    let calificaciones_filter = calificaciones_all.filter((c)=> c.estudiante_id ==  matriculas_all[index].estudiante_id)
-
-                    let nota_5 = calificaciones_filter.map((c)=>{
-                       return (c.nota_1 + c.nota_2 + c.nota_3 + c.nota_4) / 4
-                    })
-
-                    let registro = { ...matriculas_all[index],'nota_5': nota_5 ,'calificaciones': calificaciones_filter.sort( function (x, y){ return y.asignatura_id - x.asignatura_id }) }
-                    m_comp.push(registro)
-            
-                }
                 
+                if(matriculas_all.length && calificaciones_all.length){
+                    
+                    for (let index = 0; index < matriculas_all.length; index++){
+        
+                        let calificaciones_filter = calificaciones_all.filter((c)=> c.estudiante_id ==  matriculas_all[index].estudiante_id)
+    
+                        let nota_5 = calificaciones_filter.map((c)=>{
+                           return (c.nota_1 + c.nota_2 + c.nota_3 + c.nota_4) / 4
+                        })
+    
+                        let registro = { ...matriculas_all[index],'nota_5': nota_5 ,'calificaciones': calificaciones_filter.sort( function (x, y){ return y.asignatura_id - x.asignatura_id }) }
+                        m_comp.push(registro)
+                
+                    }
+
+                }
+
                 return m_comp
 
             })
@@ -274,7 +279,7 @@
                 
                 Aplicacion.check_login(()=>{
 
-                    if(!Store.state.matriculas.length && Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0){
+                    if(Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0){
 
                         Matricula.index(()=>{})
                     

@@ -9,7 +9,7 @@
                 <div class=" flex items-center justify-between space-x-1 w-full">
 
                     <span class="block capitalize font-semibold text-sm text-indigo-500 hover:text-indigo-400">
-                       {{periodo_select.nombre}} : {{periodo_select.periodo}}
+                        {{periodo_select.periodo}} : {{periodo_select.nombre}} 
                     </span>
 
                     <span class="flex right-0 inset-y-0 items-center pr-2 pointer-events-none">
@@ -39,7 +39,7 @@
                                 </svg>
                                 
                                 <span class="font-semibold text-gray-700 text-sm ">
-                                    {{per.nombre}} : {{per.periodo}}       
+                                    {{per.periodo}}: {{per.nombre}}       
                                 </span>
 
                             </div>

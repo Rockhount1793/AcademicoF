@@ -25,7 +25,7 @@
                     <SelectorGrado class="mx-auto"></SelectorGrado>
                 </div>
 
-                <div v-if="seccion == 0" class="mt-3">
+                <div v-if="seccion == 0" class="mt-3 overflow-y-auto h-5/6 ">
                     <ul>
 
                         <li v-if="!asignaturas.length">
@@ -158,12 +158,12 @@
                         'lectivo_id': actual_lectivo.value.lectivo_id,
                         'grado_id': actual_grado.value.grado_id,
                         'estado':1
+                    },()=>{
+                        seccion.value = 0
+                        nombre.value = ''
+                        numero_ih.value = 1
+                        numero_hcd.value = 1
                     })
-
-                    seccion.value = 0
-                    nombre.value = ''
-                    numero_ih.value = 1
-                    numero_hcd.value = 1
 
                 }
 
@@ -222,7 +222,7 @@
                 
                 Aplicacion.check_login(()=>{
 
-                    if(!Store.state.asignaturas.length && this.actual_grado.grado_id > 0){
+                    if(this.actual_grado.grado_id > 0){
                                     
                         Asignatura.index(()=>{
                         

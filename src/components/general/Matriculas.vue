@@ -5,7 +5,7 @@
         
         <Barra></Barra>
         
-        <div class="mt-2 min-h-full flex w-auto px-2 md:space-x-2">
+        <div class="mt-2 h-5/6 flex w-auto px-2 md:space-x-2">
             
             <Lateral></Lateral>
 
@@ -28,22 +28,22 @@
                 <hr class="mt-3 border border-gray-500" />
 
                 <!-- Matriculas -->
-                <div v-if="seccion == 0" class="">
+                <div v-if="seccion == 0" class="mt-3 h-4/6 overflow-y-auto">
 
                     <ul>
 
                         <li v-if="!matriculas.length">
-                            <p class="px-2 font-semibold text-gray-100 mt-3"> No hay matriculas creadas</p>
+                            <p class="px-2 font-semibold text-gray-100"> No hay matriculas creadas</p>
                         </li>
                     
                         <li :key="index" v-for="(item, index, key) in matriculas ">
             
-                            <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center mt-3">
+                            <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center ">
                                 
                                 <div class="w-full">
                                     
                                     <p class="w-full truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        {{item.nombres}}  {{item.apellidos}} : {{item.identificacion }}
+                                        {{ index+1 }}, {{item.nombres}}, {{item.apellidos}}, {{item.identificacion }}
                                     </p>
                                     
                                 </div>

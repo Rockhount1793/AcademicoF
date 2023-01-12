@@ -20,7 +20,7 @@
 
                 <hr class="mt-3 border border-gray-500" />
 
-                <div v-if="seccion == 0" class="mt-3">
+                <div v-if="seccion == 0" class="mt-3 h-5/6 overflow-y-auto">
 
                     <ul>
 
@@ -34,7 +34,7 @@
                                 
                                 <div>
                                     
-                                    <button v-if="actual_lectivo.numero == item.numero" class="shadow-md w-64 shadow-cyan-500 rounded bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                    <button v-if="actual_lectivo.lectivo_id == item.lectivo_id" class="shadow-md w-64 shadow-cyan-500 rounded bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                                         Actual : {{item.numero}}
                                     </button>
                                     
@@ -139,6 +139,12 @@
                         'director_id': director_id.value,
                         'sede_id':  actual_sede.value.sede_id,
                         'estado':1
+                    },()=>{
+                        
+                        let fecha = new Date()
+                        numero.value = fecha.getFullYear()
+                        director_id.value = 0
+                        
                     })
 
                     seccion.value = 0
