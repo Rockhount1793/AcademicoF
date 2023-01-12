@@ -253,7 +253,6 @@
             const seccion_num = computed(()=> Store.state.seccion_num )
             const urlsf = computed(()=> Store.state.urlsf )
 
-
             //# watch
             watch(listado,(value) => {
 

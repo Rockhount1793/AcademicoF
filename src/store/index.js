@@ -251,29 +251,69 @@ const store = createStore({
 
         },
 
-        async clear_data_sede(){
+        async clear_data_sede(state){
 
             return await new Promise((res,rej)=>{
-                
-                this.commit('set_actual_lectivo',{'lectivo_id': 0, 'numero': 0, 'sede_id': 0, 'director_id': 0})
+
                 this.commit('set_lectivos',[])
+                this.commit('set_actual_lectivo',{'lectivo_id': 0, 'numero': 0, 'sede_id': 0, 'director_id': 0})
                 this.commit('set_grados',[])
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
-                this.commit('set_asignaturas',[])
+                this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' })
+                this.commit('set_actual_generable',{ 'recurso': 0, 'nombre': 'Generable' })
                 this.commit('set_actual_asignatura',{ 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 })
-                this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' } )
+                this.commit('set_asignaturas',[])
                 this.commit('set_calificaciones',[])
                 this.commit('set_faltas',[])
-                this.commit('set_docentes',[])
-                this.commit('set_estudiantes',[])
-                this.commit('set_directores',[])
                 this.commit('set_matriculas',[])
+                this.commit('set_estudiantes',[])
+                this.commit('set_logros',[])
+                this.commit('set_docentes',[])
+                this.commit('set_personas',[])
+                this.commit('set_directores',[])
                 this.commit('set_boletin',{'asignaturas':[], grado:'', puesto:[0,0], rector:'', 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'faltas': 0 })
 
                 res(true)
 
             })
 
+        },
+
+        async clear_data_sesion(state){
+
+            return await new Promise((res,rej)=>{
+             
+                localStorage.removeItem('token')
+                this.commit('set_seccion_num',[0,0])
+                this.commit('set_usuario',{'usuario_id':0, 'avatar': 'default.png'})
+                this.commit('set_login',false)
+                this.commit('set_token','')
+                this.commit('set_loading',false)
+                this.commit('set_mini_loading',false)
+                this.commit('set_sedes',[])
+                this.commit('set_actual_sede',{'sede_id': 0, 'nombre':'No seleccionada!'})
+                this.commit('set_lectivos',[])
+                this.commit('set_actual_lectivo',{'lectivo_id': 0, 'numero': 0, 'sede_id': 0, 'director_id': 0})
+                this.commit('set_grados',[])
+                this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
+                this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' })
+                this.commit('set_actual_generable',{ 'recurso': 0, 'nombre': 'Generable' })
+                this.commit('set_actual_asignatura',{ 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 })
+                this.commit('set_asignaturas',[])
+                this.commit('set_calificaciones',[])
+                this.commit('set_faltas',[])
+                this.commit('set_matriculas',[])
+                this.commit('set_estudiantes',[])
+                this.commit('set_logros',[])
+                this.commit('set_docentes',[])
+                this.commit('set_personas',[])
+                this.commit('set_directores',[])
+                this.commit('set_boletin',{'asignaturas':[], grado:'', puesto:[0,0], rector:'', 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'faltas': 0 })
+
+                res(true)
+
+            })
+            
         },
 
         async clear_data_lectivo(){

@@ -124,15 +124,11 @@
 
             const cerrar_sesion = async ()=>{ 
 
-                const result = await Store.dispatch('clear_data_sede')
+                const result = await Store.dispatch('clear_data_sesion')
                 .then((res)=>{
     
                     if(res){
     
-                        localStorage.removeItem('token')
-                        Store.commit('set_login',false)
-                        Store.commit('set_seccion_num',[0,0])
-                        Store.commit('set_usuario',{'usuario_id':0, 'avatar': 'default.png'})
                         Router.push({'name':'Entrar'})
                         
                     }
