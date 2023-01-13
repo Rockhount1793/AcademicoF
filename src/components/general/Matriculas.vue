@@ -199,10 +199,11 @@
                         'tipo': 0,
                         'estado': 1
                     
+                    },()=>{
+                        identificacion_.value = 0
+                        seccion.value = 0
+                        estudiante.value = {'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': '0'}
                     })
-
-                    seccion.value = 0
-                    estudiante.value = {'estudiante_id': 0, 'nombres': 'Nombres', 'apellidos': 'Apellidos', 'identificacion': '0'}
 
                 }
 

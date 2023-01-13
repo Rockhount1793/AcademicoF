@@ -26,14 +26,14 @@
 
         },
 
-        'store': async function(json){
+        'store': async function(json,cb){
 
             const response = await Fetch.post('/matricula/store',json)
             
             if(response.error === 0){
 
                 Store.dispatch('add_matricula',response.matricula)
-
+                cb()
             }
 
             if(response.error == 400){

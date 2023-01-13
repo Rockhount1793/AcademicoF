@@ -19,8 +19,12 @@
                 </div>
 
                 <hr class="mt-3 border border-gray-500" />
-
+                
                 <div v-if="seccion == 0" class="mt-3 h-5/6 overflow-y-auto">
+                    
+                    <div class="">
+                        <p v-if="actual_lectivo.lectivo_id == 0" class="mx-auto text-center text-yellow-500" > No hay un año lectivo seleccionado! </p>
+                    </div>
 
                     <ul>
 
@@ -39,7 +43,7 @@
                                     </button>
                                     
                                     <button v-else @click="set_lectivo(item)" class="shadow-md w-64 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Seleccionar : {{item.numero}}
+                                        Seleccionar el año lectivo {{item.numero}}
                                     </button>
 
                                 </div>
@@ -55,6 +59,10 @@
                 </div>
 
                 <div v-if="seccion == 1" class="mt-3 flex-1 rounded p-1 px-2">
+                    
+                    <div class="">
+                        <p v-if="!directores.length" class="mx-auto text-center text-yellow-500" > Considere registrar un(a) rector(a) primero. </p>
+                    </div>
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
                         <p class="font-semibold text-gray-100 text-md px-2" for="year">Año</p>
@@ -182,6 +190,7 @@
             return {
                 urlsf,
                 listado,
+                directores,
                 set_route,
                 set_lectivo,
                 lectivos,

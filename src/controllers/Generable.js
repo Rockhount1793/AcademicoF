@@ -11,7 +11,7 @@
 
     const Controller = {
 
-        'boletin_todos_file': async function(params,cb){
+        'boletin_todos_file': async function(cb){
 
             let json = {
                 'periodo':periodo().periodo,

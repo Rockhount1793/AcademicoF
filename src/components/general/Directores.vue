@@ -21,6 +21,9 @@
                 <hr class="mt-3 border border-gray-500" />
 
                 <div v-if="seccion == 0" class="mt-3">
+
+                    <span v-if="actual_sede.sede_id == 0" class="text-center p-2 text-yellow-500" > Considere seleccionar una sede primero! </span>
+
                     <ul>
 
                         <li v-if="!directores.length">
@@ -30,7 +33,7 @@
                         <li :key="index" v-for="(item, index,key) in  directores">
                             
                             <div class="p-2 w-full lg:w-1/2 truncate">
-                                <p class="px-2 h-7 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.nombres}} {{item.apellidos}}</p>
+                                <p class="px-2 h-7 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.apellidos}}, {{item.nombres}}, {{item.identificacion}}</p>
                             </div>
                         
                         </li>
@@ -82,7 +85,7 @@
   
 </template>
   
-<script lang="js">
+<script>
   
     import Barra from '@/components/framework/Barra.vue'
     import Lateral from '@/components/framework/Lateral.vue'
@@ -159,6 +162,7 @@
             return {
                 urlsf,
                 listado,
+                actual_sede,
                 set_route,
                 directores,
                 seccion,

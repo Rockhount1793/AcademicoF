@@ -52,6 +52,10 @@
 
                 <div v-if="seccion == 1" class="mt-3 flex-1 rounded p-1 px-2">
 
+                    <div class="">
+                        <p v-if="!directores.length" class="mx-auto text-center text-yellow-500" > Considere registrar un docente primero. </p>
+                    </div>
+
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
                         <p class="font-semibold text-gray-100 text-md px-2" for="nombre">Nombre / Referencia</p>
                         <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="text" placeholder=" Preescolar A"/>
@@ -182,6 +186,7 @@
                 urlsf,
                 listado,
                 set_route,
+                directores,
                 grados,
                 seccion,
                 nombre,

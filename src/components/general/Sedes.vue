@@ -21,6 +21,11 @@
                 <hr class="mt-3 border border-gray-500" />
 
                 <div v-if="seccion == 0" class="overflow-y-auto h-5/6 mt-3">
+                    
+                    <div class="">
+                        <p v-if="actual_sede.sede_id == 0" class="p-2 text-center text-yellow-500" > No hay una sede seleccionada!</p>
+                    </div>
+                    
                     <ul>
                         
                         <li v-if="!sedes.length">
@@ -37,8 +42,8 @@
                                         Actual
                                     </button>
                                     
-                                    <button v-else @click="set_sede(item)" class="shadow-md w-28 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Seleccionar
+                                    <button v-else @click="set_sede(item)" class="shadow-md w-40 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                        Seleccionar esta sede
                                     </button>
 
                                 </div>

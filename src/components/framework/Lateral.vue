@@ -28,7 +28,7 @@
                 </div>
 
                 <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
-                    <div v-if="sede.sede_id == 0" class="inline-flex bg-red-500 rounded-full h-2 w-2 mr-0.5"></div>
+                    <div v-if="sede.sede_id == 0" class="inline-flex bg-yellow-500 rounded-full h-2 w-2 mr-0.5"></div>
                     Sedes
                 </p>
 
@@ -43,7 +43,7 @@
                 </div>
                 
                 <p :class="listado ? 'hidden md:block':'hidden'" class="ml-2 z-10 opacity-90  leading-normal font-semibold text-base text-center">
-                    <div v-if="lectivo.lectivo_id == 0" class="inline-flex bg-red-500 rounded-full h-2 w-2 mr-0.5"></div>
+                    <div v-if="lectivo.lectivo_id == 0" class="inline-flex bg-yellow-500 rounded-full h-2 w-2 mr-0.5"></div>
                     Lectivos
                 </p>
 
