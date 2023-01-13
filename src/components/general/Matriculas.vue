@@ -239,12 +239,8 @@
     
                     },(response)=>{
 
-                        if(response.status){
-                            estudiante.value = response.estudiante[0]
-                        }else{
-                            alert(response.message)
-                        }
-    
+                        estudiante.value = response.estudiante
+                        
                     })
 
                 }else{

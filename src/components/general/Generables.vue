@@ -145,7 +145,7 @@
             const generar_boletines = ()=>{
 
                 errores.value = []
-                
+                if(!matriculas.value.length){ errores.value.push('No hay matriculas creadas!') }
                 if(actual_sede.value.sede_id === 0){ errores.value.push('Seleccione sede') }
                 if(actual_lectivo.value.lectivo_id === 0){ errores.value.push('Seleccione lectivo') }
                 if(actual_grado.value.grado_id === 0){ errores.value.push('Seleccione grado') }

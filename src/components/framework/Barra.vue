@@ -14,20 +14,16 @@
                     <div class="flex-1">
 
                         <p class="h-4"> 
-                        
                             Sede: <span class="text-pink-500">{{sede.nombre}}</span>
-                        
                         </p>
                         
                         <p class="h-4">
-
                             Año Lectivo: <span class="text-pink-500">{{lectivo.numero}} </span>
-                        
                         </p>
 
                     </div>
 
-                    <div class="px-2">
+                    <div v-if="grado.grado_id > 0" class="px-2">
                         <p class="h-4">&nbsp;</p>
                         <p class="h-4">Grado: <span class="text-pink-500">{{grado.nombre}}</span></p>
                     </div>
