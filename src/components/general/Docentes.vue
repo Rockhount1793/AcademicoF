@@ -30,7 +30,7 @@
                         <li :key="index" v-for="(item, index,key) in  docentes">
                             
                             <div class="p-2 w-full lg:w-1/2 truncate">
-                                <p class="px-2 h-7 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.nombres}} {{item.apellidos}}</p>
+                                <p class="px-2 h-7 bg-gray-800 capitalize text-gray-100 font-semibold">{{ index+1 }}. {{item.apellidos}}, {{ item.nombres }}, {{ item.identificacion }}</p>
                             </div>
                         
                         </li>

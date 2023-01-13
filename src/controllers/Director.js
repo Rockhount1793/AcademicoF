@@ -28,9 +28,7 @@
             const response = await Fetch.post('/director/store',json)
 
             if(response.error === 0){
-
                 Store.dispatch('add_director',response.director)
-
             }
 
             if(response.error == 400){
