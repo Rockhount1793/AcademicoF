@@ -74,7 +74,7 @@
 
                                             <td class="table-cell" :key="key" v-for="(matri, index, key) in matricula.calificaciones">
                                                
-                                                <input v-if="periodo != 'nota_5' " @keyup.enter="update_calificacion(matri)" :class="index_1 % 2 == 0 ? 'bg-gray-100' : 'bg-teal-200' " class="text-md font-semibold text-center" type="number" name="nota" v-model="matri[periodo]" id="">
+                                                <input v-if="periodo != 'nota_5' " @blur="update_calificacion(matri)" :class="index_1 % 2 == 0 ? 'bg-gray-100' : 'bg-teal-200' " class="text-md font-semibold text-center" type="number" name="nota" v-model="matri[periodo]" id="">
                                                 
                                                 <button v-else class="text-center w-44" type="number" disabled > 
 
@@ -141,7 +141,7 @@
 
             //###### methods
             const update_calificacion = (json)=>{
-                
+
                 errores.value = []
 
                 if(typeof Number(json.nota_1) != 'number' || Number(json.nota_1) > 5 || Number(json.nota_1) < 0){ errores.value.push('¡valor de nota primer periodo no debe ser menor a 0 o mayor a 5!') }
