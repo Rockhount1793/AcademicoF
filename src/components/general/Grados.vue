@@ -2,20 +2,18 @@
 <template>
 
     <div class="">
-        
-        <Barra></Barra>
-        
+
         <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
             
-            <Lateral></Lateral>
+
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg">Grados</p>
+                <p class="text-gray-500 text-center font-semibold text-lg">Grados</p>
 
                 <div class="mt-3 flex space-x-2 px-2">
-                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
-                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>
+                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Lista</p>
+                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Crear</p>
                 </div>
 
                 <hr class="mt-3 border border-gray-500" />
@@ -25,7 +23,7 @@
                     <ul>
 
                         <li v-if="!grados.length">
-                            <p class="px-2 font-semibold text-gray-100"> No hay grados creados</p>
+                            <p class="px-2 font-semibold text-gray-500"> No hay grados creados</p>
                         </li>
                     
                         <li :key="index" v-for="(item, index, key) in grados ">
@@ -34,14 +32,14 @@
                                 
                                 <div>
                                     
-                                    <div class="w-64 rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                    <div class="w-64 rounded bg-cyan-900 text-center h-7 leading-6 text-gray-500 font-semibold text-md">
                                         {{ index+1 }}. {{item.nombre}}
                                     </div>
                                     
                                 </div>
                                 
                                 <div class="w-full md:w-1/2 lg:w-1/3 truncate">
-                                    <p class="mt-2 lg:mt-0.5 px-2 p-0.5 rounded bg-gray-800 capitalize text-gray-100 font-semibold"><span class="hidden lg:inline">Director:</span> {{filter_director(item.docente_id)}}</p>
+                                    <p class="mt-2 lg:mt-0.5 px-2 p-0.5 rounded bg-gray-800 capitalize text-gray-500 font-semibold"><span class="hidden lg:inline">Director:</span> {{filter_director(item.docente_id)}}</p>
                                 </div>
 
                             </div>
@@ -57,23 +55,23 @@
                     </div>
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="nombre">Nombre / Referencia</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="nombre">Nombre / Referencia</p>
                         <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="text" placeholder=" Preescolar A"/>
                     </div>
 
                    <!--<div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="numero">Numero</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="numero">Numero</p>
                         <input v-model="numero" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="number" min="0" max="12" step="1" placeholder=" 0"/>
                     </div>-->
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="director">Director</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="director">Director</p>
                         <SelectorDirector @set_director="set_director" class="mx-auto"></SelectorDirector>
                     </div>
                     
 
                     <div class="mx-auto w-1/2">
-                        <button @click="guardar()" class="mx-auto mt-3 h-7 shadow-md w-full lg:w-32 shadow-pink-500 rounded float-right bg-pink-800 text-gray-100 px-2">
+                        <button @click="guardar()" class="mx-auto mt-3 h-7 shadow-md w-full lg:w-32 shadow-pink-500 rounded float-right bg-pink-800 text-gray-500 px-2">
                             Guardar
                         </button>
                     </div>

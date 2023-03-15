@@ -3,15 +3,15 @@
 
     <div class="">
         
-        <Barra></Barra>
+
         
         <div class="mt-2 min-h-full flex px-2 md:space-x-2">
             
-            <Lateral></Lateral>
+
 
             <div class="w-full ml-2 p-1 rounded border border-gray-600 h-auto">
 
-                <p class="text-gray-100 text-center font-semibold text-lg">Calificaciones</p>
+                <p class="text-gray-500 text-center font-semibold text-lg">Calificaciones</p>
         
                 <hr class="mt-3 border border-gray-500" />
 
@@ -20,12 +20,12 @@
                     <div class="flex-1 lg:flex">
 
                         <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                            <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-100 text-md px-2">Grado</p>
+                            <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-500 text-md px-2">Grado</p>
                             <SelectorGrado class="mx-auto lg:w-1/2"></SelectorGrado>
                         </div>
     
                         <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                            <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-100 text-md px-2">Periodo</p>
+                            <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-500 text-md px-2">Periodo</p>
                             <SelectorPeriodo class="mx-auto w-full lg:w-1/2"></SelectorPeriodo>
                         </div>
 
@@ -37,7 +37,7 @@
                 <div class="pr-12 lg:px-10 mx-auto mt-3 max-w-7xl w-full">
                     
                     <div v-if="!matriculas_comp.length">
-                        <p class="px-2 font-semibold text-gray-100 mt-3"> No hay matriculas o asignaturas creadas </p>
+                        <p class="px-2 font-semibold text-gray-500 mt-3"> No hay matriculas o asignaturas creadas </p>
                     </div>
 
                     <!-- tabla 4 peridos y final --->
@@ -52,11 +52,11 @@
 
                                         <tr class="bg-pink-700">
 
-                                            <th style="margin-left: -10rem;" class="pt-0 absolute w-40 text-gray-100 font-semibold text-sm">
+                                            <th style="margin-left: -10rem;" class="pt-0 absolute w-40 text-gray-500 font-semibold text-sm">
                                                 <div class="h-7 py-1 min-w-full px-6">Nombre</div>
                                             </th>
                                         
-                                            <th class="h-7 table-cell border-l border-gray-100 text-gray-100 font-semibold text-sm" :key="key" v-for="(item,index,key) in matriculas_comp[0].calificaciones">
+                                            <th class="h-7 table-cell border-l border-gray-100 text-gray-500 font-semibold text-sm" :key="key" v-for="(item,index,key) in matriculas_comp[0].calificaciones">
                                                 <p> {{ index+1 }}. {{item.nombre }}</p>
                                             </th>
                                         

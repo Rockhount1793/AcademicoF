@@ -3,28 +3,28 @@
 
     <div class="">
         
-        <Barra></Barra>
+
         
         <div class="mt-2 min-h-full flex w-auto px-2 md:space-x-2">
             
-            <Lateral></Lateral>
+            
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg">Faltas</p>
+                <p class="text-gray-500 text-center font-semibold text-lg">Faltas</p>
 
                 <div class="mt-3 space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
-                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Estudiantes</p>
-                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Asignaturas</p>
-                    <p @click="seccion = 2" :class="seccion == 2 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Faltas</p>
+                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Estudiantes</p>
+                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Asignaturas</p>
+                    <p @click="seccion = 2" :class="seccion == 2 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Faltas</p>
                 </div>
 
                 <hr class="mt-3 border border-gray-500" />
                 
                 <div class="mt-3 space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
-                    <p class="text-center h-7 leading-6 text-pink-500 font-semibold text-md"> <span class="text-gray-100"> Estudiante: </span> {{estudiante.nombres}} {{estudiante.apellidos}}</p>
-                    <p class="text-center h-7 leading-6 text-pink-500 font-semibold text-md"> <span class="text-gray-100"> Identificación: </span> {{filter_identificacion(estudiante.identificacion)}}</p>
-                    <p class="text-center h-7 leading-6 text-pink-500 font-semibold text-md"> <span class="text-gray-100"> Asignatura: </span> {{asignatura.nombre}}</p>
+                    <p class="text-center h-7 leading-6 text-pink-500 font-semibold text-md"> <span class="text-gray-500"> Estudiante: </span> {{estudiante.nombres}} {{estudiante.apellidos}}</p>
+                    <p class="text-center h-7 leading-6 text-pink-500 font-semibold text-md"> <span class="text-gray-500"> Identificación: </span> {{filter_identificacion(estudiante.identificacion)}}</p>
+                    <p class="text-center h-7 leading-6 text-pink-500 font-semibold text-md"> <span class="text-gray-500"> Asignatura: </span> {{asignatura.nombre}}</p>
                 </div>
         
                 <hr class="mt-3 border border-gray-500" />
@@ -33,14 +33,14 @@
                 <div v-if="seccion == 0" class="mt-0">
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                        <p class="font-semibold text-gray-100 text-md px-2">Grado</p>
+                        <p class="font-semibold text-gray-500 text-md px-2">Grado</p>
                         <SelectorGrado class="mx-auto"></SelectorGrado>
                     </div>
                     
                     <ul>
 
                         <li v-if="!matriculas.length">
-                            <p class="px-2 font-semibold text-gray-100 mt-3"> No hay matriculas creadas</p>
+                            <p class="px-2 font-semibold text-gray-500 mt-3"> No hay matriculas creadas</p>
                         </li>
                     
                         <li :key="index" v-for="(item, index, key) in matriculas ">
@@ -49,14 +49,14 @@
                                 
                                 <div class="w-full">
                                     
-                                    <div class="w-full px-2 truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                    <div class="w-full px-2 truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-500 font-semibold text-md">
                                         {{item.nombres}}  {{item.apellidos}} : {{item.identificacion }}
                                     </div>
                                     
                                 </div>
 
                                 <div class="w-full h-8 lg:w-1/2 truncate">
-                                    <button @click="set_estudiante(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
+                                    <button @click="set_estudiante(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-500 font-semibold">
                                        ver estudiante
                                     </button>
                                 </div>
@@ -75,7 +75,7 @@
                     <ul>
             
                         <li v-if="!asignaturas.length">
-                            <p class="px-2 font-semibold text-gray-100 mt-3"> No hay asignaturas creadas</p>
+                            <p class="px-2 font-semibold text-gray-500 mt-3"> No hay asignaturas creadas</p>
                         </li>
                     
                         <li :key="index" v-for="(item, index, key) in asignaturas ">
@@ -84,14 +84,14 @@
                     
                                 <div class="w-full">
                                     
-                                    <div class="w-full px-2 truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                    <div class="w-full px-2 truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-500 font-semibold text-md">
                                         {{item.nombre}}
                                     </div>
                                     
                                 </div>
             
                                 <div class="w-full h-8 lg:w-1/2 truncate">
-                                    <button @click="get_faltas(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-100 font-semibold">
+                                    <button @click="get_faltas(item)" class="mt-0.5 h-6 px-2 rounded shadow-md shadow-pink-500  bg-pink-800 text-gray-500 font-semibold">
                                        ver faltas
                                     </button>
                                 </div>
@@ -109,22 +109,22 @@
                     
                     <div class="pt-2 mb-3">
 
-                        <p class="px-2 font-semibold text-center text-gray-100">Crear falta</p>
+                        <p class="px-2 font-semibold text-center text-gray-500">Crear falta</p>
 
                         <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                            <p class="font-semibold text-gray-100 text-md px-2">Periodo</p>
+                            <p class="font-semibold text-gray-500 text-md px-2">Periodo</p>
                             <SelectorPeriodo class="mx-auto"></SelectorPeriodo>
                         </div>
 
                         <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
                             
                             <div class="flex-1">
-                                <p class="text-sm font-semibold text-gray-100"> Fecha </p>
+                                <p class="text-sm font-semibold text-gray-500"> Fecha </p>
                                 <input class="w-full border border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-blue-900 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5" type="date" name="fecha" v-model="fecha" />
                             </div>
 
                             <div class="flex-1 mt-3 truncate">
-                                <p class="text-sm font-semibold text-gray-100"> Observación: <span class="text-yellow-300"> [{{ ( 300 - descripcion.length)}}] </span> </p>
+                                <p class="text-sm font-semibold text-gray-500"> Observación: <span class="text-yellow-300"> [{{ ( 300 - descripcion.length)}}] </span> </p>
                                 <textarea v-model="descripcion" rows="6" class="w-full border border-gray-300 bg-white rounded pl-2 pr-8 py-1 px-2 focus:outline-none shadow-md shadow-blue-900 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-4" />
                             </div>
                             
@@ -132,7 +132,7 @@
     
                         <div class="flow-root px-2">
 
-                            <button @click="store_falta()" class="float-right mt-3 mr-0 h-6 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-100 font-semibold">
+                            <button @click="store_falta()" class="float-right mt-3 mr-0 h-6 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-500 font-semibold">
                                 Guardar
                             </button>
     
@@ -143,7 +143,7 @@
                     <hr class="mt-3 border border-gray-500" />
 
                     <div v-if="!faltas.length">
-                        <p class="px-2 font-semibold text-gray-100 mt-3"> No hay faltas creadas </p>
+                        <p class="px-2 font-semibold text-gray-500 mt-3"> No hay faltas creadas </p>
                     </div>
 
                     <div v-else class="flex-1 space-y-2 mt-3 ">
@@ -152,7 +152,7 @@
     
                             <section class="">
 
-                                <div class="p-1 mt-3 text-gray-100 text-md font-semibold bg-gray-800 px-2 rounded border border-gray-500">
+                                <div class="p-1 mt-3 text-gray-500 text-md font-semibold bg-gray-800 px-2 rounded border border-gray-500">
     
                                     <p># {{index+1}}</p>
 

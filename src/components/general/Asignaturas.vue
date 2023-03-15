@@ -3,25 +3,25 @@
 
     <div class="">
         
-        <Barra></Barra>
+        
         
         <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
             
-            <Lateral></Lateral>
+
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg">Asignaturas</p>
+                <p class="text-gray-500 text-center font-semibold text-lg">Asignaturas</p>
 
                 <div class="mt-3 flex space-x-2 px-2">
-                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
-                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>
+                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Lista</p>
+                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Crear</p>
                 </div>
 
                 <hr class="mt-3 border border-gray-500" />
 
                 <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                    <p class="font-semibold text-gray-100 text-md px-2">Grado</p>
+                    <p class="font-semibold text-gray-500 text-md px-2">Grado</p>
                     <SelectorGrado class="mx-auto"></SelectorGrado>
                 </div>
 
@@ -29,7 +29,7 @@
                     <ul>
 
                         <li v-if="!asignaturas.length">
-                            <p class="px-2 font-semibold text-gray-100 mt-3"> No hay asignaturas creadas</p>
+                            <p class="px-2 font-semibold text-gray-500 mt-3"> No hay asignaturas creadas</p>
                         </li>
                     
                         <li :key="index" v-for="(item, index, key) in asignaturas ">
@@ -38,14 +38,14 @@
                                 
                                 <div>
                                     
-                                    <div class="w-64 rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                    <div class="w-64 rounded bg-cyan-900 text-center h-7 leading-6 text-gray-500 font-semibold text-md">
                                         {{ index+1 }}. {{item.nombre}}
                                     </div>
                                     
                                 </div>
                                 
                                 <div class="w-full lg:w-1/2 truncate">
-                                    <p class="mt-2 lg:mt-0.5 px-2 p-0.5 rounded bg-gray-900 capitalize text-gray-100 font-semibold"> Director: {{filter_director(item.docente_id)}}</p>
+                                    <p class="mt-2 lg:mt-0.5 px-2 p-0.5 rounded bg-gray-900 capitalize text-gray-500 font-semibold"> Director: {{filter_director(item.docente_id)}}</p>
                                 </div>
 
                             </div>
@@ -58,27 +58,27 @@
                 <div v-if="seccion == 1" class="mt-0 flex-1 rounded px-2">
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="nombre">Nombre</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="nombre">Nombre</p>
                         <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="text" placeholder=" Asignatura"/>
                     </div>
                     
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="numero_ih">IH</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="numero_ih">IH</p>
                         <input v-model="numero_ih" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="number" min="0" max="999" step="1" placeholder=" 0"/>
                     </div>
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="numero_hcd">HCD</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="numero_hcd">HCD</p>
                         <input v-model="numero_hcd" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="number" min="0" max="999" step="1" placeholder=" 0"/>
                     </div>
                     
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="director">Director</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="director">Director</p>
                         <SelectorDirector @set_director="set_director" class="mx-auto"></SelectorDirector>
                     </div>
 
                     <div class="mx-auto w-1/2">
-                        <button @click="guardar()" class="mx-auto mt-3 h-7 shadow-md w-full lg:w-32 shadow-pink-500 rounded float-right bg-pink-800 text-gray-100 px-2">
+                        <button @click="guardar()" class="mx-auto mt-3 h-7 shadow-md w-full lg:w-32 shadow-pink-500 rounded float-right bg-pink-800 text-gray-500 px-2">
                             Guardar
                         </button>
                     </div>

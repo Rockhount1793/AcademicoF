@@ -11,11 +11,11 @@
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg"> Rectores</p>
+                <p class="text-gray-500 text-center font-semibold text-lg"> Rectores</p>
 
                 <div class="px-2">
-                    <p @click="seccion = 1" v-if="seccion == 0" class="shadow-md w-32 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>
-                    <p @click="seccion = 0" v-if="seccion == 1" class="shadow-md w-32 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
+                    <p @click="seccion = 1" v-if="seccion == 0" class="shadow-md w-32 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Crear</p>
+                    <p @click="seccion = 0" v-if="seccion == 1" class="shadow-md w-32 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Lista</p>
                 </div>
 
                 <hr class="mt-3 border border-gray-500" />
@@ -27,13 +27,13 @@
                     <ul>
 
                         <li v-if="!directores.length">
-                            <p class="px-2 font-semibold text-gray-100"> No hay directores creados</p>
+                            <p class="px-2 font-semibold text-gray-500"> No hay directores creados</p>
                         </li>
 
                         <li :key="index" v-for="(item, index,key) in  directores">
                             
                             <div class="p-2 w-full lg:w-1/2 truncate">
-                                <p class="px-2 h-7 bg-gray-800 capitalize text-gray-100 font-semibold">{{item.apellidos}}, {{item.nombres}}, {{item.identificacion}}</p>
+                                <p class="px-2 h-7 bg-gray-800 capitalize text-gray-500 font-semibold">{{item.apellidos}}, {{item.nombres}}, {{item.identificacion}}</p>
                             </div>
                         
                         </li>
@@ -43,34 +43,34 @@
                 <div v-if="seccion == 1" class="mt-3 flex-1 lg:grid lg:grid-cols-2 gap-2 rounded p-1 px-2">
 
                     <div class="flex-1 py-2">
-                        <p class="font-semibold text-gray-100 text-md px-2">Nombres</p>
+                        <p class="font-semibold text-gray-500 text-md px-2">Nombres</p>
                         <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="nombre" type="text" placeholder=" Nombres"/>
                     </div>
 
                     <div class="flex-1 py-2">
-                        <p class="font-semibold text-gray-100 text-md px-2">Apellidos</p>
+                        <p class="font-semibold text-gray-500 text-md px-2">Apellidos</p>
                         <input v-model="apellido" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="apellido" type="text" placeholder=" Apellidos"/>
                     </div>
 
                     <div class="flex-1 py-2">
-                        <p class="font-semibold text-gray-100 text-md px-2">Identificación</p>
+                        <p class="font-semibold text-gray-500 text-md px-2">Identificación</p>
                         <input v-model="identificacion" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" id="direccion" type="text" placeholder=" 0000000"/>
                     </div>
 
                     <div class="flex-1 py-2">
-                        <p class="font-semibold text-gray-100 text-md px-2">Teléfono</p>
+                        <p class="font-semibold text-gray-500 text-md px-2">Teléfono</p>
                         <input v-model="telefono" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" type="text" placeholder=" 1234567890"/>
                     </div>
                     
                     <div class="flex-1 py-2">
-                        <p class="font-semibold text-gray-100 text-md px-2">Email</p>
+                        <p class="font-semibold text-gray-500 text-md px-2">Email</p>
                         <input v-model="email" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full lg:w-1/2" type="email" placeholder=" usuario@dominio.com"/>
                     </div>
 
                     <div class=""></div>
 
                     <div class="">
-                        <button @click="guardar()" class="w-32 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-100 px-2">
+                        <button @click="guardar()" class="w-32 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-500 px-2">
                             Guardar
                         </button>
                     </div>

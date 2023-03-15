@@ -14,7 +14,7 @@
   
                 <div class="bg-gray-800 z-10 opacity-75 w-full shadow-lg rounded-lg px-8">
     
-                    <div class="flex-1 text-sm text-gray-100 items-center p-3">
+                    <div class="flex-1 text-sm text-gray-500 items-center p-3">
     
                         <h2 class="text-center">versión {{ version}}</h2>
                         <h2 class="text-center text-lg font-semibold text-pink-500">2023 - Leo Caicedo</h2>

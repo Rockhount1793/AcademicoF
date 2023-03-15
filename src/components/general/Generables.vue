@@ -2,19 +2,18 @@
 <template>
 
     <div class="">
-        
-        <Barra></Barra>
+
         
         <div class="mt-2 min-h-full flex w-auto px-2 md:space-x-2">
             
-            <Lateral></Lateral>
+
 
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg">Generables Grado <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span></p>
+                <p class="text-gray-500 text-center font-semibold text-lg">Generables Grado <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span></p>
 
                 <!--<div class="mt-3 space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
-                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
+                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Lista</p>
                 </div>-->
 
                 <hr class="mt-3 border border-gray-500" />
@@ -24,17 +23,17 @@
                     <div class="flex-1 lg:flex gap-3">
 
                         <div class="flex-1 mt-2">
-                            <p class="font-semibold text-gray-100 text-md px-3">Grado</p>
+                            <p class="font-semibold text-gray-500 text-md px-3">Grado</p>
                             <SelectorGrado class="mx-auto w-full lg:w-64"></SelectorGrado>
                         </div>
                         
                         <div class="flex-1 mt-2">
-                            <p class="font-semibold text-gray-100 text-md px-2">Periodo</p>
+                            <p class="font-semibold text-gray-500 text-md px-2">Periodo</p>
                             <SelectorPeriodo class="mx-auto w-full lg:w-64"></SelectorPeriodo>
                         </div>
 
                         <div class="flex-1 mt-2">
-                            <p class="font-semibold text-gray-100 text-md px-2">Generable</p>
+                            <p class="font-semibold text-gray-500 text-md px-2">Generable</p>
                             <SelectorGenerable class="mx-auto w-full lg:w-64"></SelectorGenerable>
                         </div>
 
@@ -45,7 +44,7 @@
                 <div v-if="actual_generable.nombre == 'boletin' " class="block">
 
                     <div class="mt-3 w-64 mx-auto">
-                        <button @click="generar_boletines()" class="bg-pink-700 shadow-pink-500 shadow-md w-full cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        <button @click="generar_boletines()" class="bg-pink-700 shadow-pink-500 shadow-md w-full cursor-pointer rounded text-center h-7 leading-6 text-gray-500 font-semibold text-md">
                             Generar todos los boletines
                         </button>
                     </div>
@@ -60,7 +59,7 @@
                     <ul>
 
                         <li v-if="!matriculas.length">
-                            <p class="px-2 font-semibold text-gray-100 mt-3"> No hay matriculas creadas</p>
+                            <p class="px-2 font-semibold text-gray-500 mt-3"> No hay matriculas creadas</p>
                         </li>
                     
                         <li :key="index" v-for="(item, index, key) in matriculas ">
@@ -69,7 +68,7 @@
                                 
                                 <div class="w-full">
                                     
-                                    <p class="w-full truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                    <p class="w-full truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-500 font-semibold text-md">
                                         {{item.nombres}},  {{item.apellidos}}, {{item.identificacion }}
                                     </p>
                                     
@@ -77,13 +76,13 @@
 
                                 <!--<div v-if="actual_generable.nombre === 'boletin'" class="space-x-2 flex w-full h-8 ">
                                     
-                                    <button title="generar" @click="generar_estudiante_pdf(item)" class="flex space-x-1 mt-0.5 h-7 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-100 font-semibold">
+                                    <button title="generar" @click="generar_estudiante_pdf(item)" class="flex space-x-1 mt-0.5 h-7 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-500 font-semibold">
 
                                         <img title="pdf" class="mx-auto mt-0.5 w-6 h-6 " :src="urlsf+'/images/pdf.svg'" />
                                          
                                     </button>
 
-                                    <button title="generar" @click="generar_estudiante_vista(item)" class="flex space-x-1 mt-0.5 h-7 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-100 font-semibold">
+                                    <button title="generar" @click="generar_estudiante_vista(item)" class="flex space-x-1 mt-0.5 h-7 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-500 font-semibold">
                                         
                                         <img title="preview" class="mx-auto mt-0.5 w-6 h-6 " :src="urlsf+'/images/preview.svg'" />
                                       

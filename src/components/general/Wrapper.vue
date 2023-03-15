@@ -30,15 +30,12 @@
                   <img class="h-8 w-auto" title="Academic" :src="urlsf+'/images/logo.svg'"  alt="Academic" />
                 </div>
                 <div class="mt-5 h-0 flex-1 overflow-y-auto">
-                  <RouterLink v-for="item in navigation"
-                    :key="item.name"
-                    :to="item.href"
-                    :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center rounded-md px-2 py-2 text-base font-medium']">
-                      <component :is="item.icon"
-                                :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-4 h-6 w-6 flex-shrink-0']"
-                                aria-hidden="true" />
+                  <nav class="space-y-1 px-2">
+                    <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center rounded-md px-2 py-2 text-base font-medium']">
+                      <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-4 h-6 w-6 flex-shrink-0']" aria-hidden="true" />
                       {{ item.name }}
-                </RouterLink>
+                    </a>
+                  </nav>
                 </div>
               </DialogPanel>
             </TransitionChild>
@@ -60,15 +57,10 @@
           </div>
           <div class="flex flex-1 flex-col overflow-y-auto">
             <nav class="flex-1 space-y-1 px-2 py-4">
-              <RouterLink v-for="item in navigation"
-                  :key="item.name"
-                  :to="item.href"
-                  :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center rounded-md px-2 py-2 text-base font-medium']">
-                  <component :is="item.icon"
-                            :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-4 h-6 w-6 flex-shrink-0']"
-                            aria-hidden="true" />
-                  {{ item.name }}
-              </RouterLink>
+              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'group flex items-center rounded-md px-2 py-2 text-sm font-medium']">
+                <component :is="item.icon" :class="[item.current ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300', 'mr-3 h-6 w-6 flex-shrink-0']" aria-hidden="true" />
+                {{ item.name }}
+              </a>
             </nav>
           </div>
         </div>
@@ -84,11 +76,11 @@
 
             
                 <div class="mr-4 rounded-full sm:text-end lg:bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20 ">
-                    Sede actual: <span class="text-gray-900 capitalize">{{ actual_sede.nombre }}</span>
+                    Sede actual: <span class="text-gray-900">Belen</span>
                 </div>
 
                 <div class="rounded-full lg:bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20">
-                    Año lectivo actual: <span class="text-gray-900">{{lectivo.numero}}</span>
+                    Año lectivo actual: <span class="text-gray-900">2023</span>
                 </div>
            
                 
@@ -105,13 +97,13 @@
                 <div>
                   <MenuButton class="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" :src="urlsf+'/images/avatar/'+user.avatar" alt="Perfil photo" />
+                    <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
                   </MenuButton>
                 </div>
                 <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                   <MenuItems class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <MenuItem as="div" v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                      <div @click="cerrar_sesion()" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</div>
+                      <Router-link :to="item.href" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.name }}</Router-link>
                     </MenuItem>
                   </MenuItems>
                 </transition>
@@ -122,15 +114,11 @@
   
         <main class="flex-1 ">
           <div class="py-6">
-
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 ">
-              <h1 class="ml-4 text-2xl font-semibold text-gray-900 capitalize">{{String(route.path).replace('/','')}}</h1>
+              <h1 class="text-2xl font-semibold text-gray-900 capitalize">{{route.path}}</h1>
             </div>
-
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-stone-900 mt-4">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <RouterView></RouterView>
-            </div>
-
           </div>
         </main>
 
@@ -169,8 +157,6 @@
     DocumentArrowDownIcon,
     AcademicCapIcon,
     UserCircleIcon,
-    RectangleStackIcon,
-    RocketLaunchIcon
   } from '@heroicons/vue/24/outline'
   import { MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
   
@@ -189,13 +175,12 @@
     { name: 'Logros', href: '/logros', icon: InboxIcon, current: false },
     { name: 'Faltas', href: '/faltas', icon: CalendarDaysIcon, current: false },
     { name: 'Matriculas', href: '/matriculas', icon: LinkIcon, current: false },
-    { name: 'Grados', href: '/grados', icon: RectangleStackIcon, current: false },
+
     { name: 'Generables', href: '/generables', icon: DocumentArrowDownIcon, current: false },
    
     { name: 'Docentes', href: '/docentes', icon: AcademicCapIcon, current: false },
-    // { name: 'Personas', href: '/personas', icon: UserCircleIcon, current: false },
+    { name: 'Personas', href: '/personas', icon: UserCircleIcon, current: false },
     { name: 'Sedes', href: '/sedes', icon: BuildingLibraryIcon, current: false },
-    { name: 'Año Lectivo', href: '/lectivos', icon: RocketLaunchIcon, current: false },
     
   ]);
 
@@ -203,35 +188,8 @@
   import { watchEffect, watch, defineComponent, computed, getCurrentInstance } from "vue"
   import { useRoute, RouterLink, RouterView } from 'vue-router'
   import Store from '@/store';
-  import Router from "@/router"
-
-  const cerrar_sesion = async ()=>{ 
-
-  const result = await Store.dispatch('clear_data_sesion')
-  .then((res)=>{
-
-      if(res){
-
-          Router.push({'name':'Entrar'})
-          
-      }
-
-  })
-  .catch((err)=>{
-      console.log(err)
-  })
-  .finally(()=>{
-
-  })
-
-}
-
-  const user = computed(()=> Store.state.usuario )
 
   const urlsf = computed(()=> Store.state.urlsf )
-  const lectivo = computed(()=> Store.state.actual_lectivo )
-
-  const actual_sede = computed(() => Store.state.actual_sede)
 
   //Method to change the active link in the sidebar
 
@@ -241,9 +199,6 @@
         item.current = item.href === route.path
       })
     })
-
-
-    // create a method and use Router from "@/router" to push to a route when clicked Router-link
 
 
 

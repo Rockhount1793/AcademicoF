@@ -19,7 +19,7 @@
 
             </div>
             
-            <div @click="set_route({'name':'Sedes'}); set_seccion_num([1,0]);" :class="seccion_num[0] == 1 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Sedes'}); set_seccion_num([1,0]);" :class="seccion_num[0] == 1 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 1 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Sedes" class=" p-2 rounded-md">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -34,7 +34,7 @@
 
             </div>
 
-            <div @click="set_route({'name':'Lectivos'});set_seccion_num([2,0]);" :class="seccion_num[0] == 2 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Lectivos'});set_seccion_num([2,0]);" :class="seccion_num[0] == 2 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 2 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Lectivos" class="p-2 rounded-md">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -50,7 +50,7 @@
             </div>
 
             
-            <div @click="set_route({'name':'Grados'});set_seccion_num([3,0]);" :class="seccion_num[0] == 3 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Grados'});set_seccion_num([3,0]);" :class="seccion_num[0] == 3 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 3 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Grados" class="p-2 rounded-md">
                     <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -64,7 +64,7 @@
 
             </div>
             
-            <div @click="set_route({'name':'Asignaturas'});set_seccion_num([4,0]);" :class="seccion_num[0] == 4 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Asignaturas'});set_seccion_num([4,0]);" :class="seccion_num[0] == 4 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 4 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Asignaturas" class="p-2 rounded-md">
                     <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -78,7 +78,7 @@
 
             </div>
 
-            <div @click="set_route({'name':'Logros'});set_seccion_num([5,0]);" :class="seccion_num[0] == 5 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Logros'});set_seccion_num([5,0]);" :class="seccion_num[0] == 5 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 5 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Logros" class="p-2 rounded-md">
                     <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -92,7 +92,7 @@
 
             </div>
 
-            <div @click="set_route({'name':'Calificaciones'});set_seccion_num([6,0]);" :class="seccion_num[0] == 6 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Calificaciones'});set_seccion_num([6,0]);" :class="seccion_num[0] == 6 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 6 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Calificaciones" class="p-2 rounded-md">
                     <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -106,7 +106,7 @@
 
             </div>
 
-            <div @click="set_route({'name':'Faltas'});set_seccion_num([13,0]);" :class="seccion_num[0] == 13 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Faltas'});set_seccion_num([13,0]);" :class="seccion_num[0] == 13 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 13 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Calificaciones" class="p-2 rounded-md">
 
@@ -122,7 +122,7 @@
 
             </div>
 
-            <div @click="set_route({'name':'Matriculas'});set_seccion_num([7,0]);" :class="seccion_num[0] == 7 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Matriculas'});set_seccion_num([7,0]);" :class="seccion_num[0] == 7 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 7 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Matriculas" class="p-2 rounded-md">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -138,7 +138,7 @@
 
             <hr />
 
-            <div @click="set_route({'name':'Docentes'});set_seccion_num([8,0]);" :class="seccion_num[0] == 8 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Docentes'});set_seccion_num([8,0]);" :class="seccion_num[0] == 8 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 8 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Docentes" class="p-2 rounded-md">
                     <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -152,7 +152,7 @@
 
             </div>
 
-            <div @click="set_route({'name':'Estudiantes'});set_seccion_num([9,0]);" :class="seccion_num[0] == 9 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Estudiantes'});set_seccion_num([9,0]);" :class="seccion_num[0] == 9 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 9 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Estudiantes" class="p-2 rounded-md">
                     <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -166,7 +166,7 @@
 
             </div>
 
-            <div @click="set_route({'name':'Personas'});set_seccion_num([10,0]);" :class="seccion_num[0] == 10 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Personas'});set_seccion_num([10,0]);" :class="seccion_num[0] == 10 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 10 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Personas" class="p-2 rounded-md">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -180,7 +180,7 @@
 
             </div>
 
-            <div @click="set_route({'name':'Directores'});set_seccion_num([11,0]);" :class="seccion_num[0] == 11 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Directores'});set_seccion_num([11,0]);" :class="seccion_num[0] == 11 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 11 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Rectores" class="p-2 rounded-md">
                     <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
@@ -196,7 +196,7 @@
 
             <hr/>
 
-            <div @click="set_route({'name':'Generables'});set_seccion_num([12,0]);" :class="seccion_num[0] == 12 ? 'text-gray-100':'hover:rounded hover:text-gray-100 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
+            <div @click="set_route({'name':'Generables'});set_seccion_num([12,0]);" :class="seccion_num[0] == 12 ? 'text-gray-500':'hover:rounded hover:text-gray-500 hover:bg-pink-200 text-gray-500' " class="cursor-pointer flex items-center px-2 group transform transition duration-200 ease-in-out">
 
                 <div :class="seccion_num[0] == 12 ? 'shadow-md shadow-pink-500 bg-pink-800':'' " title="Generables" class="p-2 rounded-md">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">

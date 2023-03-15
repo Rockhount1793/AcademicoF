@@ -39,6 +39,24 @@
                 Aplicacion.redirect_home(response)
             }
             
+        },
+
+        'update': async function(docente){
+
+            const response = await Fetch.put('/docente/'+docente.docente_id, docente)
+
+            if(response.error === 0){
+                Store.dispatch('update_docente',response.updatedDocente)
+            }
+
+            if(response.error == 400){
+                alert(response.message)
+            }
+
+            if(response.error == 500){
+                Aplicacion.redirect_home(response)
+            }
+            
         }
 
 

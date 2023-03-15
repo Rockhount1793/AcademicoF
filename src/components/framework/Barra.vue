@@ -10,7 +10,7 @@
                     <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" :src="urlsf+'/images/logo.svg'" alt="logo" />
                 </Router-link>
     
-                <div class="font-semibold text-xs lg:text-sm text-gray-100 flex items-center">
+                <div class="font-semibold text-xs lg:text-sm text-gray-500 flex items-center">
                     <div class="flex-1">
 
                         <p class="h-4"> 
@@ -39,7 +39,7 @@
   
                 
                 <div class="hidden lg:inline-flex mr-2 truncate">
-                    <span class="text-xs font-xs text-gray-100"> {{user.email}} </span>
+                    <span class="text-xs font-xs text-gray-500"> {{user.email}} </span>
                 </div>
 
                 <div class="flex-none">

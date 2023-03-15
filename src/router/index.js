@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Bienvenida from '@/views/Bienvenida.vue'
 import Error from '@/views/Error.vue'
+import Inicio from '@/components/general/Inicio.vue';
 
 const router = createRouter({
     
@@ -22,6 +23,12 @@ const router = createRouter({
             path: '/acerca',
             name: 'Acerca',
             component: () => import('@/views/Acerca.vue')
+        },
+        {
+            path: '/inicio',
+            name:'Wrapper',
+            component: Inicio,
+            
         },
         {
             path: '/sedes',

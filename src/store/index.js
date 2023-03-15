@@ -18,7 +18,12 @@ const store = createStore({
             urlsb: _urlsb(),
             loading: false,
             mini_loading: false,
-            usuario: {'usuario_id':0, 'avatar':'default.png','configuracion':{}},
+            usuario: {'usuario_id':0, 'avatar':'default.png',
+            'configuracion':{
+                sede_id:null,
+                nombre_sede:'',
+                numero_lectivo:0,
+            }},
             token: '',
             login: false,
             
@@ -198,10 +203,15 @@ const store = createStore({
                 if(res){
 
                     //Utilities.set_config({"sede_id": json.sede_id})
+
+                    let usuario =  this.state.usuario
+                    console.debug("sede llegando al store", usuario);
+                    console.debug(typeof usuario);
+
+
                     
-                    let usuario = this.state.usuario
-                    usuario.configuracion['sede_id'] = json.sede_id
-                    usuario.configuracion['nombre_sede'] = json.nombre
+                    usuario.configuracion.sede_id = json.sede_id
+                    usuario.configuracion['nombre_sede'] = json['nombre']
                     usuario.configuracion['numero_lectivo'] = 0
                     this.commit('set_usuario',usuario)
                     
@@ -398,6 +408,14 @@ const store = createStore({
             const result = [...directores, json]
             this.commit('set_docentes',result)
 
+        },
+
+        update_docente(state, docente){
+                
+                let docentes = this.state.docentes
+                const result = docentes.map(d => d.docente_id === docente.docente_id ? docente : d)
+                this.commit('set_docentes',result)
+    
         },
 
         add_persona(state, json){

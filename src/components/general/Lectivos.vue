@@ -2,23 +2,22 @@
 <template>
 
     <div class="">
-        
-        <Barra></Barra>
+    
         
         <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
-            
-            <Lateral></Lateral>
+        
 
-            <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
+            <div class="ml-2 p-1 rounded border border-gray-300 h-auto w-full">
 
-                <p class="text-gray-100 text-center font-semibold text-lg">Lectivos</p>
+         
 
-                <div class="mt-3 flex space-x-2 px-2">
-                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
-                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Crear</p>
+                <div class="mt-4 flex space-x-2 px-2">
+                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-indigo-800' : 'bg-indigo-300 text-gray-500'" class="shadow-gray-200 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
+                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-indigo-800 text-gray-50' : 'bg-indigo-200'" class="shadow-gray-200 shadow-md w-10 cursor-pointer rounded text-center h-7 leading-6 text-gray-600 font-semibold text-md"> +</p>
                 </div>
+    
 
-                <hr class="mt-3 border border-gray-500" />
+                <hr class="mt-3 border border-gray-200" />
                 
                 <div v-if="seccion == 0" class="mt-3 h-5/6 overflow-y-auto">
                     
@@ -26,36 +25,32 @@
                         <p v-if="actual_lectivo.lectivo_id == 0" class="mx-auto text-center text-yellow-500" > No hay un año lectivo seleccionado! </p>
                     </div>
 
-                    <ul>
 
-                        <li v-if="!lectivos.length">
-                            <p class="px-2 font-semibold text-gray-100"> No hay lectivos creados</p>
-                        </li>
+                        <div v-if="!lectivos.length">
+                            <p class="px-2 font-semibold text-gray-500"> No hay lectivos creados</p>
+                        </div>
                     
-                        <li :key="index" v-for="(item, index, key) in lectivos ">
-            
-                            <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center">
-                                
-                                <div>
-                                    
-                                    <button v-if="actual_lectivo.lectivo_id == item.lectivo_id" class="shadow-md w-64 shadow-cyan-500 rounded bg-cyan-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Actual : {{item.numero}}
-                                    </button>
-                                    
-                                    <button v-else @click="set_lectivo(item)" class="shadow-md w-64 shadow-pink-500 cursor-pointer rounded bg-pink-800 text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                        Seleccionar el año lectivo {{item.numero}}
-                                    </button>
 
+                    <div v-else class="mt-4 mx-4 mb-4 flow-root ">
+                        <ul role="list" class="-my-5 divide-y divide-gray-200">
+                            <li v-for="lectivo in lectivos" :key="lectivo.lectivo_id" class="py-4">
+                                <div class="flex items-center space-x-4">
+                                    <div class="min-w-0 flex-1">
+                                        <p class="truncate text-large font-medium text-gray-900"> Año: {{ lectivo.numero }}</p>
+                                        <p class="truncate text-sm text-gray-500">Rector(a): {{filter_director(lectivo.director_id)}}</p>
+                                    </div>
+                                    <div>
+    
+                                        <div v-if="actual_lectivo.lectivo_id == lectivo.lectivo_id" class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ">Actual : {{lectivo.numero}}</div>
+    
+                                        <div v-else @click="set_lectivo(lectivo)" class="inline-flex items-center rounded-full bg-white px-2.5 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-indigo-400 hover:text-white hover:cursor-pointer">Seleccionar este año </div>
+    
+                                    </div>
                                 </div>
-                                
-                                <div class="w-full lg:w-1/3 truncate">
-                                    <p class="mt-2 lg:mt-0.5 cursor-pointer px-2 p-0.5 bg-gray-800 capitalize text-gray-100 font-semibold">{{filter_director(item.director_id)}}</p>
-                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                            </div>
-                        
-                        </li>
-                    </ul>
                 </div>
 
                 <div v-if="seccion == 1" class="mt-3 flex-1 rounded p-1 px-2">
@@ -65,17 +60,17 @@
                     </div>
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="year">Año</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="year">Año</p>
                         <input v-model="numero" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="numero"  type="number" min="2023" max="2099" step="1" placeholder=" 2023"/>
                     </div>
                     
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-100 text-md px-2" for="director">Rector</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="director">Rector</p>
                         <SelectorDirector @set_director="set_director" id="director" class="mx-auto"></SelectorDirector>
                     </div>
 
-                    <div class="mx-auto w-1/2">
-                        <button @click="guardar()" class="mx-auto mt-3 h-7 shadow-md w-full lg:w-32 shadow-pink-500 rounded float-right bg-pink-800 text-gray-100 px-2">
+                    <div class="mx-auto w-1/2 pb-4">
+                        <button @click="guardar()" class="mx-auto mt-3 h-7 shadow-md w-full lg:w-32 shadow-indigo-500 rounded float-right bg-indigo-800 text-gray-50 px-2">
                             Guardar
                         </button>
                     </div>
@@ -134,9 +129,11 @@
 
                 errores.value = []
 
-                if(typeof numero.value != 'number' || numero.value < 2022 || numero.value > 2099){ errores.value.push('ingrese año') }
+                if(typeof numero.value != 'number' || numero.value < 2015 || numero.value > 2099){ errores.value.push('ingrese año') }
                 if(typeof director_id.value != 'number' || director_id.value < 1){ errores.value.push('seleccione director') }
-                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
+
+                // The year doesn't need a SEDE. 
+                //if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
                 
                 if(errores.value.length){
                     alert(errores.value[0])
@@ -145,7 +142,6 @@
                     Lectivo.store({
                         'numero': numero.value,
                         'director_id': director_id.value,
-                        'sede_id':  actual_sede.value.sede_id,
                         'estado':1
                     },()=>{
                         
