@@ -4,7 +4,7 @@
 
         <div class="relative col-span-12 lg:col-span-12 ">
 
-            <button type="button" @click="mostrar_menu()" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" class="w-full border border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-blue-900 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            <button type="button" @click="mostrar_menu()" aria-haspopup="listbox" aria-expanded="true"  aria-labelledby="listbox-label" class="w-full border border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
 
                 <div class=" flex items-center justify-between space-x-1 w-full">
 
@@ -148,6 +148,12 @@
 
             }
 
+            const closeMenu = () => {
+                modulo.value = false;
+            };
+
+
+
             //# computed
             
             const counter_letras_nombre = computed(()=>{
@@ -162,7 +168,7 @@
                     <span class="${color_chart(5,contador)}">&#8226;<span>
                 `
                     
-                return temp
+                return temp;
 
             })
 
@@ -203,6 +209,7 @@
 
             })
 
+  
             const grado = computed(()=>{
                 return Store.state.actual_grado
             })
@@ -258,7 +265,8 @@
                 grado,
                 grados,
                 grados_com,
-                grado_select
+                grado_select,
+                closeMenu,
             }
 
         },

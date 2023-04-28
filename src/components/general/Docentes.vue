@@ -7,7 +7,7 @@
 
             <div class="flex w-full justify-between">
                 <div class="mt-4 flex space-x-2 px-2">
-                    <p @click="seccion = 0, mode='list', clearForm()" :class="seccion == 0 ? 'bg-indigo-800' : 'bg-indigo-300 text-gray-500'" class="shadow-gray-200 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
+                    <p @click="seccion = 0, mode = 'list', clearForm()" :class="seccion == 0 ? 'bg-indigo-800' : 'bg-indigo-300 text-gray-500'" class="shadow-gray-200 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
                     <p @click="seccion = 1, mode = 'create', clearForm()" :class="seccion == 1 ? 'bg-indigo-800 text-gray-50' : 'bg-indigo-200'" class="shadow-gray-200 shadow-md w-10 cursor-pointer rounded text-center h-7 leading-6 text-gray-400 font-semibold text-md"> +</p>
 
                 </div>
@@ -118,14 +118,15 @@
 
                                         </tr>
 
-
-
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                
             </div>
 
             <div v-if="seccion == 1" class="mt-3 flex-1 lg:grid lg:grid-cols-2 gap-2 rounded p-1 px-2">
@@ -136,11 +137,10 @@
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                              </svg>
-                              
+                            </svg>
 
                         </div>
-                        <input v-model="nombre" id="nombre" type="email" name="email"  class="block w-1/2 rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Mis nombres" />
+                        <input v-model="nombre" id="nombre" type="email" name="email" class="block w-1/2 rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Mis nombres" />
                     </div>
                 </div>
 
@@ -150,8 +150,7 @@
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                              </svg>
-                              
+                            </svg>
 
                         </div>
                         <input v-model="apellido" type="email" name="email" id="apellido" class="block w-1/2 rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Mis apellidos" />
@@ -177,8 +176,7 @@
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-                              </svg>
-                              
+                            </svg>
 
                         </div>
                         <input v-model="identificacion" type="email" name="email" id="identificacion" class="block w-1/2 rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="36123722" />
@@ -191,21 +189,18 @@
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
-                              </svg>
-                              
+                            </svg>
 
                         </div>
                         <input v-model="telefono" type="email" name="email" id="identificacion" class="block w-1/2 rounded-md border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="3126665895" />
                     </div>
                 </div>
 
-
-
                 <div class=""></div>
 
                 <div class="">
 
-                    <button v-if="mode ==='create'" @click="guardar()" class="w-32 mt-3 mb-3 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
+                    <button v-if="mode === 'create'" @click="guardar()" class="w-32 mt-3 mb-3 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
                         Guardar
                     </button>
 
@@ -234,6 +229,7 @@ import Router from '@/router'
 import Aplicacion from '@/controllers/Aplicacion'
 import Docente from '@/controllers/Docente'
 import Utilities from '@/utilities'
+
 import { MagnifyingGlassIcon, EnvelopeIcon } from '@heroicons/vue/20/solid'
 
 export default defineComponent({
@@ -261,8 +257,6 @@ export default defineComponent({
 
         let search = ref("")
         let mode = ref('list')
-       
-
 
         //# methods
         const set_route = (json) => {
@@ -274,11 +268,12 @@ export default defineComponent({
             return name.charAt(0).toLowerCase() || 'default';
         }
 
+
+
         //write a method to filter docentes by name or last name or identificacion and update the table and modify a computed value called search_results
 
         const filter = (_, _search) => {
 
-            
         }
 
         const editarProfesor = (profesor) => {
@@ -334,59 +329,58 @@ export default defineComponent({
             docente_id.value = 0
         }
 
-
         const actualizarProfesor = () => {
-                
-                errores.value = []
-    
-                if (!nombre.value.length) { errores.value.push('ingrese nombres') }
-                if (!apellido.value.length) { errores.value.push('ingrese apellidos') }
-                if (!identificacion.value.length) { errores.value.push('ingrese identificación') }
-                if (!telefono.value.length) { errores.value.push('ingrese teléfono') }
-                if (!email.value.length) { errores.value.push('ingrese email') }
-                if (!Utilities.check_email(email.value)) { errores.value.push('formato de email incorrecto!') }
-                if (actual_sede.value.sede_id == 0) { errores.value.push('seleccione sede') }
-    
-                if (errores.value.length) {
-                    alert(errores.value[0])
-                } else {
-    
-                    Docente.update({
-                        'nombres': nombre.value,
-                        'apellidos': apellido.value,
-                        'identificacion': identificacion.value,
-                        'telefono': telefono.value,
-                        'sede_id': actual_sede.value.sede_id,
-                        'docente_id': docente_id.value,
-                        'email': email.value,
-                        'estado': 1
-                    })
-    
-                    seccion.value = 0
-                    mode.value = 'list'
-    
-                }
+
+            errores.value = []
+
+            if (!nombre.value.length) { errores.value.push('ingrese nombres') }
+            if (!apellido.value.length) { errores.value.push('ingrese apellidos') }
+            if (!identificacion.value.length) { errores.value.push('ingrese identificación') }
+            if (!telefono.value.length) { errores.value.push('ingrese teléfono') }
+            if (!email.value.length) { errores.value.push('ingrese email') }
+            if (!Utilities.check_email(email.value)) { errores.value.push('formato de email incorrecto!') }
+            if (actual_sede.value.sede_id == 0) { errores.value.push('seleccione sede') }
+
+            if (errores.value.length) {
+                alert(errores.value[0])
+            } else {
+
+                Docente.update({
+                    'nombres': nombre.value,
+                    'apellidos': apellido.value,
+                    'identificacion': identificacion.value,
+                    'telefono': telefono.value,
+                    'sede_id': actual_sede.value.sede_id,
+                    'docente_id': docente_id.value,
+                    'email': email.value,
+                    'estado': 1
+                })
+
+                seccion.value = 0
+                mode.value = 'list'
+
+            }
         }
 
         const urlsf = computed(() => Store.state.urlsf)
         const actual_sede = computed(() => Store.state.actual_sede)
-        
+
         const docentes = computed(() => Store.state.docentes)
 
         const filteredDocentes = computed(() => {
             if (search && search.value.length > 0) {
                 return docentes.value.filter((profesor) => {
-                return (
-                    profesor.nombres.toLowerCase().includes(search.value.toLowerCase()) ||
-                    profesor.apellidos.toLowerCase().includes(search.value.toLowerCase()) ||
-                    profesor.email.toLowerCase().includes(search.value.toLowerCase()) ||
-                    profesor.identificacion.toString().toLowerCase().includes(search.value.toLowerCase()) 
-                );
+                    return (
+                        profesor.nombres.toLowerCase().includes(search.value.toLowerCase()) ||
+                        profesor.apellidos.toLowerCase().includes(search.value.toLowerCase()) ||
+                        profesor.email.toLowerCase().includes(search.value.toLowerCase()) ||
+                        profesor.identificacion.toString().toLowerCase().includes(search.value.toLowerCase())
+                    );
                 });
             } else {
                 return docentes.value;
             }
-            });
+        });
 
         return {
             urlsf,
@@ -409,7 +403,8 @@ export default defineComponent({
             editarProfesor,
             docente_id,
             mode,
-            clearForm
+            clearForm,
+           
         }
 
     },

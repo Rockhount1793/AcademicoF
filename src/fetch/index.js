@@ -111,8 +111,6 @@
 
         'put' : async function(ext, body){
 
-            console.debug('Body', body)
-
             let options = {
             
                 method: 'PUT',

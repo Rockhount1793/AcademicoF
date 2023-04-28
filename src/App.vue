@@ -9,6 +9,8 @@
       ```
     -->
     <div class="h-full bg-gray-100">
+
+     
       <TransitionRoot as="template" :show="sidebarOpen">
         <Dialog as="div" class="relative z-40 lg:hidden" @close="sidebarOpen = false">
           <TransitionChild as="template" enter="transition-opacity ease-linear duration-300" enter-from="opacity-0" enter-to="opacity-100" leave="transition-opacity ease-linear duration-300" leave-from="opacity-100" leave-to="opacity-0">
@@ -128,7 +130,9 @@
             </div>
 
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-stone-900 mt-4">
+
                 <RouterView></RouterView>
+
             </div>
 
           </div>
@@ -136,6 +140,8 @@
 
 
       </div>
+
+    
     </div>
   </template>
   
