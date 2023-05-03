@@ -10,7 +10,7 @@
 
             let json = Store.state.actual_sede
 
-            const response = await Fetch.post('/estudiante/index',json)
+            const response = await Fetch.post('/anexo_estudiante/index',json)
 
             if(response.error === 0){
                 Store.commit('set_estudiantes', response.estudiantes)
@@ -24,46 +24,23 @@
 
         },
 
-        'index_identificacion': async function(json, cb){
+        'index_estudiante_id': async function(json, cb){
 
-            const response = await Fetch.post('/estudiante/index/identificacion', json )
+            const response = await Fetch.post('/anexo_estudiante/index/estudiante_id',json)
 
             if(response.error === 0){
-
-                cb(response)
-                
+                cb(response.estudiante)
             }
 
             if(response.error === 400){
-
                 alert(response.message)
-                
             }
 
             if(response.error === 500){
-               Aplicacion.redirect_home(response)
+               Aplicacion.redirect_home(response,'Entrar')
             }
 
 
-        },
-
-        'store': async function(json){
-
-            const response = await Fetch.post('/estudiante/store',json)
-
-            if(response.error === 0){
-                alert('Estudiante creado!')
-                Store.dispatch('add_estudiante',response.estudiante)
-            }
-
-            if(response.error == 400){
-                alert(response.message)
-            }
-
-            if(response.error == 500){
-                Aplicacion.redirect_home(response,'Entrar')
-            }
-            
         },
 
         'update': async function(json){
@@ -71,12 +48,11 @@
             const response = await Fetch.put('/estudiante/update',json)
 
             if(response.error === 0){
-              Store.dispatch('update_estudiante',json)
-              alert('estudiante actualizado!')
+               console.log(response)
             }
 
             if(response.error == 500){
-                // Aplicacion.redirect_home(response)
+                Aplicacion.redirect_home(response)
             }
             
         }

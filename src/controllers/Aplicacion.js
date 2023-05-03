@@ -18,6 +18,7 @@
         
             if(Config.status === 'development'){
                 console.log(error)
+                alert(error)
             }
 
             localStorage.removeItem('token')
@@ -27,6 +28,8 @@
 
             if(redirect != undefined){
                 Router.push({'name': redirect})
+            }else{
+                Router.push({'name': 'Entrar'})
             }
 
             //this.loading(false)
@@ -103,9 +106,7 @@
             let bool_token = localStorage.getItem('token') ? true : false
             
             if(status){
-    
                 cb()
-                
             }else{
 
                 if(bool_token){
@@ -133,7 +134,7 @@
                 }else{
                     
                     if(Router.currentRoute.value.name != 'Entrar'){
-                        this.redirect_home('','Bienvenida')
+                        this.redirect_home('','Entrar')
                     }
                 
                 }
@@ -186,7 +187,25 @@
                 Store.commit('set_actual_lectivo', {'lectivo_id': 0, 'numero_lectivo': numero_lectivo.numero_lectivo, 'sede_id': 0, 'director_id': director_id.director_id})
             }
 
+        },
+
+        'cerrar_sesion': async function(){
+            
+            await Store.dispatch('clear_data_sesion')
+            .then((res)=>{
+                if(res){
+                    Router.push({'name':'Entrar'})
+                }
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+            .finally(()=>{
+              
+            })
+              
         }
+
     }
 
     export default Controller

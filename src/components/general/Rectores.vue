@@ -3,12 +3,8 @@
 
     <div class="">
         
-        <Barra></Barra>
-        
         <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
-            
-            <Lateral></Lateral>
-
+        
             <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
 
                 <p class="text-gray-500 text-center font-semibold text-lg"> Rectores</p>
@@ -27,7 +23,7 @@
                     <ul>
 
                         <li v-if="!directores.length">
-                            <p class="px-2 font-semibold text-gray-500"> No hay directores creados</p>
+                            <p class="px-2 font-semibold text-gray-500"> No hay Rectores creados</p>
                         </li>
 
                         <li :key="index" v-for="(item, index,key) in  directores">
@@ -87,8 +83,6 @@
   
 <script>
   
-    import Barra from '@/components/framework/Barra.vue'
-    import Lateral from '@/components/framework/Lateral.vue'
     import { RouterView } from 'vue-router'
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from '@/store'
@@ -99,11 +93,7 @@
   
     export default defineComponent({
     
-        'name':'Directores',
-
-        'components':{
-            Barra, Lateral
-        },
+        'name':'Rectores',
 
         setup(){
         

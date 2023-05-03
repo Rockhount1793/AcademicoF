@@ -1,6 +1,6 @@
 <template>
         
-    <div class="grid grid-cols-6 lg:grid-cols-12 gap-2">
+    <div class="z-1 grid grid-cols-6 lg:grid-cols-12 gap-2">
 
         <div class="relative col-span-12 lg:col-span-12 ">
 

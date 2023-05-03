@@ -412,9 +412,9 @@ const store = createStore({
 
         update_docente(state, docente){
                 
-                let docentes = this.state.docentes
-                const result = docentes.map(d => d.docente_id === docente.docente_id ? docente : d)
-                this.commit('set_docentes',result)
+            let docentes = this.state.docentes
+            const result = docentes.map(d => d.docente_id === docente.docente_id ? docente : d)
+            this.commit('set_docentes',result)
     
         },
 
@@ -432,6 +432,14 @@ const store = createStore({
             const result = [...directores, json]
             this.commit('set_directores',result)
         
+        },
+
+        update_estudiante(state, json){
+
+            const estudiantes = this.state.estudiantes.filter((e)=>e.estudiante_id != json.estudiante_id)
+            const result = [ json, ...estudiantes ]
+            this.commit('set_estudiantes', result)
+
         }
 
     }

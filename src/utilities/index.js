@@ -15,7 +15,7 @@ const funciones = {
     fechaonly(i){ try { let x = i.split(" "); var y =x[0].split("-"); var f = y[2]+'-'+y[1]+'-'+y[0]; return f }catch(error){ return '' } },
     
     fecha_iso(i,x){
-
+      // tiny o large
         let d = new Date(i);
         let temp = '';
     
