@@ -5,15 +5,18 @@
 
         <div class="ml-2 p-1 rounded border border-gray-300 h-auto w-full">
 
+            <p class="text-gray-500 text-center font-semibold text-lg"> Docentes</p>
+
             <div class="flex w-full justify-between">
+
                 <div class="mt-4 flex space-x-2 px-2">
                     <p @click="seccion = 0, mode = 'list', clearForm()" :class="seccion == 0 ? 'bg-indigo-800' : 'bg-indigo-300 text-gray-500'" class="shadow-gray-200 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
-                    <p @click="seccion = 1, mode = 'create', clearForm()" :class="seccion == 1 ? 'bg-indigo-800 text-gray-50' : 'bg-indigo-200'" class="shadow-gray-200 shadow-md w-10 cursor-pointer rounded text-center h-7 leading-6 text-gray-400 font-semibold text-md"> +</p>
+                    <p @click="seccion = 1, mode = 'create', clearForm()" :class="seccion == 1 ? 'bg-indigo-800 text-gray-50' : 'bg-indigo-200'" class="shadow-gray-200 shadow-md w-10 cursor-pointer rounded text-center h-7 leading-6 text-gray-400 font-semibold text-2xl"> +</p>
 
                 </div>
 
                 <div class="w-1/3 mt-3 mr-4" v-if="seccion == 0">
-                    <label for="search" class="sr-only">Search</label>
+                    <label for="search" class="sr-only">Buscar docente</label>
                     <div class="relative">
                         <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-gray-400">
@@ -21,7 +24,7 @@
                             </svg>
 
                         </div>
-                        <input @input="filter(0, $event.target.value)" v-model="search" id="search" name="search" class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" placeholder="Buscar docente ..." type="search" />
+                        <input v-model="search" id="search" name="search" class="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" placeholder="Buscar docente.." type="search" />
                     </div>
                 </div>
 
@@ -34,17 +37,9 @@
                 <!-- New template -->
 
                 <div class="px-4 sm:px-6 lg:px-8">
-                    
-                    <div class="sm:flex sm:items-center">
-
-                    </div>
 
                     <div v-if="!docentes.length" class="sm:flex sm:items-center">
-                        <ul>
-                            <li>
-                                <p class="px-2 font-semibold text-gray-500"> No hay docentes creados</p>
-                            </li>
-                        </ul>
+                        <p class="px-2 font-semibold text-gray-500"> No hay docentes creados</p>
                     </div>
 
                     <div v-else class="mt-8 flow-root">
@@ -64,23 +59,22 @@
                                         </tr>
                                     </thead>
                                     <tbody class="divide-y divide-gray-200 bg-white">
-                                        <tr v-if="!(search && search.length > 0)" v-for="profesor in docentes" :key="profesor.email">
+                                        
+                                        <tr v-for="docente in filteredDocentes" :key="docente.email">
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
                                                 <div class="flex items-center">
                                                     <div class="h-10 w-10 flex-shrink-0">
-                                                        <img class="h-10 w-10 rounded-full ml-2" :src="urlsf + '/images/avatar/' + firstLetter(profesor.nombres) + '.png'" alt="profesor.nombres" />
-
-                                                        <!-- :src="urlsf+'/images/avatar/'+user.avatar" -->
+                                                        <img class="h-10 w-10 rounded-full ml-2" :src="urlsf + '/images/avatar/' + firstLetter(docente.nombres) + '.png'" alt="docente.nombres" />
                                                     </div>
                                                     <div class="ml-6">
-                                                        <div class="font-medium text-gray-900">{{ profesor.nombres }}</div>
-                                                        <div class="text-gray-500">Cedula: {{ profesor.identificacion }}</div>
+                                                        <div class="font-medium text-gray-900">{{ docente.nombres }}</div>
+                                                        <div class="text-gray-500">Cedula: {{ docente.identificacion }}</div>
                                                     </div>
                                                 </div>
                                             </td>
+                            
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div class="text-gray-900">{{ profesor.apellidos }}</div>
-
+                                                <div class="text-gray-900">{{ docente.apellidos }}</div>
                                             </td>
 
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
@@ -88,43 +82,11 @@
                                             </td>
 
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div class="text-gray-900">{{ profesor.telefono }}</div>
+                                                <div class="text-gray-900">{{ docente.telefono }}</div>
 
                                             </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ profesor.email }}</td>
-                                            <td @click="editarProfesor(profesor)" class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">Editar</td>
-
-                                        </tr>
-
-                                        <tr v-else v-for="profesor in filteredDocentes" :key="profesor.email">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
-                                                <div class="flex items-center">
-                                                    <div class="h-10 w-10 flex-shrink-0">
-                                                        <img class="h-10 w-10 rounded-full ml-2" :src="urlsf + '/images/avatar/' + firstLetter(profesor.nombres) + '.png'" alt="profesor.nombres" />
-
-                                                        <!-- :src="urlsf+'/images/avatar/'+user.avatar" -->
-                                                    </div>
-                                                    <div class="ml-6">
-                                                        <div class="font-medium text-gray-900">{{ profesor.nombres }}</div>
-                                                        <div class="text-gray-500">Cedula: {{ profesor.identificacion }}</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div class="text-gray-900">{{ profesor.apellidos }}</div>
-
-                                            </td>
-
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <span class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">Activo(a)</span>
-                                            </td>
-
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div class="text-gray-900">{{ profesor.telefono }}</div>
-
-                                            </td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ profesor.email }}</td>
-                                            <td @click="editarProfesor(profesor)" class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">Editar</td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ docente.email }}</td>
+                                            <td @click="editardocente(docente)" class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">Editar</td>
 
                                         </tr>
 
@@ -133,10 +95,9 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-
-                
             </div>
 
             <div v-if="seccion == 1" class="mt-3 flex-1 lg:grid lg:grid-cols-2 gap-2 rounded p-1 px-2">
@@ -214,7 +175,7 @@
                         Guardar
                     </button>
 
-                    <button v-else @click="actualizarProfesor()" class="w-32 mt-3 mb-3 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
+                    <button v-else @click="actualizardocente()" class="w-32 mt-3 mb-3 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
                         Actualizar
                     </button>
 
@@ -278,22 +239,20 @@ export default defineComponent({
             return name.charAt(0).toLowerCase() || 'default';
         }
 
-
-
         //write a method to filter docentes by name or last name or identificacion and update the table and modify a computed value called search_results
 
         const filter = (_, _search) => {
 
         }
 
-        const editarProfesor = (profesor) => {
+        const editardocente = (docente) => {
             seccion.value = 1
-            nombre.value = profesor.nombres
-            apellido.value = profesor.apellidos
-            identificacion.value = profesor.identificacion
-            telefono.value = profesor.telefono
-            email.value = profesor.email
-            docente_id.value = profesor.docente_id
+            nombre.value = docente.nombres
+            apellido.value = docente.apellidos
+            identificacion.value = docente.identificacion
+            telefono.value = docente.telefono
+            email.value = docente.email
+            docente_id.value = docente.docente_id
         }
 
         const guardar = () => {
@@ -339,7 +298,7 @@ export default defineComponent({
             docente_id.value = 0
         }
 
-        const actualizarProfesor = () => {
+        const actualizardocente = () => {
 
             errores.value = []
 
@@ -378,19 +337,22 @@ export default defineComponent({
         const docentes = computed(() => Store.state.docentes)
 
         const filteredDocentes = computed(() => {
-            if (search && search.value.length > 0) {
-                return docentes.value.filter((profesor) => {
+            
+            key = search.value.toLowerCase()
+
+            if (key.length > 3) {
+                return docentes.value.filter((d) => {
                     return (
-                        profesor.nombres.toLowerCase().includes(search.value.toLowerCase()) ||
-                        profesor.apellidos.toLowerCase().includes(search.value.toLowerCase()) ||
-                        profesor.email.toLowerCase().includes(search.value.toLowerCase()) ||
-                        profesor.identificacion.toString().toLowerCase().includes(search.value.toLowerCase())
-                    );
-                });
+                        d.nombres.toLowerCase().includes(key) ||
+                        d.apellidos.toLowerCase().includes(key) ||
+                        d.email.toLowerCase().includes(key) ||
+                        d.identificacion.toString().toLowerCase().includes(key)
+                    )
+                })
             } else {
-                return docentes.value;
+                return docentes.value
             }
-        });
+        })
 
         return {
             urlsf,
@@ -409,8 +371,8 @@ export default defineComponent({
             filteredDocentes,
             search,
             mode,
-            actualizarProfesor,
-            editarProfesor,
+            actualizardocente,
+            editardocente,
             docente_id,
             mode,
             clearForm,
