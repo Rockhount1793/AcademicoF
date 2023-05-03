@@ -18,7 +18,6 @@
         
             if(Config.status === 'development'){
                 console.log(error)
-                alert(error)
             }
 
             localStorage.removeItem('token')
@@ -84,10 +83,7 @@
                 Router.push({ 'name':'Sedes' })
 
             }else{
-
-
                 this.redirect_home(response)
-
             }
 
             if(response.error == 403){

@@ -5,7 +5,6 @@
 
         <div class="w-full ml-2 p-1 rounded border border-gray-300 h-auto">
 
-
             <div class="pr-12 lg:pr-0 mt-0">
 
                 <div class="flex-1 lg:flex">
@@ -33,9 +32,14 @@
 
                 <!-- tabla 4 peridos y final --->
                 <div v-else class="mx-auto w-full">
-                    <div class="p-1 h-auto rounded px-4 overflow-y-auto relative">
 
-                        <div style="margin-left: 150px;" class="px-1 overflow-x-auto h-auto mt-10 mb-10">
+                    <div class="p-1 h-auto rounded px-4 overflow-y-auto relative">
+    
+                        <div class="mt-5">
+                            <p class="font-semibold text-gray-500">Ingreso de Calificaciones <hr/></p>
+                        </div>
+
+                        <div style="margin-left: 150px;" class="px-1 overflow-x-auto h-auto  mb-10">
 
                                 <table class="table border-separate">
 
@@ -59,17 +63,17 @@
 
                                         <tr class="even:bg-gray-200 odd:bg-gray-100 " :key="key" v-for="(matricula, index_1, key) in matriculas_comp">
 
-                                            <td style="margin-left: -10rem; " id="middle" class="pt-2 absolute w-40 text-gray-500 font-semibold text-xs">
-                                                <div :class="index_1 % 2 == 0 ? 'bg-white' : 'bg-gray-200'" class="border rounded-md px-1 py-1 text-center truncate h-7 align-middle">{{matricula.apellidos}}  {{matricula.nombres}} </div>
+                                            <td style="margin-left: -10rem; " id="middle" class="absolute w-40 text-gray-500 font-semibold text-xs">
+                                                <div :class="index_1 % 2 == 0 ? 'bg-white' : 'bg-gray-200'" class="h-8 border rounded-md px-1 py-1 text-center truncate align-middle">{{matricula.apellidos}}  {{matricula.nombres}} </div>
                                             </td>
 
                                             <td class="table-cell bg-gray-50" :key="key" v-for="(matri, index, key) in matricula.calificaciones">
 
-                                                <input  v-if="periodo != 'nota_5'" @blur="update_calificacion(matri)" class=" w-28 text-md  font-semibold text-center border rounded-md border-gray-300  hover:bg-gray-300" :class="index_1 % 2 == 0 ? 'bg-white focus:bg-white' : 'bg-gray-200 focus:bg-gray-200'"  type="number" name="nota" v-model="matri[periodo]" id="">
+                                                <input  v-if="periodo != 'nota_5'" @blur="update_calificacion(matri)" class=" w-28 h-8 text-md  font-semibold text-center border rounded-md border-gray-300  hover:bg-gray-300" :class="index_1 % 2 == 0 ? 'bg-white focus:bg-white' : 'bg-gray-200 focus:bg-gray-200'"  type="number" min="1" max="5" name="nota" v-model="matri[periodo]" id="">
 
-                                                <button v-else class="text-center w-24 " type="number" disabled>
+                                                <button v-else class="text-center w-32 h-8 border border-gray-300 rounded-md" type="button" disabled>
 
-                                                    <span :class="matricula.nota_5[index] > 4 ? 'text-green-600' : matricula.nota_5[index] > 3 ? 'text-blue-500' : matricula.nota_5[index] > 2 ? 'text-yellow-500' : 'text-red-500'">{{ matricula.nota_5[index] }} [{{ matricula.nota_5[index] - 5 }}] </span>
+                                                    <span :class="matricula.nota_5[index] > 4 ? 'text-green-600' : matricula.nota_5[index] > 3 ? 'text-blue-500' : matricula.nota_5[index] > 2 ? 'text-yellow-500' : 'text-red-500'">{{ matricula.nota_5[index] }} / <strong>{{ matricula.nota_5[index] - 5 }}</strong> </span>
 
                                                 </button>
 
@@ -194,8 +198,8 @@ export default defineComponent({
                     let calificaciones_filter = calificaciones_all.filter((c) => c.estudiante_id == matriculas_all[index].estudiante_id)
 
                     let nota_5 = calificaciones_filter.map((c) => {
-                        return (c.nota_1 + c.nota_2 + c.nota_3 + c.nota_4) / 4
-                    })
+                        return (c.nota_1 + c.nota_2 + c.nota_3 + c.nota_4)/4
+                    }).reverse()
 
                     let registro = { ...matriculas_all[index], 'nota_5': nota_5, 'calificaciones': calificaciones_filter.sort(function (x, y) { return y.asignatura_id - x.asignatura_id }) }
                     m_comp.push(registro)
@@ -205,21 +209,6 @@ export default defineComponent({
             }
 
             return m_comp
-
-        })
-
-        const promedio_final = computed(() => {
-
-            // se definen en 0 por si en dado caso la nota aún no existe
-            let notas = [0, 0, 0, 0]
-
-            for (let index = 0; index < calificaciones.value.length; index++) {
-
-                notas[index] = calificaciones.value.filter((c) => c.periodo == index + 1)[0].nota
-
-            }
-
-            return ((notas[0] + notas[1] + notas[2] + notas[3]) / 4).toFixed(2)
 
         })
 
@@ -256,7 +245,6 @@ export default defineComponent({
             actual_asignatura,
             actual_grado,
             filter_identificacion,
-            promedio_final,
             update_calificacion
 
         }

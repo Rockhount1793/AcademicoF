@@ -31,7 +31,6 @@
             const response = await Fetch.post('/lectivo/store',json)
 
             if(response.error === 0){
-
                 Store.dispatch('add_lectivo',response.lectivo)
                 cb()
             }

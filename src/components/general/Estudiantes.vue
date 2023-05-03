@@ -135,7 +135,7 @@
                     </div>
 
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Identificacion</label>
+                        <label for="identificacion" class="block text-sm font-medium leading-6 text-gray-900">Identificacion</label>
                         <div class="relative mt-2">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400">
@@ -143,7 +143,7 @@
                                 </svg>
 
                             </div>
-                            <input v-model="identificacion" type="email" name="email" id="identificacion" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="12345678" />
+                            <input v-model="identificacion" type="text" name="identificacion" id="identificacion" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="12345678" />
                         </div>
                     </div>
 
@@ -257,7 +257,8 @@
 
                             </div>
                             
-                            <input v-model="estudiante_temp.identificacion" type="text" 
+                            <input v-model="estudiante_temp.identificacion" 
+                            type="number" 
                             name="identificacion_ed" id="identificacion_ed" 
                             class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" 
                             placeholder="12345678" />
@@ -613,7 +614,7 @@ export default defineComponent({
                 case 'acudiente': identificacion = search_identificacion_acudiente.value; break;
             }
 
-            if(identificacion <= 0 ){ errores.value.push('ingrese una identificacion para el/la '+ key) }
+            if(identificacion <= 0 ){ errores.value.push('ingrese una identificación para el/la '+ key) }
 
             if(errores.value.length){
                 alert(errores.value[0])
