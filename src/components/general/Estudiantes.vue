@@ -3,6 +3,8 @@
 
         <div class="ml-2 p-1 pb-2 rounded border border-gray-300 w-full">
 
+            <p class="text-gray-500 text-center mt-3 font-semibold text-lg">Estudiantes</p>
+
             <div class="flex w-full justify-between">
 
                 <div class="mt-4 flex space-x-2 px-2">
@@ -32,11 +34,7 @@
                 <div class="px-0 sm:px-2 lg:px-4">
 
                     <div v-if="!estudiantes.length" class="sm:flex sm:items-center">
-                        <ul>
-                            <li>
-                                <p class="px-2 font-semibold text-gray-500"> No hay estudiantes creados</p>
-                            </li>
-                        </ul>
+                        <p class="px-2 font-semibold text-gray-500"> No hay estudiantes creados</p>    
                     </div>
 
                     <div v-else class="mt-2">
@@ -66,7 +64,7 @@
                                                     </div>
                                                     <div class="ml-6">
                                                         <div class="font-medium text-base text-gray-900 capitalize">{{ estudiante.nombres + " " + estudiante.apellidos  }}</div>
-                                                        <div class="text-gray-500">TI: {{ estudiante.identificacion }}</div>
+                                                        <div class="text-gray-500">ID: {{ estudiante.identificacion }}</div>
                                                     </div>
                                                 </div>
                                             </td>

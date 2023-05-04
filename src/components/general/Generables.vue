@@ -2,21 +2,14 @@
 <template>
 
     <div class="">
-
         
         <div class="mt-2 min-h-full flex w-auto px-2 md:space-x-2">
-            
 
+            <div class="ml-2 p-1 rounded border border-gray-300 h-auto w-full">
 
-            <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
+                <p class="text-gray-500 mt-3 text-center font-semibold text-lg">Generables Grado <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span></p>
 
-                <p class="text-gray-500 text-center font-semibold text-lg">Generables Grado <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span></p>
-
-                <!--<div class="mt-3 space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
-                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Lista</p>
-                </div>-->
-
-                <hr class="mt-3 border border-gray-500" />
+                <hr class="mt-3 border border-gray-200" />
 
                 <div class="lg:flex lg:space-x-3 flex-1 py-2 w-full lg:w-1/4 px-2 lg:px-1">
 
@@ -44,60 +37,68 @@
                 <div v-if="actual_generable.nombre == 'boletin' " class="block">
 
                     <div class="mt-3 w-64 mx-auto">
-                        <button @click="generar_boletines()" class="bg-pink-700 shadow-pink-500 shadow-md w-full cursor-pointer rounded text-center h-7 leading-6 text-gray-500 font-semibold text-md">
+                        <button @click="generar_boletines()" class="bg-pink-700 shadow-pink-500 shadow-md w-full cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                             Generar todos los boletines
                         </button>
                     </div>
                     
                 </div>
 
-                <hr class="mt-3 border border-gray-500" />
+                <hr class="mt-3 border border-gray-200" />
 
                 <!-- Matriculas -->
-                <div v-if="seccion == 0" class="">
+                <div v-if="seccion == 0" class="overflow-y-auto">
 
-                    <ul>
+                    <div class="px-0 sm:px-2 lg:px-4">
 
-                        <li v-if="!matriculas.length">
-                            <p class="px-2 font-semibold text-gray-500 mt-3"> No hay matriculas creadas</p>
-                        </li>
-                    
-                        <li :key="index" v-for="(item, index, key) in matriculas ">
-            
-                            <div class="lg:space-x-2 px-2 mb-2 flex-1 lg:flex lg:items-center mt-3">
-                                
-                                <div class="w-full">
-                                    
-                                    <p class="w-full truncate rounded bg-cyan-900 text-center h-7 leading-6 text-gray-500 font-semibold text-md">
-                                        {{item.nombres}},  {{item.apellidos}}, {{item.identificacion }}
-                                    </p>
-                                    
-                                </div>
+                        <div v-if="!matriculas.length" class="sm:flex sm:items-center">
+                            <p class="px-2 font-semibold text-gray-500"> No hay matriculas creados</p>    
+                        </div>
 
-                                <!--<div v-if="actual_generable.nombre === 'boletin'" class="space-x-2 flex w-full h-8 ">
-                                    
-                                    <button title="generar" @click="generar_estudiante_pdf(item)" class="flex space-x-1 mt-0.5 h-7 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-500 font-semibold">
-
-                                        <img title="pdf" class="mx-auto mt-0.5 w-6 h-6 " :src="urlsf+'/images/pdf.svg'" />
-                                         
-                                    </button>
-
-                                    <button title="generar" @click="generar_estudiante_vista(item)" class="flex space-x-1 mt-0.5 h-7 px-2 rounded shadow-md shadow-pink-500 bg-pink-800 text-gray-500 font-semibold">
+                        <div v-else class="mt-2">
+                            <div class="overflow-x-auto">
+                                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                                    <table class="min-w-full divide-y divide-gray-300 mb-4">
                                         
-                                        <img title="preview" class="mx-auto mt-0.5 w-6 h-6 " :src="urlsf+'/images/preview.svg'" />
-                                      
-                                    </button>
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Nombres</th>
+                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado</th>
 
-                                </div>-->
+                                            </tr>
+                                        </thead>
 
+                                        <tbody class="divide-y divide-gray-200 bg-white">
+                                            <tr v-for="(matri, index) in matriculas" :key="index+10">
+
+                                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
+                                                    <div class="flex items-center">
+                                                        <div class="h-10 w-10 flex-shrink-0">
+                                                            <img class="h-10 w-10 rounded-full ml-2" :src="urlsf + '/images/avatar/' + firstLetter(matri.nombres) + '.png'" alt="estudiante.nombres" />
+                                                        </div>
+                                                        <div class="ml-6">
+                                                            <div class="font-medium text-base text-gray-900 capitalize">{{ matri.nombres + " " + matri.apellidos  }}</div>
+                                                            <div class="text-gray-500">ID: {{ matri.identificacion }}</div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                                    <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ matri.estudiante_estado ? 'Activo':'Inactivo'  }} </span>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
                             </div>
-                        
-                        </li>
+                        </div>
 
-                    </ul>
+                    </div>
 
                 </div>
-
 
             </div>
   
@@ -251,6 +252,10 @@
                 return Utilitie.format_tnumber(number)
             }
       
+            const firstLetter = (name)=>{
+                return name.charAt(0).toLowerCase() || 'default'
+            }
+
             //# computed
             const urlsf = computed(()=> Store.state.urlsf )
             const estudiantes = computed(()=> Store.state.estudiantes )
@@ -285,7 +290,8 @@
                 matriculas,
                 seccion,
                 filter_estudiante,
-                filter_identificacion        
+                filter_identificacion,
+                firstLetter
             
             }
       

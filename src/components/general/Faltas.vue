@@ -5,6 +5,8 @@
     
             <div class="w-full ml-2 p-1 rounded border border-gray-300 h-auto">
     
+                <p class="text-gray-500 text-center mt-3 font-semibold text-lg">Faltas</p>
+
                 <div class="pr-12 lg:pr-0 mt-0">
     
                     <div class="flex-1 lg:flex">

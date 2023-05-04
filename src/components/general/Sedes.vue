@@ -3,11 +3,14 @@
 
     <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
 
+        
         <div class="ml-2 p-1 rounded border border-gray-300 h-auto w-full">
-
+       
+            <p class="text-gray-500 mt-3 text-center font-semibold text-lg"> Sedes</p>
+            
             <div class="mt-4 flex space-x-2 px-2">
                 <p @click="seccion = 0" :class="seccion == 0 ? 'bg-indigo-800' : 'bg-indigo-300 text-gray-500'" class="shadow-gray-200 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
-                <p @click="seccion = 1" :class="seccion == 1 ? 'bg-indigo-800 text-gray-50' : 'bg-indigo-200'" class="shadow-gray-200 shadow-md w-10 cursor-pointer rounded text-center h-7 leading-6 text-gray-600 font-semibold text-md"> +</p>
+                <p @click="seccion = 1" :class="seccion == 1 ? 'bg-indigo-800 text-gray-50' : 'bg-indigo-200'" class="shadow-gray-200 shadow-md w-10 cursor-pointer rounded text-center h-7 leading-6 text-gray-400 font-semibold text-2xl"> +</p>
             </div>
 
             <hr class="mt-3 border border-gray-200" />

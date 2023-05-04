@@ -3,24 +3,21 @@
 
     <div class="">
         
- 
-        
         <div class="mt-2 min-h-full flex w-auto px-2 md:space-x-2">
 
+            <div class="ml-2 p-1 rounded border border-gray-200 h-auto w-full">
 
-            <div class="ml-2 p-1 rounded border border-gray-600 h-auto w-full">
+                <p class="text-gray-500 text-center mt-3 font-semibold text-lg">Logros <span v-if="asignatura.asignatura_id > 0">{{asignatura.nombre}} </span></p>
 
-                <p class="text-gray-500 text-center font-semibold text-lg">Logros <span v-if="asignatura.asignatura_id > 0">{{asignatura.nombre}} </span></p>
-
-                <div class="mt-3 space-y-2 lg:space-y-0 flex-1 lg:flex lg:space-x-2 px-2">
-                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Asignaturas</p>
-                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Logros</p>
+                <div class="mt-4 flex space-x-2 px-2">
+                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-indigo-800' : 'bg-indigo-300 text-gray-500'" class="shadow-gray-200 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Asignaturas</p>
+                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-indigo-800 text-gray-50' : 'bg-indigo-200'" class="shadow-gray-200 shadow-md w-32 cursor-pointer rounded text-center h-7 leading-6 text-gray-400 font-semibold text-md"> Logros</p>
                     <span v-if="seccion == 1" class="hidden lg:inline-flex text-cyan-500 font-semibold"> | </span>
                     <p v-if="seccion == 1 && logros.length" @click="set_aprobado(true)" :class="aprobado ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-500 font-semibold text-md"> Aprobado</p>
                     <p v-if="seccion == 1 && logros.length" @click="set_aprobado(false)" :class="!aprobado ? 'bg-pink-800':'bg-pink-400' " class="shadow-pink-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-500 font-semibold text-md"> No Aprobado</p>
                 </div>
 
-                <hr class="mt-3 border border-gray-500" />
+                <hr class="mt-3 border border-gray-200" />
 
                 <!-- Asignaturas -->
                 <div v-if="seccion == 0" class="">

@@ -7,7 +7,7 @@
         
             <div class="ml-2 p-1 rounded border border-gray-300 h-auto w-full">
 
-                <p class="text-gray-500 text-center font-semibold text-lg"> Rectores</p>
+                <p class="text-gray-500 mt-3 text-center font-semibold text-lg"> Rectores</p>
 
                 <div class="flex w-full justify-between">
 
@@ -51,7 +51,6 @@
                                         <tr>
                                             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Nombres</th>
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Apellidos</th>
-
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado</th>
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Celular</th>
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Correo</th>
@@ -74,12 +73,12 @@
                                                 </div>
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div class="text-gray-900">{{ director.apellidos }}</div>
+                                                <div class="font-medium text-gray-900">{{ director.apellidos }}</div>
 
                                             </td>
 
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <span class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">Activo(a)</span>
+                                                <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="director.estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ director.estado ? 'Activo':'Inactivo'  }} </span>
                                             </td>
 
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">

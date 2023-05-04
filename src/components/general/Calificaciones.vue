@@ -2,8 +2,10 @@
 <div class="">
 
     <div class="mt-2 min-h-full flex px-2 md:space-x-2">
+        
+        <div class="w-full ml-2 rounded border border-gray-300 h-auto">
 
-        <div class="w-full ml-2 p-1 rounded border border-gray-300 h-auto">
+            <p class="text-gray-500 text-center mt-3 font-semibold text-lg">Calificaciones</p>
 
             <div class="pr-12 lg:pr-0 mt-0">
 
@@ -22,6 +24,8 @@
                 </div>
 
             </div>
+
+            <hr class="mt-3 border border-gray-200" />
 
             <!-- Calificaciones -->
             <div class="pr-12 lg:px-10 mx-auto mt-3 max-w-7xl w-full">
