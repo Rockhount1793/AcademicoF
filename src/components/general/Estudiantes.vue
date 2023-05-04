@@ -108,19 +108,19 @@
                 <div class="mt-3 p-2 flex-1 lg:grid grid-cols-2 lg:gap-2">
 
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Nombres</label>
+                        <label for="nombre" class="block text-sm font-medium leading-6 text-gray-900">Nombres</label>
                         <div class="relative mt-2 ">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                                 </svg>
                             </div>
-                            <input v-model="nombre" id="nombre" type="email" name="email" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Mis nombres" />
+                            <input v-model="nombre" id="nombre" type="text" name="nombre" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Mis nombres" />
                         </div>
                     </div>
 
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Apellidos</label>
+                        <label for="apellido" class="block text-sm font-medium leading-6 text-gray-900">Apellidos</label>
                         <div class="relative mt-2">
                             <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400">
@@ -128,7 +128,7 @@
                                 </svg>
 
                             </div>
-                            <input v-model="apellido" type="email" name="email" id="apellido" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Mis apellidos" />
+                            <input v-model="apellido" type="text" name="apellido" id="apellido" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Mis apellidos" />
                         </div>
                     </div>
 

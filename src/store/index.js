@@ -440,6 +440,14 @@ const store = createStore({
             const result = [ json, ...estudiantes ]
             this.commit('set_estudiantes', result)
 
+        },
+
+        update_asignatura(state, json){
+
+            const asignaturas = this.state.asignaturas.filter((e)=>e.asignatura_id != json.asignatura_id)
+            const result = [ ...asignaturas, json ]
+            this.commit('set_asignaturas', result)
+
         }
 
     }
