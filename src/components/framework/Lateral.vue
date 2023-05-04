@@ -76,7 +76,7 @@
   
 <script setup>
 
-  import { ref, watchEffect, watch, defineComponent, computed, getCurrentInstance } from "vue"
+  import { ref, watchEffect, watch, defineComponent, onMounted,nextTick, computed, getCurrentInstance } from "vue"
   import { useRoute, RouterLink, RouterView } from 'vue-router'
   import Store from "@/store"
   import Aplicacion from '@/controllers/Aplicacion'
@@ -132,5 +132,16 @@
     })
 
   })
+
+    onMounted(()=>{
+        
+        nextTick(()=>{
+            
+            Aplicacion.check_login(()=>{
+            })
+
+        })
+
+    })
 
   </script>

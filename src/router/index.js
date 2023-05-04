@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Layout from '@/components/layouts/Default.vue'
+import Dashboard from '@/components/layouts/Default.vue'
 import Error from '@/views/Error.vue'
 
 const router = createRouter({
@@ -7,11 +7,15 @@ const router = createRouter({
     history: createWebHistory(),
     
     routes: [
-
         {
             path: '/',
-            name: 'Layout',
-            component: Layout,
+            name: 'Bienvenida',
+            component: () => import('@/views/Bienvenida.vue')
+        },
+        {
+            path: '/dashboard',
+            name: 'Dashboard',
+            component: Dashboard,
             children:[
                 {
                     path: '/',

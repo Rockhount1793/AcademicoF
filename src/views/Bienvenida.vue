@@ -1,7 +1,7 @@
 
 <template>
 
-    <div class="h-auto min-h-screen relative max-w-8xl ">
+    <div class="h-auto min-h-screen relative bg-gradient-to-r from-gray-700  to-gray-900 max-w-8xl ">
         
         <BarraInicio></BarraInicio>
         
@@ -22,7 +22,7 @@
                 </div>
   
                 <div class="z-0 opacity-90 fixed mx-auto w-4/5 sm:w-4/6 lg:w-3/6 xl:w-3/6 2xl:w-2/6 max-w-2xl">
-                    <img title="logo" class="mx-auto w-full" :src="urlsf+'/images/logo.svg'" />
+                    <img class="transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6 mx-auto w-full" :src="urlsf+'/images/logo.svg'" />
                 </div>
   
             </div>
@@ -82,7 +82,7 @@
             this.$nextTick(()=>{
                 
                 Aplicacion.check_login(()=>{
-                    Router.push({'name':'Sedes'})
+                    Router.push({'name':'Dashboard'})
                 })
 
             })

@@ -80,7 +80,7 @@
                 }
                 
                 Store.commit('set_seccion_num',[1,0])
-                Router.push({ 'name':'Sedes' })
+                Router.push({ 'name':'Dashboard' })
 
             }else{
                 this.redirect_home(response)
@@ -130,7 +130,7 @@
                 }else{
                     
                     if(Router.currentRoute.value.name != 'Entrar'){
-                        this.redirect_home('','Entrar')
+                        this.redirect_home('','Bienvenida')
                     }
                 
                 }
