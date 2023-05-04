@@ -1,5 +1,5 @@
 <template>
-    <div class="h-auto min-h-screen relative max-w-8xl ">
+    <div class="h-auto min-h-screen relative bg-gradient-to-r from-gray-700  to-gray-900 max-w-8xl ">
       
         <BarraInicio></BarraInicio>
   
@@ -15,9 +15,9 @@
                 </h1>
   
                 <form class="bg-gray-900 z-10 opacity-75 w-full shadow-lg rounded-lg px-8 pt-10 pb-3">
-                    <div class="mb-4">
+                    <div class="mb-4 text-white">
   
-                        Error
+                        Ir a la pagina de Bienvenida
   
                     </div>
   

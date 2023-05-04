@@ -9,7 +9,7 @@
   
                 <h1 class="my-4 z-10 text-3xl md:text-5xl text-white opacity-75 font-bold leading-tight text-center">
                     Iniciar
-                    <span class="bg-clip-text ml-2 text-transparent bg-gradient-to-r from-pink-400  to-pink-600">
+                    <span class="bg-clip-text ml-2 text-transparent bg-gradient-to-r from-indigo-400  to-indigo-600">
                         Sesión
                     </span>
                 </h1>
@@ -21,18 +21,18 @@
                         <input id="email" name="email" autocomplete="on" v-model="email" placeholder="usuario" type="text" class="text-center mt-2 border rounded w-full p-2 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" />
     
                         <label for="password" class="sr-only">contraseña</label>
-                        <input id="password" name="password" v-model="password" autocomplete="current-password" placeholder="contraseña" type="password" class="text-center mt-2 border rounded w-full p-2 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" />
+                        <input id="password" name="password" @keyup.enter="entrar()" v-model="password" autocomplete="current-password" placeholder="contraseña" type="password" class="text-center mt-2 border rounded w-full p-2 text-gray-700 leading-tight focus:ring transform transition hover:scale-105 duration-300 ease-in-out" />
   
                         <div class="flex mt-3 items-center justify-between">
                             <div class="flex items-center">
-                                <input id="remember-me" name="remember-me" v-model="sesion" type="checkbox" class="h-4 w-4 text-pink-600 rounded" />
-                                <label for="remember-me" class="ml-2 block text-sm text-pink-500">
+                                <input id="remember-me" name="remember-me" v-model="sesion" type="checkbox" class="h-4 w-4 text-indigo-600 rounded" />
+                                <label for="remember-me" class="ml-2 block text-sm text-indigo-500">
                                   Mantener sesión iniciada
                                 </label>
                             </div>
      
                             <div class="text-sm">
-                                <Link to="recovery" class="font-medium text-pink-500 hover:text-pink-300">
+                                <Link to="recovery" class="font-medium text-indigo-500 hover:text-indigo-300">
                                   ¿Olvido su contraseña?
                                 </Link>
                             </div>
@@ -42,7 +42,7 @@
                     </div>
   
                     <div class="cursor-pointer flex items-center pt-4">
-                        <button @click="entrar()" type="button" id="btn-continuar" class="mx-auto bg-gradient-to-r from-pink-800 to-pink-500 hover:from-pink-500 hover:to-cyan-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out">
+                        <button @click="entrar()" type="button" id="btn-continuar" class="mx-auto bg-gradient-to-r from-indigo-800 to-indigo-500 hover:from-indigo-500 hover:to-cyan-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out">
                             Continuar
                         </button>
                     </div>
@@ -102,7 +102,7 @@
             this.$nextTick(()=>{
                 
                 Aplicacion.check_login(()=>{
-                    Router.push({'name':'Dashboard'})
+                    Router.push({'name':'Inicio'})
                 })
 
             })

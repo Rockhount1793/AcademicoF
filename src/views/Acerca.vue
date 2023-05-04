@@ -12,12 +12,15 @@
                     <span>Acerca</span>
                 </h1>
   
-                <div class="bg-gray-800 z-10 opacity-75 w-full shadow-lg rounded-lg px-8">
+                <div class="bg-gray-900 z-10 opacity-75 w-full shadow-lg rounded-lg px-8">
     
                     <div class="flex-1 text-sm text-gray-500 items-center p-3">
     
-                        <h2 class="text-center">versión {{ version}}</h2>
-                        <h2 class="text-center text-lg font-semibold text-pink-500">2023 - Leo Caicedo</h2>
+                        <h2 class="text-center text-gray-300">{{ version}}</h2>
+                        <h2 class="text-center text-lg font-semibold text-pink-500">Rockhount™ 2023</h2>
+                        <div class="text-center">
+                            <a class="text-blue-500 underline" target="_blank" href="https://t.me/rockhount">@Telegram</a>
+                        </div>
     
                     </div>
     

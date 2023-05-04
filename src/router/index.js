@@ -8,18 +8,18 @@ const router = createRouter({
     
     routes: [
         {
-            path: '/',
+            path: '/home',
             name: 'Bienvenida',
             component: () => import('@/views/Bienvenida.vue')
         },
         {
-            path: '/dashboard',
+            path: '/',
             name: 'Dashboard',
             component: Dashboard,
             children:[
                 {
                     path: '/',
-                    name:'',
+                    name:'Inicio',
                     component: () => import('@/components/general/Inicio.vue'),
                     
                 },

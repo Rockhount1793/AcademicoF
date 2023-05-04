@@ -97,8 +97,6 @@
     RocketLaunchIcon
   } from '@heroicons/vue/24/outline'
   
-  const sidebarOpen = ref(false)
-
   const navigation = ref([
     { name: 'Inicio', href: '/', icon: HomeIcon, current: true },
     { name: 'Calificaciones', href: '/calificaciones', icon: PencilSquareIcon, current: false },

@@ -17,7 +17,7 @@
         'redirect_home': function(error, redirect){
         
             if(Config.status === 'development'){
-                console.log(error)
+               console.log(error)
             }
 
             localStorage.removeItem('token')
@@ -80,7 +80,7 @@
                 }
                 
                 Store.commit('set_seccion_num',[1,0])
-                Router.push({ 'name':'Dashboard' })
+                Router.push({ 'name':'Inicio' })
 
             }else{
                 this.redirect_home(response)
@@ -190,7 +190,7 @@
             await Store.dispatch('clear_data_sesion')
             .then((res)=>{
                 if(res){
-                    Router.push({'name':'Entrar'})
+                    Router.push({'name':'Bienvenida'})
                 }
             })
             .catch((err)=>{

@@ -82,7 +82,7 @@
             this.$nextTick(()=>{
                 
                 Aplicacion.check_login(()=>{
-                    Router.push({'name':'Dashboard'})
+                    Router.push({'name':'Inicio'})
                 })
 
             })
