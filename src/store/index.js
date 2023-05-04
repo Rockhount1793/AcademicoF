@@ -410,10 +410,10 @@ const store = createStore({
 
         },
 
-        update_docente(state, docente){
+        update_docente(state, json){
                 
-            let docentes = this.state.docentes
-            const result = docentes.map(d => d.docente_id === docente.docente_id ? docente : d)
+            let docentes = this.state.docentes.filter((e)=>e.docente_id != json.docente_id)
+            const result = [ json, ...docentes ]
             this.commit('set_docentes',result)
     
         },

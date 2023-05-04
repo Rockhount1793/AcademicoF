@@ -72,7 +72,6 @@
 
             if(response.error === 0){
               Store.dispatch('update_estudiante',json)
-              alert('estudiante actualizado!')
             }
 
             if(response.error == 500){

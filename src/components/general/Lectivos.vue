@@ -1,5 +1,6 @@
 
 <template>
+<div class="mx-auto">
         
     <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
 
@@ -73,7 +74,7 @@
         </div>
   
     </div>
-
+</div>
 </template>
   
 <script>

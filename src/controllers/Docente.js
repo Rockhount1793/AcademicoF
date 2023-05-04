@@ -1,7 +1,6 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
 
     const Controller = {
@@ -41,16 +40,12 @@
             
         },
 
-        'update': async function(docente){
+        'update': async function(json){
 
-            const response = await Fetch.put('/docente/'+docente.docente_id, docente)
+            const response = await Fetch.put('/docente/update', json)
 
             if(response.error === 0){
-                Store.dispatch('update_docente',response.updatedDocente)
-            }
-
-            if(response.error == 400){
-                alert(response.message)
+                Store.dispatch('update_docente',json)
             }
 
             if(response.error == 500){

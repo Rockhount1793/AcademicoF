@@ -1,8 +1,7 @@
 <template>
-<div class="container mx-auto">
+<div class="mx-auto">
 
     <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
-
         
         <div class="ml-2 p-1 rounded border border-gray-300 h-auto w-full">
        
