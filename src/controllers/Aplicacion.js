@@ -14,22 +14,13 @@
         'loading': function(boolean){ Store.commit('set_loading',boolean) },
         'mini_loading': function(boolean){ Store.commit('set_mini_loading',boolean) },
 
-        'redirect_home': function(error, redirect){
+        'redirect_end_sesion': function(error){
         
             if(Config.status === 'development'){
                console.log(error)
             }
 
-            localStorage.removeItem('token')
-            Store.commit('set_login',false)
-            Store.commit('set_seccion_num',[0,0])
-            Store.commit('set_usuario',{'usuario_id':0, 'avatar': 'default.png'})
-
-            if(redirect != undefined){
-                Router.push({'name': redirect})
-            }else{
-                Router.push({'name': 'Entrar'})
-            }
+            this.cerrar_sesion()
 
             //this.loading(false)
             //this.mini_loading(false)
@@ -83,7 +74,7 @@
                 Router.push({ 'name':'Inicio' })
 
             }else{
-                this.redirect_home(response)
+                this.redirect_end_sesion(response)
             }
 
             if(response.error == 403){
@@ -123,14 +114,14 @@
     
                     if(response.error > 0){
     
-                        this.redirect_home(response)
+                        this.redirect_end_sesion(response)
                 
                     }
     
                 }else{
                     
                     if(Router.currentRoute.value.name != 'Entrar'){
-                        this.redirect_home('','Bienvenida')
+                        this.redirect_end_sesion('fail check login')
                     }
                 
                 }

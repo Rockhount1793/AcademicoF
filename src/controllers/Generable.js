@@ -39,7 +39,7 @@
             }
 
             if(response.error === 500){
-                Aplicacion.redirect_home(response)
+                Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -73,7 +73,7 @@
             }
 
             if(response.error === 500){
-                Aplicacion.redirect_home(response)
+                Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -101,7 +101,7 @@
             }
 
             if(response.error === 500){
-                Aplicacion.redirect_home(response)
+                Aplicacion.redirect_end_sesion(response)
             }
 
 
