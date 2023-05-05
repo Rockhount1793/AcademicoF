@@ -5,7 +5,7 @@
 
     const Controller = {
 
-        'index': async function(cb){
+        'index': async function(){
 
             let json = Store.state.actual_sede
 
@@ -13,7 +13,6 @@
 
             if(response.error === 0){
                 Store.commit('set_docentes', response.docentes)
-                cb()
             }
 
             if(response.error == 500){

@@ -287,7 +287,7 @@
                 if(value.grado_id > 0) {
                     Asignatura.index(()=>{
                         if (!Store.state.docentes.length) {
-                            Docente.index(() => {})
+                            Docente.index()
                         }
                     })
                 }
@@ -322,7 +322,7 @@
                                     
                         Asignatura.index(()=>{
                             if (!Store.state.docentes.length) {
-                                Docente.index(() => {})
+                                Docente.index()
                             }
                         })
 

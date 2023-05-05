@@ -36,8 +36,8 @@
                 cb()
             }
 
-            if(response.error == 400){
-                alert(response.message)
+            if(response.status){
+                alert("Matricula ya existe")
             }
 
             if(response.error == 500){
@@ -47,6 +47,20 @@
         },
 
         'delete': async function(json){
+            
+            const response = await Fetch.delete('/matricula/delete',json)
+            
+            if(response.error === 0){
+                Store.dispatch('remove_matricula',json)
+            }
+
+            if(response.error == 400){
+                alert(response.message)
+            }
+
+            if(response.error == 500){
+                Aplicacion.redirect_end_sesion(response)
+            }
             
         }
 

@@ -1,17 +1,36 @@
 
 <template>
+    <Ventana :elemento="matricula_eliminar" @control_acceso="delete_" v-if="ventana_confirmacion">
+        <template v-slot:dialog>
+            <div class="px-2 font-semibold">
 
+                <h5 class="pb-1 text-center text-pink-500">Detalle de matricula a eliminar</h5>
+
+                <h5>{{ matricula_eliminar.nombres }} {{ matricula_eliminar.apellidos }}</h5>
+                <h5><span class="text-gray-400">ID:</span> {{ matricula_eliminar.identificacion }}</h5>
+                <h5><span class="text-gray-400">Grado:</span> {{ actual_grado.nombre }}</h5>
+                <h5><span class="text-gray-400">Lectivo:</span> {{ actual_lectivo.numero }}</h5>
+                <h5><span class="text-gray-400">Sede:</span> {{ actual_sede.nombre }}</h5>
+                
+            </div>
+        </template>
+    </Ventana>
     <div class="">
     
         <div class="mt-2 h-5/6 flex w-auto px-2 md:space-x-2">
 
             <div class="ml-2 p-1 rounded border border-gray-200 h-auto w-full">
 
-                <p class="text-gray-500 mt-3 text-center font-semibold text-lg">Matriculas <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span></p>
+                <p class="text-gray-500 mt-3 text-center font-semibold text-lg">
+                    Matriculas
+                    <span v-if="actual_grado.grado_id > 0">
+                        <span class="text-indigo-600">{{actual_grado.nombre}}</span>
+                    </span>
+                </p>
 
                 <div class="mt-4 flex space-x-2 px-2">
-                    <p @click="seccion = 0" :class="seccion == 0 ? 'bg-indigo-800' : 'bg-indigo-300 text-gray-500'" class="shadow-gray-200 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
-                    <p @click="seccion = 1" :class="seccion == 1 ? 'bg-indigo-800 text-gray-50' : 'bg-indigo-200'" class="shadow-gray-200 shadow-md w-10 cursor-pointer rounded text-center h-7 leading-6 text-gray-400 font-semibold text-2xl"> +</p>
+                    <p @click="set_seccion(0)" :class="seccion == 0 ? 'bg-indigo-800' : 'bg-indigo-300 text-gray-500'" class="shadow-gray-200 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md"> Lista</p>
+                    <p @click="set_seccion(1)" :class="seccion == 1 ? 'bg-indigo-800 text-gray-50' : 'bg-indigo-200'" class="shadow-gray-200 shadow-md w-10 cursor-pointer rounded text-center h-7 leading-6 text-gray-400 font-semibold text-2xl"> +</p>
                 </div>
 
                 <hr class="mt-3 border border-gray-200" />
@@ -76,7 +95,7 @@
 
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">
                                                     <div class="w-full h-9 truncate">
-                                                        <button title="eliminar matricula" @click="delete_(matri)" class="mt-0.5 h-7 px-2 rounded shadow shadow-pink-500 bg-pink-400  hover:bg-pink-600 font-semibold">
+                                                        <button title="eliminar matricula" @click="abrir_ventana_conf(matri)" class="mt-0.5 h-7 px-2 rounded shadow shadow-pink-500 bg-pink-400  hover:bg-pink-600 font-semibold">
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-7 h-7">
                                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                             </svg>                                          
@@ -209,7 +228,8 @@
 </template>
   
 <script>
-  
+
+    import Ventana from "@/components/framework/Ventana_Emergente.vue"
     import Barra from "@/components/framework/Barra.vue"
     import Lateral from "@/components/framework/Lateral.vue"
     import SelectorDirector from "@/components/framework/Selector_Docente.vue"
@@ -227,28 +247,52 @@
         'name':'Matriculas',
 
         'components':{
-            Barra, Lateral, SelectorDirector, SelectorGrado, SelectorEstudiante
+            Ventana, Barra, Lateral, SelectorDirector, SelectorGrado, SelectorEstudiante
         },
 
-        setup(){
+        setup(props, {emit}){
         
             //# data 
-            let identificacion_ = ref('')
-            let estudiante = ref({'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': '0'})
-            let tipo_numero = ref(0)
-            let tipos = ref([
+            const seccion = ref(0)
+            const errores = ref([])
+            const ventana_confirmacion = ref(false)
+            const identificacion_ = ref('')
+            const estudiante = ref({'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': '0'})
+            const tipo_numero = ref(0)
+            const tipos = ref([
                 {"tipo": 0, "nombre":"Inicial", "color":"text-teal-500"},
                 {"tipo": 1, "nombre":"Extraordinario", "color":"text-yellow-500"},
                 {"tipo": 2, "nombre":"Traslado", "color":"text-blue-500"},
                 {"tipo": 3, "nombre":"Desertor", "color":"text-red-500"}
             ])
-            let seccion = ref(0)
-            let errores = ref([])
 
-            //# methods
+            const matricula_eliminar = ref({})
+            
+            //# methods 
 
-            const delete_ = (matricula_)=>{
-               // Matricula.delete(matricula_)
+            const set_seccion = (num)=>{
+                seccion.value = num
+                
+                if(num == 1) Store.commit('set_actual_estudiante',{'estudiante_id': 0, 'nombres': '', 'identificacion': 0})
+            }
+
+            const abrir_ventana_conf = (json)=>{
+                matricula_eliminar.value = json
+                ventana_confirmacion.value = true
+            }
+
+            const delete_ = (res)=>{
+
+                const { status, password } = res
+                
+                if(status){
+                    matricula_eliminar.value.password = password
+                    Matricula.delete(matricula_eliminar.value)
+                    matricula_eliminar.value = {}
+                }
+
+                ventana_confirmacion.value = false
+
             }
 
             const guardar = ()=>{
@@ -307,14 +351,14 @@
                     estudiante.value = {'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': ''}
 
                     Estudiante.index_identificacion({
-                        
+
                         'identificacion': Number(identificacion_.value),
                         'sede_id': actual_sede.value.sede_id
-    
+
                     },(response)=>{
 
                         estudiante.value = response.estudiante
-                        
+
                     })
 
                 }else{
@@ -329,6 +373,15 @@
       
             const firstLetter = (name)=>{
                 return name.charAt(0).toLowerCase() || 'default'
+            }
+
+            const verfificar_matriculas = ()=>{
+                
+                if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
+                                    
+                    Matricula.index(()=>{})
+            
+                }
             }
 
             //# computed
@@ -346,7 +399,7 @@
 
             watch(actual_grado,(value) => {
 
-                if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
+                if(value.grado_id > 0 ) {
                     
                     Matricula.index(()=>{})
                 
@@ -356,6 +409,7 @@
 
             return {
                 urlsf,
+                ventana_confirmacion,
                 delete_,
                 identificacion_,
                 tipos,
@@ -370,7 +424,11 @@
                 filter_estudiante,
                 get_estudiante,
                 filter_identificacion,
-                firstLetter
+                firstLetter,
+                abrir_ventana_conf,
+                matricula_eliminar,
+                set_seccion,
+                verfificar_matriculas
             }
       
         },
@@ -378,18 +436,9 @@
         mounted(){
             
             this.$nextTick(()=>{
-                
+
                 Aplicacion.check_login(()=>{
-
-                    Store.commit('set_actual_estudiante',{'estudiante_id': 0, 'nombres': '', 'identificacion': 0})
-
-                    if(!Store.state.matriculas.length && this.actual_grado.grado_id > 0 && this.actual_sede.sede_id > 0 && this.actual_lectivo.lectivo_id > 0){
-                                    
-                        Matricula.index(()=>{
-                        })
-
-                    }
-
+                    this.verfificar_matriculas()
                 })
 
             })

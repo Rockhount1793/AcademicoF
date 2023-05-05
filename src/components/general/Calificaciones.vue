@@ -164,6 +164,15 @@ export default defineComponent({
             return Utilitie.format_tnumber(number)
         }
 
+        const verfificar_matriculas = ()=>{
+                
+            if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
+                                    
+                Matricula.index(()=>{})
+            
+            }
+        }
+
         //###### computed
         const urlsf = computed(() => Store.state.urlsf)
         const calificaciones = computed(() => Store.state.calificaciones)
@@ -249,7 +258,8 @@ export default defineComponent({
             actual_asignatura,
             actual_grado,
             filter_identificacion,
-            update_calificacion
+            update_calificacion,
+            verfificar_matriculas
 
         }
 
@@ -261,11 +271,7 @@ export default defineComponent({
 
             Aplicacion.check_login(() => {
 
-                if (Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0) {
-
-                    Matricula.index(() => {})
-
-                }
+                this.verfificar_matriculas()
 
                 if (Store.state.matriculas.length && Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0) {
 

@@ -345,6 +345,7 @@ const store = createStore({
 
         },
 
+        //#sedes
         add_sede(state, json){
             
             let sedes = this.state.sedes
@@ -353,6 +354,7 @@ const store = createStore({
         
         },
 
+        //# lectivos
         add_lectivo(state, json){
             
             let lectivos = this.state.lectivos
@@ -361,6 +363,7 @@ const store = createStore({
         
         },
 
+        //# grados
         add_grado(state, json){
             
             let grados = this.state.grados
@@ -369,6 +372,7 @@ const store = createStore({
 
         },
 
+        //# asignaturas 
         add_asignatura(state,json){
 
             let asignaturas = this.state.asignaturas
@@ -377,6 +381,7 @@ const store = createStore({
 
         },
 
+        //# faltas
         add_falta(state,json){
 
             let faltas = this.state.faltas
@@ -385,6 +390,7 @@ const store = createStore({
 
         },
 
+        // # matriculas
         add_matricula(state,json){
 
             let matriculas = this.state.matriculas
@@ -393,6 +399,14 @@ const store = createStore({
 
         },
 
+        remove_matricula(state, json){
+
+            const result = this.state.matriculas.filter((e)=>e.matricula_id != json.matricula_id)
+            this.commit('set_matriculas', result)
+
+        },
+
+        // # estudiantes
         add_estudiante(state, json){
 
             let estudiantes = this.state.estudiantes
@@ -401,6 +415,7 @@ const store = createStore({
 
         },
 
+        //# Docentes
         add_docente(state, json){
 
             let directores = this.state.docentes
@@ -417,6 +432,7 @@ const store = createStore({
     
         },
 
+        //# personas
         add_persona(state, json){
             
             let personas = this.state.personas
@@ -425,6 +441,7 @@ const store = createStore({
         
         },
 
+        //# directores
         add_director(state, json){
             
             let directores = this.state.directores
@@ -448,6 +465,7 @@ const store = createStore({
             this.commit('set_asignaturas', result)
 
         }
+
 
     }
 

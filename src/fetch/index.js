@@ -193,8 +193,45 @@
 
             return res
 
-        }
+        },
         
+        'delete': async function(ext, body){
+            let options = {
+            
+                method: 'DELETE',
+
+                headers: {
+                    'Accept': "application/json",
+                    'Content-Type': "application/json;charset=UTF-8",
+                },
+
+                body: JSON.stringify(body)
+
+            }
+
+            options.headers[ Config.get('app','token_header_key') ] = this.token()
+            
+            Aplicacion.loading(true)
+
+            const res = await fetch(_urlsb() + '/api' + ext , options)
+            .then((response) => response.json())
+            .then((data) => {
+                
+                return data
+
+            })
+            .catch((error) => {
+
+                console.log(error)
+                console.error('timeout exceeded') 
+                return {'error': 500 }
+
+            }).finally(()=>{
+                Aplicacion.loading(false)
+            })
+
+            return res
+        }
     }
 
     export default request

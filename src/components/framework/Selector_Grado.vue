@@ -119,7 +119,7 @@
                     
                     if(!Store.state.grados.length){ 
                         Grado.index(()=>{
-                           // if(!Store.state.docentes.length){ Docente.index(()=>{}) }
+                           // if(!Store.state.docentes.length){ Docente.index() }
                         }) 
                     }
                 

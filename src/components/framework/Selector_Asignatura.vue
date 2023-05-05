@@ -119,7 +119,7 @@
                     
                     if(!Store.state.asignaturas.length){ 
                         Asignatura.index(()=>{
-                            if(!Store.state.docentes.length){ Docente.index(()=>{}) }
+                            if(!Store.state.docentes.length){ Docente.index() }
                         }) 
                     }
                 

@@ -161,6 +161,15 @@
                 return Utilitie.format_tnumber(number)
             }
     
+            const verfificar_matriculas = ()=>{
+                
+                if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
+                                    
+                    Matricula.index(()=>{})
+            
+                }
+            }
+
             //###### computed
             const urlsf = computed(() => Store.state.urlsf)
             const calificaciones = computed(() => Store.state.calificaciones)
@@ -246,7 +255,8 @@
                 actual_asignatura,
                 actual_grado,
                 filter_identificacion,
-                update_falta   
+                update_falta,
+                verfificar_matriculas
             }
     
         },
@@ -257,13 +267,9 @@
     
                 Aplicacion.check_login(() => {
     
-                    if (Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0) {
+                    this.verfificar_matriculas()
     
-                        Matricula.index(() => {})
-    
-                    }
-    
-                    if (Store.state.matriculas.length && Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0) {
+                    if (Store.state.matriculas.length && Store.state.actual_grado.grado_id > 0) {
     
                         Calificacion.index_matriculas(() => {
                             Store.commit('set_actual_periodo', { 'periodo': 1, 'nombre': 'Primero' })

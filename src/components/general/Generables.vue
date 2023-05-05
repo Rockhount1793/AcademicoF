@@ -254,6 +254,15 @@
                 return name.charAt(0).toLowerCase() || 'default'
             }
 
+            const verfificar_matriculas = ()=>{
+                
+                if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
+                                    
+                    Matricula.index(()=>{})
+            
+                }
+            }
+
             //# computed
             const urlsf = computed(()=> Store.state.urlsf )
             const estudiantes = computed(()=> Store.state.estudiantes )
@@ -289,10 +298,11 @@
                 seccion,
                 filter_estudiante,
                 filter_identificacion,
-                firstLetter
-            
+                firstLetter,
+                verfificar_matriculas
+
             }
-      
+
         },
     
         mounted(){
@@ -300,13 +310,7 @@
             this.$nextTick(()=>{
                 
                 Aplicacion.check_login(()=>{
-
-                    if(!Store.state.matriculas.length && this.actual_grado.grado_id > 0 && this.actual_sede.sede_id > 0 && this.actual_lectivo.lectivo_id > 0){
-                                    
-                        Matricula.index(()=>{})
-
-                    }
-
+                    this.verfificar_matriculas()
                 })
 
             })
