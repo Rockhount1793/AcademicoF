@@ -85,7 +85,7 @@
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
                         <p class="font-semibold text-gray-500 text-md px-2" for="nombre">Nombre / Referencia</p>
-                        <input v-model="nombre" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center placeholder:text-gray-300 rounded w-full" id="numero"  type="text" placeholder=" Preescolar A"/>
+                        <input v-model="nombre" class="appearance-none shadow focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center placeholder:text-gray-300 rounded w-full" id="numero"  type="text" placeholder=" Preescolar A"/>
                     </div>
 
                    <!--<div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
@@ -94,13 +94,13 @@
                     </div>-->
 
                     <div class="flex-1 mx-auto py-2 w-full lg:w-1/2">
-                        <p class="font-semibold text-gray-500 text-md px-2" for="director">Director</p>
+                        <p class="font-semibold text-gray-500 text-md px-2" for="director">Director de grado</p>
                         <SelectorDirector @set_director="set_director" class="mx-auto"></SelectorDirector>
                     </div>
                     
 
                     <div class="mx-auto w-1/2">
-                        <button @click="guardar()" class="mx-auto mt-3 h-7 shadow-md w-full lg:w-32 shadow-pink-500 rounded float-right bg-pink-800 text-gray-500 px-2">
+                        <button @click="guardar()" class="mx-auto mt-3 h-7 shadow w-full lg:w-32 shadow-indigo-500 rounded float-right bg-indigo-800 text-gray-50 px-2">
                             Guardar
                         </button>
                     </div>

@@ -21,7 +21,6 @@
                // Aplicacion.redirect_home(response)
             }
 
-
         },
 
         'index_identificacion': async function(json, cb){

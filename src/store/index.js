@@ -71,6 +71,7 @@ const store = createStore({
             actual_periodo: { 'periodo': 0, 'nombre': 'Periodo' },
             actual_generable: { 'recurso': 0, 'nombre': 'Generable' },
             actual_asignatura: { 'asignatura_id': 0, 'nombre': '', 'ih': 0, 'hcd': 0 },
+            actual_estudiante: {'estudiante_id': 0, 'nombres': '', 'identificacion': 0},
             lectivos: [],
             grados:[],
             logros:[],
@@ -189,8 +190,11 @@ const store = createStore({
 
         set_boletin(state,json){ 
             state.boletin = json
-        }
+        },
 
+        set_actual_estudiante(state,json){
+            state.actual_estudiante = json
+        }
     },
 
     actions:{
@@ -202,14 +206,7 @@ const store = createStore({
 
                 if(res){
 
-                    //Utilities.set_config({"sede_id": json.sede_id})
-
                     let usuario =  this.state.usuario
-                    console.debug("sede llegando al store", usuario);
-                    console.debug(typeof usuario);
-
-
-                    
                     usuario.configuracion.sede_id = json.sede_id
                     usuario.configuracion['nombre_sede'] = json['nombre']
                     usuario.configuracion['numero_lectivo'] = 0

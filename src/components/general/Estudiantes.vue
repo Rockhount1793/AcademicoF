@@ -26,7 +26,7 @@
 
             </div>
 
-            <hr class="mt-3 border border-gray-200" />
+            <hr class="mt-2 border border-gray-200" />
 
             <!-- listado -->
             <div v-if="seccion == 0" class="overflow-y-auto">

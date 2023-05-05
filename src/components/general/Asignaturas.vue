@@ -16,7 +16,7 @@
 
                 <hr class="mt-3 border border-gray-200" />
 
-                <div v-if="asignatura.asinatura_id == 0" class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                <div v-if="asignatura.asinatura_id == 0" class="flex-1 mx-auto mt-2 py-2 w-full lg:w-1/2 px-2 lg:px-1">
                     <p class="font-semibold text-gray-500 text-md px-2">Grado</p>
                     <SelectorGrado class="mx-auto"></SelectorGrado>
                 </div>
@@ -24,8 +24,6 @@
                 <div v-else class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
                     <p class="font-semibold text-gray-500 text-md px-2">Editar Asignatura</p>
                 </div>
-
-                <hr class="mt-3 border border-gray-200" />
 
                 <div v-if="seccion == 0" class="mt-3">
 

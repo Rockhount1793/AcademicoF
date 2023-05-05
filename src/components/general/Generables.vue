@@ -3,31 +3,31 @@
 
     <div class="">
         
-        <div class="mt-2 min-h-full flex w-auto px-2 md:space-x-2">
+        <div class="mt-2 min-h-full w-auto px-2 md:space-x-2">
 
-            <div class="ml-2 p-1 rounded border border-gray-300 h-auto w-full">
+            <div class="ml-2 p-1 rounded border border-gray-300 h-auto">
 
                 <p class="text-gray-500 mt-3 text-center font-semibold text-lg">Generables Grado <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span></p>
 
                 <hr class="mt-3 border border-gray-200" />
 
-                <div class="lg:flex lg:space-x-3 flex-1 py-2 w-full lg:w-1/4 px-2 lg:px-1">
+                <div class="flex flex-1 py-2 mx-auto">
 
-                    <div class="flex-1 lg:flex gap-3">
+                    <div class="flex-1 lg:flex px-2 lg:px-10 lg:space-x-10">
 
                         <div class="flex-1 mt-2">
-                            <p class="font-semibold text-gray-500 text-md px-3">Grado</p>
-                            <SelectorGrado class="mx-auto w-full lg:w-64"></SelectorGrado>
+                            <p class="font-semibold text-gray-500 text-md">Grado</p>
+                            <SelectorGrado class="mx-auto w-full"></SelectorGrado>
                         </div>
                         
                         <div class="flex-1 mt-2">
                             <p class="font-semibold text-gray-500 text-md px-2">Periodo</p>
-                            <SelectorPeriodo class="mx-auto w-full lg:w-64"></SelectorPeriodo>
+                            <SelectorPeriodo class="mx-auto w-full"></SelectorPeriodo>
                         </div>
 
                         <div class="flex-1 mt-2">
                             <p class="font-semibold text-gray-500 text-md px-2">Generable</p>
-                            <SelectorGenerable class="mx-auto w-full lg:w-64"></SelectorGenerable>
+                            <SelectorGenerable class="mx-auto w-full"></SelectorGenerable>
                         </div>
 
                     </div>
@@ -43,8 +43,6 @@
                     </div>
                     
                 </div>
-
-                <hr class="mt-3 border border-gray-200" />
 
                 <!-- Matriculas -->
                 <div v-if="seccion == 0" class="overflow-y-auto">

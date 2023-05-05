@@ -4,7 +4,6 @@
     <div class="">
     
         <div class="mt-2 h-5/6 flex w-auto px-2 md:space-x-2">
-            
 
             <div class="ml-2 p-1 rounded border border-gray-200 h-auto w-full">
 
@@ -17,13 +16,10 @@
 
                 <hr class="mt-3 border border-gray-200" />
 
-                <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                <div class="flex-1 mt-2 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
                     <p class="font-semibold text-gray-500 text-md px-2">Grado</p>
                     <SelectorGrado class="mx-auto"></SelectorGrado>
                 </div>
-
-                <hr class="mt-3 border border-gray-200" />
-
 
                 <!-- Matriculas -->
                 <div v-if="seccion == 0" class="overflow-y-auto">
@@ -31,7 +27,7 @@
                     <div class="px-0 sm:px-2 lg:px-4">
                     
                         <div v-if="!matriculas.length" class="sm:flex sm:items-center">
-                            <p class="px-2 font-semibold text-gray-500"> No hay matriculas creados</p>    
+                            <p class="px-2 font-semibold text-gray-500"> No hay matriculas creadas</p>    
                         </div>
                     
                         <div v-else class="mt-2">
@@ -92,23 +88,35 @@
 
                 <!-- Crear -->
                 <div v-if="seccion == 1" class="">
+
+                    <div class="">
+                        
+                        <!--
+                        <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                            <p class="font-semibold text-gray-500 text-md px-2">Buscar Identificación</p>
+                            <input v-model="identificacion_" class="placeholder:text-gray-300 appearance-none shadow focus:outline-none focus:ring-1 focus:ring-indigo-600 shadow-indigo-300 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="identificacion" type="text" placeholder="123456789"/>
+                        </div>
                     
-                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                        <p class="font-semibold text-gray-500 text-md px-2">Identificación Estudiante</p>
-                        <input v-model="identificacion_" class="appearance-none shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-600 shadow-blue-900 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="identificacion" type="text" placeholder=" Identificación estudiante"/>
+                        <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1 flow-root">
+                            <button @click="get_estudiante()" class="float-right w-64 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
+                                Consulta institucional
+                            </button>
+                        </div>
+                        -->
+
                     </div>
 
-                    <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1 flow-root">
-                        <button @click="get_estudiante()" class="float-right w-32 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-500 px-2">
-                            Consultar
-                        </button>
-                    </div>                    
+                    <div class="flex-1 mt-2 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                        <p class="font-semibold text-gray-500 text-md px-2">Estudiante</p>
+                        <SelectorEstudiante class="mx-auto"></SelectorEstudiante>
+                    </div>
+                    
 
                 </div>
-                
+
                 <div v-if="seccion == 1" class="mt-3 px-2 lg:w-1/2 mx-auto">    
                 
-                    <p class="font-semibold text-gray-500 text-md text-center">Detalle registro</p>
+                    <p class="font-semibold text-gray-500 text-lg text-center">Detalle registro</p>
 
                     <hr class="mb-3 border border-gray-500" />
 
@@ -147,7 +155,7 @@
                     <div class="flow-root flex-1 pb-2">
                         
                         <div class="float-right">
-                            <button @click="guardar()" class="w-64 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-500 px-2">
+                            <button @click="guardar()" class="w-64 mt-3 h-7 shadow shadow-pink-500 rounded bg-pink-800 text-gray-50 px-2">
                                 Matricular
                             </button>
                         </div>
@@ -170,10 +178,9 @@
     import Lateral from "@/components/framework/Lateral.vue"
     import SelectorDirector from "@/components/framework/Selector_Docente.vue"
     import SelectorGrado from "@/components/framework/Selector_Grado.vue"
-    import { RouterView } from "vue-router"
+    import SelectorEstudiante from "@/components/framework/Selector_Estudiante.vue"
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from "@/store"
-    import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
     import Matricula from "@/controllers/Matricula"
     import Estudiante from "@/controllers/Estudiante"
@@ -184,7 +191,7 @@
         'name':'Matriculas',
 
         'components':{
-            Barra, Lateral, SelectorDirector, SelectorGrado
+            Barra, Lateral, SelectorDirector, SelectorGrado, SelectorEstudiante
         },
 
         setup(){
@@ -290,7 +297,12 @@
             const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const actual_grado = computed(()=> Store.state.actual_grado )
+            const actual_estudiante = computed(()=> Store.state.actual_estudiante )
            
+            watch(actual_estudiante,(value) => {
+                estudiante.value = value
+            })
+
             watch(actual_grado,(value) => {
 
                 if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
@@ -328,9 +340,12 @@
                 
                 Aplicacion.check_login(()=>{
 
+                    Store.commit('set_actual_estudiante',{'estudiante_id': 0, 'nombres': '', 'identificacion': 0})
+
                     if(!Store.state.matriculas.length && this.actual_grado.grado_id > 0 && this.actual_sede.sede_id > 0 && this.actual_lectivo.lectivo_id > 0){
                                     
-                        Matricula.index(()=>{})
+                        Matricula.index(()=>{
+                        })
 
                     }
 
