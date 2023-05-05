@@ -31,7 +31,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Grado</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado</th>
+                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"></th>
                                             <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Acciones</th>
 
                                         </tr>
@@ -52,7 +52,7 @@
                                             </td>
                                             
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="grado.estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ grado.estado ? 'Activo':'Inactivo'  }} </span>
+
                                             </td>
                                             
                                             <td  class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">

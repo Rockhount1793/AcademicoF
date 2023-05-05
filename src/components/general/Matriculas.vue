@@ -38,6 +38,7 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Nombres</th>
+                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Tipo</th>
                                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado</th>
                                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Acciones</th>
                     
@@ -58,9 +59,19 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                    
+
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm">
-                                                    <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ matri.estado ? 'Activo':'Inactivo'  }} </span>
+
+                                                    <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="tipos.find(({tipo})=>tipo === matri.tipo).color">
+                                                        {{tipos.find(({tipo})=>tipo === matri.tipo).nombre}}
+                                                    </span>
+                                                
+                                                </td>
+                                                
+                                                <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                                    <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">
+                                                        {{ matri.estudiante_estado ? 'Activo':'Inactivo'  }}
+                                                    </span>
                                                 </td>
 
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">
@@ -110,6 +121,26 @@
                         <p class="font-semibold text-gray-500 text-md px-2">Estudiante</p>
                         <SelectorEstudiante class="mx-auto"></SelectorEstudiante>
                     </div>
+
+                    
+                    <div class="flex-1 mt-2 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                        <p class="font-semibold text-gray-500 text-md px-2">Tipo</p>
+                        <div class="relative">
+
+                            <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-gray-400">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.568 3H5.25A2.25 2.25 0 003 5.25v4.318c0 .597.237 1.17.659 1.591l9.581 9.581c.699.699 1.78.872 2.607.33a18.095 18.095 0 005.223-5.223c.542-.827.369-1.908-.33-2.607L11.16 3.66A2.25 2.25 0 009.568 3z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
+                                </svg>
+
+                            </div>
+
+                            <select id="genero_detalle" v-model="tipo_numero" class="w-full rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <option v-for="(item, index) in tipos" :key="index" :value="item.tipo">{{item.nombre}}</option>
+                            </select>
+
+                        </div>
+                    </div>
                     
 
                 </div>
@@ -148,6 +179,11 @@
                     <div class="flex-1 lg:flex py-1">
                         <p class="font-semibold text-gray-500 text-md px-2">Grado:</p>
                         <p class="font-semibold text-pink-500 text-md px-2">{{actual_grado.nombre}}</p>
+                    </div>
+
+                    <div class="flex-1 lg:flex py-1">
+                        <p class="font-semibold text-gray-500 text-md px-2">Tipo:</p>
+                        <p class="font-semibold text-pink-500 text-md px-2">{{tipos.find(({tipo})=>tipo === tipo_numero).nombre}}</p>
                     </div>
                     
                     <hr class="mt-3 border border-gray-500" />
@@ -200,7 +236,12 @@
             let identificacion_ = ref('')
             let estudiante = ref({'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': '0'})
             let tipo_numero = ref(0)
-            let tipos = ref({'tipo': 0, 'nombre':'Inicial'}, {'tipo': 1, 'nombre':'Extraordinario'}, {'tipo': 2, 'nombre':'Traslado'}, {'tipo': 3, 'nombre':'Desertor'})
+            let tipos = ref([
+                {"tipo": 0, "nombre":"Inicial", "color":"text-teal-500"},
+                {"tipo": 1, "nombre":"Extraordinario", "color":"text-yellow-500"},
+                {"tipo": 2, "nombre":"Traslado", "color":"text-blue-500"},
+                {"tipo": 3, "nombre":"Desertor", "color":"text-red-500"}
+            ])
             let seccion = ref(0)
             let errores = ref([])
 
@@ -229,7 +270,7 @@
                         'sede_id':  actual_sede.value.sede_id,
                         'lectivo_id': actual_lectivo.value.lectivo_id,
                         'grado_id': actual_grado.value.grado_id,
-                        'tipo': 0,
+                        'tipo': tipo_numero.value,
                         'estado': 1
                     
                     },()=>{
