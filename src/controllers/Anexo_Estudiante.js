@@ -1,7 +1,6 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
 
     const Controller = {
@@ -16,10 +15,9 @@
                 Store.commit('set_estudiantes', response.estudiantes)
             }
 
-            if(response.error === 500){
+            if(response.error == 500){
                Aplicacion.redirect_end_sesion(response)
             }
-
 
         },
 
@@ -32,28 +30,13 @@
             }
 
             if(response.error === 400){
-                alert(response.message)
-            }
-
-            if(response.error === 500){
-               Aplicacion.redirect_end_sesion(response)
-            }
-
-
-        },
-
-        'update': async function(json){
-
-            const response = await Fetch.put('/estudiante/update',json)
-
-            if(response.error === 0){
-               console.log(response)
+                Aplicacion.redirect_end_sesion("Estudiante no encontrado!") 
             }
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+               Aplicacion.redirect_end_sesion(response)
             }
-            
+
         }
 
     }

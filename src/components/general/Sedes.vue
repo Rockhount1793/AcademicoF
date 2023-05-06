@@ -30,9 +30,13 @@
                                 </div>
                                 <div>
 
-                                    <div v-if="actual_sede.sede_id == sede.sede_id" class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ">Sede actual</div>
+                                    <div v-if="actual_sede.sede_id == sede.sede_id" class="inline-flex items-center rounded-full bg-indigo-100 px-2.5 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 ">
+                                        Sede actual
+                                    </div>
 
-                                    <div v-else @click="set_sede(sede)" class="inline-flex items-center rounded-full bg-white px-2.5 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-indigo-400 hover:text-white hover:cursor-pointer">Seleccionar esta sede</div>
+                                    <div v-else @click="set_sede(sede)" class="inline-flex items-center rounded-full bg-white px-2.5 py-2 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-indigo-400 hover:text-white hover:cursor-pointer">
+                                        Seleccionar esta sede
+                                    </div>
 
                                 </div>
                             </div>
@@ -140,8 +144,6 @@ export default defineComponent({
         }
 
         const set_sede = (json) => {
-
-            console.debug('Sede', { sede: json })
             Store.dispatch('change_sede', json)
         }
 

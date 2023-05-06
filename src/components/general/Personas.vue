@@ -174,7 +174,7 @@
                 
                 Aplicacion.check_login(()=>{
                     if(Store.state.personas.length){
-                      //  Persona.index(()=>{})
+                      //  Persona.index()
                     }
                 })
 

@@ -9,9 +9,10 @@
 
         'index': async function(){
 
-            const response = await Fetch.get('/sede/index')
+            let json = Store.state.actual_sede
+            const response = await Fetch.get('/sede/index', json)
            
-            if(response.error === 0){
+            if(response.status){
 
                 Store.commit('set_sedes', response.sedes)
 
@@ -29,7 +30,7 @@
                       
             }
 
-            if(response.error === 500){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
 
@@ -41,13 +42,13 @@
             
             const response = await Fetch.post('/sede/store',json)
 
-            if(response.error === 0){
+            if(response.status){
 
                 Store.dispatch('add_sede',response.sede)
                 cb()
             }
 
-            if(response.error > 0){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
             

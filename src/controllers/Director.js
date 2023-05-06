@@ -16,7 +16,7 @@
                 Store.commit('set_directores', response.directores)
             }
 
-            if(response.error === 500){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
 
@@ -27,12 +27,10 @@
 
             const response = await Fetch.post('/director/store',json)
 
-            if(response.error === 0){
+            if(response.status){
                 Store.dispatch('add_director',response.director)
-            }
-
-            if(response.error == 400){
-                alert(response.message)
+            }else{
+                alert("Rector ya existe!")
             }
 
             if(response.error == 500){
@@ -40,7 +38,6 @@
             }
             
         }
-
 
     }
 

@@ -45,15 +45,6 @@
 
         },
 
-        'erase_token': function(error){
-        
-            console.log(error)
-            localStorage.removeItem('token')
-            this.loading(false)
-            this.mini_loading(false)
-    
-        },
-
         'login': async function(json){
             
            const response = await Fetch.post('/login', json)
@@ -154,25 +145,6 @@
                     Store.commit('set_seccion_num',[num,0])
                 }
             },200)
-
-
-        },
-
-        'load_default_config': function(){
-
-            
-            const sede_id = this.read_config('sede_id')
-            const nombre_sede = this.read_config('nombre_sede')
-            const numero_lectivo = this.read_config('numero_lectivo')
-            const director_id = this.read_config('director_id')
-
-            if(sede_id.status && nombre_sede.status){
-                Store.commit('set_actual_sede', { 'sede_id': sede_id.sede_id,'nombre_sede': nombre_sede.nombre_sede})
-            }
-
-            if(numero_lectivo.status && director_id.status){
-                Store.commit('set_actual_lectivo', {'lectivo_id': 0, 'numero_lectivo': numero_lectivo.numero_lectivo, 'sede_id': 0, 'director_id': director_id.director_id})
-            }
 
         },
 

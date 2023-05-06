@@ -1,7 +1,6 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
 
     const sede = ()=>{ return Store.state.actual_sede }
@@ -38,7 +37,7 @@
     
             }
 
-            if(response.error === 500){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
 
@@ -72,7 +71,7 @@
     
             }
 
-            if(response.error === 500){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
 
@@ -100,13 +99,11 @@
     
             }
 
-            if(response.error === 500){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
 
-
         }
-
 
     }
 

@@ -8,11 +8,9 @@
 
         'index': async function(cb){
             
-            let json = Store.state.actual_sede
-            
-            const response = await Fetch.post('/lectivo/index',json)
+            const response = await Fetch.post('/lectivo/index')
            
-            if(response.error === 0){
+            if(response.status){
 
                 Store.commit('set_lectivos', response.lectivos)
                 cb()
@@ -22,12 +20,10 @@
                 Aplicacion.redirect_end_sesion(response)
             }
 
-
         },
 
         'store': async function(json,cb){
 
-            
             const response = await Fetch.post('/lectivo/store',json)
 
             if(response.error === 0){
@@ -35,7 +31,7 @@
                 cb()
             }
 
-            if(response.error > 0){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
             

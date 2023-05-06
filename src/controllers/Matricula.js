@@ -20,7 +20,7 @@
                 cb()
             }
 
-            if(response.error === 500){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
 
@@ -50,12 +50,8 @@
             
             const response = await Fetch.delete('/matricula/delete',json)
             
-            if(response.error === 0){
+            if(response.status){
                 Store.dispatch('remove_matricula',json)
-            }
-
-            if(response.error == 400){
-                alert(response.message)
             }
 
             if(response.error == 500){

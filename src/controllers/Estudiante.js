@@ -16,32 +16,9 @@
                 Store.commit('set_estudiantes', response.estudiantes)
             }
 
-            if(response.error === 500){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
-
-        },
-
-        'index_identificacion': async function(json, cb){
-
-            const response = await Fetch.post('/estudiante/index/identificacion', json )
-
-            if(response.error === 0){
-
-                cb(response)
-                
-            }
-
-            if(response.error === 400){
-
-                alert(response.message)
-                
-            }
-
-            if(response.error === 500){
-               Aplicacion.redirect_end_sesion(response)
-            }
-
 
         },
 
@@ -54,8 +31,8 @@
                 Store.dispatch('add_estudiante',response.estudiante)
             }
 
-            if(response.error == 400){
-                alert(response.message)
+            if(response.status){
+                alert('Estudiante ya esiste!')
             }
 
             if(response.error == 500){

@@ -1,7 +1,6 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
 
     const Controller = {
@@ -12,7 +11,7 @@
 
             const response = await Fetch.post('/persona/index',json)
 
-            if(response.error === 0){
+            if(response.status){
                 Store.commit('set_personas', response.personas)
                 cb()
             }
@@ -27,12 +26,8 @@
 
             const response = await Fetch.post('/persona/store',json)
 
-            if(response.error === 0){
+            if(response.status){
                 Store.dispatch('add_persona',response.persona)
-            }
-
-            if(response.error == 400){
-                alert(response.message)
             }
 
             if(response.error == 500){

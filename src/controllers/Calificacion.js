@@ -6,27 +6,6 @@
 
     const Controller = {
 
-        'index': async function(params, cb){
-
-            let sede = Store.state.actual_sede
-            let lectivo = Store.state.actual_lectivo
-            let grado = Store.state.actual_grado
-            let json = { ...params,'sede_id': sede.sede_id, 'lectivo_id': lectivo.lectivo_id, 'grado_id': grado.grado_id}
-
-            const response = await Fetch.post('/calificacion/index',json)
-
-            if(response.error === 0){
-                Store.commit('set_calificaciones', response.calificaciones)
-                cb()
-
-            }
-
-            if(response.error === 500){
-                Aplicacion.redirect_end_sesion(response)
-            }
-
-        },
-
         'index_matriculas': async function(cb){
 
             let sede = Store.state.actual_sede
@@ -42,7 +21,7 @@
 
             }
 
-            if(response.error === 500){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
 
@@ -52,9 +31,7 @@
 
             const response = await Fetch.put('/calificacion/update',json)
             if(response.error === 0){
-
                 //console.log(response)
-
             }
 
             if(response.error > 0){

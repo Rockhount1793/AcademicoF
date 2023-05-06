@@ -694,6 +694,7 @@ export default defineComponent({
             if (nacimiento.value.day === 0) { errores.value.push('ingrese día') }
             if (nacimiento.value.month === 0) { errores.value.push('ingrese mes') }
             if (nacimiento.value.year === 0) { errores.value.push('ingrese año') }
+            if (actual_sede.value.sede_id == 0) { errores.value.push('seleccione sede') }
 
             if(errores.value.length){
                 alert(errores.value[0])

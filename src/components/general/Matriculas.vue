@@ -119,23 +119,6 @@
                 <!-- Crear -->
                 <div v-if="seccion == 1" class="">
 
-                    <div class="">
-                        
-                        <!--
-                        <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                            <p class="font-semibold text-gray-500 text-md px-2">Buscar Identificación</p>
-                            <input v-model="identificacion_" class="placeholder:text-gray-300 appearance-none shadow focus:outline-none focus:ring-1 focus:ring-indigo-600 shadow-indigo-300 p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded w-full" id="identificacion" type="text" placeholder="123456789"/>
-                        </div>
-                    
-                        <div class="flex-1 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1 flow-root">
-                            <button @click="get_estudiante()" class="float-right w-64 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
-                                Consulta institucional
-                            </button>
-                        </div>
-                        -->
-
-                    </div>
-
                     <div class="flex-1 mt-2 mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
                         <p class="font-semibold text-gray-500 text-md px-2">Estudiante</p>
                         <SelectorEstudiante class="mx-auto"></SelectorEstudiante>
@@ -340,33 +323,6 @@
 
             }
 
-            const get_estudiante = ()=>{
-
-                errores.value = []
-
-                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
-             
-                if(!errores.value.length){
-
-                    estudiante.value = {'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': ''}
-
-                    Estudiante.index_identificacion({
-
-                        'identificacion': Number(identificacion_.value),
-                        'sede_id': actual_sede.value.sede_id
-
-                    },(response)=>{
-
-                        estudiante.value = response.estudiante
-
-                    })
-
-                }else{
-                    alert(errores.value[0])
-                }
-
-            }
-
             const filter_identificacion = (number)=>{
                 return Utilitie.format_tnumber(number)
             }
@@ -422,7 +378,6 @@
                 seccion,
                 guardar,
                 filter_estudiante,
-                get_estudiante,
                 filter_identificacion,
                 firstLetter,
                 abrir_ventana_conf,

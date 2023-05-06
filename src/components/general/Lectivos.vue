@@ -123,7 +123,6 @@
 
                 if(typeof numero.value != 'number' || numero.value < 2015 || numero.value > 2099){ errores.value.push('ingrese año') }
                 if(typeof director_id.value != 'number' || director_id.value < 1){ errores.value.push('seleccione director') }
-                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
                 
                 if(errores.value.length){
                     alert(errores.value[0])
@@ -132,7 +131,6 @@
                     Lectivo.store({
                         'numero': numero.value,
                         'director_id': director_id.value,
-                        'sede_id':  actual_sede.value.sede_id,
                         'estado':1
                     },()=>{
                         

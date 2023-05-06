@@ -128,7 +128,7 @@
                     <div class=""></div>
 
                     <div class="">
-                        <button @click="guardar()" class="w-32 mt-3 h-7 shadow-md shadow-pink-500 rounded bg-pink-800 text-gray-500 px-2">
+                        <button @click="guardar()" class="w-32 mt-3 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
                             Guardar
                         </button>
                     </div>
@@ -145,8 +145,7 @@
   
 <script>
   
-    import { RouterView } from 'vue-router'
-    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
+    import { watchEffect, watch, ref, defineComponent, computed } from "vue"
     import Store from '@/store'
     import Router from '@/router'
     import Aplicacion from '@/controllers/Aplicacion'
@@ -186,8 +185,7 @@
                 if(!telefono.value.length){ errores.value.push('ingrese teléfono') }
                 if(!email.value.length){ errores.value.push('ingrese email') }
                 if(!Utilities.check_email(email.value)){ errores.value.push('formato de email incorrecto!') }
-                if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
-
+           
                 if(errores.value.length){
                     alert(errores.value[0])
                 }else{
@@ -198,12 +196,15 @@
                         'identificacion': identificacion.value,
                         'telefono':  telefono.value,
                         'email': email.value,
-                        'sede_id':  actual_sede.value.sede_id,
                         'estado':1
                     })
 
                     seccion.value = 0
-
+                    nombre.value = ''
+                    apellido.value =''
+                    identificacion = ''
+                    telefono.value = ''
+                    email.value = ''
                 }
 
             }
