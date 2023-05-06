@@ -25,12 +25,10 @@
 
             const response = await Fetch.post('/docente/store',json)
 
-            if(response.error === 0){
+            if(response.status){
                 Store.dispatch('add_docente',response.docente)
-            }
-
-            if(response.error == 400){
-                alert(response.message)
+            }else{
+                alert("Docente ya existe!")
             }
 
             if(response.error == 500){
