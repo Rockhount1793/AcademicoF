@@ -1,25 +1,21 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
 
     const Controller = {
 
         'index': async function(){
 
-            let json = Store.state.actual_sede
+            const response = await Fetch.post('/director/index')
 
-            const response = await Fetch.post('/director/index',json)
-
-            if(response.error === 0){
+            if(response.status){
                 Store.commit('set_directores', response.directores)
             }
 
             if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
-
 
         },
 

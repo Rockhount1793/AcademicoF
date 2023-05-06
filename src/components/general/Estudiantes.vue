@@ -633,9 +633,12 @@ export default defineComponent({
             // const diff = now.diff(inputDate, ['years']).toObject()
             // const age = Math.floor(diff.years)
 
-            let date1 = new Date(date).getFullYear()
-            let date2 = new Date().getFullYear()
-            return  date2 - date1
+            if(date != '#'){
+                let date1 = new Date(date).getFullYear()
+                let date2 = new Date().getFullYear()
+                return  date2 - date1
+            }
+            return date
         }
 
         const clearForm = () => {

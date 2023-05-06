@@ -133,12 +133,9 @@
 
     onMounted(()=>{
         
-        nextTick(()=>{
-            
-            Aplicacion.check_login(()=>{
-            })
+      nextTick(()=>{
 
-        })
+      })
 
     })
 

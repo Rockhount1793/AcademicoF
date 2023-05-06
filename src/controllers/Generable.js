@@ -24,7 +24,7 @@
 
             const response = await Fetch.post_download('/generable/boletin_todos_file',json)
 
-            if(response.error === 0){
+            if(response.status){
     
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]))
                 var fURL = document.createElement('a')
@@ -35,6 +35,8 @@
     
                 cb()
     
+            }else{
+                alert("Ingrese Asignaturas en actual Grado!")
             }
 
             if(response.error == 500){

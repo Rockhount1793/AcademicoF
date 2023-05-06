@@ -39,7 +39,7 @@
 
             const response = await Fetch.put('/docente/update', json)
 
-            if(response.error === 0){
+            if(response.status){
                 Store.dispatch('update_docente',json)
             }
 

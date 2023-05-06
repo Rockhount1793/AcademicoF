@@ -193,7 +193,7 @@
                     <div class="flow-root flex-1 pb-2">
                         
                         <div class="float-right">
-                            <button @click="guardar()" class="w-64 mt-3 h-7 shadow shadow-pink-500 rounded bg-pink-800 text-gray-50 px-2">
+                            <button @click="guardar()" class="w-64 mt-3 h-7 shadow shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
                                 Matricular
                             </button>
                         </div>

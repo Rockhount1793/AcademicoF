@@ -11,7 +11,7 @@
 
             const response = await Fetch.post('/anexo_estudiante/index',json)
 
-            if(response.error === 0){
+            if(response.status){
                 Store.commit('set_estudiantes', response.estudiantes)
             }
 
@@ -25,11 +25,9 @@
 
             const response = await Fetch.post('/anexo_estudiante/index/estudiante_id',json)
 
-            if(response.error === 0){
+            if(response.status){
                 cb(response.estudiante)
-            }
-
-            if(response.error === 400){
+            }else{
                 Aplicacion.redirect_end_sesion("Estudiante no encontrado!") 
             }
 

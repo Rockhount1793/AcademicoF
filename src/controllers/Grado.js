@@ -13,10 +13,11 @@ const Controller = {
 
         const response = await Fetch.post('/grado/index',json)
 
-        if(response.error === 0){
+        if(response.status){
             Store.commit('set_grados', response.grados)
             cb()
         }
+
         if(response.error == 500){
             Aplicacion.redirect_end_sesion(response)
         }
@@ -27,14 +28,16 @@ const Controller = {
 
         const response = await Fetch.post('/grado/store',json)
 
-        if(response.error === 0){
+        if(response.status){
             Store.dispatch('add_grado',response.grado)
             cb()
         }
+
         if(response.error == 500){
             Aplicacion.redirect_end_sesion(response)
         }
         
     }
+
 }
 export default Controller

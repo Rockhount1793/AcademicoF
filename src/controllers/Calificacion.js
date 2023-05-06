@@ -1,7 +1,6 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
 
     const Controller = {
@@ -15,10 +14,9 @@
 
             const response = await Fetch.post('/calificacion/index_matriculas',json)
 
-            if(response.error === 0){
+            if(response.status){
                 Store.commit('set_calificaciones', response.calificaciones)
                 cb()
-
             }
 
             if(response.error == 500){
@@ -30,10 +28,7 @@
         'update': async function(json){
 
             const response = await Fetch.put('/calificacion/update',json)
-            if(response.error === 0){
-                //console.log(response)
-            }
-
+            
             if(response.error > 0){
                 Aplicacion.redirect_end_sesion(response)
             }

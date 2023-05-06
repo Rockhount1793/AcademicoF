@@ -1,7 +1,6 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
 
     const Controller = {
@@ -15,7 +14,7 @@
 
             const response = await Fetch.post('/asignatura/index',json)
 
-            if(response.error === 0){
+            if(response.status){
                 Store.commit('set_asignaturas', response.asignaturas)
                 Store.commit('set_logros', [])
                 cb()
@@ -32,11 +31,11 @@
 
             const response = await Fetch.post('/asignatura/store',json)
             
-            if(response.error === 0){
+            if(response.status){
                 Store.dispatch('add_asignatura',response.asignatura)
             }
 
-            if(response.error > 0){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
             
@@ -46,7 +45,7 @@
 
             const response = await Fetch.put('/asignatura/update',json)
 
-            if(response.error === 0){
+            if(response.status){
               Store.dispatch('update_asignatura',json)
             }
 

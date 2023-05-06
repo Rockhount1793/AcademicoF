@@ -80,7 +80,8 @@
     
     import Store from '@/store'
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
-    import Estudiante from '@/controllers/Estudiante'
+    import Anexo_Estudiante from '@/controllers/Anexo_Estudiante'
+
     import Utilities from '@/utilities'
 
     export default defineComponent({
@@ -115,7 +116,7 @@
                     modulo.value = true 
                     
                     if(!Store.state.estudiantes.length){ 
-                        Estudiante.index() 
+                        Anexo_Estudiante.index()
                     }
                 
                     setTimeout(() => {
@@ -212,12 +213,6 @@
                     emitir(value)
                 }
 
-            })
-
-            watch(buscador_nombre,(value)=>{
-                if(value.toString().length > 4){
-                    if(!Store.state.estudiantes.length){ Estudiante.index() }
-                }
             })
 
             watch(estudiantes_com,(value)=>{

@@ -2,12 +2,8 @@
     import Store  from "@/store"
     import Fetch from "@/fetch"
     import  Router  from "@/router"
-    import { useRoute, useRouter } from "vue-router"
     import Utilities from "@/utilities"
     import Config from "@/config"
-
-    
-    const token = ()=>{ return Store.state.token }
 
     const Controller = {
 
@@ -112,7 +108,7 @@
                 }else{
                     
                     if(Router.currentRoute.value.name != 'Entrar'){
-                        this.redirect_end_sesion('fail check login')
+                        this.redirect_end_sesion('No found session!')
                     }
                 
                 }

@@ -175,17 +175,31 @@
             Aplicacion.loading(true)
 
             const res = await fetch(_urlsb() + '/api' + ext , options)
-            .then((response) => response.blob())
+            .then((response) =>{ 
+            
+                if(response.headers.get("content-type").includes("application/json")){
+                    return response.json()
+                }
+                
+                if(response.headers.get("content-type").includes("application/pdf")){
+                    return response.blob()
+                }
+
+            })
             .then((data) => {
                 
-                return {'error':0, 'data': data }
+                if (data instanceof Blob) {
+                    return {"status":true, data }
+                } else if (typeof data === 'object') {
+                    return data
+                }
 
             })
             .catch((error) => {
 
                 console.log(error)
                 console.error('timeout exceeded') 
-                return {'error': 500 }
+                return {"error": 500 }
 
             }).finally(()=>{
                 Aplicacion.loading(false)

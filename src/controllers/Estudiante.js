@@ -1,7 +1,6 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
 
     const Controller = {
@@ -12,7 +11,7 @@
 
             const response = await Fetch.post('/estudiante/index',json)
 
-            if(response.error === 0){
+            if(response.status){
                 Store.commit('set_estudiantes', response.estudiantes)
             }
 
@@ -26,13 +25,11 @@
 
             const response = await Fetch.post('/estudiante/store',json)
 
-            if(response.error === 0){
-                alert('Estudiante creado!')
-                Store.dispatch('add_estudiante',response.estudiante)
-            }
-
             if(response.status){
-                alert('Estudiante ya esiste!')
+                Store.dispatch('add_estudiante',response.estudiante)
+                alert("Estudiante creado!")
+            }else{
+                alert('Estudiante ya existe!')
             }
 
             if(response.error == 500){
@@ -45,7 +42,7 @@
 
             const response = await Fetch.put('/estudiante/update',json)
 
-            if(response.error === 0){
+            if(response.status){
               Store.dispatch('update_estudiante',json)
             }
 

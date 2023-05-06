@@ -30,10 +30,6 @@
 
             const response = await Fetch.put('/logro/update',json)
 
-            if(response.error === 0){
-                console.log(response)
-            }
-
             if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
