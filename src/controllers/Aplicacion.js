@@ -45,7 +45,7 @@
             
            const response = await Fetch.post('/login', json)
            
-            if(response.error === 0){
+            if(response.status){
 
                 Store.commit('set_usuario', response.usuario)
                 Store.commit('set_token', response.token)
@@ -61,11 +61,7 @@
                 Router.push({ 'name':'Inicio' })
 
             }else{
-                this.redirect_end_sesion(response)
-            }
-
-            if(response.error == 403){
-                alert('¡Usuario no encontrado!')
+                alert("Usuario no encontrado!")
             }
 
             if(response.error == 401){
@@ -87,7 +83,7 @@
     
                     const response = await Fetch.get('/index')
     
-                    if(response.error === 0){
+                    if(response.status){
         
                         Store.commit('set_usuario',response.usuario)
                         Store.commit('set_token', localStorage.getItem('token'))

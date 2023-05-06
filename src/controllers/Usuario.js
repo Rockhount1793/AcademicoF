@@ -8,7 +8,7 @@
 
             const response = await Fetch.put('/usuario/update',json)
 
-            if(response.error > 500){
+            if(response.error == 500){
                 Aplicacion.redirect_end_sesion(response)
             }
 
