@@ -164,7 +164,7 @@
                 if(typeof numero.value != 'number' || numero.value < 0 || numero.value > 12 ){ errores.value.push('ingrese numero') }
                 if(typeof docente_id.value != 'number' || docente_id.value < 1){ errores.value.push('seleccione director') }
                 if(actual_sede.value.sede_id == 0){ errores.value.push('seleccione sede') }
-                if(actual_lectivo.value.numero_lectivo == 0){ errores.value.push('seleccione lectivo') }
+                if(actual_lectivo.value.lectivo_id == 0 ){ errores.value.push('seleccione lectivo') }
                 
                 if(errores.value.length){
                     alert(errores.value[0])
