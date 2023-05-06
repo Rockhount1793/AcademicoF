@@ -19,7 +19,7 @@ const store = createStore({
             mini_loading: false,
             usuario: {'usuario_id':0, 'avatar':'default.png',
             'configuracion':{
-                sede_id:null,
+                sede_id:0,
                 nombre_sede:'',
                 numero_lectivo:0,
             }},
@@ -208,13 +208,10 @@ const store = createStore({
                     let usuario =  this.state.usuario
                     usuario.configuracion.sede_id = json.sede_id
                     usuario.configuracion['nombre_sede'] = json['nombre']
-                    usuario.configuracion['numero_lectivo'] = 0
-                    this.commit('set_usuario',usuario)
-                    
-                    Usuario.update(usuario)
-
+                    this.commit('set_usuario',usuario)                    
                     this.commit('set_actual_sede',json)
-                    
+                    Usuario.update(usuario)
+   
                 }
 
             })
@@ -259,8 +256,6 @@ const store = createStore({
 
             return await new Promise((res,rej)=>{
 
-                this.commit('set_lectivos',[])
-                this.commit('set_actual_lectivo',{'lectivo_id': 0, 'numero': 0, 'sede_id': 0, 'director_id': 0})
                 this.commit('set_grados',[])
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
                 this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' })
@@ -325,7 +320,7 @@ const store = createStore({
         async clear_data_lectivo(){
 
             return await new Promise((res,rej)=>{
-                
+
                 this.commit('set_grados',[])
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
                 this.commit('set_asignaturas',[])

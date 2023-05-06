@@ -227,7 +227,6 @@ export default defineComponent({
             'identificacion':'',
             'telefono':'',
             'email':'',
-            'sede_id': 0,
             'estado':1,
             'docente_id':0
         })
@@ -253,7 +252,6 @@ export default defineComponent({
                 if(docente.value.docente_id > 0){ 
                     Docente.update(docente.value)
                 }else{
-                    docente.value.sede_id = actual_sede.value.sede_id
                     Docente.store(docente.value)
                 }
                 
@@ -272,7 +270,6 @@ export default defineComponent({
             if (!docente.value.telefono.length || docente.value.telefono.length > 99) { errores.value.push('ingrese teléfono') }
             if (!docente.value.email.length || docente.value.email.length > 99) { errores.value.push('ingrese email') }
             if (!Utilities.check_email(docente.value.email)){ errores.value.push('formato de email incorrecto!') }
-            if (actual_sede.value.sede_id == 0) { errores.value.push('seleccione sede') }
         } 
 
         const clearForm = ()=>{
@@ -282,7 +279,6 @@ export default defineComponent({
             'identificacion':'',
             'telefono':'',
             'email':'',
-            'sede_id': 0,
             'estado': 1,
             'docente_id':0
            }

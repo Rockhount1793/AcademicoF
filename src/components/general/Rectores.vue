@@ -35,8 +35,6 @@
 
                 <div v-if="seccion == 0" class="mt-3">
 
-                    <span v-if="actual_sede.sede_id == 0" class="text-center p-2 text-yellow-500" > Considere seleccionar una sede primero! </span>
-
                     <div class="px-4 sm:px-6 lg:px-8">
 
                         <div v-if="!directores_all.length" class="sm:flex sm:items-center">

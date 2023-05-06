@@ -7,11 +7,9 @@
 
         'index': async function(){
 
-            let json = Store.state.actual_sede
+            const response = await Fetch.post('/docente/index')
 
-            const response = await Fetch.post('/docente/index',json)
-
-            if(response.error === 0){
+            if(response.status){
                 Store.commit('set_docentes', response.docentes)
             }
 
