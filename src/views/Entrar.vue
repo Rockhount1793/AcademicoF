@@ -77,13 +77,25 @@
 
         setup(){
             // data 
-            let email = ref('')
-            let password = ref('')
-            let sesion = ref (true)
+            const email = ref('')
+            const password = ref('')
+            const sesion = ref (true)
+            const errores = ref([])
 
             // methods
             const entrar = ()=>{
-                Aplicacion.login({'email':email.value, 'password': password.value, 'sesion': sesion.value})
+                
+                errores.value = []
+
+                if(!email.value ){ errores.value.push('Ingrese email!') }
+                if(!password.value ){ errores.value.push('Ingrese contraseña!') }
+
+                if(errores.value.length){
+                    alert(errores.value[0])
+                }else{
+                    Aplicacion.login({'email':email.value, 'password': password.value, 'sesion': sesion.value})
+                }
+
             }
             
             const urlsf = computed(()=> Store.state.urlsf )
