@@ -107,10 +107,7 @@ export default defineComponent({
         let errores = ref([])
 
         //# methods
-        const set_route = (json) => {
-            Router.push(json)
-        }
-
+        
         const guardar = () => {
 
             errores.value = []
@@ -155,7 +152,6 @@ export default defineComponent({
         return {
             urlsf,
             listado,
-            set_route,
             actual_sede,
             sedes,
             seccion,

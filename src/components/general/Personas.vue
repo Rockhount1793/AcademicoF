@@ -112,10 +112,7 @@
             let errores = ref([])
 
             //# methods
-            const set_route = (json)=>{ 
-                Router.push(json)
-            }
-
+            
             const guardar = ()=>{
 
                 errores.value = []
@@ -155,7 +152,6 @@
             return {
                 urlsf,
                 listado,
-                set_route,
                 personas,
                 seccion,
                 nombre,

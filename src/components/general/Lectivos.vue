@@ -113,10 +113,6 @@
                 director_id.value = number
             }
 
-            const set_route = (json)=>{ 
-                Router.push(json)
-            }
-
             const guardar = ()=>{
 
                 errores.value = []
@@ -174,7 +170,6 @@
                 urlsf,
                 listado,
                 directores,
-                set_route,
                 set_lectivo,
                 lectivos,
                 seccion,

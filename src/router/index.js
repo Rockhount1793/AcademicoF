@@ -8,101 +8,101 @@ const router = createRouter({
     
     routes: [
         {
-            path: '/home',
+            path: '/',
             name: 'Bienvenida',
             component: () => import('@/views/Bienvenida.vue')
         },
         {
-            path: '/',
+            path: '/dashboard',
             name: 'Dashboard',
             component: Dashboard,
             children:[
                 {
-                    path: '/',
+                    path: 'inicio',
                     name:'Inicio',
                     component: () => import('@/components/general/Inicio.vue'),
                     
                 },
                 {
-                    path: '/sedes',
+                    path: 'sedes',
                     name:'Sedes',
                     component: () => import('@/components/general/Sedes.vue'),
                     
                 },
                 {
-                    path: '/lectivos',
+                    path: 'lectivos',
                     name:'Lectivos',
                     component: () => import('@/components/general/Lectivos.vue'),
                     
                 },
                 {
-                    path: '/grados',
+                    path: 'grados',
                     name:'Grados',
                     component: () => import('@/components/general/Grados.vue'),
                     
                 },
                 {
-                    path: '/asignaturas',
+                    path: 'asignaturas',
                     name:'Asignaturas',
                     component: () => import('@/components/general/Asignaturas.vue'),
                     
                 },
                 {
-                    path: '/logros',
+                    path: 'logros',
                     name:'Logros',
                     component: () => import('@/components/general/Logros.vue'),
                     
                 },
                 {
-                    path: '/calificaciones',
+                    path: 'calificaciones',
                     name:'Calificaciones',
                     component: () => import('@/components/general/Calificaciones.vue'),
                     
                 },
                 {
-                    path: '/faltas',
+                    path: 'faltas',
                     name:'Faltas',
                     component: () => import('@/components/general/Faltas.vue'),
                     
                 },
                 {
-                    path: '/matriculas',
+                    path: 'matriculas',
                     name:'Matriculas',
                     component: () => import('@/components/general/Matriculas.vue'),
                     
                 },
                 {
-                    path: '/docentes',
+                    path: 'docentes',
                     name:'Docentes',
                     component: () => import('@/components/general/Docentes.vue'),
                     
                 },
                 {
-                    path: '/estudiantes',
+                    path: 'estudiantes',
                     name:'Estudiantes',
                     component: () => import('@/components/general/Estudiantes.vue'),
                     
                 },
                 {
-                    path: '/rectores',
+                    path: 'rectores',
                     name:'Rectores',
                     component: () => import('@/components/general/Rectores.vue'),
                     
                 },
                 {
-                    path: '/personas',
+                    path: 'personas',
                     name:'Personas',
                     component: () => import('@/components/general/Personas.vue'),
                     
                 },
                 {
-                    path: '/generables',
+                    path: 'generables',
                     name:'Generables',
                     component: () => import('@/components/general/Generables.vue'),
                     
                 },
                 {
-                    path: '/boletin',
+                    path: 'boletin',
                     name:'Boletin',
                     component: () => import('@/components/generables/Boletin.vue'),
                     

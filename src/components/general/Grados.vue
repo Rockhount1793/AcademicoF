@@ -152,10 +152,6 @@
                 docente_id.value = number
             }
 
-            const set_route = (json)=>{
-                Router.push(json)
-            }
-
             const guardar = ()=>{
 
                 errores.value = []
@@ -220,7 +216,6 @@
             return {
                 urlsf,
                 listado,
-                set_route,
                 docentes,
                 grados,
                 seccion,

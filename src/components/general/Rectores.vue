@@ -169,9 +169,6 @@
             const errores = ref([])
 
             //# methods
-            const set_route = (json)=>{ 
-                Router.push(json)
-            }
 
             const guardar = ()=>{
 
@@ -243,7 +240,6 @@
                 urlsf,
                 listado,
                 actual_sede,
-                set_route,
                 directores_all,
                 filter_directores,
                 seccion,

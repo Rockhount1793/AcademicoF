@@ -98,20 +98,20 @@
   } from '@heroicons/vue/24/outline'
   
   const navigation = ref([
-    { name: 'Inicio', href: '/', icon: HomeIcon, current: true },
-    { name: 'Calificaciones', href: '/calificaciones', icon: PencilSquareIcon, current: false },
-    { name: 'Estudiantes', href: '/estudiantes', icon: UsersIcon, current: false },
-    { name: 'Asignaturas', href: '/asignaturas', icon: FolderIcon, current: false },
-    { name: 'Logros', href: '/logros', icon: InboxIcon, current: false },
-    { name: 'Faltas', href: '/faltas', icon: CalendarDaysIcon, current: false },
-    { name: 'Matriculas', href: '/matriculas', icon: LinkIcon, current: false },
-    { name: 'Grados', href: '/grados', icon: RectangleStackIcon, current: false },
-    { name: 'Generables', href: '/generables', icon: DocumentArrowDownIcon, current: false },
-    { name: 'Docentes', href: '/docentes', icon: AcademicCapIcon, current: false },
-    { name: 'Rectores', href: '/rectores', icon: UsersIcon, current: false },
-    // { name: 'Personas', href: '/personas', icon: UserCircleIcon, current: false },
-    { name: 'Sedes', href: '/sedes', icon: BuildingLibraryIcon, current: false },
-    { name: 'Año Lectivo', href: '/lectivos', icon: RocketLaunchIcon, current: false },
+    { name: 'Inicio', href: 'inicio', icon: HomeIcon, current: true },
+    { name: 'Calificaciones', href: 'calificaciones', icon: PencilSquareIcon, current: false },
+    { name: 'Estudiantes', href: 'estudiantes', icon: UsersIcon, current: false },
+    { name: 'Asignaturas', href: 'asignaturas', icon: FolderIcon, current: false },
+    { name: 'Logros', href: 'logros', icon: InboxIcon, current: false },
+    { name: 'Faltas', href: 'faltas', icon: CalendarDaysIcon, current: false },
+    { name: 'Matriculas', href: 'matriculas', icon: LinkIcon, current: false },
+    { name: 'Grados', href: 'grados', icon: RectangleStackIcon, current: false },
+    { name: 'Generables', href: 'generables', icon: DocumentArrowDownIcon, current: false },
+    { name: 'Docentes', href: 'docentes', icon: AcademicCapIcon, current: false },
+    { name: 'Rectores', href: 'rectores', icon: UsersIcon, current: false },
+    // { name: 'Personas', href: 'personas', icon: UserCircleIcon, current: false },
+    { name: 'Sedes', href: 'sedes', icon: BuildingLibraryIcon, current: false },
+    { name: 'Año Lectivo', href: 'lectivos', icon: RocketLaunchIcon, current: false },
     
   ])
 
