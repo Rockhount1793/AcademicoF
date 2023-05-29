@@ -163,7 +163,7 @@
 
             const nombre = ref('')
             const apellido = ref('')
-            const identificacion = ref('')
+            let identificacion = ref('')
             const telefono = ref('')
             const email = ref('')
             const errores = ref([])
