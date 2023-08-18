@@ -45,6 +45,40 @@
 
         },
 
+        'boletin_final_todos_file': async function(cb){
+
+            let json = {
+                'periodo':periodo().periodo,
+                'nombre_sede': sede().nombre,
+                'sede_id': sede().sede_id,
+                'lectivo': lectivo().numero,
+                'lectivo_id': lectivo().lectivo_id,
+                'grado_id': grado().grado_id
+            }
+
+            const response = await Fetch.post_download('/generable/boletin_final_todos_file',json)
+
+            if(response.status){
+    
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]))
+                var fURL = document.createElement('a')
+                fURL.href = fileURL
+                fURL.setAttribute('download', 'Boletines_'+sede().nombre+'_'+grado().nombre+'.pdf')
+                document.body.appendChild(fURL)
+                fURL.click()
+    
+                cb()
+    
+            }else{
+                alert("Ingrese Asignaturas en actual Grado! O error en esta consulta!")
+            }
+
+            if(response.error == 500){
+                Aplicacion.redirect_end_sesion(response)
+            }
+
+        },
+
         'boletin_estudiante_file': async function(params,cb){
             
             let json = {

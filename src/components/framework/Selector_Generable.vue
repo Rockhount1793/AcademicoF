@@ -82,16 +82,12 @@
 
             //# methods
             const set_recurso = (json)=>{
-
                 recurso.value = json.recurso
                 Store.commit('set_actual_generable',json)
-
             }
 
             const mostrar_menu = ()=>{
-                
                 modulo.value = !modulo.value
-  
             }
 
             const emitir = (number)=>{
@@ -119,11 +115,9 @@
             })
 
             watch(recurso,(value) => {
-      
                 if(value > 0) {
                     emitir(value)
                 }
-
             })
 
             return{

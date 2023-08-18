@@ -34,11 +34,11 @@
 
                 </div>
 
-                <div v-if="actual_generable.nombre == 'boletin' " class="block">
+                <div v-if="actual_generable.nombre == 'boletin'" class="block">
 
                     <div class="mt-3 w-64 mx-auto">
                         <button @click="generar_boletines()" class="bg-pink-700 shadow-pink-500 shadow-md w-full cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                            Generar todos los boletines
+                            Generar Boletines
                         </button>
                     </div>
                     
@@ -62,7 +62,6 @@
                                             <tr>
                                                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Nombres</th>
                                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado</th>
-
                                             </tr>
                                         </thead>
 
@@ -153,17 +152,12 @@
                 if(!errores.value.length){
                 
                     if(actual_periodo.value.periodo < 5){
-                        
                         Generable.boletin_todos_file(()=>{ })
-                
                     }
                 
                     if(actual_periodo.value.periodo == 5){
-                
-                        alert('boletín final')
-                
+                        Generable.boletin_final_todos_file(()=>{ })
                     }
-                
                 
                 }else{
                     alert(errores.value[0])
@@ -284,7 +278,6 @@
             })
 
             return {
-            
                 urlsf,
                 generar_boletines,
                 generar_estudiante_pdf,
@@ -300,7 +293,6 @@
                 filter_identificacion,
                 firstLetter,
                 verfificar_matriculas
-
             }
 
         },
