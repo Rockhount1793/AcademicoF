@@ -51,11 +51,11 @@ const store = createStore({
             ],
 
             generables:[
-                // { 'recurso': 2, 'nombre': 'planilla' },
-                // { 'recurso': 3, 'nombre': 'informe' },
-                // { 'recurso': 1, 'nombre': 'carnet' },
-                { 'recurso': 4, 'nombre': 'boletin' },
-                // { 'recurso': 5, 'nombre': 'constancia' }
+                { 'recurso': 1, 'nombre': 'boletin' },
+                { 'recurso': 2, 'nombre': 'informe' },
+                // { 'recurso': 0, 'nombre': 'planilla' },
+                // { 'recurso': 0, 'nombre': 'constancia' }
+                // { 'recurso': 0, 'nombre': 'carnet' },
             ],
 
 

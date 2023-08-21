@@ -34,12 +34,17 @@
 
                 </div>
 
-                <div v-if="actual_generable.nombre == 'boletin'" class="block">
+                <div class="block">
 
                     <div class="mt-3 w-64 mx-auto">
-                        <button @click="generar_boletines()" class="bg-pink-700 shadow-pink-500 shadow-md w-full cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                            Generar Boletines
+                        <button v-if="actual_generable.recurso > 0" @click="generar_archivo()" class="bg-pink-700 shadow-pink-500 shadow-md w-full cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                            <p class="capitalize">Generar {{ actual_generable.nombre }}</p>
                         </button>
+                        
+                        <p v-else class="text-pink-600 w-full text-center leading-6 font-semibold text-md">
+                            Por favor elija en todos los campos...
+                        </p>
+                        
                     </div>
                     
                 </div>
@@ -133,13 +138,37 @@
         setup(){
         
             //# data
-
             let seccion = ref(0)
             let errores = ref([])
 
             //# methods
-
+            
             const generar_boletines = ()=>{
+                
+                if(actual_periodo.value.periodo < 5){
+                   // Generable.boletin_todos_file(()=>{ })
+                }
+                
+                if(actual_periodo.value.periodo == 5){
+                    Generable.boletin_final_todos_file(()=>{ })
+                }
+
+            }
+
+            const generar_informe = ()=>{
+                
+                if(actual_periodo.value.periodo < 5){
+                   // Generable.informe_todos_file(()=>{ })
+                alert("en construcción")
+                }
+
+                if(actual_periodo.value.periodo == 5){
+                    Generable.informe_final_todos_file(()=>{ })
+                }
+
+            }
+
+            const generar_archivo = ()=>{
 
                 errores.value = []
                 if(!matriculas.value.length){ errores.value.push('No hay matriculas creadas!') }
@@ -150,15 +179,12 @@
                 if(actual_generable.value.recurso === 0){ errores.value.push('Seleccione generable') }
                 
                 if(!errores.value.length){
-                
-                    if(actual_periodo.value.periodo < 5){
-                        Generable.boletin_todos_file(()=>{ })
+
+                    switch (actual_generable.value.recurso) {
+                        case 1: generar_boletines(); break;
+                        case 2: generar_informe(); break;
                     }
-                
-                    if(actual_periodo.value.periodo == 5){
-                        Generable.boletin_final_todos_file(()=>{ })
-                    }
-                
+
                 }else{
                     alert(errores.value[0])
                 }
@@ -256,7 +282,7 @@
             
                 }
             }
-
+           
             //# computed
             const urlsf = computed(()=> Store.state.urlsf )
             const estudiantes = computed(()=> Store.state.estudiantes )
@@ -266,7 +292,7 @@
             const actual_periodo = computed(()=> Store.state.actual_periodo )
             const actual_grado = computed(()=> Store.state.actual_grado )
             const actual_generable = computed(()=> Store.state.actual_generable )
-           
+
             watch(actual_grado,(value) => {
 
                 if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
@@ -279,7 +305,9 @@
 
             return {
                 urlsf,
+                generar_archivo,
                 generar_boletines,
+                generar_informe,
                 generar_estudiante_pdf,
                 generar_estudiante_vista,
                 actual_sede,
