@@ -146,7 +146,7 @@
             const generar_boletines = ()=>{
                 
                 if(actual_periodo.value.periodo < 5){
-                   // Generable.boletin_todos_file(()=>{ })
+                   Generable.boletin_todos_file(()=>{ })
                 }
                 
                 if(actual_periodo.value.periodo == 5){
@@ -159,7 +159,7 @@
                 
                 if(actual_periodo.value.periodo < 5){
                    // Generable.informe_todos_file(()=>{ })
-                alert("en construcción")
+                   alert("en construcción")
                 }
 
                 if(actual_periodo.value.periodo == 5){
