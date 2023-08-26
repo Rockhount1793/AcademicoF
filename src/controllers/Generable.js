@@ -113,6 +113,40 @@
 
         },
 
+        'certificado_final_file': async function(matricula,cb){
+
+            let json = {
+                'matricula_id': matricula.matricula_id,
+                'nombre_sede': sede().nombre,
+                'sede_id': sede().sede_id,
+                'lectivo': lectivo().numero,
+                'lectivo_id': lectivo().lectivo_id,
+                'grado_id': grado().grado_id
+            }
+
+            const response = await Fetch.post_download('/generable/certificado_final_file',json)
+
+            if(response.status){
+    
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]))
+                var fURL = document.createElement('a')
+                fURL.href = fileURL
+                fURL.setAttribute('download', 'Certificado_'+matricula.identificacion+'_'+sede().nombre+'_'+grado().nombre+'.pdf')
+                document.body.appendChild(fURL)
+                fURL.click()
+    
+                cb()
+    
+            }else{
+                alert("Ingrese Asignaturas en actual Grado!")
+            }
+
+            if(response.error == 500){
+                Aplicacion.redirect_end_sesion(response)
+            }
+
+        },
+
         'boletin_estudiante_file': async function(params,cb){
             
             let json = {

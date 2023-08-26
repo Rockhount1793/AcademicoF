@@ -36,15 +36,21 @@
 
                 <div class="block">
 
-                    <div class="mt-3 w-64 mx-auto">
-                        <button v-if="actual_generable.recurso > 0" @click="generar_archivo()" class="bg-pink-700 shadow-pink-500 shadow-md w-full cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                    <div class="mt-3 flex items-center mx-auto">
+                        <!-- si el recurso es entre rango 1 - 10 NO REQUIERE selección de estudiante  -->
+                        <button v-if="actual_generable.recurso < 10" @click="generar_archivo()" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                             <p class="capitalize">Generar {{ actual_generable.nombre }}</p>
                         </button>
-                        
+
+                        <!-- si el recurso es entre rango 11 - 20 REQUIERE selección de estudiante  -->
+                        <div v-else-if="actual_generable.recurso > 10" class="mx-auto w-96 bg-pink-700 shadow-pink-500 shadow-md rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                            <p class="">Seleccione el estudiante a generar el <span class="capitalize">{{ actual_generable.nombre }}</span></p>
+                        </div>
+
                         <p v-else class="text-pink-600 w-full text-center leading-6 font-semibold text-md">
                             Por favor elija en todos los campos...
                         </p>
-                        
+
                     </div>
                     
                 </div>
@@ -61,12 +67,19 @@
                         <div v-else class="mt-2">
                             <div class="overflow-x-auto">
                                 <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                    <table class="min-w-full divide-y divide-gray-300 mb-4">
+                                    <table class="min-w-full border divide-y divide-gray-300 mb-4">
                                         
                                         <thead>
                                             <tr>
-                                                <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Nombres</th>
-                                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado</th>
+                                                <th scope="col" class="px-3 py-1 border text-left text-sm font-semibold text-gray-900">
+                                                    Nombres
+                                                </th>
+                                                <th scope="col" class="px-3 w-24 py-1 border text-left text-sm font-semibold text-gray-900">
+                                                    Estado
+                                                </th>
+                                                <th v-if="actual_generable.recurso > 10" scope="col" class="px-3 w-32 py-1 border text-sm font-semibold text-pink-700 text-center capitalize">
+                                                    Generar
+                                                </th>
                                             </tr>
                                         </thead>
 
@@ -87,6 +100,12 @@
 
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm">
                                                     <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ matri.estudiante_estado ? 'Activo':'Inactivo'  }} </span>
+                                                </td>
+
+                                                <td v-if="actual_generable.recurso > 10" class="flex py-4 text-sm">
+                                                    <button @click="generar_archivo(matri)" class="mx-auto w-24 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                                        <p class="capitalize">{{ actual_generable.nombre }}</p>
+                                                    </button>
                                                 </td>
 
                                             </tr>
@@ -119,7 +138,7 @@
     import SelectorPeriodo from "@/components/framework/Selector_Periodo.vue"
     import SelectorGenerable from "@/components/framework/Selector_Generable.vue"
     import { RouterView } from "vue-router"
-    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
+    import { watchEffect, watch, ref, defineComponent, computed } from "vue"
     import Store from "@/store"
     import Router from "@/router"
     import Aplicacion from "@/controllers/Aplicacion"
@@ -168,7 +187,18 @@
 
             }
 
-            const generar_archivo = ()=>{
+            const generar_certificado = (matricula)=>{
+                if(actual_periodo.value.periodo < 5){
+                   // Generable.certificado_periodo_file(matricula,()=>{ })
+                   alert("en construcción")
+                }
+
+                if(actual_periodo.value.periodo == 5){
+                    Generable.certificado_final_file(matricula,()=>{ })
+                }
+            }
+
+            const generar_archivo = (matricula)=>{
 
                 errores.value = []
                 if(!matriculas.value.length){ errores.value.push('No hay matriculas creadas!') }
@@ -181,8 +211,11 @@
                 if(!errores.value.length){
 
                     switch (actual_generable.value.recurso) {
+                        // rango 1-10
                         case 1: generar_boletines(); break;
                         case 2: generar_informe(); break;
+                        //rango 11-20
+                        case 11: generar_certificado(matricula); break;
                     }
 
                 }else{
@@ -203,15 +236,11 @@
                 if(!errores.value.length){
 
                     if(actual_periodo.value.periodo < 5){
-                        
                         Generable.boletin_estudiante_file(json,()=>{ })
-
                     }
 
                     if(actual_periodo.value.periodo == 5){
-
                         alert('boletín final')
-
                     }
 
                 }else{
@@ -296,9 +325,7 @@
             watch(actual_grado,(value) => {
 
                 if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
-                    
                     Matricula.index(()=>{})
-                
                 }
                 
             })

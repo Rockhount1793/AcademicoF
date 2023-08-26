@@ -51,13 +51,15 @@ const store = createStore({
             ],
 
             generables:[
-                { 'recurso': 1, 'nombre': 'boletin' },
+                // recurso 1 - 10 aplica a todos los estudiantes
+                { 'recurso': 1, 'nombre': 'boletín' },
                 { 'recurso': 2, 'nombre': 'informe' },
-                // { 'recurso': 0, 'nombre': 'planilla' },
-                // { 'recurso': 0, 'nombre': 'constancia' }
-                // { 'recurso': 0, 'nombre': 'carnet' },
+                // { 'recurso': 3, 'nombre': 'carné' },
+                 
+                // recurso 11 - 20 debe seleccionar un estudiante
+                { 'recurso': 11, 'nombre': 'certificado' },
+                // { 'recurso': 12, 'nombre': 'constancia' },
             ],
-
 
             seccion_num: [0,0],
             config:[{ 'name':'sede_id','valor':0}],
