@@ -113,6 +113,41 @@
 
         },
 
+        'planilla_file': async function(cb){
+
+            let json = {
+                'periodo':periodo().periodo,
+                'nombre_periodo': periodo().nombre,
+                'nombre_sede': sede().nombre,
+                'sede_id': sede().sede_id,
+                'lectivo': lectivo().numero,
+                'lectivo_id': lectivo().lectivo_id,
+                'grado_id': grado().grado_id
+            }
+
+            const response = await Fetch.post_download('/generable/planilla_file',json)
+
+            if(response.status){
+    
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]))
+                var fURL = document.createElement('a')
+                fURL.href = fileURL
+                fURL.setAttribute('download', 'Planilla_'+sede().nombre+'_'+grado().nombre+'.pdf')
+                document.body.appendChild(fURL)
+                fURL.click()
+    
+                cb()
+    
+            }else{
+                alert("Ingrese Asignaturas en actual Grado!")
+            }
+
+            if(response.error == 500){
+                Aplicacion.redirect_end_sesion(response)
+            }
+
+        },
+
         'certificado_final_file': async function(matricula,cb){
 
             let json = {

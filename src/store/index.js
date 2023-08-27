@@ -54,6 +54,7 @@ const store = createStore({
                 // recurso 1 - 10 aplica a todos los estudiantes
                 { 'recurso': 1, 'nombre': 'boletín' },
                 { 'recurso': 2, 'nombre': 'informe' },
+                { 'recurso': 3, 'nombre': 'planilla' },
                 // { 'recurso': 3, 'nombre': 'carné' },
                  
                 // recurso 11 - 20 debe seleccionar un estudiante

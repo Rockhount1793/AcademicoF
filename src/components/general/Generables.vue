@@ -187,6 +187,10 @@
 
             }
 
+            const generar_planilla = ()=>{
+                Generable.planilla_file(()=>{ })
+            }
+
             const generar_certificado = (matricula)=>{
                 if(actual_periodo.value.periodo < 5){
                    // Generable.certificado_periodo_file(matricula,()=>{ })
@@ -214,6 +218,7 @@
                         // rango 1-10
                         case 1: generar_boletines(); break;
                         case 2: generar_informe(); break;
+                        case 3: generar_planilla(); break;
                         //rango 11-20
                         case 11: generar_certificado(matricula); break;
                     }
