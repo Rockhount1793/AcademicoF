@@ -1,6 +1,22 @@
-node_modules/
-.dockerignore
+# Node Js
 node_modules
-.env
+npm-debug.log
 dist
-./dist
+*.env
+*.md
+
+# Docker
+Dockerfile
+Containerfile
+ContainerfileDev
+compose.yaml
+compose*
+docker*
+.dockerignore
+
+# Git
+.git*
+.gitignore
+
+# Config
+.vscode
