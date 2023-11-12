@@ -4,7 +4,7 @@ import Error from '@/views/Error.vue'
 
 const router = createRouter({
     
-    history: createWebHashHistory (),
+    history: createWebHashHistory(),
     
     routes: [
         {
