@@ -1,6 +1,6 @@
 
 # Use an official Node.js runtime as a parent image
-FROM node:18-alpine3.14
+FROM node:18-alpine3.14 as builder
 
 # Set environment variables uncomment for local
 # ENV PORT=8080 \
@@ -17,16 +17,27 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-RUN npm install -g serve
-
+RUN npm install -g http-server
 # Copy the rest of the application code to the container
 COPY . .
 
 # Build the application
 RUN npm run build
 
-# Expose port 80 to the outside world
+# # Expose port 80 to the outside world
+# EXPOSE 8080
+
+# # Start the server
+# CMD ["npm", "start"]
+
+# Use a lightweight web server to serve the built files
+FROM nginx:alpine
+
+# Copy the built files from the builder stage to the nginx default public directory
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Expose the internal port 80
 EXPOSE 80
 
-# Start the server
-CMD ["npm", "start"]
+# Set the default command to start nginx and serve the application
+CMD ["nginx", "-g", "daemon off;"]
