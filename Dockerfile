@@ -30,8 +30,10 @@ RUN npm run build
 # # Start the server
 # CMD ["npm", "start"]
 
-# Use a lightweight web server to serve the built files
 FROM nginx:alpine
+
+# Copy the Nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the built files from the builder stage to the nginx default public directory
 COPY --from=builder /app/dist /usr/share/nginx/html
