@@ -7,7 +7,7 @@ const Config = {
     'version': "Estable 1.1.4.0 1-09-2023 13:17",
 
     // development o production
-    'status': "development",
+    'status': import.meta.env.VITE_ENVIRONMENT || "development",
 
     /**
      * @param {String} key
