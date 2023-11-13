@@ -1,6 +1,0 @@
-pendientes
-
-- Guardar configuracion y cargarla al cargar perfil
--configurar los directores por cada usuario OK
- 
- 
