@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory  } from 'vue-router'
 import Dashboard from '@/components/layouts/Default.vue'
 import Error from '@/views/Error.vue'
 
 const router = createRouter({
     
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     
     routes: [
         {

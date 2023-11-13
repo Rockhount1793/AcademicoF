@@ -3,8 +3,6 @@
     import Config from '@/config/'
     import Aplicacion from '@/controllers/Aplicacion'
 
-    // 'Content-Type': 'application/x-www-form-urlencoded',
-    
     const _urlsb = ()=>{ return Config.get('app','urlsb') }
     const _token = ()=>{ return Store.state.token }
     
@@ -61,7 +59,9 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
 
@@ -102,7 +102,9 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
             return res
@@ -147,7 +149,9 @@
                 return {'error': 500, 'message':'query failed' }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
             return res
@@ -202,7 +206,9 @@
                 return {"error": 500 }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
             return res
@@ -241,7 +247,9 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
             return res

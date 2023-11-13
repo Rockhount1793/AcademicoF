@@ -1,14 +1,19 @@
     
     import Store  from "@/store"
+    import AplicacionStore  from "@/store/Aplicacion"
     import Fetch from "@/fetch"
-    import  Router  from "@/router"
+    import Router  from "@/router"
     import Utilities from "@/utilities"
     import Config from "@/config"
 
     const Controller = {
 
-        'loading': function(boolean){ Store.commit('set_loading',boolean) },
-        'mini_loading': function(boolean){ Store.commit('set_mini_loading',boolean) },
+        'loading': function(boolean){ 
+            AplicacionStore.commit('set_loading',boolean) 
+        },
+        'mini_loading': function(boolean){ 
+            //Store.commit('set_mini_loading',boolean) 
+        },
 
         'redirect_end_sesion': function(error){
         
@@ -80,7 +85,7 @@
             }else{
 
                 if(bool_token){
-    
+
                     const response = await Fetch.get('/index')
     
                     if(response.status){
@@ -90,7 +95,7 @@
                         Store.commit('set_login',true)
                         
                         this.set_config_user(response.usuario)
-    
+                        
                         cb()
 
                     }

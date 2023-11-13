@@ -2,7 +2,7 @@
 const Development = {
 
     'app':{
-        'urlsf': "http://localhost:8080",
+        'urlsf': "http://localhost:5173",
         'urlsb': "http://localhost:8000",
         'token_header_key' : "token",
     }
