@@ -3,8 +3,6 @@
     import Config from '@/config/'
     import Aplicacion from '@/controllers/Aplicacion'
 
-    // 'Content-Type': 'application/x-www-form-urlencoded',
-    
     const _urlsb = ()=>{ return Config.get('app','urlsb') }
     const _token = ()=>{ return Store.state.token }
     
