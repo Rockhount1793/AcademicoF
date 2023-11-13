@@ -61,7 +61,9 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
 
@@ -102,7 +104,9 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
             return res
@@ -147,7 +151,9 @@
                 return {'error': 500, 'message':'query failed' }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
             return res
@@ -202,7 +208,9 @@
                 return {"error": 500 }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
             return res
@@ -241,7 +249,9 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                Aplicacion.loading(false)
+                setTimeout(()=>{
+                    Aplicacion.loading(false)
+                },500)
             })
 
             return res

@@ -1,4 +1,5 @@
 <template>
+    <Loader></Loader>
     <div class="mx-auto max-w-8xl">
     
         <div class="flex justify-between">
@@ -18,7 +19,7 @@
 </template>
   
 <script setup>
-
+    import Loader from "@/components/framework/Loader.vue";
     import NavBar from "@/components/framework/Barra.vue"
     import Sidebar from "@/components/framework/Lateral.vue"  
 
