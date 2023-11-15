@@ -1,14 +1,20 @@
     
     import Store  from "@/store"
     import Fetch from "@/fetch"
-    import  Router  from "@/router"
     import Utilities from "@/utilities"
+    import AplicacionStore from "@/store/Aplicacion"
+    import Router from "@/router"
     import Config from "@/config"
 
     const Controller = {
 
-        'loading': function(boolean){ Store.commit('set_loading',boolean) },
-        'mini_loading': function(boolean){ Store.commit('set_mini_loading',boolean) },
+       
+        'loading': function(boolean){ 
+            AplicacionStore.commit('set_loading',boolean) 
+        },
+        'mini_loading': function(boolean){ 
+            //Store.commit('set_mini_loading',boolean) 
+        },
 
         'redirect_end_sesion': function(error){
         

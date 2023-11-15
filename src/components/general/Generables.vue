@@ -39,7 +39,7 @@
                     <div class="mt-3 flex items-center mx-auto">
                         <!-- si el recurso es entre rango 1 - 10 NO REQUIERE selección de estudiante  -->
                         <button v-if="actual_generable.recurso < 10" @click="generar_archivo()" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                            <p class="capitalize">Generar {{ actual_generable.nombre }}</p>
+                            <p class="capitalize">Descargar {{ actual_generable.nombre }}</p>
                         </button>
 
                         <!-- si el recurso es entre rango 11 - 20 REQUIERE selección de estudiante  -->
