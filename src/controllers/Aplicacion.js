@@ -70,7 +70,7 @@
                 Router.push({ 'name':'Inicio' })
 
             }else{
-                alert("Error en la solicitud!")
+                console.error("Error en la solicitud!")
             }
 
             if(response.error == 401){
