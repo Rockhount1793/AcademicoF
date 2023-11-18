@@ -70,7 +70,7 @@
                 Router.push({ 'name':'Inicio' })
 
             }else{
-                alert("Usuario no encontrado!")
+                alert("Error en la solicitud!")
             }
 
             if(response.error == 401){
