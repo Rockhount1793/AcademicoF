@@ -59,9 +59,7 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                setTimeout(()=>{
-                    Aplicacion.loading(false)
-                },500)
+                Aplicacion.loading(false)
             })
 
 
@@ -102,9 +100,7 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                setTimeout(()=>{
-                    Aplicacion.loading(false)
-                },500)
+                Aplicacion.loading(false)
             })
 
             return res
@@ -149,9 +145,7 @@
                 return {'error': 500, 'message':'query failed' }
 
             }).finally(()=>{
-                setTimeout(()=>{
-                    Aplicacion.loading(false)
-                },500)
+                Aplicacion.loading(false)
             })
 
             return res
@@ -206,9 +200,7 @@
                 return {"error": 500 }
 
             }).finally(()=>{
-                setTimeout(()=>{
-                    Aplicacion.loading(false)
-                },500)
+                Aplicacion.loading(false)
             })
 
             return res
@@ -236,9 +228,7 @@
             const res = await fetch(_urlsb() + '/api' + ext , options)
             .then((response) => response.json())
             .then((data) => {
-                
                 return data
-
             })
             .catch((error) => {
 
@@ -247,9 +237,7 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                setTimeout(()=>{
-                    Aplicacion.loading(false)
-                },500)
+                Aplicacion.loading(false)
             })
 
             return res

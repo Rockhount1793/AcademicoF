@@ -9,7 +9,11 @@
     const Controller = {
 
         'loading': function(boolean){ 
-            AplicacionStore.commit('set_loading',boolean) 
+
+            setTimeout(()=>{
+                AplicacionStore.commit('set_loading',boolean)
+            },300)
+        
         },
         'mini_loading': function(boolean){ 
             //Store.commit('set_mini_loading',boolean) 
