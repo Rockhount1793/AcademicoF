@@ -166,6 +166,8 @@
     import Aplicacion from '@/controllers/Aplicacion'
     import Asignatura from '@/controllers/Asignatura'
     import Docente from '@/controllers/Docente'
+    import Utilities from '@/utilities'
+
   
     export default defineComponent({
     
@@ -249,6 +251,7 @@
                         Asignatura.store(asignatura.value)
 
                     }
+                    Utilities.show_save('Asignatura creada');
 
                     clearform()
                     seccion.value = 0

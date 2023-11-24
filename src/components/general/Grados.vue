@@ -127,6 +127,7 @@
     import Aplicacion from '@/controllers/Aplicacion'
     import Grado from '@/controllers/Grado'
     import Docente from '@/controllers/Docente'
+    import Utilities from '@/utilities';
   
     export default defineComponent({
     
@@ -180,7 +181,7 @@
                         docente_id.value = 0
                     })
 
-
+                    Utilities.show_save('Grado creado');
                 }
 
             }

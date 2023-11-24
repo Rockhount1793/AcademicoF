@@ -140,10 +140,25 @@
     
                 errores.value = []
     
-                if (typeof Number(json.falta_1) != 'number' || Number(json.falta_1) > 365 || Number(json.falta_1) < 0) { errores.value.push('¡valor en faltas primer periodo no debe ser menor a 0 o mayor a 365!') }
-                if (typeof Number(json.falta_2) != 'number' || Number(json.falta_2) > 365 || Number(json.falta_2) < 0) { errores.value.push('¡valor en faltas segundo periodo no debe ser menor a 0 o mayor a 365!') }
-                if (typeof Number(json.falta_3) != 'number' || Number(json.falta_3) > 365 || Number(json.falta_3) < 0) { errores.value.push('¡valor en faltas tercer periodo no debe ser menor a 0 o mayor a 365!') }
-                if (typeof Number(json.falta_4) != 'number' || Number(json.falta_4) > 365 || Number(json.falta_4) < 0) { errores.value.push('¡valor en faltas cuarto periodo no debe ser menor a 0 o mayor a 365!') }
+                if (typeof Number(json.falta_1) != 'number' || Number(json.falta_1) > 365 || Number(json.falta_1) < 0) {
+                    errores.value.push('¡valor en faltas primer periodo no debe ser menor a 0 o mayor a 365!') 
+                    json.falta_1 = 0;
+                }
+                if (typeof Number(json.falta_2) != 'number' || Number(json.falta_2) > 365 || Number(json.falta_2) < 0) {
+                    errores.value.push('¡valor en faltas segundo periodo no debe ser menor a 0 o mayor a 365!') 
+                    json.falta_2 = 0;
+
+                }
+                if (typeof Number(json.falta_3) != 'number' || Number(json.falta_3) > 365 || Number(json.falta_3) < 0) {
+                    errores.value.push('¡valor en faltas tercer periodo no debe ser menor a 0 o mayor a 365!') 
+                    json.falta_3 = 0;
+
+                }
+                if (typeof Number(json.falta_4) != 'number' || Number(json.falta_4) > 365 || Number(json.falta_4) < 0) { 
+                    errores.value.push('¡valor en faltas cuarto periodo no debe ser menor a 0 o mayor a 365!') 
+                    json.falta_4 = 0;
+
+                }
     
                 if (!errores.value.length) {
     

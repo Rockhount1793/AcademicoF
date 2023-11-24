@@ -27,7 +27,7 @@
 
             if(response.status){
                 Store.dispatch('add_estudiante',response.estudiante)
-                alert("Estudiante creado!")
+                //alert("Estudiante creado!")
             }else{
                 alert('Estudiante ya existe!')
             }

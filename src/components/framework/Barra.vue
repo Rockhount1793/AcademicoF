@@ -19,6 +19,19 @@
         Año lectivo actual: <span class="text-gray-900">{{lectivo.numero}}</span>
       </div>
 
+      <select v-model="sede_selected">
+        <option value="">Seleccione</option>
+        <option v-for="sede in sedes.value" :key='sede.id' :value='sede'>{{ sede.nombre }} </option>
+      </select>
+
+      
+      <select name="" id="">
+        <option value="">Seleccione año</option>
+        <option value="">2022</option>
+        <option value="">2023</option>
+        
+      </select>
+
     </div>
 
     <div class="ml-4 flex items-center space-x-3">
@@ -63,7 +76,7 @@
   
 <script setup>
 
-  import { ref, computed } from "vue"
+  import { ref, computed, onMounted, nextTick } from "vue"
 
   import{
     Menu,
@@ -77,6 +90,12 @@
     BellIcon
   } from '@heroicons/vue/24/outline'
 
+  import Store from "@/store"
+  import Aplicacion from "@/controllers/Aplicacion"
+  import Sede from "@/controllers/Sede"
+
+
+
   const userNavigation = [
     { name: 'Cerrar Sesión', href: '#' },
   ]
@@ -84,14 +103,41 @@
   const sidebarOpen = ()=>{
     // abrir lateral
   }
+ 
 
-  import Store from "@/store"
-  import Aplicacion from "@/controllers/Aplicacion"
 
+
+  
+  const sedes = ref([]);
+  const sede_selected = ref('');
+  sedes.value = computed(() => Store.state.sedes);
+
+  
+
+  onMounted(async ()=> {
+
+    await nextTick(() => {
+
+    Aplicacion.check_login(() => {
+        if (!Store.state.sedes.length) {
+            Sede.index()
+        }
+    })
+
+    })
+
+  }) 
+  
+  
+  const set_sede = (json) => {
+    Store.dispatch('change_sede', json)
+  }
+
+  
   const cerrar_sesion = async ()=>{ 
     Aplicacion.cerrar_sesion()
   }
-
+ 
   const user = computed(()=> Store.state.usuario )
   const urlsf = computed(()=> Store.state.urlsf )
   const lectivo = computed(()=> Store.state.actual_lectivo )

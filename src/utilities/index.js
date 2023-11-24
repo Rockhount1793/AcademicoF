@@ -1,3 +1,6 @@
+import $swal from 'sweetalert2'
+
+
 const funciones = {
 
     format_tnumber(i){ if(i != 0 || i!='0'){ return i.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.') }else{ return 0 } },
@@ -57,6 +60,15 @@ const funciones = {
 
       return result
   
+    },
+    show_save(msg){
+        $swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: msg,
+            showConfirmButton: false,
+            timer: 1300
+        });
     }
 
 }

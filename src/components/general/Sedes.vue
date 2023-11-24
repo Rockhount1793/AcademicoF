@@ -115,8 +115,9 @@ export default defineComponent({
             if (!nombre.value.length || nombre.value.length > 100) { errores.value.push('ingrese nombre') }
             // if (!direccion.value.length || direccion.value.length > 100) { errores.value.push('ingrese dirección') }
             // if (!telefono.value.length || telefono.value.length > 100) { errores.value.push('ingrese teléfono') }
-            if (!email.value.length || email.value.length > 100) { errores.value.push('ingrese email') }
-            if (!Utilities.check_email(email.value)) { errores.value.push('formato de email incorrecto!') }
+            
+            if ( email.value.length > 100) { errores.value.push('El email debe contener menos caracteres') }
+            if ( email.value.length && !Utilities.check_email(email.value)) { errores.value.push('El formato de email incorrecto!') }
 
             if (errores.value.length) {
                 alert(errores.value[0])
@@ -126,7 +127,7 @@ export default defineComponent({
                     'nombre': nombre.value,
                     'direccion': direccion.value,
                     'telefono': telefono.value,
-                    'email': email.value,
+                    'email': email.value||'correo@ejemplo.com',
                     'estado': 1
                 }, () => {
                     nombre.value = ''
@@ -136,6 +137,8 @@ export default defineComponent({
                 })
 
                 seccion.value = 0
+
+                Utilities.show_save('Sede guardada');
             }
 
         }
@@ -147,6 +150,7 @@ export default defineComponent({
         //# computed
         const urlsf = computed(() => Store.state.urlsf)
         const sedes = computed(() => Store.state.sedes)
+    
         const actual_sede = computed(() => Store.state.actual_sede)
 
         return {

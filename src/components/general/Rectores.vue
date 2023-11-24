@@ -200,6 +200,8 @@
                     identificacion = ''
                     telefono.value = ''
                     email.value = ''
+
+                    Utilities.show_save('Rector creado');
                 }
 
             }

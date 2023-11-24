@@ -179,18 +179,20 @@
 
                 </div>
 
-                <div class="mt-3 p-2 flex-1 lg:grid lg:grid-cols-2 lg:gap-2">
+                <div class="mt-3 p-2 flex-1  lg:grid lg:grid-cols-2 lg:gap-2">
 
-                    <button @click="clearForm(); seccion = 0" class="w-full lg:w-32 mt-3 mb-3 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
-                        Cancelar
-                    </button>
-                    
                     <div class="w-full lg:w-3/4">
-                        <button @click="guardar_actualizar()" class="lg:float-right w-full lg:w-32 mt-3 mb-3 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
+                        <button @click="guardar_actualizar()" class="lg:float-left w-full lg:w-32 mt-3 mb-3 h-7 shadow-md shadow-indigo-500 rounded bg-indigo-800 text-gray-50 px-2">
                             {{ docente.docente_id > 0 ? 'Actualizar' : 'Guardar'}}
                         </button>
                     </div>
-                        
+                    <div class="w-full lg:w-3/4 flex justify-end">
+
+                        <button @click="clearForm(); seccion = 0" class="w-full mr-4  lg:w-32 mt-3 mb-3 h-7 shadow-md shadow-indigo-500 rounded bg-white text-indigo-600 px-2 ">
+                            Cancelar
+                        </button>
+                    </div>
+                    
                 </div>                
 
             </div>
@@ -208,6 +210,9 @@ import Store from '@/store'
 import Aplicacion from '@/controllers/Aplicacion'
 import Docente from '@/controllers/Docente'
 import Utilities from '@/utilities'
+
+import $swal from 'sweetalert2'
+
 
 export default defineComponent({
 
@@ -254,7 +259,7 @@ export default defineComponent({
                 }else{
                     Docente.store(docente.value)
                 }
-                
+                Utilities.show_save('Docente creado');
                 clearForm()
                 seccion.value = 0
 
@@ -262,6 +267,7 @@ export default defineComponent({
 
         }
 
+        
         const validar = ()=>{
             errores.value = []
             if (!docente.value.nombres.length || docente.value.nombres.length > 99) { errores.value.push('ingrese nombres') }

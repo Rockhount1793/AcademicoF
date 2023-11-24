@@ -306,6 +306,8 @@
                         estudiante.value = {'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': '0'}
                     })
 
+                    Utilitie.show_save('Matricula creada');
+
                 }
 
             }

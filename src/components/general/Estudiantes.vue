@@ -538,7 +538,7 @@
     import Anexo_Estudiante from '@/controllers/Anexo_Estudiante'
     import Utilities from '@/utilities'
     import { Switch } from '@headlessui/vue'
-  
+
 export default defineComponent({
 
     'name': 'Estudiantes',
@@ -711,6 +711,8 @@ export default defineComponent({
                     'estado': 1,
                     'nacimiento': `${ nacimiento.value.year+'-'+nacimiento.value.month+'-'+nacimiento.value.day }`
                 })
+
+                Utilities.show_save('Estudiante creado');
 
                 clearForm()
 

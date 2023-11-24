@@ -121,6 +121,8 @@ import Asignatura from "@/controllers/Asignatura"
 import Calificacion from "@/controllers/Calificacion"
 import Utilitie from "@/utilities"
 
+
+
 export default defineComponent({
 
     'name': 'Calificaciones',
@@ -143,10 +145,22 @@ export default defineComponent({
 
             errores.value = []
 
-            if (typeof Number(json.nota_1) != 'number' || Number(json.nota_1) > 5 || Number(json.nota_1) < 0) { errores.value.push('¡valor de nota primer periodo no debe ser menor a 0 o mayor a 5!') }
-            if (typeof Number(json.nota_2) != 'number' || Number(json.nota_2) > 5 || Number(json.nota_2) < 0) { errores.value.push('¡valor de nota segundo periodo no debe ser menor a 0 o mayor a 5!') }
-            if (typeof Number(json.nota_3) != 'number' || Number(json.nota_3) > 5 || Number(json.nota_3) < 0) { errores.value.push('¡valor de nota tercer periodo no debe ser menor a 0 o mayor a 5!') }
-            if (typeof Number(json.nota_4) != 'number' || Number(json.nota_4) > 5 || Number(json.nota_4) < 0) { errores.value.push('¡valor de nota cuarto periodo no debe ser menor a 0 o mayor a 5!') }
+            if (typeof Number(json.nota_1) != 'number' || Number(json.nota_1) > 5 || Number(json.nota_1) < 0) { 
+                json.nota_1 = 0;
+                errores.value.push('¡valor de nota primer periodo no debe ser menor a 0 o mayor a 5!') 
+            }
+            if (typeof Number(json.nota_2) != 'number' || Number(json.nota_2) > 5 || Number(json.nota_2) < 0) {
+                json.nota_2 = 0;
+                errores.value.push('¡valor de nota segundo periodo no debe ser menor a 0 o mayor a 5!') 
+            }
+            if (typeof Number(json.nota_3) != 'number' || Number(json.nota_3) > 5 || Number(json.nota_3) < 0) {
+                json.nota_3 = 0;
+                errores.value.push('¡valor de nota tercer periodo no debe ser menor a 0 o mayor a 5!') 
+            }
+            if (typeof Number(json.nota_4) != 'number' || Number(json.nota_4) > 5 || Number(json.nota_4) < 0) {
+                json.nota_4 = 0;
+                errores.value.push('¡valor de nota cuarto periodo no debe ser menor a 0 o mayor a 5!') 
+            }
 
             if (!errores.value.length) {
 
@@ -159,6 +173,8 @@ export default defineComponent({
             }
 
         }
+
+        
 
         const filter_identificacion = (number) => {
             return Utilitie.format_tnumber(number)
