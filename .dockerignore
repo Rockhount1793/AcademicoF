@@ -1,0 +1,22 @@
+# Node Js
+node_modules
+npm-debug.log
+dist
+*.env
+*.md
+
+# Docker
+Dockerfile
+Containerfile
+ContainerfileDev
+compose.yaml
+compose*
+docker*
+.dockerignore
+
+# Git
+.git*
+.gitignore
+
+# Config
+.vscode
