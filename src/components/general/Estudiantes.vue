@@ -779,6 +779,13 @@ export default defineComponent({
             newValue ?  estudiante_temp.value.estado = 1 : estudiante_temp.value.estado = 0
         })
 
+        watch(actual_sede,(newValue, oldValue)=> {
+            Anexo_Estudiante.index()
+
+        })
+        
+        
+
         return {
             search,
             urlsf,
@@ -810,8 +817,11 @@ export default defineComponent({
             years
         }
 
-    },
 
+
+    },
+    
+    
     mounted() {
 
         this.$nextTick(() => {

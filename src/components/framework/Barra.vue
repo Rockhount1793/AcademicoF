@@ -20,15 +20,14 @@
       </div>
 
       <select v-model="sede_selected">
-        <option value="">Seleccione</option>
+        <option value="" selected>Seleccione la sede</option>
         <option v-for="sede in sedes.value" :key='sede.id' :value='sede'>{{ sede.nombre }} </option>
       </select>
 
       
-      <select name="" id="">
+      <select v-model="lectivo_selected">
         <option value="">Seleccione año</option>
-        <option value="">2022</option>
-        <option value="">2023</option>
+        <option v-for="lectivo in lectivos.value" :key="lectivo.lectivo_id" :value="lectivo">{{ lectivo.numero }}</option>
         
       </select>
 
@@ -76,8 +75,8 @@
   
 <script setup>
 
-  import { ref, computed, onMounted, nextTick } from "vue"
-
+  import { ref, computed, onMounted, nextTick, watch } from "vue"
+  
   import{
     Menu,
     MenuButton,
@@ -89,38 +88,61 @@
     Bars3BottomLeftIcon,
     BellIcon
   } from '@heroicons/vue/24/outline'
-
+  
   import Store from "@/store"
   import Aplicacion from "@/controllers/Aplicacion"
   import Sede from "@/controllers/Sede"
-
-
+  import Lectivo from '@/controllers/Lectivo'
 
   const userNavigation = [
     { name: 'Cerrar Sesión', href: '#' },
   ]
-  
   const sidebarOpen = ()=>{
     // abrir lateral
   }
  
-
-
-
   
   const sedes = ref([]);
+  const lectivos = ref([]);
   const sede_selected = ref('');
-  sedes.value = computed(() => Store.state.sedes);
+  const lectivo_selected = ref('');
 
+  sedes.value = computed(() => Store.state.sedes);
+  
+  lectivos.value = computed(()=> Store.state.lectivos);
+  //console.log('lectivos',lectivos);
+
+  const set_sede = (json) => {
+    Store.dispatch('change_sede', json)
+  }
+  const set_lectivo = (json)=>{
+      Store.dispatch('change_lectivo',json)
+  }
+
+
+  watch(sede_selected, (act,old)=> {
+   
+    set_sede(act);
+
+  })
+  watch(lectivo_selected, (newValue,oldValue)=> {
+    set_lectivo(newValue)
+  })
+  
   
 
   onMounted(async ()=> {
+   
+    
 
     await nextTick(() => {
 
     Aplicacion.check_login(() => {
         if (!Store.state.sedes.length) {
             Sede.index()
+        }
+        if(!Store.state.lectivos.length){
+            Lectivo.index(()=>{})   
         }
     })
 
@@ -129,10 +151,8 @@
   }) 
   
   
-  const set_sede = (json) => {
-    Store.dispatch('change_sede', json)
-  }
 
+ 
   
   const cerrar_sesion = async ()=>{ 
     Aplicacion.cerrar_sesion()

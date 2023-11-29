@@ -24,7 +24,7 @@
 
             </button>
 
-            <div v-if="modulo" class="z-10 w-full absolute border border-indigo-500 shadow-lg mt-0.5 rounded bg-white">
+            <div v-if="modulo" @mouseleave="()=> modulo = !modulo" class="z-10 w-full absolute border border-indigo-500 shadow-lg mt-0.5 rounded bg-white">
                 
                 <div class="h-48 overflow-auto">
 

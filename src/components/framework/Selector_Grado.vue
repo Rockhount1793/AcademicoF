@@ -9,7 +9,7 @@
                 <div class=" flex items-center justify-between space-x-1 w-full">
 
                     <span class="block capitalize font-semibold text-sm text-indigo-500 hover:text-indigo-400">
-                       {{grado_select.nombre}}
+                       {{grado_select.nombre?grado_select.nombre:'Grado'}}
                     </span>
 
                     <span class="flex right-0 inset-y-0 items-center pr-2 pointer-events-none">
@@ -24,7 +24,7 @@
 
             </button>
 
-            <div v-if="modulo" class="z-10 w-full absolute border border-indigo-500 shadow-lg mt-0.5 rounded bg-white">
+            <div v-if="modulo" @mouseleave="()=> modulo = !modulo" class="z-10 w-full absolute border border-indigo-500 shadow-lg mt-0.5 rounded bg-white">
 
                 <ul>
                     <li>
@@ -38,7 +38,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                 </svg>
                                 
-                                <input id="nombre" placeholder="Buscar Nombre.." type="text" v-model="buscador_nombre" class="h-6 w-full px-2 border-l border-gray-400 focus:outline-none  transition duration-300 ease-in-out text-sm" />
+                                <input  id="nombre" placeholder="Buscar Nombre.." type="text" v-model="buscador_nombre" class="h-6 w-full px-2 border-l border-gray-400 focus:outline-none  transition duration-300 ease-in-out text-sm" />
                             
                             </div>
                            
@@ -102,6 +102,8 @@
             const grado_id = ref(0)
             const buscador_nombre = ref('')
             let modulo = ref(false)
+
+            const grado_select = ref({'grado_id':0,'nombre':'Grado','numero': '#'})
 
             //# methods
             const set_grado = (json)=>{
@@ -195,24 +197,14 @@
 
             })
 
-            const grado_select = computed(()=>{
-
-                let grados = Store.state.grados
-
-                let temp = {'grado_id':0,'nombre':'Grado','numero': '#'}
-
-                if(grado_id.value > 0){
-                    temp = grados.find((p)=>p.grado_id == grado_id.value)
-                }
-            
-                return temp
-
-            })
+        
 
   
             const grado = computed(()=>{
                 return Store.state.actual_grado
             })
+
+            const actual_sede = computed(() => Store.state.actual_sede)
 
             watch(grado_id,(value) => {
       
@@ -251,6 +243,24 @@
                     grado_id.value = 0
 
                 }
+            })
+
+            watch(actual_sede, (newValue, oldValue)=> {
+                console.log(newValue)
+                grado_id.value = 0;
+                console.log(grado_id.value)
+                modulo.value = false;
+
+            })
+            watch(grado_id, (newValue, oldValue)=> {
+                console.log(newValue)
+
+                if(newValue > 0){
+                    grado_select.value = Store.state.grados.find((p)=>p.grado_id == grado_id.value)
+                }else{
+                    grado_select.value = {'grado_id':0,'nombre':'Grado','numero': '#'}
+                }
+            
             })
 
             return{
