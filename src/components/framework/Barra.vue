@@ -11,22 +11,22 @@
 
     <div class="flex text-2xl space-x-2 font-semibold text-gray-900">
  
-      <div class="rounded-md lg:rounded-full sm:text-end lg:bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20 ">
+      <div class="rounded-md sm:text-end lg:bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-8 text-indigo-400 ">
         Sede actual: <span class="text-gray-900 capitalize">{{ actual_sede.nombre }}</span>
       </div>
 
-      <div class="rounded-md  lg:rounded-full lg:bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20">
+      <div class="rounded-md lg:bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-8 text-indigo-400 ">
         Año lectivo actual: <span class="text-gray-900">{{lectivo.numero}}</span>
       </div>
 
-      <select v-model="sede_selected">
-        <option value="" selected>Seleccione la sede</option>
+      <select v-model="sede_selected" class="rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        <option value="" selected>Cambiar sede</option>
         <option v-for="sede in sedes.value" :key='sede.id' :value='sede'>{{ sede.nombre }} </option>
       </select>
 
       
-      <select v-model="lectivo_selected">
-        <option value="">Seleccione año</option>
+      <select v-model="lectivo_selected" class="rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        <option value="">Cambiar año</option>
         <option v-for="lectivo in lectivos.value" :key="lectivo.lectivo_id" :value="lectivo">{{ lectivo.numero }}</option>
         
       </select>

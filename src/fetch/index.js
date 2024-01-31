@@ -100,9 +100,9 @@
                 return {'error': 500 }
 
             }).finally(()=>{
-                setTimeout(()=>{
-                    Aplicacion.loading(false)
-                },50)
+      
+                 Aplicacion.loading(false)
+               
             })
 
             return res
@@ -147,9 +147,7 @@
                 return {'error': 500, 'message':'query failed' }
 
             }).finally(()=>{
-                setTimeout(()=>{
                     Aplicacion.loading(false)
-                },50)
             })
 
             return res
@@ -204,9 +202,7 @@
                 return {"error": 500 }
 
             }).finally(()=>{
-                setTimeout(()=>{
-                    Aplicacion.loading(false)
-                },50)
+                 Aplicacion.loading(false)
             })
 
             return res
