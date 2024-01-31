@@ -102,7 +102,7 @@
             }).finally(()=>{
                 setTimeout(()=>{
                     Aplicacion.loading(false)
-                },500)
+                },50)
             })
 
             return res
@@ -149,7 +149,7 @@
             }).finally(()=>{
                 setTimeout(()=>{
                     Aplicacion.loading(false)
-                },500)
+                },50)
             })
 
             return res
@@ -206,7 +206,7 @@
             }).finally(()=>{
                 setTimeout(()=>{
                     Aplicacion.loading(false)
-                },500)
+                },50)
             })
 
             return res
