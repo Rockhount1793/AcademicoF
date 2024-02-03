@@ -5,7 +5,6 @@
         <div class="relative col-span-12 lg:col-span-12 ">
 
             <button type="button" @click="mostrar_menu()" aria-haspopup="listbox" aria-expanded="true"  aria-labelledby="listbox-label" class="w-full border border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-
                 <div class=" flex items-center justify-between space-x-1 w-full">
 
                     <span class="block capitalize font-semibold text-sm text-indigo-500 hover:text-indigo-400">
@@ -23,7 +22,7 @@
                 </div>
 
             </button>
-
+            
             <div v-if="modulo" @mouseleave="()=> modulo = !modulo" class="z-10 w-full absolute border border-indigo-500 shadow-lg mt-0.5 rounded bg-white">
 
                 <ul>
@@ -196,8 +195,6 @@
                 }
 
             })
-
-        
 
   
             const grado = computed(()=>{

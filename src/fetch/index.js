@@ -155,7 +155,7 @@
         },
 
         'post_download' : async function(ext, body){
-            
+            console.log("Post Download ...")
             let options = {
             
                 method: 'POST',

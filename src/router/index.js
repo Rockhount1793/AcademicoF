@@ -27,7 +27,6 @@ const router = createRouter({
                     path: 'sedes',
                     name:'Sedes',
                     component: () => import('@/components/general/Sedes.vue'),
-                    
                 },
                 {
                     path: 'lectivos',

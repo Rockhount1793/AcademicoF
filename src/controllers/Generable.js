@@ -7,6 +7,7 @@
     const lectivo = ()=>{ return Store.state.actual_lectivo }
     const grado = ()=>{ return Store.state.actual_grado }
     const periodo = ()=>{ return Store.state.actual_periodo }
+    const actual_datos_certificado_estudio = () => { return Store.state.actual_datos_certificado_estudio }
 
     const Controller = {
 
@@ -82,7 +83,7 @@
         'informe_final_todos_file': async function(cb){
 
             let json = {
-                'periodo':periodo().periodo,
+                'periodo': periodo().periodo,
                 'nombre_sede': sede().nombre,
                 'sede_id': sede().sede_id,
                 'lectivo': lectivo().numero,
@@ -97,7 +98,7 @@
                 var fileURL = window.URL.createObjectURL(new Blob([response.data]))
                 var fURL = document.createElement('a')
                 fURL.href = fileURL
-                fURL.setAttribute('download', 'Informe_'+sede().nombre+'_'+grado().nombre+'.pdf')
+                fURL.setAttribute('download', 'Informe_final_'+sede().nombre+'_'+grado().nombre+'.pdf')
                 document.body.appendChild(fURL)
                 fURL.click()
     
@@ -239,6 +240,47 @@
             }
 
             if(response.error == 500){
+                Aplicacion.redirect_end_sesion(response)
+            }
+
+        },
+
+        // Invocado desde component/general/Generables.vue
+        'certificado_estudio_file_front': async function (matricula, cb) {
+
+            console.log("FRONT: Controllers/Generable.js -> certificado_estudio_file_front")
+
+            let json = {
+                'matricula_id': matricula.matricula_id,
+                'sede_id': sede().sede_id,
+                'lectivo': lectivo().numero,
+                'lectivo_id': lectivo().lectivo_id,
+                'grado_id': grado().grado_id,
+                'razon_constancia': actual_datos_certificado_estudio().razon,
+                'fecha_constancia': actual_datos_certificado_estudio().fecha
+            }
+
+            //POST: "generable/certificado_estudio_file_post" asignado en routes/Generable_Router.js del Back
+            const response = await Fetch.post_download('/generable/certificado_estudio_file_post', json)
+
+            if (response.status) {
+                console.log("FRONT: Controllers/Generable.js -> certificado_estudio_file_front. response.status OK")
+
+                var fileURL = window.URL.createObjectURL(new Blob([response.data]))
+                var fURL = document.createElement('a')
+                fURL.href = fileURL
+                //fURL.setAttribute('download', 'Certificado_de_Estudio_' + sede().nombre + '_' + grado().nombre + '.pdf')
+                fURL.setAttribute('download', 'Certificado_de_Estudio_' + '.pdf')
+                document.body.appendChild(fURL)
+                fURL.click()
+
+                cb()
+
+            } else {
+                alert("Ingrese Asignaturas en actual Grado!")
+            }
+
+            if (response.error == 500) {
                 Aplicacion.redirect_end_sesion(response)
             }
 

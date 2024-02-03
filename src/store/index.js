@@ -87,7 +87,8 @@ const store = createStore({
             directores: [],
 
             //# generables
-            boletin: {'asignaturas':[], grado:'', puesto:[0,0], rector:'', 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'faltas': 0 }
+            boletin: {'asignaturas':[], grado:'', puesto:[0,0], rector:'', 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'faltas': 0 },
+            actual_datos_certificado_estudio: { 'razon': '', 'fecha': '01-01-1900' }
 
         }
     },
@@ -196,7 +197,12 @@ const store = createStore({
 
         set_actual_estudiante(state,json){
             state.actual_estudiante = json
+        },
+
+        set_actual_datos_certificado_estudio(state,json){
+            state.actual_datos_certificado_estudio = json
         }
+        
     },
 
     actions:{
@@ -205,16 +211,16 @@ const store = createStore({
 
             const result = await this.dispatch('clear_data_sede')
             .then((res)=>{
-
                 if(res){
 
                     let usuario =  this.state.usuario
+                    
                     usuario.configuracion.sede_id = json.sede_id
                     usuario.configuracion['nombre_sede'] = json['nombre']
-                    this.commit('set_usuario',usuario)                    
+                    this.commit('set_usuario', usuario)
                     this.commit('set_actual_sede',json)
                     Usuario.update(usuario)
-   
+
                 }
 
             })
