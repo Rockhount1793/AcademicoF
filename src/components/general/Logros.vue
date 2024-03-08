@@ -23,13 +23,39 @@
                     
                     <span v-if="seccion == 1" class="hidden lg:inline-flex text-cyan-500 font-semibold"> | </span>
                     
-                    <p v-if="seccion == 1 && logros.length" @click="set_aprobado('aprobado')" :class="aprobado == 'aprobado' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                        Aprobado
+                    <p v-if="seccion == 1 && logros.length" @click="set_nivel_logro('bajo')" :class="nivel_logro == 'bajo' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        Bajo
                     </p>
                     
-                    <p v-if="seccion == 1 && logros.length" @click="set_aprobado('no_aprobado')" :class="aprobado == 'no_aprobado' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                        No Aprobado
+                    <p v-if="seccion == 1 && logros.length" @click="set_nivel_logro('basico')" :class="nivel_logro == 'basico' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        Basico
                     </p>
+
+                    <p v-if="seccion == 1 && logros.length" @click="set_nivel_logro('alto')" :class="nivel_logro == 'alto' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        Alto
+                    </p>
+
+                    <p v-if="seccion == 1 && logros.length" @click="set_nivel_logro('superior')" :class="nivel_logro == 'superior' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        Superior
+                    </p>
+
+                    <!--
+                    <p v-if="seccion == 1 && logros.length" @click="set_aprobado('bajo')" :class="aprobado == 'bajo' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        Bajo
+                    </p>
+                    
+                    <p v-if="seccion == 1 && logros.length" @click="set_aprobado('basico')" :class="aprobado == 'basico' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        Basico
+                    </p>
+
+                    <p v-if="seccion == 1 && logros.length" @click="set_aprobado('alto')" :class="aprobado == 'alto' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        Alto
+                    </p>
+
+                    <p v-if="seccion == 1 && logros.length" @click="set_aprobado('superior')" :class="aprobado == 'superior' ? 'bg-indigo-800':'bg-indigo-400' " class="shadow-indigo-500 shadow-md w-32 cursor-pointer rounded  text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        Superior
+                    </p>
+                    -->
 
                 </div>
 
@@ -70,7 +96,7 @@
                                                             <img class="h-10 w-10 rounded-full ml-2" :src="urlsf + '/images/avatar/' + firstLetter(asig.nombre) + '.png'" alt="asignatura.nombres" />
                                                         </div>-->
                                                         <div class="ml-6">
-                                                            <div class="font-medium text-gray-900 text-xl ">{{ index+1 }}. {{asig.nombre}}</div>
+                                                            <div class="font-medium text-gray-900 text-xl ">{{ index + 1 }}. {{asig.nombre}}</div>
                                                             <div class="text-gray-600">{{filter_director(asig.docente_id)}}</div>
                                                         </div>
                                                     </div>
@@ -96,7 +122,7 @@
 
                 <!-- Logros -->
                 <div v-if="seccion == 1" class="mt-3">
-                        
+                    
                     <div class="flex-1 content-center ">
                         
                         <div :key="index" v-for="(item, index, key) in logros" class="pb-3 pt-3 mx-auto w-full lg:w-3/4 px-2">
@@ -106,7 +132,7 @@
                             </div>
     
                             <div class="mt-0">
-                                <textarea v-model="item[aprobado]" class="appearance-none shadow focus:outline-none focus:ring-1 focus:ring-teal-500 shadow-teal-500 focus:shadow-none p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded border-t-0 rounded-t-none w-full" name="" id="edit_apro" rows="3"></textarea>
+                                <textarea v-model="item[nivel_logro]" class="appearance-none shadow focus:outline-none focus:ring-1 focus:ring-teal-500 shadow-teal-500 focus:shadow-none p-1 text-center font-semibold text-md placeholder:text-md placeholder:text-center rounded border-t-0 rounded-t-none w-full" name="" id="edit_apro" rows="3"></textarea>
                             </div>
     
                             <div class="flow-root">
@@ -126,11 +152,11 @@
         </div>
 
     </div>
-  
+
 </template>
-  
+
 <script>
-  
+
     import Barra from '@/components/framework/Barra.vue'
     import Lateral from '@/components/framework/Lateral.vue'
     import SelectorDirector from '@/components/framework/Selector_Docente.vue'
@@ -152,24 +178,46 @@
         'components':{
             Barra, Lateral, SelectorDirector, SelectorGrado
         },
-
+        
         setup(){
         
-            //# data 
+            //# data
             let listado = ref(false)
             let asignatura = ref({'asignatura_id': 0, 'nombre':''}) 
             let seccion = ref(0)
-            let aprobado = ref('aprobado')
-            let errores = ref([])
 
+            let nivel_logro = ref('bajo') //ref('bajo'): Nivel de logro seleccionado por defecto cuando se hace clic en "Ver Logros"
+            let errores = ref([])
+            
             //# methods
             const update_logro = (_logro)=>{
 
+                console.log('update_logro')
+                console.log('_logro: ' + _logro)
+                console.log('bajo: ' + _logro.bajo)
+                console.log('basico: ' + _logro.basico)
+                console.log('alto: ' + _logro.alto)
+                console.log('superior: ' + _logro.superior)
+                
+
                 errores.value = []
 
+                if(_logro.bajo == null)     _logro.bajo = "";
+                if(_logro.basico == null)   _logro.basico = "";
+                if(_logro.alto == null)     _logro.alto = "";
+                if(_logro.superior == null) _logro.superior = "";
+
+                if(nivel_logro == 'bajo' && (_logro.bajo.length == 0 || _logro.bajo.length > 500)){ errores.value.push('el texto debe tener menos de 500 caracteres') } 
+                if(nivel_logro == 'basico' && (_logro.basico.length == 0 || _logro.basico.length > 500)){ errores.value.push('el texto debe tener menos de 500 caracteres') } 
+                if(nivel_logro == 'alto' && (_logro.alto.length == 0 || _logro.alto.length > 500)){ errores.value.push('el texto debe tener menos de 500 caracteres') } 
+                if(nivel_logro == 'superior' && (_logro.superior.length == 0 || _logro.superior.length > 500)){ errores.value.push('el texto debe tener menos de 500 caracteres') } 
+
+                /*
                 if(_logro.aprobado.length == 0 || _logro.aprobado.length > 500){ errores.value.push('texto aprobado menor a 500 caracteres') } 
                 if(_logro.no_aprobado.length == 0 || _logro.no_aprobado.length > 500){ errores.value.push('texto no aprobado menor a 500 caracteres') } 
+                */
 
+                console.log('aqui')
                 if(!errores.value.length){
                     Logro.update(_logro)
                 }else{
@@ -177,8 +225,14 @@
                 }
             }
 
+            /*
             const set_aprobado = (string)=>{
                 aprobado.value = string
+            }
+            */
+
+            const set_nivel_logro = (string)=>{
+                nivel_logro.value = string
             }
 
             const set_director = (number)=>{ 
@@ -217,7 +271,7 @@
                 
                 return periodos[numero]
             })
-      
+
             //# computed
             const urlsf = computed(()=> Store.state.urlsf )
             const asignaturas = computed(()=> Store.state.asignaturas )
@@ -248,8 +302,10 @@
                 actual_grado,
                 get_logros,
                 asignatura,
-                aprobado,
-                set_aprobado,
+                //aprobado,
+                //set_aprobado,
+                nivel_logro,
+                set_nivel_logro,
                 update_logro,
                 filter_director,
                 comp_periodo

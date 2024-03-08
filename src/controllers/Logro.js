@@ -28,6 +28,8 @@
 
         'update': async function(json){
 
+            console.log('update:')
+            console.log('json = ' + json)
             const response = await Fetch.put('/logro/update',json)
 
             if(response.error == 500){
