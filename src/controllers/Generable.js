@@ -20,7 +20,7 @@
                 'sede_id': sede().sede_id,
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
-                'grado_id': grado().grado_id
+                'grado_id': grado().grado_id,
             }
 
             const response = await Fetch.post_download('/generable/boletin_todos_file',json)

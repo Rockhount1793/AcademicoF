@@ -85,7 +85,6 @@ const store = createStore({
             docentes:[],
             personas:[],
             directores: [],
-
             //# generables
             boletin: {'asignaturas':[], grado:'', puesto:[0,0], rector:'', 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'faltas': 0 },
             actual_datos_certificado_estudio: { 'razon': '', 'fecha': '01-01-1900' }
