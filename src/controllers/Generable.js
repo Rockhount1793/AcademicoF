@@ -8,10 +8,15 @@
     const grado = ()=>{ return Store.state.actual_grado }
     const periodo = ()=>{ return Store.state.actual_periodo }
     const actual_datos_certificado_estudio = () => { return Store.state.actual_datos_certificado_estudio }
+    const actual_generable_director = () => { return Store.state.actual_generable_director }
 
     const Controller = {
 
         'boletin_todos_file': async function(cb){
+
+            console.log('FRONT: boletin_todos_file')
+            console.log('actual_generable_director.docente_id: ' + actual_generable_director.docente_id)
+            
 
             let json = {
                 'periodo':periodo().periodo,
@@ -21,6 +26,7 @@
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
                 'grado_id': grado().grado_id,
+                'docente_id': actual_generable_director().docente_id
             }
 
             const response = await Fetch.post_download('/generable/boletin_todos_file',json)
@@ -54,7 +60,8 @@
                 'sede_id': sede().sede_id,
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
-                'grado_id': grado().grado_id
+                'grado_id': grado().grado_id,
+                'docente_id': actual_generable_director().docente_id
             }
 
             const response = await Fetch.post_download('/generable/boletin_final_todos_file',json)
@@ -88,7 +95,8 @@
                 'sede_id': sede().sede_id,
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
-                'grado_id': grado().grado_id
+                'grado_id': grado().grado_id,
+                'docente_id': actual_generable_director().docente_id
             }
 
             const response = await Fetch.post_download('/generable/informe_final_todos_file',json)
@@ -123,7 +131,8 @@
                 'sede_id': sede().sede_id,
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
-                'grado_id': grado().grado_id
+                'grado_id': grado().grado_id,
+                'docente_id': actual_generable_director().docente_id
             }
 
             const response = await Fetch.post_download('/generable/planilla_file',json)
@@ -193,7 +202,8 @@
                 'sede_id': sede().sede_id,
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
-                'grado_id': grado().grado_id
+                'grado_id': grado().grado_id,
+                'docente_id': actual_generable_director().docente_id
             }
 
             const response = await Fetch.post_download('/generable/boletin_estudiante_file',json)
@@ -227,7 +237,8 @@
                 'sede_id': sede().sede_id,
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
-                'grado_id': grado().grado_id
+                'grado_id': grado().grado_id,
+                'docente_id': actual_generable_director().docente_id
             }
             
             const response = await Fetch.post('/generable/boletin_estudiante_vista',json)

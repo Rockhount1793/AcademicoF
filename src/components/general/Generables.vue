@@ -6,56 +6,88 @@
     
         <!-- CONTENEDOR DE DATOS SOLICITADOS PARA GENERAR CERTIFICADO DE ESTUDIO -->
         <div id="div_certificado_datos" style="visibility: hidden; height: 0px;" >
-        <!-- Titulo -->
-        <div class="w-full text-center pt-5">
-            <p class="font-semibold text-gray-500 text-md">CERTIFICADO DE ESTUDIO</p>
-        </div>
+            <!-- Titulo -->
+            <div class="w-full text-center pt-5">
+                <p class="font-semibold text-gray-500 text-md">CERTIFICADO DE ESTUDIO</p>
+            </div>
 
-        <!-- Contenedor Nombre del Estudiante -->
-        <div class="w-full px-4 py-5">
-        
             <!-- Contenedor Nombre del Estudiante -->
-            <div class="w-full border px-2 py-3 rounded">
-            <p class="font-semibold text-gray-500 text-md">Generando certificado a:</p>
+            <div class="w-full px-4 py-5">
+            
+                <!-- Contenedor Nombre del Estudiante -->
+                <div class="w-full border px-2 py-3 rounded">
+                    <p class="font-semibold text-gray-500 text-md">Generando certificado a:</p>
+                </div>
+
+                <div class="w-full border px-2 py-3 rounded">
+                    <p id="p_certificado_datos_nombre_estudiante" class="font-semibold text-gray-500 text-md">Estudiante</p>
+                </div>
+
             </div>
-            <div class="w-full border px-2 py-3 rounded">
-            <p id="p_certificado_datos_nombre_estudiante" class="font-semibold text-gray-500 text-md">Estudiante</p>
-            </div>
-
-        </div>
-
-        <!-- Contenedor datos solicitados-->
-        <div class="w-full px-4 mt-5">
-
-            <!-- Fecha del certificado -->
-            <div class="w-full">
-            <p class="mx-2 font-semibold text-gray-500 text-md">Fecha del certificado</p>
-            <input id="datos_constancia_estudio_fecha" type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-
-            <!-- <input @click="Store.state().actual_datos_certificado_estudio.fecha ='Hola'" type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
-                -->
-            </div>
-        
-            <!-- Razón del certificado -->
-            <div class="w-full mt-3">
-            <p class="mx-2 font-semibold text-gray-500 text-md">Razón del certificado</p>
-            <!-- <input @click="Store.state().actual_datos_certificado_estudio.razon = 'Razon'" type="text" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            <!-- 
+            Contenedor datos solicitados
             -->
-            <input id="datos_constancia_estudio_razon" type="text" value="" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            <div class="w-full px-4 mt-5">
+
+                <!-- Fecha del certificado -->
+                <div class="w-full">
+                    <p class="mx-2 font-semibold text-gray-500 text-md">Fecha del certificado</p>
+                    <input id="datos_constancia_estudio_fecha" type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+
+                    <!-- <input @click="Store.state().actual_datos_certificado_estudio.fecha ='Hola'" type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                        -->
+                </div>
+            
+                <!-- Razón del certificado -->
+                <div class="w-full mt-3">
+                    <p class="mx-2 font-semibold text-gray-500 text-md">Razón del certificado</p>
+                    <!-- <input @click="Store.state().actual_datos_certificado_estudio.razon = 'Razon'" type="text" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                    -->
+                    <input id="datos_constancia_estudio_razon" type="text" value="" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+
+                </div>
 
             </div>
-
-        </div>
 
             <!-- Contenedor botón Generar Certificado -->
-        <div class="w-full px-6 mt-5">
-            <button @click="generar_certificado_estudio()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center">
-            Generar Certificado
-            </button>
-            <button @click="cancelar_certificado_estudio()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center mx-4">
-            Cancelar
-            </button>
+            <div class="w-full px-6 mt-5">
+                <button @click="generar_certificado_estudio()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center">
+                Generar Certificado
+                </button>
+                <button @click="cancelar_certificado_estudio()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center mx-4">
+                Cancelar
+                </button>
             </div>
+        </div>
+
+        <!-- CONTENEDOR DE SELECCION DEL DIRECTOR DE CURSO QUE VA A APARECER EN EL GENERABLE -->
+        <!-- <div id="div_seleccion_director" style="visibility: hidden; height: 0px;" > -->
+        <div id="div_seleccion_director" style="visibility: hidden; height: 0px;" >
+            
+            <!-- Titulo -->
+            <div class="w-full text-center pt-5">
+                <p class="font-semibold text-gray-500 text-md">SELECCIONE EL DIRECTOR DE CURSO</p>
+            </div>
+
+            <!-- Contenedor datos solicitados-->
+            <div class="w-full px-4 mt-5">
+                <!-- Director de curso -->
+                <div class="w-80 mt-3">
+                    <p class="mx-2 font-semibold text-gray-500 text-md">Director de curso</p>
+                    <SelectorDirector id="selector_director_generable" @set_director="set_director" class="mx-auto"></SelectorDirector>
+                </div>
+            </div>
+            
+            <!-- Contenedor botón Generar Boletin -->
+            <div class="w-full px-6 mt-5">
+                <button @click="generar_archivo()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center">
+                Generar
+                </button>
+                <button @click="cancelar_generar_archivo()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center mx-4">
+                Cancelar
+                </button>
+            </div>
+
         </div>
 
         <!-- CONTENEDOR DE OPCIONES PARA GENERARBLES -->
@@ -96,7 +128,10 @@
 
                         <div class="mt-3 flex items-center mx-auto">
                             <!-- si el recurso es entre rango 1 - 10 NO REQUIERE selección de estudiante  -->
-                            <button v-if="actual_generable.recurso < 10" @click="generar_archivo()" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                            <!-- 
+                            <button v-if="actual_generable.recurso < 10" @click="pedir_director_curso()" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                            -->
+                            <button v-if="actual_generable.recurso < 10" @click="pedir_director_curso()" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                                 <p class="capitalize">Descargar {{ actual_generable.nombre }}</p>
                             </button>
 
@@ -119,7 +154,7 @@
                         <div class="px-0 sm:px-2 lg:px-4">
 
                             <div v-if="!matriculas.length" class="sm:flex sm:items-center">
-                                <p class="px-2 font-semibold text-gray-500"> No hay matriculas creados</p>    
+                                <p class="px-2 font-semibold text-gray-500"> No hay matriculas creados</p>
                             </div>
 
                             <div v-else class="mt-2">
@@ -160,10 +195,7 @@
                                                         <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ matri.estudiante_estado ? 'Activo':'Inactivo'  }} </span>
                                                     </td>
 
-                                                    <td v-if="actual_generable.recurso > 10" class="text-sm w-40">
-                                                        <!--
-                                                            <button @click="generar_certificado_estudio(matri)" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                                        -->
+                                                    <td v-if="actual_generable.recurso > 10" class="text-sm w-52">
                                                         <button @click="pedir_datos_certificado_estudio(matri)" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                                                             Certificado de Estudio
                                                         </button>
@@ -211,6 +243,7 @@
     import Matricula from "@/controllers/Matricula"
     import Generable from "@/controllers/Generable"
     import Utilitie from "@/utilities"
+
   
     export default defineComponent({
     
@@ -227,6 +260,7 @@
             let errores = ref([])
 
             let Matricula_Global
+            let director_id
             //# methods
             
             const generar_boletines = ()=>{
@@ -277,6 +311,40 @@
                 }
             }
 
+            const pedir_director_curso = (() => {
+                errores.value = []
+                if (!matriculas.value.length) { errores.value.push('No hay matriculas creadas!') }
+                if (actual_sede.value.sede_id === 0) { errores.value.push('Seleccione sede') }
+                if (actual_lectivo.value.lectivo_id === 0) { errores.value.push('Seleccione lectivo') }
+                if (actual_grado.value.grado_id === 0) { errores.value.push('Seleccione grado') }
+                if (actual_periodo.value.periodo === 0) { errores.value.push('Seleccione periodo') }
+                if (actual_generable.value.recurso === 0) { errores.value.push('Seleccione generable') }
+                if (!errores.value.length) {
+                    //Mostrar div_seleccion_director
+                    console.log("Generando el Certificado de estudio...")
+                    
+                    document.getElementById('div_generables_grado').style.visibility = 'hidden'
+                    document.getElementById('div_generables_grado').style.height = 0
+
+                    document.getElementById('div_seleccion_director').style.visibility = 'visible'
+                    document.getElementById('div_seleccion_director').style.height = 0
+                    document.getElementById('div_seleccion_director').style.height = 'auto'
+                    
+                    //document.getElementById('selector_director_generable').value = ""
+
+                } else {
+                    alert(errores.value[0])
+                }
+            })
+            const cancelar_generar_archivo = () => {
+                document.getElementById('div_seleccion_director').style.visibility = 'hidden';
+                document.getElementById('div_seleccion_director').style.height = 0;
+
+                document.getElementById('div_generables_grado').style.visibility = 'visible';
+                document.getElementById('div_generables_grado').style.height = 0
+                document.getElementById('div_generables_grado').style.height = 'auto';
+            }
+           
             const pedir_datos_certificado_estudio = (matricula => {
                 errores.value = []
                 if (!matriculas.value.length) { errores.value.push('No hay matriculas creadas!') }
@@ -344,7 +412,7 @@
 
                         let datos_certificado_estudio = { 'razon': razon_constancia_estudio, 'fecha': fecha_constancia_estudio }
                         Store.commit('set_actual_datos_certificado_estudio', datos_certificado_estudio)
-
+                        
                         Generable.certificado_estudio_file_front(Matricula_Global, () => { })
 
                     }
@@ -385,7 +453,6 @@
                 if(actual_generable.value.recurso === 0){ errores.value.push('Seleccione generable') }
                 
                 if(!errores.value.length){
-
                     switch (actual_generable.value.recurso) {
                         // rango 1-10
                         case 1: generar_boletines(); break;
@@ -394,6 +461,13 @@
                         //rango 11-20
                         case 11: generar_certificado(matricula); break;
                     }
+                    document.getElementById('div_seleccion_director').style.visibility = 'hidden';
+                    document.getElementById('div_seleccion_director').style.height = 0;
+
+                    document.getElementById('div_generables_grado').style.visibility = 'visible';
+                    document.getElementById('div_generables_grado').style.height = 0
+                    document.getElementById('div_generables_grado').style.height = 'auto';
+
 
                 }else{
                     alert(errores.value[0])
@@ -514,6 +588,8 @@
                 generar_informe,
                 generar_estudiante_pdf,
                 generar_estudiante_vista,
+                pedir_director_curso,
+                cancelar_generar_archivo,
                 pedir_datos_certificado_estudio,
                 cancelar_certificado_estudio,
                 generar_certificado_estudio,

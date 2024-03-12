@@ -87,8 +87,9 @@ const store = createStore({
             directores: [],
             //# generables
             boletin: {'asignaturas':[], grado:'', puesto:[0,0], rector:'', 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'faltas': 0 },
-            actual_datos_certificado_estudio: { 'razon': '', 'fecha': '01-01-1900' }
-
+            actual_datos_certificado_estudio: { 'razon': '', 'fecha': '01-01-1900' },
+            actual_generable_director: { 'docente_id': 5 }
+            
         }
     },
     
@@ -200,8 +201,12 @@ const store = createStore({
 
         set_actual_datos_certificado_estudio(state,json){
             state.actual_datos_certificado_estudio = json
-        }
+        },
         
+        set_actual_generable_director(state,json){
+            state.actual_generable_director = json
+        }
+
     },
 
     actions:{

@@ -104,6 +104,9 @@
             //# methods
             const set_director = (json)=>{
                 director_id.value = json.director_id
+                console.log('docente_id: ' + director_id.value)
+                let actual_generable_director = { 'docente_id': director_id }
+                Store.commit('set_actual_generable_director', actual_generable_director)
             }
 
             const mostrar_menu = ()=>{
