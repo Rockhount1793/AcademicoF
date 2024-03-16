@@ -95,7 +95,6 @@
 
         setup(props, { emit }){
 
-
             //# data
             const director_id = ref(0)
             const buscador_nombre = ref('')

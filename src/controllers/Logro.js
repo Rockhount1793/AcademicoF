@@ -21,7 +21,8 @@
             }
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+                alert("Error interno de la aplicación!")
+                //Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -33,7 +34,8 @@
             const response = await Fetch.put('/logro/update',json)
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+                alert("Error interno de la aplicación!")
+                //Aplicacion.redirect_end_sesion(response)
             }
             
         }

@@ -19,7 +19,8 @@ const Controller = {
         }
 
         if(response.error == 500){
-            Aplicacion.redirect_end_sesion(response)
+            alert("Error interno de la aplicación!")
+            //Aplicacion.redirect_end_sesion(response)
         }
 
     },
@@ -34,7 +35,8 @@ const Controller = {
         }
 
         if(response.error == 500){
-            Aplicacion.redirect_end_sesion(response)
+            alert("Error interno de la aplicación!")
+            //Aplicacion.redirect_end_sesion(response)
         }
         
     }

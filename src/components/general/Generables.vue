@@ -32,7 +32,7 @@
                 <!-- Fecha del certificado -->
                 <div class="w-full">
                     <p class="mx-2 font-semibold text-gray-500 text-md">Fecha del certificado</p>
-                    <input id="datos_constancia_estudio_fecha" type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                    <input id="datos_constancia_estudio_fecha" required type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
 
                     <!-- <input @click="Store.state().actual_datos_certificado_estudio.fecha ='Hola'" type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                         -->
@@ -43,7 +43,7 @@
                     <p class="mx-2 font-semibold text-gray-500 text-md">Razón del certificado</p>
                     <!-- <input @click="Store.state().actual_datos_certificado_estudio.razon = 'Razon'" type="text" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                     -->
-                    <input id="datos_constancia_estudio_razon" type="text" value="" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                    <input id="datos_constancia_estudio_razon" required type="text" value="" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
 
                 </div>
 
@@ -66,7 +66,13 @@
             
             <!-- Titulo -->
             <div class="w-full text-center pt-5">
-                <p class="font-semibold text-gray-500 text-md">SELECCIONE EL DIRECTOR DE CURSO</p>
+                <!-- Texto de descripcion de archivo a generar-->
+                <p class="font-semibold text-gray-500 text-md " style="text-transform: uppercase;">GENERANDO {{ actual_generable.nombre }}</p>
+            </div>
+
+            <!-- Contenedor Texto descripción-->
+            <div class="w-full px-4 mt-5">
+                <p class="font-semibold text-gray-500 text-md">Seleccione el director de curso</p>
             </div>
 
             <!-- Contenedor datos solicitados-->
@@ -74,19 +80,21 @@
                 <!-- Director de curso -->
                 <div class="w-80 mt-3">
                     <p class="mx-2 font-semibold text-gray-500 text-md">Director de curso</p>
-                    <SelectorDirector id="selector_director_generable" @set_director="set_director" class="mx-auto"></SelectorDirector>
+                    <SelectorDirector className="seldir" id="selector_director_generable" @set_director="set_director" @reset_director="reset_director" class="mx-auto"></SelectorDirector>
                 </div>
             </div>
             
-            <!-- Contenedor botón Generar Boletin -->
+            <!-- Contenedor botón Generar -->
             <div class="w-full px-6 mt-5">
                 <button @click="generar_archivo()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center">
                 Generar
                 </button>
-                <button @click="cancelar_generar_archivo()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center mx-4">
-                Cancelar
+                <button @click="volver_generar_archivo()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center mx-4">
+                Volver
                 </button>
             </div>
+
+            <label id="labelResultado" style="visibility: hidden">{{ actual_generable.nombre }} generado exitosamente</label>
 
         </div>
 
@@ -263,52 +271,96 @@
             let director_id
             //# methods
             
+            //GENERAR BOLETINES
             const generar_boletines = ()=>{
-                
                 if(actual_periodo.value.periodo < 5){
                     Generable.boletin_todos_file(()=>{ })
-                }
-                
-                if(actual_periodo.value.periodo == 5){
+                }else if(actual_periodo.value.periodo == 5){
                     Generable.boletin_final_todos_file(()=>{ })
                 }
-
             }
 
+            //GENERAR INFORME FINAL
             const generar_informe = ()=>{
-                
-                if(actual_periodo.value.periodo < 5){
-                    alert("Para generar el informe final por favor seleccione el Periodo '5. Final'")
-                    //Generable.informe_todos_file(()=>{ })
-                }
-
                 if(actual_periodo.value.periodo == 5){
                     Generable.informe_final_todos_file(()=>{ })
                 }
-
             }
 
+            //GENERAR PLANILLA
             const generar_planilla = ()=>{
                 if (actual_periodo.value.periodo < 5) {
                     Generable.planilla_file(() => { })
                 }
-                else if (actual_periodo.value.periodo == 5) {
-                    alert("Para generar la planilla por favor seleccione un periodo de 1 a 4")
-                }
-
-                
             }
-
-       
+            
+            //GENERAR CERTIFICADO
             const generar_certificado = (matricula)=>{
                 if(actual_periodo.value.periodo < 5){
                     alert("En construcción!")
                     //Generable.certificado_estudio_file(matricula,()=>{ })
-                }
-
-                if(actual_periodo.value.periodo == 5){
+                } else if(actual_periodo.value.periodo == 5){
                     Generable.certificado_final_file(matricula,()=>{ })
                 }
+            }
+            
+            const mostrar_seleccion_director = () => {
+                //let actual_generable_director = { 'docente_id': 0 }
+                //Store.commit('set_actual_generable_director', actual_generable_director)
+               
+                //let selector_director_generable = document.getElementById('selector_director_generable').value
+                //selector_director_generable.setup(0)
+
+                document.getElementById('div_seleccion_director').style.visibility = 'visible';
+                document.getElementById('div_seleccion_director').style.height = 0;
+
+                document.getElementById('div_generables_grado').style.visibility = 'hidden';
+                document.getElementById('div_generables_grado').style.height = 0
+                document.getElementById('div_generables_grado').style.height = 'auto';
+
+            }
+
+            const ocultar_seleccion_director = () => {
+                document.getElementById('div_seleccion_director').style.visibility = 'hidden';
+                document.getElementById('div_seleccion_director').style.height = 0;
+
+                document.getElementById('div_generables_grado').style.visibility = 'visible';
+                document.getElementById('div_generables_grado').style.height = 0
+                document.getElementById('div_generables_grado').style.height = 'auto';
+
+            }
+            
+            const volver_generar_archivo = () => {
+                ocultar_seleccion_director()
+            }
+            
+            const mostrar_datos_certificado_estudio = () => {
+
+                document.getElementById('div_generables_grado').style.visibility = 'hidden'
+                document.getElementById('div_generables_grado').style.height = 0
+
+                document.getElementById('div_certificado_datos').style.visibility = 'visible'
+                document.getElementById('div_certificado_datos').style.height = 'auto'
+                
+                document.getElementById('p_certificado_datos_nombre_estudiante').textContent = Matricula_Global.nombres + " " + Matricula_Global.apellidos
+                document.getElementById('datos_constancia_estudio_fecha').value = ""
+                document.getElementById('datos_constancia_estudio_razon').value = ""
+
+            }
+            
+            const ocultar_datos_certificado_estudio = () => {
+
+                document.getElementById('div_certificado_datos').style.visibility = 'hidden';
+                document.getElementById('div_certificado_datos').style.height = 0;
+
+                document.getElementById('div_generables_grado').style.visibility = 'visible';
+                document.getElementById('div_generables_grado').style.height = 0
+                document.getElementById('div_generables_grado').style.height = 'auto';
+
+            }
+
+            const cancelar_certificado_estudio = () => {
+                ocultar_datos_certificado_estudio()
             }
 
             const pedir_director_curso = (() => {
@@ -323,28 +375,35 @@
                     //Mostrar div_seleccion_director
                     console.log("Generando el Certificado de estudio...")
                     
-                    document.getElementById('div_generables_grado').style.visibility = 'hidden'
-                    document.getElementById('div_generables_grado').style.height = 0
-
-                    document.getElementById('div_seleccion_director').style.visibility = 'visible'
-                    document.getElementById('div_seleccion_director').style.height = 0
-                    document.getElementById('div_seleccion_director').style.height = 'auto'
-                    
+                    //document.getElementById('labelResultado').style.visibility = 'hidden'
                     //document.getElementById('selector_director_generable').value = ""
+                    switch (actual_generable.value.recurso) {
+                        // rango 1-10
+                        case 1: 
+                            mostrar_seleccion_director();
+                        break;
+                        case 2: 
+                            if(actual_periodo.value.periodo < 5){
+                                alert("Para generar el informe final por favor seleccione el Periodo '5. Final'")
+                            }else if(actual_periodo.value.periodo == 5){
+                                mostrar_seleccion_director()
+                            }
+                        break;
+                        case 3: 
+                            if (actual_periodo.value.periodo == 5) {
+                                alert("Para generar la planilla por favor seleccione un periodo de 1 a 4")
+                            }
+                            else
+                                generar_planilla()
+                        break;
+                    }
+                    
 
                 } else {
                     alert(errores.value[0])
                 }
             })
-            const cancelar_generar_archivo = () => {
-                document.getElementById('div_seleccion_director').style.visibility = 'hidden';
-                document.getElementById('div_seleccion_director').style.height = 0;
-
-                document.getElementById('div_generables_grado').style.visibility = 'visible';
-                document.getElementById('div_generables_grado').style.height = 0
-                document.getElementById('div_generables_grado').style.height = 'auto';
-            }
-           
+            
             const pedir_datos_certificado_estudio = (matricula => {
                 errores.value = []
                 if (!matriculas.value.length) { errores.value.push('No hay matriculas creadas!') }
@@ -358,33 +417,13 @@
                     //Mostrar div_datos_certificado_estudio
                     Matricula_Global = matricula
                     console.log("Generando el Certificado de estudio...")
-                    
-                    document.getElementById('div_generables_grado').style.visibility = 'hidden'
-                    document.getElementById('div_generables_grado').style.height = 0
 
-                    document.getElementById('div_certificado_datos').style.visibility = 'visible'
-                    document.getElementById('div_certificado_datos').style.height = 0
-                    document.getElementById('div_certificado_datos').style.height = 'auto'
-                    
-                    document.getElementById('p_certificado_datos_nombre_estudiante').textContent = Matricula_Global.nombres + " " + Matricula_Global.apellidos
-                    document.getElementById('datos_constancia_estudio_fecha').value = ""
-                    document.getElementById('datos_constancia_estudio_razon').value = ""
-
+                    mostrar_datos_certificado_estudio()
                 } else {
                     alert(errores.value[0])
                 }
 
             })
-
-            const cancelar_certificado_estudio = () => {
-                document.getElementById('div_certificado_datos').style.visibility = 'hidden';
-                document.getElementById('div_certificado_datos').style.height = 0;
-
-                document.getElementById('div_generables_grado').style.visibility = 'visible';
-                document.getElementById('div_generables_grado').style.height = 0
-                document.getElementById('div_generables_grado').style.height = 'auto';
-
-            }
 
             const generar_certificado_estudio = () => {
 
@@ -400,23 +439,27 @@
                     if (actual_periodo.value.periodo < 5) {
                         console.log("Generando el Certificado de estudio...")
 
-                        document.getElementById('div_certificado_datos').style.visibility = 'hidden';
-                        document.getElementById('div_certificado_datos').style.height = 0;
-
-                        document.getElementById('div_generables_grado').style.visibility = 'visible';
-                        document.getElementById('div_generables_grado').style.height = 0
-                        document.getElementById('div_generables_grado').style.height = 'auto';
-
+                        //Capturar datos de interfaz 
                         let fecha_constancia_estudio = document.getElementById('datos_constancia_estudio_fecha').value
                         let razon_constancia_estudio = document.getElementById('datos_constancia_estudio_razon').value
 
-                        let datos_certificado_estudio = { 'razon': razon_constancia_estudio, 'fecha': fecha_constancia_estudio }
-                        Store.commit('set_actual_datos_certificado_estudio', datos_certificado_estudio)
-                        
-                        Generable.certificado_estudio_file_front(Matricula_Global, () => { })
+                        //Validar datos de interfaz
+                        if(fecha_constancia_estudio === "")
+                        {
+                            alert("La fecha del certificado de estudio es requerida, por favor seleccione una fecha!")
+                        }else if(razon_constancia_estudio === "")
+                        {
+                            alert("La razón del certificado de estudio es requerida, no puede ser un texto vacío. Por favor digite la razón del certificado!")
+                        }
+                        else{
+                            //Generar certificado
+                            let datos_certificado_estudio = { 'razon': razon_constancia_estudio, 'fecha': fecha_constancia_estudio }
+                            Store.commit('set_actual_datos_certificado_estudio', datos_certificado_estudio)
+                            
+                            Generable.certificado_estudio_file_front(Matricula_Global, () => { })
+                        }
 
                     }
-
                     if (actual_periodo.value.periodo == 5) {
                         Generable.certificado_final_file(matricula, () => { })
                     }
@@ -453,21 +496,24 @@
                 if(actual_generable.value.recurso === 0){ errores.value.push('Seleccione generable') }
                 
                 if(!errores.value.length){
-                    switch (actual_generable.value.recurso) {
-                        // rango 1-10
-                        case 1: generar_boletines(); break;
-                        case 2: generar_informe(); break;
-                        case 3: generar_planilla(); break;
-                        //rango 11-20
-                        case 11: generar_certificado(matricula); break;
+                    //Obtener id de director del Store
+                    let director_id = Store.state.actual_generable_director.docente_id;
+
+                    //Validar selección
+                    if(director_id === 0)
+                    {
+                        alert("Director no seleccionado. Por favor seleccione un director de curso!")
                     }
-                    document.getElementById('div_seleccion_director').style.visibility = 'hidden';
-                    document.getElementById('div_seleccion_director').style.height = 0;
-
-                    document.getElementById('div_generables_grado').style.visibility = 'visible';
-                    document.getElementById('div_generables_grado').style.height = 0
-                    document.getElementById('div_generables_grado').style.height = 'auto';
-
+                    else {
+                        switch (actual_generable.value.recurso) {
+                            // rango 1-10
+                            case 1: generar_boletines(); break;
+                            case 2: generar_informe(); break;
+                            case 3: generar_planilla(); break;
+                            //rango 11-20
+                            case 11: generar_certificado(matricula); break;
+                        }
+                    }
 
                 }else{
                     alert(errores.value[0])
@@ -509,6 +555,7 @@
                 if(actual_periodo.value.periodo === 0){ errores.value.push('Seleccione periodo') }
                 if(actual_generable.value.recurso === 0){ errores.value.push('Seleccione generable') }
 
+                //generar_archivo
                 if(!errores.value.length){
 
                     if(actual_periodo.value.periodo < 5){
@@ -589,7 +636,7 @@
                 generar_estudiante_pdf,
                 generar_estudiante_vista,
                 pedir_director_curso,
-                cancelar_generar_archivo,
+                volver_generar_archivo,
                 pedir_datos_certificado_estudio,
                 cancelar_certificado_estudio,
                 generar_certificado_estudio,

@@ -47,7 +47,8 @@
             }
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+                alert("Ocurrió un error inesperado al intentar generar el archivo!")
+                //Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -82,7 +83,8 @@
             }
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+                alert("Ocurrió un error inesperado al intentar generar el archivo!")                
+                //Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -117,7 +119,8 @@
             }
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+                alert("Ocurrió un error inesperado al intentar generar el archivo!")                
+                //Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -153,7 +156,8 @@
             }
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+                alert("Ocurrió un error inesperado al intentar generar el archivo!")                
+                //Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -187,7 +191,8 @@
             }
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+                alert("Ocurrió un error inesperado al intentar generar el archivo!")                
+                //Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -222,7 +227,8 @@
             }
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+                alert("Ocurrió un error inesperado al intentar generar el archivo!")                
+                //Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -251,7 +257,8 @@
             }
 
             if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
+                alert("Ocurrió un error inesperado al intentar generar el archivo!")                
+                //Aplicacion.redirect_end_sesion(response)
             }
 
         },
@@ -292,7 +299,8 @@
             }
 
             if (response.error == 500) {
-                Aplicacion.redirect_end_sesion(response)
+                alert("Ocurrió un error inesperado al intentar generar el archivo!")                
+                //Aplicacion.redirect_end_sesion(response)
             }
 
         }
