@@ -214,6 +214,7 @@
             }
             const set_director = (number)=>{ 
                 asignatura.value.docente_id = number
+                console.log("set_director: OK")
             }
 
             const editar = (json)=>{
@@ -261,7 +262,7 @@
             }
 
             const filter_director = (director_id)=>{
-
+                console.log("filter_director: " + director_id)
                 let array = docentes.value
 
                 if(array.length){
