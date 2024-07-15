@@ -17,7 +17,7 @@
                     <p class=""> SECRETARÍA DE EDUCACIÓN DEPARTAMENTAL </p>
                     <p class="uppercase"> INSTITUCION EDUCATIVA BELÉN - SEDE {{ boletin_info[0] }} </p> 
                     <p class=""> Decreto 706 de junio de 2004 </p>
-                    <p class=""> I.E BELÉN RESOLUCIÓN DE APROBACIÓN 1953 de Abril 29 del 2021 </p> 
+                    <p class=""> I.E BELÉN RESOLUCIÓN DE APROBACIÓN 2257 de Marzo 15 del 2024 </p> 
                     <p class=""> NIT: 813.011.815-2 DANE 241359000160 </p>
                     <p class=""> ISNOS - HUILA </p>
                     <p class="uppercase"> BOLETÍN {{ boletin_info[1] }} Periodo - Lectivo {{ boletin_info[2] }}</p>
