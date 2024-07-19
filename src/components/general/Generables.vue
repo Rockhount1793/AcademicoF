@@ -1,7 +1,5 @@
 
 <template>
-
-    SECCION {{seccion}}
     
     <div id="contenedor_principal" style="height:min-content;">
         
