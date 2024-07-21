@@ -112,7 +112,6 @@
             let errores = ref([])
 
             //# methods
-            
             const guardar = ()=>{
 
                 errores.value = []
@@ -145,12 +144,11 @@
 
             }
       
-            const urlsf = computed(()=> Store.state.urlsf )
+            // #computed
             const personas = computed(()=> Store.state.personas )
             const actual_sede = computed(()=> Store.state.actual_sede )
             
             return {
-                urlsf,
                 listado,
                 personas,
                 seccion,

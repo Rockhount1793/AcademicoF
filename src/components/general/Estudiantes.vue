@@ -1,7 +1,6 @@
 <template>
-    <div class="mt-2 pb-2 flex w-auto lg:px-2 md:space-x-2">
-
-        <div class="ml-2 p-1 pb-2 rounded border border-gray-300 w-full">
+    <div class="mt-2 h-[90%] pb-2 flex w-auto lg:px-2">
+        <div class="rounded border border-gray-300 w-full">
 
             <p class="text-gray-500 text-center mt-3 font-semibold text-lg">Estudiantes</p>
 
@@ -29,67 +28,61 @@
             <hr class="mt-2 border border-gray-200" />
 
             <!-- listado -->
-            <div v-if="seccion == 0" class="overflow-y-auto">
+            <div v-if="seccion == 0" class="mt-2 h-full">
 
-                <div class="px-0 sm:px-2 lg:px-4">
+                <div class="px-0 sm:px-2 lg:px-4 h-[86%] overflow-y-auto">
 
                     <div v-if="!estudiantes.length" class="sm:flex sm:items-center">
                         <p class="px-2 font-semibold text-gray-500"> No hay estudiantes creados</p>    
                     </div>
 
-                    <div v-else class="mt-2">
-                        <div class="overflow-x-auto">
-                            <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                <table class="min-w-full divide-y divide-gray-300 mb-4">
-                                    
-                                    <thead>
-                                        <tr>
-                                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">Nombres</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">RH</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha nacimiento</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Edad</th>
-                                            <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Acciones</th>
-
-                                        </tr>
-                                    </thead>
-
-                                    <tbody class="divide-y divide-gray-200 bg-white">
-                                        <tr v-for="estudiante in estudiantes" :key="estudiante.id">
-
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
-                                                <div class="flex items-center">
-                                                    <div class="h-10 w-10 flex-shrink-0">
-                                                        <img class="h-10 w-10 rounded-full ml-2" :src="urlsf + '/images/avatar/' + firstLetter(estudiante.nombres) + '.png'" alt="estudiante.nombres" />
-                                                    </div>
-                                                    <div class="ml-6">
-                                                        <div class="font-medium text-base text-gray-900 capitalize">{{ estudiante.nombres + " " + estudiante.apellidos  }}</div>
-                                                        <div class="text-gray-500">ID: {{ estudiante.identificacion }}</div>
-                                                    </div>
+                    <div v-else class="">
+                        <div class="px-4 lg:px-6 h-full">
+                            <table class="min-w-full divide-y divide-gray-300">
+                                <thead class="bg-white sticky top-0 shadow">
+                                    <tr>
+                                        <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                                        <p class="px-5">
+                                            Nombres
+                                        </p>
+                                        </th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Estado</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">RH</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Fecha nacimiento</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Edad</th>
+                                        <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    <tr v-for="estudiante in estudiantes" :key="estudiante.id">
+                                        <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
+                                            <div class="flex items-center">
+                                                <div class="h-10 w-10 flex-shrink-0">
+                                                    <img class="h-10 w-10 rounded-full ml-2" :src="'../public/images/avatar/'+Utilities.firstLetter(estudiante.nombres)+'.png'" alt="icon.letter" />
                                                 </div>
-                                            </td>
+                                                <div class="ml-6">
+                                                    <div class="font-medium text-base text-gray-900 capitalize">{{ estudiante.nombres + " " + estudiante.apellidos  }}</div>
+                                                    <div class="text-gray-500">ID: {{ estudiante.identificacion }}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm">
+                                            <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="estudiante.estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ estudiante.estado ? 'Activo':'Inactivo'  }} </span>
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            <div class="text-gray-900">{{ estudiante.rh }}</div>
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            <div class="text-gray-900">{{ formatDate(estudiante.nacimiento) }}</div>
+                                        </td>
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ getBirthDate(estudiante.nacimiento) }} años</td>
+                                        <td @click="consultar_estudiante(estudiante.estudiante_id)" class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">
+                                            Editar
+                                        </td>
+                                    </tr>
+                                </tbody>
 
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm">
-                                                <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="estudiante.estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ estudiante.estado ? 'Activo':'Inactivo'  }} </span>
-                                            </td>
-
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div class="text-gray-900">{{ estudiante.rh }}</div>
-                                            </td>
-
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                <div class="text-gray-900">{{ formatDate(estudiante.nacimiento) }}</div>
-                                            </td>
-
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ getBirthDate(estudiante.nacimiento) }} años</td>
-                                            <td @click="consultar_estudiante(estudiante.estudiante_id)" class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">Editar</td>
-
-                                        </tr>
-
-                                    </tbody>
-
-                                </table>
-                            </div>
+                            </table>
                         </div>
                     </div>
 
@@ -98,7 +91,7 @@
             </div>
 
             <!-- crear --->
-            <div v-if="seccion == 1" class="mt-3 rounded p-1 px-2">
+            <div v-if="seccion == 1" class="mt-3 h-[86%] overflow-y-auto rounded px-2">
 
                 <div class="mt-3">
                     <h5 class="font-semibold ">Crear nuevo estudiante</h5>
@@ -210,7 +203,7 @@
             </div>
 
             <!-- actualizar --->
-            <div v-if="seccion == 2" class="mt-3 rounded p-1 px-2">
+            <div v-if="seccion == 2" class="mt-3 h-[86%] overflow-y-auto rounded px-2">
 
                 <!-- Detalles Personales -->
                 <div class="mt-3">
@@ -219,7 +212,7 @@
 
                 <hr/>
 
-                <div class="mt-3 p-2 lg:grid lg:grid-cols-2 lg:gap-2">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-2">
 
                     <div>
                         <label for="nombre_ed" class="block text-sm font-medium leading-6 text-gray-900">Nombres<span class="text-red-500">*</span></label>
@@ -272,7 +265,7 @@
 
                 <hr/>
 
-                <div class="mt-3 p-2 lg:grid lg:grid-cols-2 gap-2">
+                <div class="mt-3 lg:grid lg:grid-cols-2 gap-2">
 
                     <div>
                         <label for="activo_detalle" class="block text-sm font-medium leading-6 text-gray-900">Activo <span class="text-red-500 font-thin">*Disponibilidad en consultas</span></label>
@@ -418,7 +411,7 @@
                     <hr/>
                 </div>
 
-                <div class="mt-3 p-2 flex-1">
+                <div class="mt-3 flex-1">
 
                     <div class="">
                         <label for="identificacion_padre" class="block text-sm font-medium leading-6 text-gray-900">Buscar Padre Por Identificación </label>
@@ -480,7 +473,7 @@
                     <hr/>
                 </div>
 
-                <div class="mt-3 p-2 ">
+                <div class="mt-3">
 
                     <div class="">
                         <label for="identificacion_acudiente" class=" text-sm font-medium leading-6 text-gray-900">Buscar Acudiente Por Identificación </label>
@@ -525,7 +518,6 @@
             </div>
 
         </div>
-
     </div>
 </template>
 
@@ -597,10 +589,6 @@ export default defineComponent({
         })
 
         //# methods
-        const firstLetter = (name)=>{
-            return name.charAt(0).toLowerCase() || 'default'
-        }
-
         const buscar_personal = async(key)=>{
 
             errores.value = []
@@ -627,12 +615,6 @@ export default defineComponent({
         }
 
         function getBirthDate(date) {
-
-            // const inputDate = DateTime.fromISO(date)
-            // const now = DateTime.local()
-            // const diff = now.diff(inputDate, ['years']).toObject()
-            // const age = Math.floor(diff.years)
-
             if(date != '#'){
                 let date1 = new Date(date).getFullYear()
                 let date2 = new Date().getFullYear()
@@ -642,7 +624,6 @@ export default defineComponent({
         }
 
         const clearForm = () => {
-
             nombre.value = ''
             apellido.value = ''
             identificacion.value = ''
@@ -671,7 +652,6 @@ export default defineComponent({
         const consultar_estudiante = async (estudiante_id)=>{
             
             clearForm()
-
             await Anexo_Estudiante.index_estudiante_id({'estudiante_id': estudiante_id},(estudiante)=>{
                 estudiante_temp.value = estudiante
                 if(estudiante.estado == 0) enabled.value = false 
@@ -711,11 +691,8 @@ export default defineComponent({
                     'estado': 1,
                     'nacimiento': `${ nacimiento.value.year+'-'+nacimiento.value.month+'-'+nacimiento.value.day }`
                 })
-
                 Utilities.show_save('Estudiante creado');
-
                 clearForm()
-
             }
 
         }
@@ -728,7 +705,6 @@ export default defineComponent({
         const actualizar = () => {
 
             errores.value = []
-
             if(!estudiante_temp.value.nombres.length || estudiante_temp.value.length > 99){ errores.value.push('ingrese nombres') }
             if(!estudiante_temp.value.apellidos.length || estudiante_temp.value.length > 99){ errores.value.push('ingrese apellidos') }
             if(!estudiante_temp.value.identificacion || estudiante_temp.value.identificacion.length > 99){ errores.value.push('ingrese identificación') }
@@ -739,26 +715,21 @@ export default defineComponent({
             if(errores.value.length){
                 alert(errores.value[0])
             }else{
-
                 estudiante_temp.value.nacimiento = `${ nacimiento.value.year+'-'+nacimiento.value.month+'-'+nacimiento.value.day }`
                 estudiante_temp.value.estado = enabled.value ? 1 : 0
                 Estudiante.update(estudiante_temp.value)
-
                 clearForm()
                 cancelar()
-
             }
 
         }
 
         // computed
-
         const estudiantes_all = computed(() => Store.state.estudiantes)
         
         const estudiantes = computed(() => {
 
             let key = search.value.toLowerCase()
-
             if (key.length > 3) {
                 return estudiantes_all.value.filter((e) => {
                     return (
@@ -770,32 +741,28 @@ export default defineComponent({
             } else {
                 return estudiantes_all.value
             }
-        });
+        })
 
-        const urlsf = computed(() => Store.state.urlsf)
         const actual_sede = computed(() => Store.state.actual_sede)
 
+        //# watch
         watch(enabled,(newValue,oldValue)=>{
             newValue ?  estudiante_temp.value.estado = 1 : estudiante_temp.value.estado = 0
         })
 
         watch(actual_sede,(newValue, oldValue)=> {
             Anexo_Estudiante.index()
-
         })
         
-        
-
         return {
+            Utilities,
             search,
-            urlsf,
             estudiantes,
             seccion,
             nombre,
             apellido,
             identificacion,
             guardar,
-            firstLetter,
             formatDate,
             getBirthDate,
             nacimiento,
@@ -817,24 +784,15 @@ export default defineComponent({
             years
         }
 
-
-
     },
-    
-    
     mounted() {
-
         this.$nextTick(() => {
-
             Aplicacion.check_login(() => {
                 if (!Store.state.estudiantes.length) {
                     Anexo_Estudiante.index()
                 }
             })
-
         })
-
     }
-
 })
 </script>

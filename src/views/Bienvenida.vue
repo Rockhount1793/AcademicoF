@@ -22,7 +22,7 @@
                 </div>
   
                 <div class="z-0 opacity-90 fixed mx-auto w-4/5 sm:w-4/6 lg:w-3/6 xl:w-3/6 2xl:w-2/6 max-w-2xl">
-                    <img class="transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6 mx-auto w-full" :src="urlsf+'/images/logo.svg'" />
+                    <img class="transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6 mx-auto w-full" src="../../public/images/logo.svg" />
                 </div>
   
             </div>
@@ -42,51 +42,16 @@
     import Router from '@/router'
 
     export default defineComponent({
-    
         'name':'Bienvenida',
-
         'components':{
             BarraInicio
-        },
-
-        setup(){
-        
-            //# data 
-            const listado = ref(false)
-            
-            //# methods
-            const consultar_anterior = ()=>{ 
-            
-            }
-      
-            const urlsf = computed(()=> Store.state.urlsf )
-
-            watch(listado,(value) => {
-
-                if(value) {
-                  //code
-                }
-            
-            })
-      
-            return {
-                urlsf,
-                listado,
-                consultar_anterior
-            }
-      
-        },
-    
+        },    
         mounted(){
-        
             this.$nextTick(()=>{
-                
                 Aplicacion.check_login(()=>{
-                    Router.push({'name':'Inicio'})
+                    Router.push({"name":"Inicio"})
                 })
-
             })
-
         }
   
     })

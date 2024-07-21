@@ -62,7 +62,7 @@
                                             <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
                                                 <div class="flex items-center">
                                                     <div class="h-10 w-10 flex-shrink-0">
-                                                        <img class="h-10 w-10 rounded-full ml-2" :src="urlsf + '/images/avatar/' + firstLetter(director.nombres) + '.png'" alt="director.nombres" />
+                                                        <img class="h-10 w-10 rounded-full ml-2" :src="'../public/images/avatar/'+Utilities.firstLetter(director.nombres)+'.png'" alt="avatar" />
                                                     </div>
                                                     <div class="ml-6">
                                                         <div class="font-medium text-gray-900">{{ director.nombres }}</div>
@@ -206,16 +206,11 @@
 
             }
       
-            const firstLetter = (name) => {
-                return name.charAt(0).toLowerCase() || 'default';
-            }
-
             const editar = ()=>{
                 // 
             }
 
             // computeds
-            const urlsf = computed(()=> Store.state.urlsf )
             const actual_sede = computed(()=> Store.state.actual_sede )
             const directores_all = computed(()=> Store.state.directores )
       
@@ -238,8 +233,8 @@
             })
 
             return {
+                Utilities,
                 search,
-                urlsf,
                 listado,
                 actual_sede,
                 directores_all,
@@ -251,7 +246,6 @@
                 telefono,
                 email,
                 guardar,
-                firstLetter,
                 editar
             }
       

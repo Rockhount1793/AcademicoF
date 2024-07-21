@@ -1,30 +1,19 @@
 <template>
-  <div
-    class="h-auto min-h-screen relative bg-gradient-to-r from-gray-800 to-gray-900 max-w-8xl"
-  >
+  <div class="h-screen overflow-hidden relative bg-gradient-to-r from-gray-800 to-gray-900 max-w-8xl">
     <BarraInicio></BarraInicio>
     <section class="bg-gray-900">
-      <div
-        class="flex flex-col items-center justify-top px-6 py-8 mx-auto md:h-screen lg:py-0"
-      >
-        <a
-          href="#"
-          class="flex items-center mb-6 pt-3 text-2xl font-semibold text-white"
-        >
+      <div class="flex flex-col items-center justify-top px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <a href="#" class="flex items-center mb-6 pt-3 text-2xl font-semibold text-white" >
           <img
             class="w-8 h-8 mr-2 mt-1"
-            :src="urlsf + '/images/logo.svg'"
+            src="../../public/images/logo.svg"
             alt="logo"
           />
           Academic
         </a>
-        <div
-          class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
-        >
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1
-              class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
-            >
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Iniciar sesión
             </h1>
             <form class="space-y-4 md:space-y-6" action="#">
@@ -93,11 +82,6 @@
         </div>
       </div>
     </section>
-
-  </div>
-
-  <div>
-   
   </div>
 </template>
 
@@ -110,13 +94,10 @@ import Aplicacion from '@/controllers/Aplicacion'
 import Router from '@/router'
 
 export default defineComponent({
-
     'name':'Entrar',
-
     'components':{
         BarraInicio
     },
-
     setup(){
         // data
         const email = ref('')
@@ -140,10 +121,7 @@ export default defineComponent({
 
         }
 
-        const urlsf = computed(()=> Store.state.urlsf )
-
         return{
-            urlsf,
             entrar,
             email,
             password,
@@ -151,18 +129,13 @@ export default defineComponent({
         }
 
     },
-
     mounted(){
         this.$nextTick(()=>{
-
             Aplicacion.check_login(()=>{
-                Router.push({'name':'Inicio'})
+                Router.push({"name":"Inicio"})
             })
-
         })
     }
-
 })
 </script>
 
-<style></style>

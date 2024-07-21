@@ -16,21 +16,17 @@
   
                 <form class="bg-gray-900 z-10 opacity-75 w-full shadow-lg rounded-lg px-8 pt-10 pb-3">
                     <div class="mb-4 text-white">
-  
                         Ir a la pagina de Bienvenida
-  
                     </div>
-  
                     <div class="cursor-pointer flex items-center pt-4">
                         <button @click="continuar()" type="button" id="btn-continuar" class="mx-auto bg-gradient-to-r from-pink-800 to-pink-500 hover:from-pink-500 hover:to-cyan-500 text-white font-bold py-2 px-4 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out">
                             Continuar
                         </button>
                     </div>
-  
                 </form>
   
                 <div class="z-0 fixed mx-auto w-3/4 sm:w-3/5 lg:w-2/5 xl:w-2/6 2xl:w-1/5 max-w-2xl">
-                    <img class="mx-auto w-full" :src=" urlsf+'/images/logo.svg' " />
+                    <img class="mx-auto w-full" src="../../public/images/logo.svg" />
                 </div>
 
             </div>
@@ -48,41 +44,20 @@
     import Router from '@/router'
     
     export default defineComponent({
-
         'name':'Error',
-
-        'components':{
-            BarraInicio
-        },
-
+        'components':{ BarraInicio },
         setup(){
 
             // methods
             const continuar = ()=>{
-                Router.push({'name':'Bienvenida'})
+                Router.push({"name":"Bienvenida"})
             }
-            
-            const urlsf = computed(()=> Store.state.urlsf )
-            
+
             return{
-                urlsf,
                 continuar
             }
 
-        },
-
-        mounted(){
-            this.$nextTick(()=>{
-                
-              
-            })
         }
-
     })
 
 </script>
-
-<style>
-
-</style>
-  

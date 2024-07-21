@@ -3,9 +3,7 @@ import Dashboard from '@/components/layouts/Default.vue'
 import Error from '@/views/Error.vue'
 
 const router = createRouter({
-    
     history: createWebHashHistory(),
-    
     routes: [
         {
             path: '/',

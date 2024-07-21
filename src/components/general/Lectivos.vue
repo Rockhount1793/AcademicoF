@@ -1,10 +1,7 @@
 
 <template>
-<div class="mx-auto">
-        
-    <div class="mt-2 h-4/6 min-h-full flex w-auto px-2 md:space-x-2">
-
-        <div class="ml-2 p-1 rounded border border-gray-300 h-auto w-full">
+    <div class="mt-2 h-[90%] pb-2 flex w-auto lg:px-2">
+        <div class=" rounded border border-gray-300 h-full w-full">
 
             <p class="text-gray-500 mt-3 text-center font-semibold text-lg"> Lectivos</p>
 
@@ -25,8 +22,8 @@
                     <p class="px-2 font-semibold text-gray-500"> No hay lectivos creados</p>
                 </div>
 
-                <div v-else class="mt-4 mx-4 mb-4 flow-root ">
-                    <ul role="list" class="-my-5 divide-y divide-gray-200">
+                <div v-else class="mx-4 mb-4 flow-root">
+                    <ul role="list" class="divide-y divide-gray-200">
                         <li v-for="lectivo in lectivos" :key="lectivo.lectivo_id" class="py-4">
                             <div class="flex items-center space-x-4">
                                 <div class="min-w-0 flex-1">
@@ -72,9 +69,7 @@
             </div>
 
         </div>
-  
     </div>
-</div>
 </template>
   
 <script>
@@ -160,14 +155,12 @@
             }
       
             //# computed
-            const urlsf = computed(()=> Store.state.urlsf )
             const lectivos = computed(()=> Store.state.lectivos )
             const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const directores = computed(()=> Store.state.directores )
 
             return {
-                urlsf,
                 listado,
                 directores,
                 set_lectivo,

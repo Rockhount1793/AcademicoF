@@ -1,79 +1,75 @@
 <template>
-        
-    <div class="grid grid-cols-6 lg:grid-cols-12 gap-2">
+    <div class="relative w-full">
 
-        <div class="relative col-span-12 lg:col-span-12 ">
+        <button type="button" @click="mostrar_menu()" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" class="w-full border border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 py-1 px-2 focus:outline-none focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
 
-            <button type="button" @click="mostrar_menu()" aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label" class="w-full border border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            <div class=" flex items-center justify-between space-x-1 w-full truncate text-ellipsis">
 
-                <div class=" flex items-center justify-between space-x-1 w-full">
+                <p class="text-left w-full capitalize font-semibold text-sm text-indigo-500 hover:text-indigo-400">
+                   {{director_select.nombres}}  {{director_select.apellidos}}
+                </p>
 
-                    <span class="block capitalize font-semibold text-sm text-indigo-500 hover:text-indigo-400">
-                       {{director_select.nombres}}  {{director_select.apellidos}}
-                    </span>
+                <span class="flex-none w-5 items-center pointer-events-none">
+                    <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-pink-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </span>
 
-                    <span class="flex right-0 inset-y-0 items-center pr-2 pointer-events-none">
-                        <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-pink-600">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                    </span>
+            </div>
 
-                </div>
+        </button>
 
-            </button>
+        <div v-if="modulo" v-clickoutside="closeOnClickOutside" class="z-10 w-full absolute border border-indigo-500 shadow-lg mt-0.5 rounded bg-white">
 
-            <div v-if="modulo" class="z-10 w-full absolute border border-indigo-500 shadow-lg mt-0.5 rounded bg-white">
+            <ul>
+                <li>
+                    <div class="w-full px-2">
+                 
+                        <label for="nombre" class="block text-sm font-semibold text-gray-500"><span v-html="counter_letras_nombre" class=""></span></label>
 
-                <ul>
-                    <li>
-                        <div class="w-full px-2">
-                     
-                            <label for="nombre" class="block text-sm font-semibold text-gray-500"><span v-html="counter_letras_nombre" class=""></span></label>
+                        <div class="flex items-center space-x-1 border shadow-lg h-7 focus:border-indigo-500 rounded border-gray-400">
 
-                            <div class="flex items-center space-x-1 border shadow-lg h-7 focus:border-indigo-500 rounded border-gray-400">
-
-                                <svg xmlns="http://www.w3.org/2000/svg" class="text-pink-500 ml-0.5 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                                
-                                <input id="nombre" placeholder="Buscar Nombre.." type="text" v-model="buscador_nombre" class="h-6 w-full px-2 border-l border-gray-400 focus:outline-none  transition duration-300 ease-in-out text-sm" />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="text-pink-500 ml-0.5 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
                             
-                            </div>
-                           
-                        </div>
-                    </li>
-                </ul>
-                
-                <div class="h-48 overflow-auto">
-
-                    <ul :key="dir.index" v-for="dir in directores_com" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="py-0 text-base leading-6 shadow-xs focus:outline-none sm:text-sm sm:leading-5">
-
-                        <li  @click="set_director(dir);mostrar_menu();" id="listbox-item-0" role="option" class="h-6 text-gray-900 cursor-pointer hover:bg-gray-200 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out select-none py-1 pl-3 pr-9">
+                            <input id="nombre" placeholder="Buscar Nombre.." type="text" v-model="buscador_nombre" class="h-6 w-full px-2 border-l border-gray-400 focus:outline-none  transition duration-300 ease-in-out text-sm" />
                         
-                            <div class="flex items-center space-x-3">
+                        </div>
+                       
+                    </div>
+                </li>
+            </ul>
+            
+            <div class="h-48 overflow-auto">
 
-                                <svg  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 text-pink-600">
+                <ul :key="dir.index" v-for="dir in directores_com" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="py-0 text-base leading-6 shadow-xs focus:outline-none sm:text-sm sm:leading-5">
+
+                    <li  @click="set_director(dir);mostrar_menu();" id="listbox-item-0" role="option" class="h-6 text-gray-900 cursor-pointer hover:bg-gray-200 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out select-none py-1 pl-3">
+                    
+                        <div :title="`${dir.nombres} ${dir.apellidos}`" class="flex items-center space-x-2 truncate text-ellipsis">
+
+                            <div class="flex-none w-4">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-1 h-4 w-4 text-pink-600">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-
-                                <span class="font-semibold text-gray-700 text-sm ">
-                                    {{dir.nombres}} - {{dir.apellidos}}       
-                                </span>
-
                             </div>
 
-                        </li>
+                            <p class="font-semibold text-gray-700 text-xs">
+                                {{dir.nombres}} {{dir.apellidos}}       
+                            </p>
 
-                    </ul>
+                        </div>
 
-                </div>
+                    </li>
+
+                </ul>
 
             </div>
 
         </div>
-    
+
     </div>
-    
 </template>
     
 <script>
@@ -82,13 +78,16 @@
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Docente from '@/controllers/Docente'
     import Utilities from '@/utilities'
+    import clickOutside from '@/directives/click-outside'
 
     export default defineComponent({
 
         name: 'Selector-Director',
 
         components:{  },
-
+        directives: {
+            clickoutside: clickOutside,
+        },
         props:{
             //title: String
         },
@@ -124,6 +123,10 @@
                     modulo.value = false
                 }
   
+            }
+
+            const closeOnClickOutside = ()=>{
+                modulo.value = false
             }
 
             const emitir = (number)=>{
@@ -246,7 +249,8 @@
                 counter_letras_nombre,
                 directores,
                 directores_com,
-                director_select
+                director_select,
+                closeOnClickOutside
             }
 
         },

@@ -2,7 +2,6 @@ import { createStore } from 'vuex'
 import Config from '@/config'
 import Usuario from '@/controllers/Usuario'
 
-const _urlsf = ()=>{ return Config.get('app','urlsf') }
 const _urlsb = ()=>{ return Config.get('app','urlsb') }
 const _version = ()=>{ return Config.version }
 
@@ -13,7 +12,6 @@ const store = createStore({
             
             //# generales
             version: _version(),
-            urlsf: _urlsf(),
             urlsb: _urlsb(),
             loading: false,
             mini_loading: false,
@@ -216,15 +214,12 @@ const store = createStore({
             const result = await this.dispatch('clear_data_sede')
             .then((res)=>{
                 if(res){
-
                     let usuario =  this.state.usuario
-                    
                     usuario.configuracion.sede_id = json.sede_id
                     usuario.configuracion['nombre_sede'] = json['nombre']
                     this.commit('set_usuario', usuario)
                     this.commit('set_actual_sede',json)
                     Usuario.update(usuario)
-
                 }
 
             })
@@ -244,14 +239,12 @@ const store = createStore({
             .then((res)=>{
 
                 if(res){
-                    
                     let usuario = this.state.usuario
                     usuario.configuracion['lectivo_id'] = json.lectivo_id
                     usuario.configuracion['numero_lectivo'] = json.numero
                     this.commit('set_usuario',usuario)
                     this.commit('set_actual_lectivo',json)
                     Usuario.update(usuario)
-                    
                 }
 
             })
@@ -268,7 +261,6 @@ const store = createStore({
         async clear_data_sede(state){
 
             return await new Promise((res,rej)=>{
-
                 this.commit('set_grados',[])
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
                 this.commit('set_actual_periodo',{ 'periodo': 0, 'nombre': 'Periodo' })
@@ -285,9 +277,7 @@ const store = createStore({
                 this.commit('set_personas',[])
                 this.commit('set_directores',[])
                 this.commit('set_boletin',{'asignaturas':[], grado:'', puesto:[0,0], rector:'', 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'faltas': 0 })
-
                 res(true)
-
             })
 
         },
@@ -333,7 +323,6 @@ const store = createStore({
         async clear_data_lectivo(){
 
             return await new Promise((res,rej)=>{
-
                 this.commit('set_grados',[])
                 this.commit('set_actual_grado',{ 'grado_id': 0, 'nombre': '', 'numero': 0, 'director_id': 0 })
                 this.commit('set_asignaturas',[])
@@ -343,7 +332,6 @@ const store = createStore({
                 this.commit('set_faltas',[])
                 this.commit('set_matriculas',[])
                 this.commit('set_boletin',{'asignaturas':[], grado:'', puesto:[0,0], rector:'', 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'faltas': 0 })
-
                 res(true)
 
             })
@@ -352,125 +340,96 @@ const store = createStore({
 
         //#sedes
         add_sede(state, json){
-            
             let sedes = this.state.sedes
             const result = [...sedes, json]
             this.commit('set_sedes',result)
-        
         },
 
         //# lectivos
         add_lectivo(state, json){
-            
             let lectivos = this.state.lectivos
             const result = [...lectivos, json]
             this.commit('set_lectivos',result)
-        
         },
 
         //# grados
         add_grado(state, json){
-            
             let grados = this.state.grados
             const result = [...grados, json]
             this.commit('set_grados',result)
-
         },
 
         //# asignaturas 
         add_asignatura(state,json){
-
             let asignaturas = this.state.asignaturas
             const result = [...asignaturas, json]
             this.commit('set_asignaturas',result)
-
         },
 
         //# faltas
         add_falta(state,json){
-
             let faltas = this.state.faltas
             const result = [...faltas, json]
             this.commit('set_faltas',result)
-
         },
 
         // # matriculas
         add_matricula(state,json){
-
             let matriculas = this.state.matriculas
             const result = [...matriculas, json]
             this.commit('set_matriculas',result)
-
         },
 
         remove_matricula(state, json){
-
             const result = this.state.matriculas.filter((e)=>e.matricula_id != json.matricula_id)
             this.commit('set_matriculas', result)
-
         },
 
         // # estudiantes
         add_estudiante(state, json){
-
             let estudiantes = this.state.estudiantes
             const result = [...estudiantes, json]
             this.commit('set_estudiantes',result)
-
         },
 
         //# Docentes
         add_docente(state, json){
-
             let directores = this.state.docentes
             const result = [...directores, json]
             this.commit('set_docentes',result)
-
         },
 
         update_docente(state, json){
-                
             let docentes = this.state.docentes.filter((e)=>e.docente_id != json.docente_id)
             const result = [ json, ...docentes ]
             this.commit('set_docentes',result)
-    
         },
 
         //# personas
         add_persona(state, json){
-            
             let personas = this.state.personas
             const result = [...personas, json]
             this.commit('set_personas',result)
-        
         },
 
         //# directores
         add_director(state, json){
-            
             let directores = this.state.directores
             const result = [...directores, json]
             this.commit('set_directores',result)
-        
         },
 
         update_estudiante(state, json){
-
             const estudiantes = this.state.estudiantes.filter((e)=>e.estudiante_id != json.estudiante_id)
             const result = [ json, ...estudiantes ]
             this.commit('set_estudiantes', result)
-
         },
 
         update_asignatura(state, json){
-
             const asignaturas = this.state.asignaturas.filter((e)=>e.asignatura_id != json.asignatura_id)
             const result = [ ...asignaturas, json ]
             this.commit('set_asignaturas', result)
-
         }
-
 
     }
 

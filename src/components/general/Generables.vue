@@ -1,155 +1,136 @@
 
 <template>
-    
-    <div id="contenedor_principal" style="height:min-content;">
+    <div class="mt-2 h-[90%] pb-2 flex w-auto lg:px-2">
         
         <!-- CONTENEDOR DE OPCIONES PARA GENERARBLES -->
-        <div v-if="seccion==0" id="div_generables_grado">
-            
-            <div class="mt-2 min-h-full w-auto px-2 md:space-x-2">
+        <div v-if="seccion==0" id="div_generables_grado" class="w-full h-full">
+            <div class="rounded border border-gray-300 h-full">
 
-                <div class="ml-2 p-1 rounded border border-gray-300 h-auto">
+                <p class="text-gray-500 mt-3 text-center font-semibold text-lg">
+                    Generables Grado <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span>
+                </p>
 
-                    <p class="text-gray-500 mt-3 text-center font-semibold text-lg">Generables Grado <span v-if="actual_grado.grado_id > 0">{{actual_grado.nombre}} </span></p>
+                <hr class="mt-3 border border-gray-200" />
 
-                    <hr class="mt-3 border border-gray-200" />
+                <div class="flex flex-1 py-2 mx-auto">
 
-                    <div class="flex flex-1 py-2 mx-auto">
-
-                        <div class="flex-1 lg:flex px-2 lg:px-10 lg:space-x-10">
-                            
-                            <div class="flex-1 mt-2">
-                                <p class="font-semibold text-gray-500 text-md">Grado</p>
-                                <SelectorGrado class="mx-auto w-full"></SelectorGrado>
-                            </div>
-                            
-                            <div class="flex-1 mt-2">
-                                <p class="font-semibold text-gray-500 text-md">Periodo</p>
-                                <SelectorPeriodo class="mx-auto w-full"></SelectorPeriodo>
-                            </div>
-
-                            <div class="flex-1 mt-2">
-                                <p class="font-semibold text-gray-500 text-md">Generable</p>
-                                <SelectorGenerable class="mx-auto w-full"></SelectorGenerable>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="block">
-
-                        <div class="mt-3 flex items-center mx-auto">
-                            <!-- si el recurso es entre rango 1 - 10 NO REQUIERE selección de estudiante  -->
-                            <!-- 
-                            <button v-if="actual_generable.recurso < 10" @click="pedir_director_curso()" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                            -->
-                            <!-- VALIDACIONES PARA SOLICITAR DATOS -->
-                            <p v-if="actual_generable.recurso == 0 || actual_periodo.periodo == 0 || actual_grado.grado_id == 0" class="text-pink-600 w-full text-center leading-6 font-semibold text-md">
-                                Por favor elija todos los campos...
-                            </p>
-                            <p v-else-if="actual_generable.recurso == 2 && actual_periodo.periodo < 5" class="text-pink-600 w-full text-center leading-6 font-semibold text-md">
-                                Para "Informe" por favor marque el periodo 5. Final ...
-                            </p>
-                            <p v-else-if="actual_generable.recurso == 3 && actual_periodo.periodo == 5" class="text-pink-600 w-full text-center leading-6 font-semibold text-md">
-                                Para "Planilla" por favor marque un periodo entre 1 y 4 ...
-                            </p>                           
-                            <!--
-                            Al hacer clic en el botón "Generar Boletín" o "Generar Informe" solicitar el director de curso cambiando a la sección 1
-                            -->
-                            <button v-else-if="(actual_generable.recurso == 1)
-                                        ||(actual_generable.recurso == 2 && actual_periodo.periodo == 5)"
-                                        @click="seccion=1" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                <p class="capitalize">Descargar {{ actual_generable.nombre }}</p>
-                            </button>
-                            <!-- Al hacer clic en el botón "Generar planilla" generar el archivo de planilla: -->
-                            <button v-else-if="(actual_generable.recurso == 3 && actual_periodo.periodo < 5)"
-                                        @click="generar_planilla()" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                <p class="capitalize">Descargar {{ actual_generable.nombre }}</p>
-                            </button>
-
-                            <!-- si el recurso es entre rango 11 - 20 REQUIERE selección de estudiante  -->
-                            <div v-else-if="actual_generable.recurso > 10" class="mx-auto w-96 bg-pink-700 shadow-pink-500 shadow-md rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                <p class="">Seleccione el estudiante a generar el <span class="capitalize">{{ actual_generable.nombre }}</span></p>
-                            </div>
-
+                    <div class="flex-1 lg:flex px-2 lg:px-10 lg:space-x-10">
+                        
+                        <div class="flex-1 mt-2">
+                            <p class="font-semibold text-gray-500 text-md">Grado</p>
+                            <SelectorGrado class="mx-auto w-full"></SelectorGrado>
                         </div>
                         
-                    </div>
+                        <div class="flex-1 mt-2">
+                            <p class="font-semibold text-gray-500 text-md">Periodo</p>
+                            <SelectorPeriodo class="mx-auto w-full"></SelectorPeriodo>
+                        </div>
 
-                    <!-- Matriculas -->
-                    <div v-if="seccion == 0" class="overflow-y-auto">
-
-                        <div class="px-0 sm:px-2 lg:px-4">
-
-                            <div v-if="!matriculas.length" class="sm:flex sm:items-center">
-                                <p class="px-2 font-semibold text-gray-500"> No hay matriculas creados</p>
-                            </div>
-
-                            <div v-else class="mt-2">
-                                <div class="overflow-x-auto">
-                                    <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                                        <table class="min-w-full border divide-y divide-gray-300 mb-4">
-                                            
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" class="px-3 py-1 border text-left text-sm font-semibold text-gray-900">
-                                                        Nombres
-                                                    </th>
-                                                    <th scope="col" class="px-3 py-1 border text-left text-sm font-semibold text-gray-900">
-                                                        Estado
-                                                    </th>
-                                                    <th v-if="actual_generable.recurso > 10" scope="col" class="px-3 py-1 border text-sm font-semibold text-pink-700 text-center capitalize">
-                                                        Generar
-                                                    </th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody class="divide-y divide-gray-200 bg-white">
-                                                <tr v-for="(matri, index) in matriculas" :key="index+10">
-
-                                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
-                                                        <div class="flex items-center">
-                                                            <div class="h-10 w-10 flex-shrink-0">
-                                                                <img class="h-10 w-10 rounded-full ml-2" :src="urlsf + '/images/avatar/' + firstLetter(matri.nombres) + '.png'" alt="estudiante.nombres" />
-                                                            </div>
-                                                            <div class="ml-6">
-                                                                <div class="font-medium text-base text-gray-900 capitalize">{{ matri.nombres + " " + matri.apellidos  }}</div>
-                                                                <div class="text-gray-500">ID: {{ matri.identificacion }}</div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-
-                                                    <td class="whitespace-nowrap px-3 py-4 text-sm">
-                                                        <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ matri.estudiante_estado ? 'Activo':'Inactivo'  }} </span>
-                                                    </td>
-
-                                                    <td v-if="actual_generable.recurso > 10" class="text-sm w-52">
-                                                        <button @click="seccion=2;Matricula_Global=matri" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                                            Certificado de Estudio
-                                                        </button>
-                                                        <button @click="generar_certificado_notas(matri)" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
-                                                            Certificado de Notas
-                                                        </button>
-                                                    </td>
-
-                                                </tr>
-
-                                            </tbody>
-
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <div class="flex-1 mt-2">
+                            <p class="font-semibold text-gray-500 text-md">Generable</p>
+                            <SelectorGenerable class="mx-auto w-full"></SelectorGenerable>
                         </div>
 
                     </div>
 
                 </div>
-    
-            </div>
 
+                <div class="block">
+
+                    <div class="mt-3 flex items-center mx-auto">
+                        <!-- si el recurso es entre rango 1 - 10 NO REQUIERE selección de estudiante  -->
+                        <!-- 
+                        <button v-if="actual_generable.recurso < 10" @click="pedir_director_curso()" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                        -->
+                        <!-- VALIDACIONES PARA SOLICITAR DATOS -->
+                        <p v-if="actual_generable.recurso == 0 || actual_periodo.periodo == 0 || actual_grado.grado_id == 0" class="text-pink-600 w-full text-center leading-6 font-semibold text-md">
+                            Por favor elija todos los campos...
+                        </p>
+                        <p v-else-if="actual_generable.recurso == 2 && actual_periodo.periodo < 5" class="text-pink-600 w-full text-center leading-6 font-semibold text-md">
+                            Para "Informe" por favor marque el periodo 5. Final ...
+                        </p>
+                        <p v-else-if="actual_generable.recurso == 3 && actual_periodo.periodo == 5" class="text-pink-600 w-full text-center leading-6 font-semibold text-md">
+                            Para "Planilla" por favor marque un periodo entre 1 y 4 ...
+                        </p>                           
+                        <!--
+                        Al hacer clic en el botón "Generar Boletín" o "Generar Informe" solicitar el director de curso cambiando a la sección 1
+                        -->
+                        <button v-else-if="(actual_generable.recurso == 1)
+                                    ||(actual_generable.recurso == 2 && actual_periodo.periodo == 5)"
+                                    @click="seccion=1" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                            <p class="capitalize">Descargar {{ actual_generable.nombre }}</p>
+                        </button>
+                        <!-- Al hacer clic en el botón "Generar planilla" generar el archivo de planilla: -->
+                        <button v-else-if="(actual_generable.recurso == 3 && actual_periodo.periodo < 5)"
+                                    @click="generar_planilla()" class="mx-auto w-64 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                            <p class="capitalize">Descargar {{ actual_generable.nombre }}</p>
+                        </button>
+
+                        <!-- si el recurso es entre rango 11 - 20 REQUIERE selección de estudiante  -->
+                        <div v-else-if="actual_generable.recurso > 10" class="mx-auto w-96 bg-pink-700 shadow-pink-500 shadow-md rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                            <p class="">Seleccione el estudiante a generar el <span class="capitalize">{{ actual_generable.nombre }}</span></p>
+                        </div>
+
+                    </div>
+                    
+                </div>
+
+                <!-- Matriculas -->
+                <div v-if="seccion == 0" class="mt-3 px-4 sm:px-6 lg:px-8 h-full">
+
+                    <div v-if="!matriculas.length" class="sm:flex sm:items-center">
+                        <p class="px-2 font-semibold text-gray-500"> No hay matriculas creados</p>
+                    </div>
+
+                    <div v-else class="mt-0 h-[75%] overflow-y-auto">
+                        <div class="px-4 lg:px-6">
+                            <table class="min-w-full border divide-y divide-gray-300 mb-4">
+                                <thead class="sticky h-10 top-0 shadow bg-white">
+                                    <tr>
+                                        <th scope="col" class="px-3 py-1 border text-left text-sm font-semibold text-gray-900">
+                                            Nombres
+                                        </th>
+                                        <th scope="col" class="px-3 py-1 border text-left text-sm font-semibold text-gray-900">
+                                            Estado
+                                        </th>
+                                        <th v-if="actual_generable.recurso > 10" scope="col" class="px-3 py-1 border text-sm font-semibold text-pink-700 text-center capitalize">
+                                            Generar
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    <tr v-for="(matri, index) in matriculas" :key="index+10">
+                                        <td class="py-4 pl-4 pr-3 text-sm sm:pl-0">
+                                            <div class="flex items-center">
+                                                <div class="h-10 w-10 flex-shrink-0">
+                                                    <img class="h-10 w-10 rounded-full ml-2" :src="'../public/images/avatar/'+Utilities.firstLetter(matri.nombres)+'.png'" alt="avatar" />
+                                                </div>
+                                                <div class="ml-6">
+                                                    <div class="font-medium text-base text-gray-900 capitalize">{{ matri.nombres + " " + matri.apellidos  }}</div>
+                                                    <div class="text-gray-500">ID: {{ matri.identificacion }}</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-3 py-4 text-sm">
+                                            <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ matri.estudiante_estado ? 'Activo':'Inactivo'  }} </span>
+                                        </td>
+                                        <td v-if="actual_generable.recurso > 10" class="text-sm w-52">
+                                            <button @click="seccion=2;Matricula_Global=matri" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                                Certificado de Estudio
+                                            </button>
+                                            <button @click="generar_certificado_notas(matri)" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                                Certificado de Notas
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
 
         <!-- CONTENEDOR DE SELECCION DEL DIRECTOR DE CURSO QUE VA A APARECER EN EL GENERABLE -->
@@ -241,7 +222,6 @@
             </div>
         </div>
 
-  
     </div>  
 </template>
   
@@ -261,17 +241,13 @@
     import Aplicacion from "@/controllers/Aplicacion"
     import Matricula from "@/controllers/Matricula"
     import Generable from "@/controllers/Generable"
-    import Utilitie from "@/utilities"
+    import Utilities from "@/utilities"
 
-  
     export default defineComponent({
-    
         'name':'Generables',
-
         'components':{
             Barra, Lateral, SelectorDirector, SelectorGrado, SelectorPeriodo, SelectorGenerable, Nuevo_Certificado
         },
-
         setup(){
         
             //# data
@@ -465,15 +441,12 @@
                 if(actual_generable.value.recurso === 0){ errores.value.push('Seleccione generable') }
                 
                 if(!errores.value.length){
-
                     if(actual_periodo.value.periodo < 5){
                         Generable.boletin_estudiante_file(json,()=>{ })
                     }
-
                     if(actual_periodo.value.periodo == 5){
                         alert('boletín final')
                     }
-
                 }else{
                     alert(errores.value[0])
                 }
@@ -491,66 +464,45 @@
 
                 //generar_archivo
                 if(!errores.value.length){
-
                     if(actual_periodo.value.periodo < 5){
-                        
                         Generable.boletin_estudiante_vista(json,()=>{
-
-                            Router.push({ name: "Boletin" })
-
+                            Router.push({"name":"Boletin"})
                         })
 
                     }
-
                     if(actual_periodo.value.periodo == 5){
-
                         alert('boletín final')
-
                     }
-
-
                 }else{
                     alert(errores.value[0])
                 }
             }
 
             const filter_estudiante = (estudiante_id)=>{
-
                 let array = estudiantes.value
-
                 if(array.length){
                     let res = array.filter((d)=>{ return d.estudiante_id == estudiante_id })
                     return res[0].nombres +' '+ res[0].apellidos
                 }else{
                     return ''
                 }
-
             }
 
             const filter_identificacion = (number)=>{
-                return Utilitie.format_tnumber(number)
+                return Utilities.format_tnumber(number)
             }
       
-            const firstLetter = (name)=>{
-                return name.charAt(0).toLowerCase() || 'default'
-            }
-
             const verfificar_matriculas = ()=>{
-                
                 if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
-                                    
                     Matricula.index(()=>{})
-            
                 }
             }
 
             const set_director = (number)=>{ 
                 director_id = number
-                console.log("set_director: OK")
             }
 
             //# computed
-            const urlsf = computed(()=> Store.state.urlsf )
             const estudiantes = computed(()=> Store.state.estudiantes )
             const matriculas = computed(()=> Store.state.matriculas )
             const actual_sede = computed(()=> Store.state.actual_sede )
@@ -559,16 +511,15 @@
             const actual_grado = computed(()=> Store.state.actual_grado )
             const actual_generable = computed(()=> Store.state.actual_generable )
 
+            // #watch
             watch(actual_grado,(value) => {
-
                 if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
                     Matricula.index(()=>{})
                 }
-                
             })
 
             return {
-                urlsf,
+                Utilities,
                 generar_archivo,
                 generar_boletines,
                 generar_informe,
@@ -593,26 +544,18 @@
                 seccion,
                 filter_estudiante,
                 filter_identificacion,
-                firstLetter,
                 verfificar_matriculas,
                 validar_datos,
                 clearform
             }
 
         },
-    
         mounted(){
-            
             this.$nextTick(()=>{
-                
                 Aplicacion.check_login(()=>{
                     this.verfificar_matriculas()
                 })
-
             })
-
         }
-  
     })
-  
 </script>

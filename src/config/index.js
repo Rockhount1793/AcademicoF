@@ -4,25 +4,16 @@ import env from '@/config/env.js'
 
 const Config = {
 
-    'version': "Estable 1.1.4.1 12-11-2023 12:32",
+    'version': "1.2.0.0 20-07-2024 22:30",
 
     // development o production
-    'status': "production",
-
+    'status': import.meta.env.VITE_ENVIRONMENT || "development",
     /**
      * @param {String} key
      * @param {String} value
      */
-    'get': function(key,value){
-
-        if(this.status === "development"){
-            return env.development[key][value]
-        }
-
-        if(this.status === "production"){
-            return env.production[key][value]
-        }
-        
+    'get':(key,value)=>{
+        return env[Config.status][key][value]
     }
 
 }

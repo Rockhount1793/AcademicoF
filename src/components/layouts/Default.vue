@@ -1,21 +1,19 @@
 <template>
     <Loader></Loader>
-    <div class="mx-auto max-w-8xl">
-    
-        <div class="flex justify-between">
-            
-            <div class="hidden lg:block flex-col">
+    <main class="mx-auto min-h-full h-screen max-w-[1920px]">
+        <div class="flex justify-between h-screen w-full">
+        
+            <section class="z-30 w-64 h-screen">
                 <Sidebar></Sidebar>
-            </div>
+            </section>
             
-            <div class="flex-col w-full">
+            <div class="flex-col w-full h-screen overflow-hidden">
                 <NavBar></NavBar>
                 <RouterView></RouterView>
             </div>
             
         </div>
-        
-    </div>
+    </main>
 </template>
   
 <script setup>

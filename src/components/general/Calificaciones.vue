@@ -1,104 +1,84 @@
 <template>
-<div class="">
+<div class="h-full overflow-y-auto overflow-x-hidden">  
+    <div class="rounded border border-gray-300 h-auto">
 
-    <div class="mt-2 min-h-full flex px-2 md:space-x-2">
-        
-        <div class="w-full ml-2 rounded border border-gray-300 h-auto">
+        <p class="text-gray-500 text-center mt-3 font-semibold text-lg">Calificaciones</p>
 
-            <p class="text-gray-500 text-center mt-3 font-semibold text-lg">Calificaciones</p>
+        <div class="pr-12 lg:pr-0 mt-0">
+            <div class="flex-1 lg:flex">
 
-            <div class="pr-12 lg:pr-0 mt-0">
+                <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                    <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-500 text-md px-2">Grado</p>
+                    <SelectorGrado class="mx-auto lg:w-1/2"></SelectorGrado>
+                </div>
 
-                <div class="flex-1 lg:flex">
-
-                    <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                        <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-500 text-md px-2">Grado</p>
-                        <SelectorGrado class="mx-auto lg:w-1/2"></SelectorGrado>
-                    </div>
-
-                    <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
-                        <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-500 text-md px-2">Periodo</p>
-                        <SelectorPeriodo class="mx-auto w-full lg:w-1/2"></SelectorPeriodo>
-                    </div>
-
+                <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
+                    <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-500 text-md px-2">Periodo</p>
+                    <SelectorPeriodo class="mx-auto w-full lg:w-1/2"></SelectorPeriodo>
                 </div>
 
             </div>
+        </div>
 
-            <hr class="mt-3 border border-gray-200" />
+        <hr class="mt-3 border border-gray-200" />
 
-            <!-- Calificaciones -->
-            <div class="pr-12 lg:px-10 mx-auto mt-3 max-w-7xl w-full">
+        <!-- Calificaciones -->
+        <div class="mx-auto mt-3 max-w-7xl w-full">
 
-                <div v-if="!matriculas_comp.length">
-                    <p class="px-2 font-semibold text-gray-500 mt-3"> No hay matriculas o asignaturas creadas </p>
-                </div>
+            <div v-if="!matriculas_comp.length">
+                <p class="px-2 font-semibold text-gray-500 mt-3"> No hay matriculas o asignaturas creadas </p>
+            </div>
 
-                <!-- tabla 4 peridos y final --->
-                <div v-else class="mx-auto w-full">
+            <!-- tabla 4 peridos y final --->
+            <div v-else class="mx-auto w-full">
 
-                    <div class="p-1 h-auto rounded px-4 overflow-y-auto relative">
-    
-                        <div class="mt-5">
-                            <p class="font-semibold text-gray-500">Ingreso de Calificaciones <hr/></p>
-                        </div>
+                <div class="p-1 h-auto rounded px-4 overflow-y-auto relative">
 
-                        <div style="margin-left: 150px;" class="px-1 overflow-x-auto h-auto  mb-10">
-
-                                <table class="table border-separate">
-
-                                    <thead class="">
-
-                                        <tr class="">
-
-                                            <th style="margin-left: -10rem;" class="pt-1 absolute h-10 w-40 text-gray-600 font-semibold text-sm">
-                                                <div class="h-10 py-1 min-w-full px-6">Estudiante</div>
-                                            </th>
-
-                                            <th class="h-10 w-28 table-cell border-l border-gray-50 text-gray-600 font-medium text-sm" :key="key" v-for="(item, index, key) in matriculas_comp[0].calificaciones">
-                                                <p>{{item.nombre }}</p>
-                                            </th>
-
-                                        </tr>
-
-                                    </thead>
-
-                                    <tbody class="">
-
-                                        <tr class="even:bg-gray-200 odd:bg-gray-100 " :key="key" v-for="(matricula, index_1, key) in matriculas_comp">
-
-                                            <td style="margin-left: -10rem; " id="middle" class="absolute w-40 text-gray-500 font-semibold text-xs">
-                                                <div :class="index_1 % 2 == 0 ? 'bg-white' : 'bg-gray-200'" class="h-8 border rounded-md px-1 py-1 text-center truncate align-middle">{{matricula.apellidos}}  {{matricula.nombres}} </div>
-                                            </td>
-
-                                            <td class="table-cell bg-gray-50" :key="key" v-for="(matri, index, key) in matricula.calificaciones">
-
-                                                <input  v-if="periodo != 'nota_5'" @blur="update_calificacion(matri)" class=" w-28 h-8 text-md  font-semibold text-center border rounded-md border-gray-300  hover:bg-gray-300" :class="index_1 % 2 == 0 ? 'bg-white focus:bg-white' : 'bg-gray-200 focus:bg-gray-200'"  type="number" min="1" max="5" name="nota" v-model="matri[periodo]" id="">
-
-                                                <button v-else class="text-center w-32 h-8 border border-gray-300 rounded-md" type="button" disabled>
-
-                                                    <span :class="matricula.nota_5[index] > 4 ? 'text-green-600' : matricula.nota_5[index] > 3 ? 'text-blue-500' : matricula.nota_5[index] > 2 ? 'text-yellow-500' : 'text-red-500'">{{ matricula.nota_5[index] }} / <strong>{{ matricula.nota_5[index] - 5 }}</strong> </span>
-
-                                                </button>
-
-                                            </td>
-
-                                        </tr>
-
-                                    </tbody>
-
-                                </table>
-                        </div>
-
+                    <div class="mt-5">
+                        <p class="font-semibold text-gray-500">Ingreso de Calificaciones <hr/></p>
                     </div>
-                </div>
 
+                    <div style="margin-left: 150px;" class="px-1 overflow-x-auto h-auto  mb-10">
+                        <table class="table border-separate">
+                            <thead class="">
+                                <tr class="">
+                                    <th style="margin-left: -10rem;" class="pt-1 absolute h-10 w-40 text-gray-600">
+                                        <div class="w-40 h-10 content-center">
+                                            <p class="text-medium font-semibold">Estudiante</p>
+                                        </div>
+                                    </th>
+                                    <th class="h-10 w-28 table-cell border-l border-gray-50 text-gray-600" :key="key" v-for="(item, index, key) in matriculas_comp[0].calificaciones">
+                                        <p class="leading-4 text-xs font-semibold">{{item.nombre }}</p>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="">
+                                <tr class="even:bg-gray-200 odd:bg-gray-100 " :key="key" v-for="(matricula, index_1, key) in matriculas_comp">
+                                    <td style="margin-left: -10rem; " class="absolute w-40 text-gray-500 font-semibold truncate text-ellipsis text-xs">
+                                        <div :class="index_1 % 2 == 0 ? 'bg-white' : 'bg-gray-200'" class="h-8 border border-gray-300 rounded-md content-center">
+                                            <p :title="`${matricula.nombres} ${matricula.apellidos}`" class="px-0.5 text-center truncate text-ellipsis">
+                                                {{matricula.apellidos}}
+                                                {{matricula.nombres}}
+                                            </p>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell bg-gray-50" :key="key" v-for="(matri, index, key) in matricula.calificaciones">
+                                        <input  v-if="periodo != 'nota_5'" @blur="update_calificacion(matri)" class=" w-28 h-8 text-md  font-semibold text-center border rounded-md border-gray-300  hover:bg-gray-300" :class="index_1 % 2 == 0 ? 'bg-white focus:bg-white' : 'bg-gray-200 focus:bg-gray-200'"  type="number" min="1" max="5" name="nota" v-model="matri[periodo]" id="">
+                                        <button v-else class="text-center w-32 h-8 border border-gray-300 rounded-md" type="button" disabled>
+                                            <span :class="matricula.nota_5[index] > 4 ? 'text-green-600' : matricula.nota_5[index] > 3 ? 'text-blue-500' : matricula.nota_5[index] > 2 ? 'text-yellow-500' : 'text-red-500'">{{ matricula.nota_5[index] }} / <strong>{{ matricula.nota_5[index] - 5 }}</strong> </span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
             </div>
 
         </div>
 
     </div>
-
 </div>
 </template>
 
@@ -190,7 +170,6 @@ export default defineComponent({
         }
 
         //###### computed
-        const urlsf = computed(() => Store.state.urlsf)
         const calificaciones = computed(() => Store.state.calificaciones)
         const matriculas = computed(() => Store.state.matriculas)
         const actual_sede = computed(() => Store.state.actual_sede)
@@ -208,9 +187,7 @@ export default defineComponent({
                 4: 'nota_4',
                 5: 'nota_5'
             }
-
             return periodos[actual_periodo.value.periodo]
-
         })
 
         const matriculas_comp = computed(() => {
@@ -243,29 +220,20 @@ export default defineComponent({
 
         //###### watch
         watch(actual_grado, (value) => {
-
             if (value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
-
                 Matricula.index(() => {})
-
             }
-
         })
 
         watch(matriculas, (value) => {
-
             if (value.length && actual_grado.value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
-
                 Calificacion.index_matriculas(() => {
                     Store.commit('set_actual_periodo', { 'periodo': 1, 'nombre': 'Primero' })
                 })
-
             }
-
         })
 
         return {
-            urlsf,
             periodo,
             matriculas,
             calificaciones,

@@ -13,7 +13,7 @@
                 <div class="mx-auto">
 
                     <h2 class="mt-3 flex text-center text-5xl font-extrabold text-pink-500">
-                        <img class="mt-2 w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" title="Academic" :src="urlsf+'/images/logo.svg'"  alt="academic.logo" />
+                        <img class="mt-2 w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" title="Academic" src="../../../public/images/logo.svg"  alt="academic.logo" />
                         Academic
                     </h2>
 
@@ -65,17 +65,16 @@
     import Store from '@/store/index'
 
     export default defineComponent({
-
         name: 'Ventana-Emergente',
-
         props :{
             elemento:{ type: Object, required: true }
         },
-
         setup(props,{emit}){
 
-            const urlsf = computed(()=> Store.state.urlsf )
+            //#data
             const password_control = ref({'status': false, 'password': ''})
+            
+            //#computed
             const elemento = computed(()=> props.elemento)
             const continuar = (status)=>{
                 
@@ -84,12 +83,10 @@
                     alert(' Ingrese contraseña')
                     return 
                 }
-
                 emit('control_acceso',password_control.value)
             }
 
             return{
-                urlsf,
                 continuar,
                 password_control,
                 elemento
