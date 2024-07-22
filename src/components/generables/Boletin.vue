@@ -5,7 +5,7 @@
             <div class="mx-2 flex w-full items-center">
   
                 <div class="">
-                    <img title="logo" class="mx-auto w-24" src="../public/images/logo_isnos.jpeg" />
+                    <img title="logo" class="mx-auto w-24" :src="urlsf+'/images/logo_isnos.jpeg'" />
                 </div>
 
                 <div class="flex-1 z-10 text-xs text-black font-semibold text-center">
@@ -20,7 +20,7 @@
                 </div>
   
                 <div class="">
-                    <img title="logo" class="mx-auto w-24" src="../public/images/logo_belen.jpeg" />
+                    <img title="logo" class="mx-auto w-24" :src="urlsf+'/images/logo_belen.jpeg'" />
                 </div>
   
             </div>
