@@ -22,7 +22,7 @@
                 </div>
   
                 <div class="z-0 opacity-90 fixed mx-auto w-4/5 sm:w-4/6 lg:w-3/6 xl:w-3/6 2xl:w-2/6 max-w-2xl">
-                    <img class="transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6 mx-auto w-full" src="../../public/images/logo.svg" />
+                    <img class="transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6 mx-auto w-full" src="/images/logo.svg" />
                 </div>
   
             </div>

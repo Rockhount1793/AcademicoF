@@ -13,7 +13,7 @@
                 <div class="mx-auto">
 
                     <h2 class="mt-3 flex text-center text-5xl font-extrabold text-pink-500">
-                        <img class="mt-2 w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" title="Academic" src="../../../public/images/logo.svg"  alt="academic.logo" />
+                        <img class="mt-2 w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" title="Academic" src="/images/logo.svg"  alt="academic.logo" />
                         Academic
                     </h2>
 

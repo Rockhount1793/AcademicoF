@@ -6,7 +6,7 @@
         <a href="#" class="flex items-center mb-6 pt-3 text-2xl font-semibold text-white" >
           <img
             class="w-8 h-8 mr-2 mt-1"
-            src="../../public/images/logo.svg"
+            src="/images/logo.svg"
             alt="logo"
           />
           Academic

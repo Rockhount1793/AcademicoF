@@ -3,7 +3,7 @@
     <div class="border-b-2 border-indigo-800 max-w-8xl z-0">
         <div class="flow-root">
             <RouterLink to="/home" class="ml-2 float-left">
-                <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" title="logo" src="../../../public/images/logo.svg" />
+                <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" title="logo" src="/images/logo.svg" />
             </RouterLink>
 
             <div class="flex items-center py-1 float-right ">

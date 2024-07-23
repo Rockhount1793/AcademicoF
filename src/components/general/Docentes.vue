@@ -46,7 +46,7 @@
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="flex items-center">
                                             <div class="h-10 w-10 flex-shrink-0">
-                                                <img class="h-10 w-10 rounded-full ml-2" :src="'../public/images/avatar/'+Utilities.firstLetter(doce.nombres)+'.png'" alt="docente.nombres" />
+                                                <img class="h-10 w-10 rounded-full ml-2" :src="'/images/avatar/'+Utilities.firstLetter(doce.nombres)+'.png'" alt="docente.nombres" />
                                             </div>
                                             <div class="ml-6">
                                                 <div class="font-medium text-gray-900">{{ doce.nombres }}</div>

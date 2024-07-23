@@ -3,7 +3,7 @@
     <div class="h-screen w-60">
         <div class="flex min-h-full flex-1 flex-col bg-gray-800">
             <div class="flex h-16 flex-shrink-0 items-center bg-gray-900 px-4">
-                <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" title="Academic" src="@/assets/images/logo.svg"  alt="Academic" />
+                <img class="w-10 h-10 transform -rotate-6 transition hover:scale-105 duration-700 ease-in-out hover:rotate-6" title="Academic" src="/images/logo.svg"  alt="Academic" />
                 <span class="text-white">Academic</span>
             </div>
 

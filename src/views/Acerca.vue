@@ -26,7 +26,7 @@
                 </div>
   
                 <div class="z-0 fixed mx-auto w-3/4 sm:w-3/5 lg:w-2/5 xl:w-2/6 2xl:w-1/5 max-w-2xl">
-                    <img class="mx-auto w-full" src="../../public/images/logo.svg" />
+                    <img class="mx-auto w-full" src="/images/logo.svg" />
                 </div>
 
             </div>
