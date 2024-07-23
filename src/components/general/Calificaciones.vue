@@ -57,8 +57,8 @@
                                     </td>
                                     <td class="table-cell bg-gray-50" :key="key" v-for="(matri, index, key) in matricula.calificaciones">
                                         <input  v-if="periodo != 'nota_5'" @blur="update_calificacion(matri)" class=" w-28 h-8 text-md  font-semibold text-center border rounded-md border-gray-300  hover:bg-gray-300" :class="index_1 % 2 == 0 ? 'bg-white focus:bg-white' : 'bg-gray-200 focus:bg-gray-200'"  type="number" min="1" max="5" name="nota" v-model="matri[periodo]" id="">
-                                        <button v-else class="text-center w-32 h-8 border border-gray-300 rounded-md" type="button" disabled>
-                                            <span :class="matricula.nota_5[index] > 4 ? 'text-green-600' : matricula.nota_5[index] > 3 ? 'text-blue-500' : matricula.nota_5[index] > 2 ? 'text-yellow-500' : 'text-red-500'">{{ matricula.nota_5[index] }} / <strong>{{ matricula.nota_5[index] - 5 }}</strong> </span>
+                                        <button :title="`nota: ${(matricula.nota_5[index]).toFixed(2)} / restante: ${(matricula.nota_5[index] - 5).toFixed(2)}`" v-else class="text-center w-32 h-8 border border-gray-300 rounded-md" type="button" disabled>
+                                            <span :class="matricula.nota_5[index] > 4 ? 'text-green-600' : matricula.nota_5[index] > 3 ? 'text-blue-500' : matricula.nota_5[index] > 2 ? 'text-yellow-500' : 'text-red-500'">{{ (matricula.nota_5[index]).toFixed(2) }} [<strong>{{ (matricula.nota_5[index] - 5).toFixed(2) }}</strong>] </span>
                                         </button>
                                     </td>
                                 </tr>
