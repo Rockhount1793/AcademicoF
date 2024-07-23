@@ -6,13 +6,13 @@
 
     <div class="grid gap-2 lg:gap-0 lg:flex text-2xl lg:space-x-2 font-semibold text-gray-900 lg:items-center">
  
-      <div class="rounded-md w-48 lg:bg-indigo-500/10 px-2 h-8 text-xs font-semibold leading-8 text-indigo-400 ">
+      <div class="rounded-md w-48 py-2 lg:bg-indigo-500/10 px-2 h-8 text-xs font-semibold leading-8 text-indigo-400 ">
         <p>
           Sede actual: <span class="text-gray-900 capitalize">{{ actual_sede.nombre }}</span>
         </p>
       </div>
 
-      <div class="rounded-md w-48 lg:bg-indigo-500/10 px-2 h-8 text-xs font-semibold leading-8 text-indigo-400 ">
+      <div class="rounded-md w-48 py-2 lg:bg-indigo-500/10 px-2 h-8 text-xs font-semibold leading-8 text-indigo-400 ">
         <p>
           Año lectivo actual: <span class="text-gray-900">{{lectivo.numero}}</span>
         </p>

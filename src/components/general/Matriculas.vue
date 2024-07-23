@@ -187,7 +187,7 @@
     import Aplicacion from "@/controllers/Aplicacion"
     import Matricula from "@/controllers/Matricula"
     import Estudiante from "@/controllers/Estudiante"
-    import Utilities from "@/Utilities"
+    import Utilities from '@/utilities'
   
     export default defineComponent({
         'name':'Matriculas',
