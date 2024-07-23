@@ -45,7 +45,7 @@ const funciones = {
         })
     },
     firstLetter(name){
-        return name.charAt(0).toLowerCase().normalize("NFD").replace(/[^\u0000-\u007F]/g,"") || 'default'
+        return name.trim().charAt(0).toLowerCase().normalize("NFD").replace(/[^\u0000-\u007F]/g,"") || "default"
     }
 
 }

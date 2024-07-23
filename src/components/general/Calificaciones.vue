@@ -6,17 +6,14 @@
 
         <div class="pr-12 lg:pr-0 mt-0">
             <div class="flex-1 lg:flex">
-
                 <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
                     <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-500 text-md px-2">Grado</p>
                     <SelectorGrado class="mx-auto lg:w-1/2"></SelectorGrado>
                 </div>
-
                 <div class="block mx-auto py-2 w-full lg:w-1/2 px-2 lg:px-1">
                     <p class="mx-auto w-full lg:w-1/2 font-semibold text-gray-500 text-md px-2">Periodo</p>
                     <SelectorPeriodo class="mx-auto w-full lg:w-1/2"></SelectorPeriodo>
                 </div>
-
             </div>
         </div>
 
@@ -28,16 +25,12 @@
             <div v-if="!matriculas_comp.length">
                 <p class="px-2 font-semibold text-gray-500 mt-3"> No hay matriculas o asignaturas creadas </p>
             </div>
-
             <!-- tabla 4 peridos y final --->
             <div v-else class="mx-auto w-full">
-
                 <div class="p-1 h-auto rounded px-4 overflow-y-auto relative">
-
                     <div class="mt-5">
                         <p class="font-semibold text-gray-500">Ingreso de Calificaciones <hr/></p>
                     </div>
-
                     <div style="margin-left: 150px;" class="px-1 overflow-x-auto h-auto  mb-10">
                         <table class="table border-separate">
                             <thead class="">
@@ -83,30 +76,20 @@
 </template>
 
 <script>
+import { watch, ref, defineComponent, computed } from "vue"
 import Barra from "@/components/framework/Barra.vue"
 import Lateral from "@/components/framework/Lateral.vue"
 import SelectorDirector from "@/components/framework/Selector_Docente.vue"
 import SelectorGrado from "@/components/framework/Selector_Grado.vue"
 import SelectorPeriodo from "@/components/framework/Selector_Periodo.vue"
-import { RouterView } from "vue-router"
-import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
 import Store from "@/store"
-import Router from "@/router"
 import Aplicacion from "@/controllers/Aplicacion"
-import Grado from "@/controllers/Grado"
-import Docente from "@/controllers/Docente"
-import Logro from "@/controllers/Logro"
 import Matricula from "@/controllers/Matricula"
-import Asignatura from "@/controllers/Asignatura"
 import Calificacion from "@/controllers/Calificacion"
 import Utilitie from "@/utilities"
 
-
-
 export default defineComponent({
-
     'name': 'Calificaciones',
-
     'components': {
         Barra,
         Lateral,
@@ -114,58 +97,48 @@ export default defineComponent({
         SelectorGrado,
         SelectorPeriodo
     },
-
     setup() {
 
         //###### data
         let errores = ref([])
 
         //###### methods
-        const update_calificacion = (json) => {
+        const update_calificacion = (json)=>{
 
             errores.value = []
 
-            if (typeof Number(json.nota_1) != 'number' || Number(json.nota_1) > 5 || Number(json.nota_1) < 0) { 
-                json.nota_1 = 0;
+            if(typeof Number(json.nota_1) != 'number' || Number(json.nota_1) > 5 || Number(json.nota_1) < 0){ 
+                json.nota_1 = 0
                 errores.value.push('¡valor de nota primer periodo no debe ser menor a 0 o mayor a 5!') 
             }
-            if (typeof Number(json.nota_2) != 'number' || Number(json.nota_2) > 5 || Number(json.nota_2) < 0) {
-                json.nota_2 = 0;
+            if(typeof Number(json.nota_2) != 'number' || Number(json.nota_2) > 5 || Number(json.nota_2) < 0){
+                json.nota_2 = 0
                 errores.value.push('¡valor de nota segundo periodo no debe ser menor a 0 o mayor a 5!') 
             }
-            if (typeof Number(json.nota_3) != 'number' || Number(json.nota_3) > 5 || Number(json.nota_3) < 0) {
-                json.nota_3 = 0;
+            if(typeof Number(json.nota_3) != 'number' || Number(json.nota_3) > 5 || Number(json.nota_3) < 0){
+                json.nota_3 = 0
                 errores.value.push('¡valor de nota tercer periodo no debe ser menor a 0 o mayor a 5!') 
             }
-            if (typeof Number(json.nota_4) != 'number' || Number(json.nota_4) > 5 || Number(json.nota_4) < 0) {
-                json.nota_4 = 0;
+            if(typeof Number(json.nota_4) != 'number' || Number(json.nota_4) > 5 || Number(json.nota_4) < 0){
+                json.nota_4 = 0
                 errores.value.push('¡valor de nota cuarto periodo no debe ser menor a 0 o mayor a 5!') 
             }
 
-            if (!errores.value.length) {
-
+            if(!errores.value.length){
                 Calificacion.update(json)
-
-            } else {
-
+            }else{
                 alert(errores.value[0])
-
             }
 
         }
 
-        
-
-        const filter_identificacion = (number) => {
+        const filter_identificacion = (number)=>{
             return Utilitie.format_tnumber(number)
         }
 
         const verfificar_matriculas = ()=>{
-                
-            if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
-                                    
+            if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){                
                 Matricula.index(()=>{})
-            
             }
         }
 
@@ -181,11 +154,11 @@ export default defineComponent({
         const periodo = computed(() => {
 
             let periodos = {
-                1: 'nota_1',
-                2: 'nota_2',
-                3: 'nota_3',
-                4: 'nota_4',
-                5: 'nota_5'
+                1:"nota_1",
+                2:"nota_2",
+                3:"nota_3",
+                4:"nota_4",
+                5:"nota_5"
             }
             return periodos[actual_periodo.value.periodo]
         })
@@ -228,7 +201,7 @@ export default defineComponent({
         watch(matriculas, (value) => {
             if (value.length && actual_grado.value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
                 Calificacion.index_matriculas(() => {
-                    Store.commit('set_actual_periodo', { 'periodo': 1, 'nombre': 'Primero' })
+                    Store.commit('set_actual_periodo', {"periodo":1,"nombre":"Primero"})
                 })
             }
         })
@@ -244,36 +217,21 @@ export default defineComponent({
             filter_identificacion,
             update_calificacion,
             verfificar_matriculas
-
         }
 
     },
-
     mounted() {
-
         this.$nextTick(() => {
-
             Aplicacion.check_login(() => {
-
                 this.verfificar_matriculas()
-
-                if (Store.state.matriculas.length && Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0) {
-
+                if (Store.state.matriculas.length && Store.state.actual_sede.sede_id > 0 && Store.state.actual_grado.grado_id > 0 && Store.state.actual_lectivo.lectivo_id > 0){
                     Calificacion.index_matriculas(() => {
-                        Store.commit('set_actual_periodo', { 'periodo': 1, 'nombre': 'Primero' })
+                        Store.commit('set_actual_periodo',{"periodo":1,"nombre":"Primero"})
                     })
-
                 }
-
             })
-
         })
-
     }
 
 })
 </script>
-
-<style scoped>
-
-</style>
