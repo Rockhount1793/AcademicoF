@@ -42,7 +42,7 @@
         <div class="w-8">
           <MenuButton class="max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
             <span class="sr-only">Open user menu</span>
-            <img class="h-8 w-8 rounded-full" :src="'../public/images/avatar/'+user.avatar" alt="avatar" />
+            <img class="h-8 w-8 rounded-full" :src="`/images/avatar/${user.avatar}`" alt="avatar" />
           </MenuButton>
         </div>
 
@@ -105,7 +105,7 @@
   const lectivo_selected = ref('')
 
   sedes.value = computed(() => Store.state.sedes);
-  
+  const urlsf = computed(()=> Store.state.urlsf )
   lectivos.value = computed(()=> Store.state.lectivos);
   //console.log('lectivos',lectivos);
 
