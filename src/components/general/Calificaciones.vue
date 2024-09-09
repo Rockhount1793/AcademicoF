@@ -31,12 +31,12 @@
                     <div class="mt-5">
                         <p class="font-semibold text-gray-500">Ingreso de Calificaciones <hr/></p>
                     </div>
-                    <div style="margin-left: 150px;" class="px-1 overflow-x-auto h-auto  mb-10">
-                        <table class="table border-separate">
+                    <div  class="px-1 overflow-x-auto h-auto  mb-10">
+                        <table  class="table border-separate">
                             <thead class="">
                                 <tr class="">
-                                    <th style="margin-left: -10rem;" class="pt-1 absolute h-10 w-40 text-gray-600">
-                                        <div class="w-40 h-10 content-center">
+                                    <th style="margin-left: -10rem;" class="pt-1  h-10 w-56 text-gray-600">
+                                        <div class="w-56 h-10 content-center">
                                             <p class="text-medium font-semibold">Estudiante</p>
                                         </div>
                                     </th>
@@ -47,8 +47,8 @@
                             </thead>
                             <tbody class="">
                                 <tr class="even:bg-gray-200 odd:bg-gray-100 " :key="key" v-for="(matricula, index_1, key) in matriculas_comp">
-                                    <td style="margin-left: -10rem; " class="absolute w-40 text-gray-500 font-semibold truncate text-ellipsis text-xs">
-                                        <div :class="index_1 % 2 == 0 ? 'bg-white' : 'bg-gray-200'" class="h-8 border border-gray-300 rounded-md content-center">
+                                    <td style="margin-left: -10rem; " class=" w-56 text-gray-500 font-semibold truncate text-ellipsis text-xs">
+                                        <div :class="index_1 % 2 == 0 ? 'bg-white' : 'bg-gray-200'" class="px-1 h-8 border border-gray-300 rounded-md content-center">
                                             <p :title="`${matricula.nombres} ${matricula.apellidos}`" class="px-0.5 text-center truncate text-ellipsis">
                                                 {{matricula.apellidos}}
                                                 {{matricula.nombres}}
