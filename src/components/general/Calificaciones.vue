@@ -31,7 +31,7 @@
                     <div class="mt-5">
                         <p class="font-semibold text-gray-500">Ingreso de Calificaciones <hr/></p>
                     </div>
-                    <div style="/* max-height:32rem */"  class="h-[40rem]  overflow-x-auto  mb-10">
+                    <div  class="h-[40rem]  overflow-x-auto  mb-10">
                         <table  class="table border-separate">
                             <thead class="">
                                 <tr class="">
