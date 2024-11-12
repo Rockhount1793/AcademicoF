@@ -15,7 +15,7 @@
         'boletin_todos_file': async function(cb){
 
             console.log('FRONT: boletin_todos_file')
-            console.log('actual_generable_director.docente_id: ' + actual_generable_director.docente_id)
+            console.log('actual_generable_director.docente_id: ' + actual_generable_director().docente_id)
             
 
             let json = {
@@ -170,9 +170,9 @@
                 'sede_id': sede().sede_id,
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
-                'grado_id': grado().grado_id
+                'grado_id': grado().grado_id,
+                'fecha_constancia': actual_datos_certificado_estudio().fecha
             }
-
             const response = await Fetch.post_download('/generable/certificado_final_file',json)
 
             if(response.status){
