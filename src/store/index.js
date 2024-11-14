@@ -89,7 +89,8 @@ const store = createStore({
             boletin: {'asignaturas':[], grado:'', puesto:[0,0], rector:'', 'estudiante': {'estudiante_id': 0, 'identificacion': '0'}, 'faltas': 0 },
             actual_datos_certificado_estudio: { 'razon': '', 'fecha': '01-01-1900' },
             actual_datos_certificado_notas: {'fecha': '01-01-1900' },
-            actual_generable_director: { 'docente_id': 0 }
+            actual_generable_director: { 'docente_id': 0 },
+            fecha_boletin: '01-01-1900'
             
         }
     },
@@ -210,6 +211,9 @@ const store = createStore({
         
         set_actual_generable_director(state,json){
             state.actual_generable_director = json
+        },
+        set_fecha_boletin(state,json){
+            state.fecha_boletin = json
         }
 
     },

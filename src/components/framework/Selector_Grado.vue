@@ -192,9 +192,7 @@
             })
 
             watch(actual_sede, (newValue, oldValue)=> {
-                console.log(newValue)
                 grado_id.value = 0;
-                console.log(grado_id.value)
                 modulo.value = false;
 
             })

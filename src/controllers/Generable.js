@@ -10,6 +10,7 @@
     const actual_datos_certificado_estudio = () => { return Store.state.actual_datos_certificado_estudio }
     const actual_datos_certificado_notas = () => { return Store.state.actual_datos_certificado_notas }
     const actual_generable_director = () => { return Store.state.actual_generable_director }
+    const fecha_boletin = () => Store.state.fecha_boletin
 
     const Controller = {
 
@@ -63,9 +64,9 @@
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
                 'grado_id': grado().grado_id,
-                'docente_id': actual_generable_director().docente_id
+                'docente_id': actual_generable_director().docente_id,
+                'fecha_boletin': fecha_boletin()
             }
-
             const response = await Fetch.post_download('/generable/boletin_final_todos_file',json)
 
             if(response.status){
