@@ -58,11 +58,11 @@
                                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
                                             <div class="flex items-center">
                                                 <div class="h-10 w-10 flex-shrink-0">
-                                                    <img class="h-10 w-10 rounded-full ml-2" :src="'/images/avatar/'+Utilities.firstLetter(estudiante.nombres)+'.png'" alt="icon.letter" />
+                                                    <img class="h-10 w-10 rounded-full ml-2" :src="estudiante.estado?'/images/avatar/'+Utilities.firstLetter(estudiante.nombres)+'.png':'images/avatar/none.svg'" alt="icon.letter" />
                                                 </div>
                                                 <div class="ml-6">
-                                                    <div class="font-medium text-base text-gray-900 capitalize">{{ estudiante.nombres + " " + estudiante.apellidos  }}</div>
-                                                    <div class="text-gray-500">ID: {{ estudiante.identificacion }}</div>
+                                                    <div class="font-medium text-base text-gray-900 capitalize" :class="!estudiante.estado&&'text-gray-400'">{{ estudiante.nombres + " " + estudiante.apellidos  }}</div>
+                                                    <div class="text-gray-500" :class="!estudiante.estado&&'text-gray-400'">ID: {{ estudiante.identificacion }}</div>
                                                 </div>
                                             </div>
                                         </td>
@@ -70,13 +70,13 @@
                                             <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="estudiante.estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ estudiante.estado ? 'Activo':'Inactivo'  }} </span>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <div class="text-gray-900">{{ estudiante.rh }}</div>
+                                            <div class="text-gray-900" :class="!estudiante.estado&&'text-gray-400'">{{ estudiante.rh }}</div>
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <div class="text-gray-900">{{ formatDate(estudiante.nacimiento) }}</div>
+                                            <div class="text-gray-900" :class="!estudiante.estado&&'text-gray-400'">{{ formatDate(estudiante.nacimiento) }}</div>
                                         </td>
-                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ getBirthDate(estudiante.nacimiento) }} años</td>
-                                        <td @click="consultar_estudiante(estudiante.estudiante_id)" class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">
+                                        <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500" :class="!estudiante.estado&&'text-gray-400'">{{ getBirthDate(estudiante.nacimiento) }} años</td>
+                                        <td @click="consultar_estudiante(estudiante.estudiante_id)" class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer" :class="!estudiante.estado&&'text-gray-400 hover:none'">
                                             Editar
                                         </td>
                                     </tr>

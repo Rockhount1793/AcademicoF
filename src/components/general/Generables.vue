@@ -115,10 +115,10 @@
                                             <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ matri.estudiante_estado ? 'Activo':'Inactivo'  }} </span>
                                         </td>
                                         <td v-if="actual_generable.recurso > 10" class="text-sm w-52">
-                                            <button @click="seccion=2;Matricula_Global=matri" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                            <button @click="seccion=2;Matricula_Global=matri;tipo_certificado='ESTUDIO'" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                                                 Certificado de Estudio
                                             </button>
-                                            <button @click="generar_certificado_notas(matri)" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                            <button @click="seccion=2;Matricula_Global=matri;tipo_certificado='NOTAS'" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                                                 Certificado de Notas
                                             </button>
                                         </td>
@@ -175,7 +175,7 @@
         <div v-if="seccion==2" id="div_certificado_datos">
             <!-- Titulo -->
             <div class="w-full text-center pt-5">
-                <p class="font-semibold text-gray-500 text-md">CERTIFICADO DE ESTUDIO</p>
+                <p class="font-semibold text-gray-500 text-md">CERTIFICADO DE {{ tipo_certificado }}</p>
             </div>
 
             <!-- Contenedor Nombre del Estudiante -->
@@ -204,16 +204,16 @@
                 </div>
             
                 <!-- Razón del certificado -->
-                <div class="w-full mt-3">
+                <div v-if="tipo_certificado==='ESTUDIO'" class="w-full mt-3">
                     <p class="mx-2 font-semibold text-gray-500 text-md">Razón del certificado</p>
-                    <input id="datos_constancia_estudio_razon" @change="set_razon_constancia_estudio()" required type="text" value="" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                    <input id="datos_constancia_estudio_razon" @change="set_razon_constancia_estudio()" type="text" value="" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                 </div>
 
             </div>
 
             <!-- Contenedor botón Generar Certificado -->
             <div class="w-full px-6 mt-5">
-                <button @click="generar_certificado_estudio(Matricula_Global);" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center">
+                <button @click="tipo_certificado==='ESTUDIO'?generar_certificado_estudio(Matricula_Global):generar_certificado_notas(Matricula_Global);" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center">
                     Generar Certificado
                 </button>
                 <button @click="seccion = 0;clearform()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center mx-4">
@@ -258,6 +258,7 @@
             let fecha_constancia_estudio = ""
             let razon_constancia_estudio = ""
             let director_id = 0
+            const tipo_certificado = ref('')
             //# methods
             
             const clearform = ()=>{
@@ -267,10 +268,10 @@
                 Store.commit('set_actual_generable_director', actual_generable_director)
 
                 document.getElementById('datos_constancia_estudio_fecha').value = ""
-                document.getElementById('datos_constancia_estudio_razon').value = ""
+                if(tipo_certificado==='ESTUDIO') document.getElementById('datos_constancia_estudio_razon').value = ""
                 Matricula_Global = undefined
                 set_fecha_constancia_estudio()
-                set_razon_constancia_estudio()
+                if(tipo_certificado==='ESTUDIO') set_razon_constancia_estudio()
 
             }
 
@@ -358,7 +359,7 @@
                         }
                         else{
                             //Generar certificado
-                            console.log("Generando el Certificado de estudio...")
+                            // console.log("Generando el Certificado de estudio...")
 
                             console.log("Fecha constancia de estudio: " + fecha_constancia_estudio)
                             console.log("Razon constancia de estudio: " + razon_constancia_estudio)
@@ -389,7 +390,18 @@
                 if (actual_generable.value.recurso === 0) { errores.value.push('Seleccione generable') }
 
                 if (!errores.value.length) {
-                    generar_certificado(matricula);
+                    //Validar datos de interfaz
+                    if(fecha_constancia_estudio === "")
+                        {
+                            alert("La fecha del certificado de estudio es requerida, por favor seleccione una fecha!")
+                        }else{
+                            //Generar certificado
+
+                            let datos_certificado_notas = {'fecha': fecha_constancia_estudio }
+                            Store.commit('set_actual_datos_certificado_notas', datos_certificado_notas)
+                            
+                            generar_certificado(matricula)
+                        }
                 } else {
                     alert(errores.value[0])
                 }
@@ -410,6 +422,7 @@
                     let director_id = Store.state.actual_generable_director.docente_id;
                     Matricula_Global = matricula
                     //Validar selección
+                    console.log('director id', director_id)
                     if(director_id === 0)
                     {
                         alert("Director no seleccionado. Por favor seleccione un director de curso!")
@@ -504,7 +517,20 @@
 
             //# computed
             const estudiantes = computed(()=> Store.state.estudiantes )
-            const matriculas = computed(()=> Store.state.matriculas )
+            const matriculas = computed(()=> {
+                
+                // console.log("Actualizando matriculas...",actual_generable.value)
+
+                if(actual_generable.value.nombre === 'boletín' || actual_generable.value.nombre === 'informe' || actual_generable.value.nombre === 'planilla'){
+                    const matriculasActivas = Store.state.matriculas.filter((matri)=>{
+                        return matri.estado == 1
+                    })
+                    // console.log("Matriculas activas: ",matriculasActivas)
+                    return matriculasActivas
+                }
+
+                return Store.state.matriculas
+            } )
             const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const actual_periodo = computed(()=> Store.state.actual_periodo )
@@ -546,7 +572,8 @@
                 filter_identificacion,
                 verfificar_matriculas,
                 validar_datos,
-                clearform
+                clearform,
+                tipo_certificado
             }
 
         },

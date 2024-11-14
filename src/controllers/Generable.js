@@ -8,6 +8,7 @@
     const grado = ()=>{ return Store.state.actual_grado }
     const periodo = ()=>{ return Store.state.actual_periodo }
     const actual_datos_certificado_estudio = () => { return Store.state.actual_datos_certificado_estudio }
+    const actual_datos_certificado_notas = () => { return Store.state.actual_datos_certificado_notas }
     const actual_generable_director = () => { return Store.state.actual_generable_director }
 
     const Controller = {
@@ -171,7 +172,7 @@
                 'lectivo': lectivo().numero,
                 'lectivo_id': lectivo().lectivo_id,
                 'grado_id': grado().grado_id,
-                'fecha_constancia': actual_datos_certificado_estudio().fecha
+                'fecha_constancia': actual_datos_certificado_notas().fecha
             }
             const response = await Fetch.post_download('/generable/certificado_final_file',json)
 

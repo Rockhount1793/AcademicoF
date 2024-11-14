@@ -6,14 +6,12 @@
     const Controller = {
 
         'index': async function(cb){
-
             let sede = Store.state.actual_sede
             let lectivo = Store.state.actual_lectivo
             let grado = Store.state.actual_grado
             let json = {'sede_id': sede.sede_id, 'lectivo_id': lectivo.lectivo_id, 'grado_id': grado.grado_id}
 
             const response = await Fetch.post('/matricula/index',json)
-
             if(response.status){
                 Store.commit('set_matriculas', response.matriculas)
                 cb()
@@ -43,7 +41,6 @@
         },
 
         'delete': async function(json){
-            
             const response = await Fetch.delete('/matricula/delete',json)
             
             if(response.status){
@@ -54,7 +51,18 @@
                 Aplicacion.redirect_end_sesion(response)
             }
             
-        }
+        },
+        'active': async function(json){
+            const response = await Fetch.post('/matricula/active',json)
+            if(response.status){
+                Store.dispatch('active_matricula',json)
+            }
+
+            if(response.error == 500){
+                Aplicacion.redirect_end_sesion(response)
+            }
+            
+        },
 
     }
 

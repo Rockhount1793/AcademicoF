@@ -186,8 +186,8 @@ export default defineComponent({
                 }
 
             }
-
-            return m_comp
+            const m_comp_filtered = m_comp.filter(m => m.estado === 1)
+            return m_comp_filtered
 
         })
 
