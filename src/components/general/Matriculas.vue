@@ -346,7 +346,6 @@
                 await Matricula.index(()=>{})
             })
             
- */
             
 
             return {
