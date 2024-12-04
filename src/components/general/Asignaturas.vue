@@ -78,7 +78,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
                             </svg>
                         </div>
-                        <input v-model="asignatura.nombre" id="nombre_asig" type="text" name="nombre_asig" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Presscolar A" />
+                        <input v-model="asignatura.nombre" id="nombre_asig" type="text" name="nombre_asig" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Español" />
                     </div>
                 </div>
                 
