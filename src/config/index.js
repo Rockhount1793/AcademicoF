@@ -4,7 +4,7 @@ import env from '@/config/env.js'
 
 const Config = {
 
-    'version': "1.2.0.0 23-07-2024 18:29",
+    'version': "1.2.0.1 4-12-2024 17:50",
 
     // development o production
     'status': import.meta.env.VITE_ENVIRONMENT || "development",
