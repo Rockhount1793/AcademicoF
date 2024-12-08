@@ -5,32 +5,32 @@
   <div class="w-full lg:flex grid h-auto lg:h-16 justify-between px-4 content-between">
 
     <div class="grid gap-2 lg:gap-0 lg:flex text-2xl lg:space-x-2 font-semibold text-gray-900 lg:items-center">
- 
-      <div class="rounded-md w-48 lg:bg-indigo-500/10 px-2 h-8 text-xs font-semibold leading-8 text-indigo-400 ">
-        <p>
-          Sede actual: <span class="text-gray-900 capitalize">{{ actual_sede.nombre }}</span>
-        </p>
-      </div>
 
-      <div class="rounded-md w-48 lg:bg-indigo-500/10 px-2 h-8 text-xs font-semibold leading-8 text-indigo-400 ">
-        <p>
-          Año lectivo actual: <span class="text-gray-900">{{lectivo.numero}}</span>
-        </p>
-      </div>
+      <Selector 
+        :classAux="'border border-gray-200 shadow-md text-left rounded-md w-48 lg:bg-indigo-500/10 px-2 h-8 text-xs font-semibold leading-8 text-indigo-400'" 
+        :key="keySelectorSede"
+        :items="sedes"
+        :beforeText="'Sede actual:'"
+        :current="actual_sede"
+        @onSelect="set_sede"
+      >
+      </Selector>
 
-      <select v-model="sede_selected" class="rounded-md text-xs w-48 border-0 h-8 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600">
-        <option value="" selected>Cambiar sede</option>
-        <option v-for="sede in sedes.value" :key='sede.id' :value='sede'>{{ sede.nombre }} </option>
-      </select>
-
-      <select v-model="lectivo_selected" class="rounded-md text-xs w-48 border-0 h-8 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600">
-        <option value="">Cambiar año</option>
-        <option v-for="lectivo in lectivos.value" :key="lectivo.lectivo_id" :value="lectivo">{{ lectivo.numero }}</option>
-      </select>
+      <Selector 
+        :classAux="'border border-gray-200 shadow-md text-left rounded-md w-48 lg:bg-indigo-500/10 px-2 h-8 text-xs font-semibold leading-8 text-indigo-400'" 
+        :key="keySelectorLectivo"
+        :items="lectivos"
+        :beforeText="'Año lectivo actual:'"
+        :current="actual_lectivo"
+        @onSelect="set_lectivo"
+      >
+      </Selector>
 
     </div>
 
     <div class="mt-3 lg:mt-0 flex items-center space-x-3">
+      
+      <Loader></Loader>
 
       <button type="button" class="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
         <span class="sr-only">View notifications</span>
@@ -90,6 +90,8 @@
   import Aplicacion from "@/controllers/Aplicacion"
   import Sede from "@/controllers/Sede"
   import Lectivo from '@/controllers/Lectivo'
+  import Loader from "@/components/framework/Loader.vue"
+  import Selector from "@/components/framework/SelectorOpciones.vue"
 
   const userNavigation = [
     { name: 'Cerrar Sesión', href: '#' },
@@ -99,50 +101,58 @@
     // abrir lateral
   }
  
-  const sedes = ref([])
-  const lectivos = ref([])
-  const sede_selected = ref('')
-  const lectivo_selected = ref('')
+  const keySelectorSede = ref(0)
+  const keySelectorLectivo = ref(0)
 
-  sedes.value = computed(() => Store.state.sedes);
-  const urlsf = computed(()=> Store.state.urlsf )
-  lectivos.value = computed(()=> Store.state.lectivos);
-  //console.log('lectivos',lectivos);
-
-  const set_sede = (json) => {
-    Store.dispatch('change_sede', json)
+  const set_sede = (selected) => {
+    const {item} = selected
+    Store.dispatch('change_sede',{"sede_id":item.id,"nombre":item.name})
   }
-
-  const set_lectivo = (json)=>{
-      Store.dispatch('change_lectivo',json)
+  
+  const set_lectivo = (selected)=>{
+    const {item} = selected
+    Store.dispatch('change_lectivo',{"lectivo_id":item.id,"numero":item.name})
   }
+  
+  // computed
+  const user = computed(()=> Store.state.usuario )
+  const sedes = computed(() => Store.state.sedes.map((s)=>{ return {"id":s.sede_id,"name":s.nombre}}) )
+  const actual_sede = computed(() =>{ return {"id":Store.state.actual_sede.sede_id,"name": Store.state.actual_sede.nombre} })
+  const actual_lectivo = computed(()=>{ return{"id":Store.state.actual_lectivo.lectivo_id,"name":Store.state.actual_lectivo.numero } })
+  const lectivos = computed(() => Store.state.lectivos.map((s)=>{ return {"id":s.lectivo_id,"name":s.numero}}) ) 
 
-  watch(sede_selected,(act,old)=> {
-    set_sede(act)
+  // watch
+  
+  watch(sedes,(act,old)=> {
+    keySelectorSede.value++
   })
-  watch(lectivo_selected, (newValue,oldValue)=> {
-    set_lectivo(newValue)
+
+  watch(lectivos,(act,old)=> {
+    keySelectorLectivo.value++
+  })
+
+  watch(actual_sede,(act,old)=> {
+    keySelectorSede.value++
+  })
+
+  watch(actual_lectivo,(act,old)=> {
+    keySelectorLectivo.value++
   })
   
   onMounted(()=> {
-    nextTick(() => {
-      Aplicacion.check_login(() => {
+    nextTick(async() => {
           if (!Store.state.sedes.length) {
-              Sede.index()
+            const sedesq = await Sede.index()
+            if(sedesq.status && !Store.state.lectivos.length){
+              Lectivo.index()   
+            }
           }
-          if(!Store.state.lectivos.length){
-              Lectivo.index(()=>{})   
-          }
-      })
+
     })
   }) 
   
   const cerrar_sesion = async ()=>{ 
     Aplicacion.cerrar_sesion()
   }
- 
-  const user = computed(()=> Store.state.usuario )
-  const lectivo = computed(()=> Store.state.actual_lectivo )
-  const actual_sede = computed(() => Store.state.actual_sede)
 
 </script>

@@ -79,28 +79,21 @@
 </template>
     
 <script>
-import Barra from "@/components/framework/Barra.vue"
+import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
+import Navbar from "@/components/framework/Navbar.vue"
 import Lateral from "@/components/framework/Lateral.vue"
 import SelectorDirector from "@/components/framework/Selector_Docente.vue"
 import SelectorGrado from "@/components/framework/Selector_Grado.vue"
 import SelectorPeriodo from "@/components/framework/Selector_Periodo.vue"
-import { RouterView } from "vue-router"
-import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
 import Store from "@/store"
-import Router from "@/router"
-import Aplicacion from "@/controllers/Aplicacion"
-import Grado from "@/controllers/Grado"
-import Docente from "@/controllers/Docente"
-import Logro from "@/controllers/Logro"
 import Matricula from "@/controllers/Matricula"
-import Asignatura from "@/controllers/Asignatura"
 import Calificacion from "@/controllers/Calificacion"
 import Utilitie from "@/utilities"
     
 export default defineComponent({
     'name': 'Faltas',
     'components': {
-        Barra,
+        Navbar,
         Lateral,
         SelectorDirector,
         SelectorGrado,
@@ -146,8 +139,9 @@ export default defineComponent({
 
         const verfificar_matriculas = ()=>{
             if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
-                Matricula.index(()=>{})
+                return Matricula.index()
             }
+            return
         }
         
         //###### computed
@@ -199,15 +193,14 @@ export default defineComponent({
         //###### watch
         watch(actual_grado,(value)=>{
             if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0){
-                Matricula.index(() => {})
+                Matricula.index()
             }
         })
 
-        watch(matriculas,(value)=>{
+        watch(matriculas,async(value)=>{
             if(value.length && actual_grado.value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0){
-                Calificacion.index_matriculas(()=>{
-                    Store.commit('set_actual_periodo',{"periodo":1,"nombre":"Primero"})
-                })
+                await Calificacion.index_matriculas()
+                Store.commit('set_actual_periodo',{"periodo":1,"nombre":"Primero"})
             }
         })
 
@@ -226,15 +219,13 @@ export default defineComponent({
 
     },
     mounted() {
-        this.$nextTick(() => {
-            Aplicacion.check_login(() => {
-                this.verfificar_matriculas()
-                if (Store.state.matriculas.length && Store.state.actual_grado.grado_id > 0) {
-                    Calificacion.index_matriculas(() => {
-                        Store.commit('set_actual_periodo',{"periodo":1,"nombre":"Primero"})
-                    })
-                }
-            })
+        this.$nextTick(async() => {
+            await this.verfificar_matriculas()
+            if (Store.state.matriculas.length && Store.state.actual_grado.grado_id > 0) {
+                await Calificacion.index_matriculas()
+                Store.commit('set_actual_periodo',{"periodo":1,"nombre":"Primero"})
+            }
+            
         })
     }
 

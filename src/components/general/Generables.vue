@@ -79,7 +79,7 @@
                 <div v-if="seccion == 0" class="mt-3 px-4 sm:px-6 lg:px-8 h-full">
 
                     <div v-if="!matriculas.length" class="sm:flex sm:items-center">
-                        <p class="px-2 font-semibold text-gray-500"> No hay matriculas creados</p>
+                        <p class="px-2 font-semibold text-gray-500"> No hay matriculas creadas</p>
                     </div>
 
                     <div v-else class="mt-0 h-[75%] overflow-y-auto">
@@ -99,26 +99,26 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
-                                    <tr v-for="(matri, index) in matriculas" :key="index+10">
+                                    <tr v-for="(matricula, index) in matriculas" :key="index+10">
                                         <td class="py-4 pl-4 pr-3 text-sm sm:pl-0">
                                             <div class="flex items-center">
                                                 <div class="h-10 w-10 flex-shrink-0">
-                                                    <img class="h-10 w-10 rounded-full ml-2" :src="'/images/avatar/'+Utilities.firstLetter(matri.nombres)+'.png'" alt="avatar" />
+                                                    <img class="h-10 w-10 rounded-full ml-2" :src="'/images/avatar/'+Utilities.firstLetter(matricula.nombres)+'.png'" alt="avatar" />
                                                 </div>
                                                 <div class="ml-6">
-                                                    <div class="font-medium text-base text-gray-900 capitalize">{{ matri.nombres + " " + matri.apellidos  }}</div>
-                                                    <div class="text-gray-500">ID: {{ matri.identificacion }}</div>
+                                                    <div class="font-medium text-base text-gray-900 capitalize">{{ matricula.nombres + " " + matricula.apellidos  }}</div>
+                                                    <div class="text-gray-500">ID: {{ matricula.identificacion }}</div>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="px-3 py-4 text-sm">
-                                            <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ matri.estudiante_estado ? 'Activo':'Inactivo'  }} </span>
+                                            <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matricula.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">{{ matricula.estudiante_estado ? 'Activo':'Inactivo'  }} </span>
                                         </td>
                                         <td v-if="actual_generable.recurso > 10" class="text-sm w-52">
-                                            <button @click="seccion=2;Matricula_Global=matri;set_tipo_certificado('ESTUDIO')" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                            <button @click="seccion=2;Matricula_Global=matricula" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                                                 Certificado de Estudio
                                             </button>
-                                            <button @click="actual_periodo.periodo != 5?showAlert():seccion=2;Matricula_Global=matri;set_tipo_certificado('NOTAS')" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
+                                            <button @click="generar_certificado_notas(matricula)" class="my-1 w-full px-2 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-md">
                                                 Certificado de Notas
                                             </button>
                                         </td>
@@ -169,10 +169,10 @@
 
             <!-- Contenedor botón Generar -->
             <div class="w-full px-6 mt-5">
-                <button @click="generar_archivo(matri)" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center">
+                <button @click="generar_archivo(matri)" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded h-7 leading-6 text-gray-100 font-semibold text-center">
                 Generar
                 </button>
-                <button @click="seccion = 0;clearform()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center mx-4">
+                <button @click="seccion = 0;clearform()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded h-7 leading-6 text-gray-100 font-semibold text-center mx-4">
                 Volver
                 </button>
             </div>
@@ -182,7 +182,7 @@
         </div>
 
         <!-- CONTENEDOR DE DATOS SOLICITADOS PARA GENERAR CERTIFICADO DE ESTUDIO -->
-        <div v-if="seccion==2" id="div_certificado_datos">
+        <div v-if="seccion==2" class="mx-auto w-1/2" id="div_certificado_datos">
             <!-- Titulo -->
             <div class="w-full text-center pt-5">
                 <p class="font-semibold text-gray-500 text-md">CERTIFICADO DE {{ tipo_certificado }}</p>
@@ -193,12 +193,9 @@
             
                 <!-- Contenedor Nombre del Estudiante -->
                 <div class="w-full border px-2 py-3 rounded">
-                    <p class="font-semibold text-gray-500 text-md">Generando certificado a:</p>
-                </div>
-
-                <div class="w-full border px-2 py-3 rounded">
-                    <p v-if="Matricula_Global==undefined" class="font-semibold text-gray-500 text-md">Estudiante</p>
-                    <p v-else class="font-semibold text-gray-500 text-md">{{Matricula_Global.nombres}} {{Matricula_Global.apellidos}}</p>
+                    <p class="font-semibold text-gray-500 text-md">Estudiante: 
+                    <span class="font-semibold text-indigo-500 capitalize text-md">{{Matricula_Global.nombres}} {{Matricula_Global.apellidos}}</span>
+                    </p>
                 </div>
 
             </div>
@@ -209,28 +206,26 @@
 
                 <!-- Fecha del certificado -->
                 <div class="w-full">
-                    <p class="mx-2 font-semibold text-gray-500 text-md">Fecha del certificado</p>
-                    <input id="datos_constancia_estudio_fecha" @change="tipo_certificado==='ESTUDIO'?set_fecha_certificado_estudio():set_fecha_constancia_estudio()" required type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                    <p class="mx-2 font-semibold text-gray-500 text-md">Fecha del certificado:</p>
+                    <input id="datos_constancia_estudio_fecha" @change="set_fecha_constancia_estudio()" required type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                 </div>
             
                 <!-- Razón del certificado -->
-                <div v-if="tipo_certificado==='ESTUDIO'" class="w-full mt-3">
-                    <p class="mx-2 font-semibold text-gray-500 text-md">Razón del certificado</p>
-                    <input id="datos_constancia_estudio_razon" @change="set_razon_constancia_estudio()" type="text" value="" class="mx-2 w-64 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                <div class="w-full mt-3">
+                    <p class="mx-2 font-semibold text-gray-500 text-md">Razón del certificado:</p>
+                    <input id="datos_constancia_estudio_razon" @change="set_razon_constancia_estudio()" required type="text" value="" class="mx-2 w-full font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                 </div>
 
             </div>
 
             <!-- Contenedor botón Generar Certificado -->
-            <div class="w-full px-6 mt-5">
-                <button v-if="tipo_certificado=='ESTUDIO'" @click="generar_certificado_estudio(Matricula_Global);" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center">
-                    Generar Certificado 
-                </button>
-                <button v-if="tipo_certificado=='NOTAS'" @click="generar_certificado_notas(Matricula_Global);" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center">
-                    Generar Certificado 
-                </button>
-                <button @click="seccion = 0;clearform()" class="my-1 w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold text-center mx-4">
+            <div class="w-full px-6 mt-10 flow-root ">
+                <button @click="seccion = 0;clearform()" class="float-left w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-white font-semibold mx-4">
                     Volver
+                </button>
+
+                <button @click="generar_certificado_estudio(Matricula_Global);" class="float-right w-60 px-4 bg-pink-700 shadow-pink-500 shadow-md cursor-pointer rounded text-center h-7 leading-6 text-gray-100 font-semibold">
+                    Generar Certificado
                 </button>
             </div>
         </div>
@@ -238,20 +233,16 @@
     </div>  
 </template>
   
-<script>
-  
-    import Barra from "@/components/framework/Barra.vue"
+<script lang="js">
+    import { watchEffect, watch, ref, defineComponent, computed } from "vue"
+    import Navbar from "@/components/framework/Navbar.vue"
     import Lateral from "@/components/framework/Lateral.vue"
     import SelectorDirector from "@/components/framework/Selector_Docente.vue"
     import SelectorGrado from "@/components/framework/Selector_Grado.vue"
     import SelectorPeriodo from "@/components/framework/Selector_Periodo.vue"
     import SelectorGenerable from "@/components/framework/Selector_Generable.vue"
     import Nuevo_Certificado from "@/components/framework/Nuevo_Certificado.vue"
-    import { RouterView } from "vue-router"
-    import { watchEffect, watch, ref, defineComponent, computed } from "vue"
     import Store from "@/store"
-    import Router from "@/router"
-    import Aplicacion from "@/controllers/Aplicacion"
     import Matricula from "@/controllers/Matricula"
     import Generable from "@/controllers/Generable"
     import Utilities from "@/utilities"
@@ -259,7 +250,7 @@
     export default defineComponent({
         'name':'Generables',
         'components':{
-            Barra, Lateral, SelectorDirector, SelectorGrado, SelectorPeriodo, SelectorGenerable, Nuevo_Certificado
+            Navbar, Lateral, SelectorDirector, SelectorGrado, SelectorPeriodo, SelectorGenerable, Nuevo_Certificado
         },
         setup(){
         
@@ -295,24 +286,23 @@
             //GENERAR BOLETINES
             const generar_boletines = ()=>{
                 if(actual_periodo.value.periodo < 5){
-                    Generable.boletin_todos_file(()=>{ })
+                    Generable.boletin_todos_file()
                 }else if(actual_periodo.value.periodo == 5){
-                    Store.commit('set_fecha_boletin',fecha_boletin)
-                    Generable.boletin_final_todos_file(()=>{ })
+                    Generable.boletin_final_todos_file()
                 }
             }
 
             //GENERAR INFORME FINAL
             const generar_informe = ()=>{
                 if(actual_periodo.value.periodo == 5){
-                    Generable.informe_final_todos_file(()=>{ })
+                    Generable.informe_final_todos_file()
                 }
             }
 
             //GENERAR PLANILLA
             const generar_planilla = ()=>{
                 if (actual_periodo.value.periodo < 5) {
-                    Generable.planilla_file(() => { })
+                    Generable.planilla_file()
                 }
             }
             
@@ -320,9 +310,9 @@
             const generar_certificado = (matricula)=>{
                 if(actual_periodo.value.periodo < 5){
                     alert("En construcción!")
-                    //Generable.certificado_estudio_file(matricula,()=>{ })
+                    //Generable.certificado_estudio_file(matricula)
                 } else if(actual_periodo.value.periodo == 5){
-                    Generable.certificado_final_file(matricula,()=>{ })
+                    Generable.certificado_final_file(matricula)
                 }
             }
             
@@ -393,11 +383,13 @@
                             let datos_certificado_estudio = { 'razon': razon_constancia_estudio, 'fecha': fecha_certificado_estudio }
                             Store.commit('set_actual_datos_certificado_estudio', datos_certificado_estudio)
                             
-                            Generable.certificado_estudio_file_front(matricula, () => { })
+                            Generable.certificado_estudio_file_front(matricula)
                         }
 
                     }
-                    
+                    if (actual_periodo.value.periodo == 5) {
+                        Generable.certificado_final_file(matricula)
+                    }
                 } else {
                     alert(errores.value[0])
                 }
@@ -481,33 +473,7 @@
                 
                 if(!errores.value.length){
                     if(actual_periodo.value.periodo < 5){
-                        Generable.boletin_estudiante_file(json,()=>{ })
-                    }
-                    if(actual_periodo.value.periodo == 5){
-                        alert('boletín final')
-                    }
-                }else{
-                    alert(errores.value[0])
-                }
-            }
-
-            const generar_estudiante_vista = (json)=>{
-
-                errores.value = []
-
-                if(actual_sede.value.sede_id === 0){ errores.value.push('Seleccione sede') }
-                if(actual_lectivo.value.lectivo_id === 0){ errores.value.push('Seleccione lectivo') }
-                if(actual_grado.value.grado_id === 0){ errores.value.push('Seleccione grado') }
-                if(actual_periodo.value.periodo === 0){ errores.value.push('Seleccione periodo') }
-                if(actual_generable.value.recurso === 0){ errores.value.push('Seleccione generable') }
-
-                //generar_archivo
-                if(!errores.value.length){
-                    if(actual_periodo.value.periodo < 5){
-                        Generable.boletin_estudiante_vista(json,()=>{
-                            Router.push({"name":"Boletin"})
-                        })
-
+                        Generable.boletin_estudiante_file(json)
                     }
                     if(actual_periodo.value.periodo == 5){
                         alert('boletín final')
@@ -533,7 +499,7 @@
       
             const verfificar_matriculas = ()=>{
                 if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
-                    Matricula.index(()=>{})
+                    Matricula.index()
                 }
             }
 
@@ -566,7 +532,7 @@
             // #watch
             watch(actual_grado,(value) => {
                 if(value.grado_id > 0 && actual_sede.value.sede_id > 0 && actual_lectivo.value.lectivo_id > 0) {
-                    Matricula.index(()=>{})
+                    Matricula.index()
                 }
             })
 
@@ -577,7 +543,6 @@
                 generar_informe,
                 generar_planilla,
                 generar_estudiante_pdf,
-                generar_estudiante_vista,
                 generar_certificado_estudio,
                 generar_certificado_notas,
                 actual_sede,
@@ -609,9 +574,7 @@
         },
         mounted(){
             this.$nextTick(()=>{
-                Aplicacion.check_login(()=>{
-                    this.verfificar_matriculas()
-                })
+                this.verfificar_matriculas()
             })
         }
     })

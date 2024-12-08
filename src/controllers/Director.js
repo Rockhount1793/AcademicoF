@@ -1,40 +1,39 @@
     
-    import Store  from "@/store"
-    import Fetch from "@/fetch"
-    import Aplicacion from "@/controllers/Aplicacion"
+import Store  from "@/store"
+import Fetch from "@/fetch"
+import Aplicacion from "@/controllers/Aplicacion"
 
-    const Controller = {
+const Controller = {
 
-        'index': async function(){
+    'index': async function(){
 
-            const response = await Fetch.post('/director/index')
+        const response = await Fetch.post('/director/index')
 
-            if(response.status){
-                Store.commit('set_directores', response.directores)
-            }
-
-            if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
-            }
-
-        },
-
-        'store': async function(json){
-
-            const response = await Fetch.post('/director/store',json)
-
-            if(response.status){
-                Store.dispatch('add_director',response.director)
-            }else{
-                alert("Rector ya existe!")
-            }
-
-            if(response.error == 500){
-                Aplicacion.redirect_end_sesion(response)
-            }
-            
+        if(response.status){
+            Store.commit('set_directores', response.directores)
         }
 
+        if(response.error == 500){
+            Aplicacion.redirect_end_sesion(response)
+        }
+        return response
+    },
+    'store': async function(json){
+
+        const response = await Fetch.post('/director/store',json)
+
+        if(response.status){
+            Store.dispatch('add_director',response.director)
+        }else{
+            alert("Rector ya existe!")
+        }
+
+        if(response.error == 500){
+            Aplicacion.redirect_end_sesion(response)
+        }
+        return response
     }
 
-    export default Controller
+}
+
+export default Controller

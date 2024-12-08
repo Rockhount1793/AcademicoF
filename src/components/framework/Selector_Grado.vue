@@ -83,9 +83,7 @@
                     modulo.value = true 
                     
                     if(!Store.state.grados.length){ 
-                        Grado.index(()=>{
-                           // if(!Store.state.docentes.length){ Docente.index() }
-                        }) 
+                        Grado.index() 
                     }
                     setTimeout(() => {
                         document.getElementById('nombre').focus()
@@ -192,9 +190,8 @@
             })
 
             watch(actual_sede, (newValue, oldValue)=> {
-                grado_id.value = 0;
-                modulo.value = false;
-
+                grado_id.value = 0
+                modulo.value = false
             })
             watch(grado_id, (newValue, oldValue)=> {
                 if(newValue > 0){

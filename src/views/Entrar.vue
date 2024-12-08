@@ -89,7 +89,7 @@
 
 import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
 import Store from '@/store'
-import BarraInicio from '@/components/framework/Barra_Inicio.vue'
+import BarraInicio from '@/components/framework/NavbarInicio.vue'
 import Aplicacion from '@/controllers/Aplicacion'
 import Router from '@/router'
 
@@ -102,7 +102,7 @@ export default defineComponent({
         // data
         const email = ref('')
         const password = ref('')
-        const sesion = ref (true)
+        const sesion = ref(true)
         const errores = ref([])
 
         // methods
@@ -116,7 +116,7 @@ export default defineComponent({
             if(errores.value.length){
                 alert(errores.value[0])
             }else{
-                Aplicacion.login({'email':email.value, 'password': password.value, 'sesion': sesion.value})
+                Aplicacion.login({'email':email.value,'password':password.value,'sesion':sesion.value})
             }
 
         }
@@ -131,9 +131,6 @@ export default defineComponent({
     },
     mounted(){
         this.$nextTick(()=>{
-            Aplicacion.check_login(()=>{
-                Router.push({"name":"Inicio"})
-            })
         })
     }
 })

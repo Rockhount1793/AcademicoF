@@ -73,26 +73,19 @@
 </template>
   
 <script>
-  
-    import Barra from '@/components/framework/Barra.vue'
+    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
+    import Navbar from '@/components/framework/Navbar.vue'
     import Lateral from '@/components/framework/Lateral.vue'
     import SelectorDirector from '@/components/framework/Selector_Director.vue'
-    import { RouterView } from 'vue-router'
-    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from '@/store'
-    import Router from '@/router'
-    import Aplicacion from '@/controllers/Aplicacion'
     import Lectivo from '@/controllers/Lectivo'
     import Director from '@/controllers/Director'
   
     export default defineComponent({
-    
         'name':'Lectivos',
-
         'components':{
-            Barra, Lateral, SelectorDirector
+            Navbar, Lateral, SelectorDirector
         },
-
         setup(){
         
             //# data 
@@ -108,7 +101,7 @@
                 director_id.value = number
             }
 
-            const guardar = ()=>{
+            const guardar = async ()=>{
 
                 errores.value = []
 
@@ -119,17 +112,17 @@
                     alert(errores.value[0])
                 }else{
                     
-                    Lectivo.store({
+                    const lectivostoreq = await Lectivo.store({
                         'numero': numero.value,
                         'director_id': director_id.value,
                         'estado':1
-                    },()=>{
-                        
+                    })
+                    
+                    if(lectivostoreq.status){
                         let fecha = new Date()
                         numero.value = fecha.getFullYear()
                         director_id.value = 0
-                        
-                    })
+                    }
 
                     seccion.value = 0
 
@@ -156,7 +149,6 @@
       
             //# computed
             const lectivos = computed(()=> Store.state.lectivos )
-            const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const directores = computed(()=> Store.state.directores )
 
@@ -177,21 +169,12 @@
         },
     
         mounted(){
-            
-            this.$nextTick(()=>{
-                
-                Aplicacion.check_login(()=>{
-                    
-                    if(!Store.state.lectivos.length){
-                        Lectivo.index(()=>{
-                            Director.index()
-                        })   
-                    }
-
-                })
-
+            this.$nextTick(async()=>{
+                if(!Store.state.lectivos.length){
+                    await Lectivo.index()   
+                    Director.index()
+                }
             })
-
         }
   
     })

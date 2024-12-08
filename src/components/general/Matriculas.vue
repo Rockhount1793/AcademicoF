@@ -197,34 +197,32 @@
     </div>
 </template>
   
-<script>
+<script lang="js">
 
+    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Ventana from "@/components/framework/Ventana_Emergente.vue"
-    import Barra from "@/components/framework/Barra.vue"
+    import Navbar from "@/components/framework/Navbar.vue"
     import Lateral from "@/components/framework/Lateral.vue"
     import SelectorDirector from "@/components/framework/Selector_Docente.vue"
     import SelectorGrado from "@/components/framework/Selector_Grado.vue"
     import SelectorEstudiante from "@/components/framework/Selector_Estudiante.vue"
-    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from "@/store"
-    import Aplicacion from "@/controllers/Aplicacion"
     import Matricula from "@/controllers/Matricula"
-    import Estudiante from "@/controllers/Estudiante"
     import Utilities from '@/utilities'
   
     export default defineComponent({
         'name':'Matriculas',
         'components':{
-            Ventana, Barra, Lateral, SelectorDirector, SelectorGrado, SelectorEstudiante
+            Ventana, Navbar, Lateral, SelectorDirector, SelectorGrado, SelectorEstudiante
         },
-        setup(props, {emit}){
+        setup(){
         
             //# data 
             const seccion = ref(0)
             const errores = ref([])
             const ventana_confirmacion = ref(false)
             const identificacion_ = ref('')
-            const estudiante = ref({'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': '0'})
+            const estudiante = ref({"estudiante_id":0,"nombres":"","apellidos":"","identificacion":"0"})
             const tipo_numero = ref(0)
             const tipos = ref([
                 {"tipo": 0, "nombre":"Inicial", "color":"text-teal-500"},
@@ -273,7 +271,7 @@
                 obetenerMatriculas.value += 1
             }
 
-            const guardar = ()=>{
+            const guardar = async()=>{
 
                 errores.value = []
 
@@ -286,19 +284,22 @@
                     alert(errores.value[0])
                 }else{
                     
-                    Matricula.store({
+                    const matriculaq = await Matricula.store({
                         'estudiante_id': estudiante.value.estudiante_id,
                         'sede_id':  actual_sede.value.sede_id,
                         'lectivo_id': actual_lectivo.value.lectivo_id,
                         'grado_id': actual_grado.value.grado_id,
                         'tipo': tipo_numero.value,
                         'estado': 1
-                    },()=>{
+                    })
+                    
+                    if(matriculaq.status){
                         identificacion_.value = 0
                         seccion.value = 0
                         estudiante.value = {"estudiante_id":0,"nombres":"","apellidos":"","identificacion":"0"}
-                    })
-                    Utilities.show_save('Matricula creada')
+                        Utilities.show_save('Matricula creada')
+                    }
+
                 }
             }
 
@@ -318,7 +319,7 @@
       
             const verfificar_matriculas = ()=>{
                 if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
-                    Matricula.index(()=>{})
+                    Matricula.index()
                 }
             }
 
@@ -336,7 +337,7 @@
 
             watch(actual_grado,(value) => {
                 if(value.grado_id > 0 ) {
-                    Matricula.index(()=>{})
+                    Matricula.index()
                 }
             })
             watch([obetenerMatriculas],async(value) => {
@@ -374,9 +375,7 @@
         },
         mounted(){
             this.$nextTick(()=>{
-                Aplicacion.check_login(()=>{
-                    this.verfificar_matriculas()
-                })
+                this.verfificar_matriculas()
             })
         }
     })
