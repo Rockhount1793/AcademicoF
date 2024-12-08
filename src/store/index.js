@@ -361,11 +361,19 @@ const store = createStore({
             this.commit('set_matriculas',result)
         },
 
-        remove_matricula(state, json){
-            Matricula.index(()=>{})
+        delete_matricula(state, json){
+            const matriculas = this.state.matriculas.filter(m=>m.matricula_id != json.matricula_id)
+            this.commit('set_matriculas',[...matriculas])
         },
+
+        desactive_matricula(state, json){
+            let matricula = this.state.matriculas.find(m=>m.matricula_id == json.matricula_id)
+            matricula.estado = 0
+        },
+
         active_matricula(state, json){
-            Matricula.index(()=>{})
+            let matricula = this.state.matriculas.find(m=>m.matricula_id == json.matricula_id)
+            matricula.estado = 1
         },
 
         // # estudiantes

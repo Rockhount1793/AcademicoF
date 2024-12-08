@@ -46,9 +46,33 @@ const Controller = {
     'delete': async function(json){
         
         const response = await Fetch.delete('/matricula/delete',json)
-        
         if(response.status){
-            Store.dispatch('remove_matricula',json)
+            Store.dispatch('delete_matricula',json)
+        }
+
+        if(response.error == 500){
+            Aplicacion.redirect_end_sesion(response)
+        }
+        return response
+    },
+
+    'desactive': async function(json){
+        
+        const response = await Fetch.post('/matricula/desactive',json)
+        if(response.status){
+            Store.dispatch('desactive_matricula',json)
+        }
+
+        if(response.error == 500){
+            Aplicacion.redirect_end_sesion(response)
+        }
+        return response
+    },
+
+    'active': async function(json){
+        const response = await Fetch.post('/matricula/active',json)
+        if(response.status){
+            Store.dispatch('active_matricula',json)
         }
 
         if(response.error == 500){
@@ -56,7 +80,6 @@ const Controller = {
         }
         return response
     }
-
 }
 
 export default Controller
