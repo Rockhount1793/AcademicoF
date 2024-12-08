@@ -13,4 +13,4 @@ const Production = {
     }
 }
 
-export default { 'development': Development, 'production': Production }
+export default {"development":Development,"production":Production}

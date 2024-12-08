@@ -73,14 +73,11 @@
   
 <script lang="js">
   
-    import Barra from '@/components/framework/Barra.vue'
+    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
+    import Navbar from '@/components/framework/Navbar.vue'
     import Lateral from '@/components/framework/Lateral.vue'
     import SelectorDirector from '@/components/framework/Selector_Docente.vue'
-    import { RouterView } from 'vue-router'
-    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from '@/store'
-    import Router from '@/router'
-    import Aplicacion from '@/controllers/Aplicacion'
     import Grado from '@/controllers/Grado'
     import Docente from '@/controllers/Docente'
     import Utilities from '@/utilities';
@@ -88,7 +85,7 @@
     export default defineComponent({
         'name':'Grados',
         'components':{
-            Barra, Lateral, SelectorDirector
+            Navbar, Lateral, SelectorDirector
         },
         setup(){
         
@@ -106,7 +103,7 @@
                 docente_id.value = number
             }
 
-            const guardar = ()=>{
+            const guardar = async ()=>{
 
                 errores.value = []
 
@@ -120,21 +117,23 @@
                     alert(errores.value[0])
                 }else{
                     
-                    Grado.store({
+                    const gradostoreq = await Grado.store({
                         'nombre': nombre.value,
                         'numero': numero.value,
                         'docente_id': docente_id.value,
                         'sede_id':  actual_sede.value.sede_id,
                         'lectivo_id': actual_lectivo.value.lectivo_id,
                         'estado':1
-                    },()=>{
+                    })
+                    
+                    if(gradostoreq.status){
                         nombre.value = ''
                         numero.value = 0
                         seccion.value = 0
                         docente_id.value = 0
-                    })
-                    Utilities.show_save('Grado creado')
-                    
+                        Utilities.show_save('Grado creado')
+                    }
+
                 }
             }
 
@@ -175,14 +174,13 @@
       
         },
         mounted(){
-            this.$nextTick(()=>{
-                Aplicacion.check_login(()=>{
-                    if(!Store.state.grados.length){
-                        Grado.index(()=>{
-                            if(!Store.state.docentes.length){ Docente.index() }
-                        })
+            this.$nextTick(async()=>{
+                if(!Store.state.grados.length){
+                    const gradosq  = await Grado.index()
+                    if(gradosq.status && !Store.state.docentes.length){ 
+                        Docente.index()
                     }
-                })
+                }
             })
         }
     })

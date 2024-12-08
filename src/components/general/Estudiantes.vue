@@ -521,22 +521,17 @@
     </div>
 </template>
 
-<script>
-
+<script lang="js">
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from '@/store'
-    import Aplicacion from '@/controllers/Aplicacion'
     import Estudiante from '@/controllers/Estudiante'
     import Anexo_Estudiante from '@/controllers/Anexo_Estudiante'
     import Utilities from '@/utilities'
     import { Switch } from '@headlessui/vue'
 
 export default defineComponent({
-
     'name': 'Estudiantes',
-
     'components':{ Switch },
-
     setup(){
         // dates
         const days = ref([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31])
@@ -652,13 +647,15 @@ export default defineComponent({
         const consultar_estudiante = async (estudiante_id)=>{
             
             clearForm()
-            await Anexo_Estudiante.index_estudiante_id({'estudiante_id': estudiante_id},(estudiante)=>{
-                estudiante_temp.value = estudiante
-                if(estudiante.estado == 0) enabled.value = false 
-                const nacimiento_q = new Date(estudiante.nacimiento).toLocaleDateString().split("/")
+            const anexoestudianteq = await Anexo_Estudiante.index_estudiante_id({"estudiante_id": estudiante_id})
+            
+            if(anexoestudianteq.status){
+                estudiante_temp.value = anexoestudianteq.estudiante
+                if(anexoestudianteq.estudiante.estado == 0) enabled.value = false 
+                const nacimiento_q = new Date(anexoestudianteq.estudiante.nacimiento).toLocaleDateString().split("/")
                 nacimiento.value = {'day': Number(nacimiento_q[0]) ,'month': Number(nacimiento_q[1]),'year': Number(nacimiento_q[2])}
                 seccion.value = 2
-            })
+            }
             
         } 
 
@@ -667,7 +664,7 @@ export default defineComponent({
             clearForm()
         }
 
-        const guardar = () => {
+        const guardar = async () => {
 
             errores.value = []
 
@@ -683,7 +680,7 @@ export default defineComponent({
                 alert(errores.value[0])
             }else{
 
-                Estudiante.store({
+                const estudiantestoreq = await Estudiante.store({
                     'nombres': nombre.value,
                     'apellidos': apellido.value,
                     'identificacion': identificacion.value,
@@ -691,7 +688,11 @@ export default defineComponent({
                     'estado': 1,
                     'nacimiento': `${ nacimiento.value.year+'-'+nacimiento.value.month+'-'+nacimiento.value.day }`
                 })
-                Utilities.show_save('Estudiante creado');
+
+                if(estudiantestoreq.status){
+                    Utilities.show_save('Estudiante creado');
+                }
+                
                 clearForm()
             }
 
@@ -787,11 +788,9 @@ export default defineComponent({
     },
     mounted() {
         this.$nextTick(() => {
-            Aplicacion.check_login(() => {
-                if (!Store.state.estudiantes.length) {
-                    Anexo_Estudiante.index()
-                }
-            })
+            if (!Store.state.estudiantes.length) {
+                Anexo_Estudiante.index()
+            }
         })
     }
 })

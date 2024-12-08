@@ -59,11 +59,9 @@
 
 </template>
 
-<script>
-
+<script lang="js">
     import { defineComponent, ref, computed } from "vue"
-    import Store from '@/store/index'
-
+ 
     export default defineComponent({
         name: 'Ventana-Emergente',
         props :{

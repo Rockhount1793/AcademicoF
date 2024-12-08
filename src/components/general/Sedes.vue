@@ -59,11 +59,10 @@
 </template>
 
 <script lang="js">
-import Barra from "@/components/framework/Barra.vue"
-import Lateral from "@/components/framework/Lateral.vue"
 import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
+import Navbar from "@/components/framework/Navbar.vue"
+import Lateral from "@/components/framework/Lateral.vue"
 import Store from "@/store"
-import Router from "@/router"
 import Aplicacion from "@/controllers/Aplicacion"
 import Sede from "@/controllers/Sede"
 import Utilities from "@/utilities"
@@ -73,7 +72,7 @@ export default defineComponent({
     'name': 'Sedes',
 
     'components': {
-        Barra,
+        Navbar,
         Lateral
     },
 
@@ -92,7 +91,7 @@ export default defineComponent({
 
         //# methods
         
-        const guardar = () => {
+        const guardar = async() => {
 
             errores.value = []
 
@@ -107,22 +106,24 @@ export default defineComponent({
                 alert(errores.value[0])
             } else {
 
-                Sede.store({
+                const sedestoreq = await Sede.store({
                     'nombre': nombre.value,
                     'direccion': direccion.value,
                     'telefono': telefono.value,
                     'email': email.value||'correo@ejemplo.com',
                     'estado': 1
-                }, () => {
+                })
+                
+                if(sedestoreq.status){
                     nombre.value = ''
                     direccion.value = ''
                     telefono.value = ''
                     email.value = ''
-                })
+                    Utilities.show_save('Sede guardada')
+                }
 
                 seccion.value = 0
 
-                Utilities.show_save('Sede guardada');
             }
 
         }
@@ -151,17 +152,11 @@ export default defineComponent({
     },
 
     mounted() {
-
         this.$nextTick(() => {
-
-            Aplicacion.check_login(() => {
-                if (!Store.state.sedes.length) {
-                    Sede.index()
-                }
-            })
-
+            if (!Store.state.sedes.length) {
+                Sede.index()
+            }
         })
-
     }
 
 })

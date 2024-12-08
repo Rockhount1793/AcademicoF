@@ -39,7 +39,7 @@
   
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"    
     import Store from '@/store'
-    import BarraInicio from '@/components/framework/Barra_Inicio.vue'
+    import BarraInicio from '@/components/framework/NavbarInicio.vue'
     import Aplicacion from '@/controllers/Aplicacion'
     import Router from '@/router'
     

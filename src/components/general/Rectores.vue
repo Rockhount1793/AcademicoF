@@ -141,19 +141,14 @@
   
 </template>
   
-<script>
-  
+<script lang="js">
     import { watchEffect, watch, ref, defineComponent, computed } from "vue"
     import Store from '@/store'
-    import Router from '@/router'
-    import Aplicacion from '@/controllers/Aplicacion'
     import Director from '@/controllers/Director'
     import Utilities from '@/utilities'
   
     export default defineComponent({
-    
         'name':'Rectores',
-
         setup(){
         
             //# data 
@@ -250,19 +245,12 @@
             }
       
         },
-    
         mounted(){
-            
-            this.$nextTick(()=>{
-                
-                Aplicacion.check_login(()=>{
-                    if(!Store.state.directores.length){
-                        Director.index()
-                    }
-                })
-
+            this.$nextTick(()=>{      
+                if(!Store.state.directores.length){
+                    Director.index()
+                }
             })
-
         }
   
     })

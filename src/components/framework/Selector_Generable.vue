@@ -36,12 +36,10 @@
     </div>
 </template>
     
-<script lang="js">
-    
+<script lang="js">   
     import Store from '@/store'
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
-    import Utilities from '@/utilities'
-
+ 
     export default defineComponent({
         name: 'Selector-Generable',
         setup(props, { emit }){

@@ -101,24 +101,19 @@
     </div>
 </template>
 
-<script>
-    import Barra from '@/components/framework/Barra.vue'
+<script lang="js">
+    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
+    import Navbar from '@/components/framework/Navbar.vue'
     import Lateral from '@/components/framework/Lateral.vue'
     import SelectorDirector from '@/components/framework/Selector_Docente.vue'
     import SelectorGrado from '@/components/framework/Selector_Grado.vue'
-    import { RouterView } from "vue-router"
-    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from "@/store"
-    import Router from "@/router"
-    import Aplicacion from "@/controllers/Aplicacion"
     import Asignatura from "@/controllers/Asignatura"
-    import Grado from "@/controllers/Grado"
-    import Docente from "@/controllers/Docente"
     import Logro from "@/controllers/Logro"
   
     export default defineComponent({
         'name':'Logros',
-        'components':{ Barra, Lateral, SelectorDirector, SelectorGrado },
+        'components':{ Navbar, Lateral, SelectorDirector, SelectorGrado },
         setup(){
         
             //# data
@@ -154,15 +149,12 @@
                 nivel_logro.value = string
             }
 
-            const set_director = (number)=>{ 
-                director_id.value = number
-            }
-
-            const get_logros = (_asignatura)=>{
-                Logro.index(_asignatura.asignatura_id,()=>{
+            const get_logros = async(_asignatura)=>{
+                const logrosq = await Logro.index(_asignatura.asignatura_id)
+                if(logrosq.status){
                     asignatura.value = _asignatura
                     seccion.value = 1
-                })
+                }
             }
 
             const filter_director = (director_id)=>{
@@ -189,7 +181,6 @@
             //# computed
             const asignaturas = computed(()=> Store.state.asignaturas )
             const logros = computed(()=> Store.state.logros )
-            const actual_sede = computed(()=> Store.state.actual_sede )
             const actual_lectivo = computed(()=> Store.state.actual_lectivo )
             const actual_grado = computed(()=> Store.state.actual_grado )
             const docentes = computed(()=> Store.state.docentes )
@@ -197,7 +188,7 @@
             //# watch
             watch(actual_grado,(value) => {
                 if(value.grado_id > 0) {
-                    Asignatura.index(()=>{})
+                    Asignatura.index()
                 }
                 Store.commit('set_logros',[])
             })
@@ -223,13 +214,9 @@
         },
         mounted(){
             this.$nextTick(()=>{
-                Aplicacion.check_login(()=>{
-                    if(!Store.state.asignaturas.length && this.actual_grado.grado_id > 0){         
-                        Asignatura.index(()=>{
-                        
-                        })
-                    }
-                })
+                if(!Store.state.asignaturas.length && this.actual_grado.grado_id > 0){         
+                    Asignatura.index()
+                }
             })
         }
     })
