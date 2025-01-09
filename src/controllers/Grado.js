@@ -1,11 +1,10 @@
 
 import Store  from "@/store"
 import Fetch from "@/fetch"
-import Aplicacion from "@/controllers/Aplicacion"
 
 const Controller = {
 
-    'index': async function(cb){
+    'index': async function(){
 
         let sede = Store.state.actual_sede
         let lectivo = Store.state.actual_lectivo
@@ -15,7 +14,6 @@ const Controller = {
 
         if(response.status){
             Store.commit('set_grados', response.grados)
-            cb()
         }
 
         if(response.error == 500){
@@ -23,22 +21,22 @@ const Controller = {
             //Aplicacion.redirect_end_sesion(response)
         }
 
+        return response
     },
 
-    'store': async function(json,cb){
+    'store': async function(json){
 
         const response = await Fetch.post('/grado/store',json)
 
         if(response.status){
             Store.dispatch('add_grado',response.grado)
-            cb()
         }
 
         if(response.error == 500){
             alert("Error interno de la aplicación!")
             //Aplicacion.redirect_end_sesion(response)
         }
-        
+        return response
     }
 
 }

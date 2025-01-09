@@ -47,7 +47,6 @@
                 <div class="h-48 overflow-auto">
 
                     <ul :key="dir.index" v-for="dir in directores_com" tabindex="-1" role="listbox" aria-labelledby="listbox-label" aria-activedescendant="listbox-item-3" class="py-0 text-base leading-6 shadow-xs focus:outline-none sm:text-sm sm:leading-5">
-
                         <li  @click="set_director(dir);mostrar_menu();" id="listbox-item-0" role="option" class="h-6 text-gray-900 cursor-pointer hover:bg-gray-200 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out select-none py-1 pl-3 pr-9">
                         
                             <div class="flex items-center space-x-3">
@@ -106,8 +105,11 @@
                 director_id.value = json.director_id
                 console.log('docente_id: ' + director_id.value)
                 let actual_generable_director = { 'docente_id': director_id }
+                console.log(actual_generable_director)
                 Store.commit('set_actual_generable_director', actual_generable_director)
             }
+
+            console.log('director_id: ' + director_id.value)
 
             const mostrar_menu = ()=>{
                 

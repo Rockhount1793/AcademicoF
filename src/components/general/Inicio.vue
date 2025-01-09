@@ -9,13 +9,11 @@
 </template>
 <script>
 import { defineComponent } from "vue"    
-import Aplicacion from "@/controllers/Aplicacion"
 
 export default defineComponent({
 mounted(){
     this.$nextTick(()=>{
-        Aplicacion.check_login(()=>{
-        })
+        
     })
 }
 })

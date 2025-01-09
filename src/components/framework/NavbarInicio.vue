@@ -23,17 +23,13 @@
 
         </div>
     </div>
-  
 </template>
   
 <script lang="js">
-
-    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
-    import { useRoute, RouterLink, RouterView } from 'vue-router'
-    import Store from '@/store'
+import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
   
-    export default defineComponent({
-        name:'BarraInicio'
-    })
+export default defineComponent({
+    name:'BarraInicio'
+})
   
 </script>

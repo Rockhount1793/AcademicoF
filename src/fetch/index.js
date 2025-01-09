@@ -10,7 +10,7 @@ const request = {
     'token': ()=>{
         let bool_token_l = localStorage.getItem('token') ? true : false
         let bool_token_s = Store.state.token ? true : false
-        var token = ''
+        let token = ''
         if(bool_token_l){
             token = localStorage.getItem('token')
         }else if(bool_token_s){
@@ -35,7 +35,7 @@ const request = {
         })
         .catch((error) => {
             console.error('timeout exceeded') 
-            return {'error': 500 }
+            return {"error":500}
         }).finally(()=>{
             Aplicacion.loading(false)
         })

@@ -133,11 +133,10 @@
     </main>
 </template>
   
-<script>
+<script lang="js">
   
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from '@/store'
-    import Aplicacion from '@/controllers/Aplicacion'
     import Router from '@/router'
     import Utilitie from "@/utilities"
 
@@ -182,12 +181,9 @@
         },
         mounted(){
             this.$nextTick(()=>{
-                Aplicacion.check_login(()=>{
-                    if(Store.state.boletin.estudiante.estudiante_id === 0){
-                        Router.push({'name':'Generables'})
-                    }
-                })
-
+                if(Store.state.boletin.estudiante.estudiante_id === 0){
+                    Router.push({'name':'Generables'})
+                }
             })
         }
     })

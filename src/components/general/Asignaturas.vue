@@ -78,7 +78,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h.008v.008H6V6z" />
                             </svg>
                         </div>
-                        <input v-model="asignatura.nombre" id="nombre_asig" type="text" name="nombre_asig" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Presscolar A" />
+                        <input v-model="asignatura.nombre" id="nombre_asig" type="text" name="nombre_asig" class="w-full lg:w-3/4 rounded-md shadow-sm border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Español" />
                     </div>
                 </div>
                 
@@ -129,12 +129,11 @@
 <script>
   
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
-    import Barra from '@/components/framework/Barra.vue'
+    import Navbar from '@/components/framework/Navbar.vue'
     import Lateral from '@/components/framework/Lateral.vue'
     import SelectorDirector from '@/components/framework/Selector_Docente.vue'
     import SelectorGrado from '@/components/framework/Selector_Grado.vue'
     import Store from '@/store'
-    import Aplicacion from '@/controllers/Aplicacion'
     import Asignatura from '@/controllers/Asignatura'
     import Docente from '@/controllers/Docente'
     import Utilities from '@/utilities'
@@ -142,7 +141,7 @@
     export default defineComponent({
         'name':'Asignaturas',
         'components':{
-            Barra, Lateral, SelectorDirector, SelectorGrado
+            Navbar, Lateral, SelectorDirector, SelectorGrado
         },
         setup(){
         
@@ -242,14 +241,13 @@
             const actual_grado = computed(()=> Store.state.actual_grado )
             const docentes = computed(()=> Store.state.docentes )
     
-            watch(actual_grado,(value) => {
+            watch(actual_grado,async(value) => {
 
                 if(value.grado_id > 0) {
-                    Asignatura.index(()=>{
-                        if (!Store.state.docentes.length) {
-                            Docente.index()
-                        }
-                    })
+                    const asignaturasq = await Asignatura.index()
+                    if (asignaturasq.status && !Store.state.docentes.length) {
+                        Docente.index()
+                    }
                 }
                 
             })
@@ -270,25 +268,14 @@
       
         },
         mounted(){
-            
-            this.$nextTick(()=>{
-                
-                Aplicacion.check_login(()=>{
-
-                    if(this.actual_grado.grado_id > 0){
-                                    
-                        Asignatura.index(()=>{
-                            if (!Store.state.docentes.length) {
-                                Docente.index()
-                            }
-                        })
-
+            this.$nextTick(async()=>{
+                if(this.actual_grado.grado_id > 0){
+                    const asignatuasq = await Asignatura.index()
+                    if (asignatuasq.status && !Store.state.docentes.length) {
+                        Docente.index()
                     }
-                    
-                })
-
+                }
             })
-
         }
   
     })

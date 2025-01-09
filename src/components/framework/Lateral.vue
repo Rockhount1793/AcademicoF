@@ -31,6 +31,18 @@
               <p class="w-full inline-flex text-orange-500 leading-4">
                 <p>versión:</p><p class="ml-2 capitalize text-xs">{{ Config.version.split(" ")[1] +" "+ Config.version.split(" ")[2] }}</p>
               </p>
+              <p class="text-pink-500"><span class="text-orange-500">login:</span> {{Store.state.login }}</p>
+              <p class="w-full leading-4 inline-flex space-x-5">
+                <button
+                    @click="Getlogin"
+                    class="text-indigo-500 rounded h-4 w-20 bg-indigo-100"
+                >
+                    <p class="capitalize text-xs">
+                        GetLogin
+                    </p>
+
+                </button>
+              </p>
             </div>
 
             <div class="space-y-1 px-2 py-4">                    
@@ -46,13 +58,14 @@
 </template>
   
 <script setup>
+import { ref, watchEffect, watch, defineComponent, onMounted,nextTick, computed, getCurrentInstance } from "vue"
+import { useRoute, RouterLink, RouterView } from 'vue-router'
+import Aplicacion from '@/controllers/Aplicacion'
+import Config from '@/config'
+import { checkLogin }   from "@/Middleware/helper"
+import Store from "@/store"
 
-  import { ref, watchEffect, watch, defineComponent, onMounted,nextTick, computed, getCurrentInstance } from "vue"
-  import { useRoute, RouterLink, RouterView } from 'vue-router'
-  import Store from "@/store"
-  import Aplicacion from '@/controllers/Aplicacion'
-  import Config from '@/config'
-  import{
+import{
     FolderIcon,
     HomeIcon,
     InboxIcon,
@@ -66,9 +79,9 @@
     AcademicCapIcon,
     RectangleStackIcon,
     RocketLaunchIcon
-  } from '@heroicons/vue/24/outline'
+} from '@heroicons/vue/24/outline'
   
-  const navigation = ref([
+const navigation = ref([
     { name: 'Inicio', href: 'inicio', icon: HomeIcon },
     { name: 'Calificaciones', href: 'calificaciones', icon: PencilSquareIcon },
     { name: 'Estudiantes', href: 'estudiantes', icon: UsersIcon },
@@ -84,12 +97,17 @@
     { name: 'Sedes', href: 'sedes', icon: BuildingLibraryIcon },
     { name: 'Año Lectivo', href: 'lectivos', icon: RocketLaunchIcon },
     
-  ])
+])
 
-  const cerrar_sesion = async ()=>{ 
+const Getlogin = async()=>{
+    const result = await checkLogin()
+    if(!result.status){
+        alert("No hay un token de sesión!")
+    }
+}
+
+const cerrar_sesion = async ()=>{ 
     Aplicacion.cerrar_sesion()
-  }
-
-  const route = useRoute()
+}
   
 </script>

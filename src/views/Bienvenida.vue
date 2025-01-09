@@ -34,13 +34,9 @@
 </template>
   
 <script lang="js">
-  
-    import BarraInicio from '@/components/framework/Barra_Inicio.vue'
     import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
-    import Store from '@/store'
-    import Aplicacion from '@/controllers/Aplicacion'
-    import Router from '@/router'
-
+    import BarraInicio from '@/components/framework/NavbarInicio.vue'
+    
     export default defineComponent({
         'name':'Bienvenida',
         'components':{
@@ -48,9 +44,7 @@
         },    
         mounted(){
             this.$nextTick(()=>{
-                Aplicacion.check_login(()=>{
-                    Router.push({"name":"Inicio"})
-                })
+                
             })
         }
   

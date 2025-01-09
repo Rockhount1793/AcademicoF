@@ -1,11 +1,11 @@
 
 <template>
-    <Ventana :elemento="matricula_eliminar" @control_acceso="delete_" v-if="ventana_confirmacion">
+    <Ventana :elemento="matricula_temporal" @control_acceso="accion_matricula" v-if="ventana_confirmacion">
         <template v-slot:dialog>
             <div class="px-2 font-semibold">
-                <h5 class="pb-1 text-center text-pink-500">Detalle de matricula a eliminar</h5>
-                <h5>{{ matricula_eliminar.nombres }} {{ matricula_eliminar.apellidos }}</h5>
-                <h5><span class="text-gray-400">ID:</span> {{ matricula_eliminar.identificacion }}</h5>
+                <h5 class="pb-1 text-center text-pink-500">Detalle de matricula a desactivar</h5>
+                <h5>{{ matricula_temporal.nombres }} {{ matricula_temporal.apellidos }}</h5>
+                <h5><span class="text-gray-400">ID:</span> {{ matricula_temporal.identificacion }}</h5>
                 <h5><span class="text-gray-400">Grado:</span> {{ actual_grado.nombre }}</h5>
                 <h5><span class="text-gray-400">Lectivo:</span> {{ actual_lectivo.numero }}</h5>
                 <h5><span class="text-gray-400">Sede:</span> {{ actual_sede.nombre }}</h5>
@@ -64,30 +64,46 @@
                                     <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-0">
                                         <div class="flex items-center">
                                             <div class="h-10 w-10 flex-shrink-0">
-                                                <img class="h-10 w-10 rounded-full ml-2" :src="'/images/avatar/'+Utilities.firstLetter(matri.nombres)+'.png'" alt="estudiante.nombres" />
+                                                <img class="h-10 w-10 rounded-full ml-2" 
+                                                    :src="estadoMatricula(matri)
+                                                        ?'/images/avatar/'+Utilities.firstLetter(matri.nombres)+'.png'
+                                                        :'/images/avatar/none.svg'" alt="estudiante.avatar" />
                                             </div>
                                             <div class="ml-6">
-                                                <div class="font-medium text-base text-gray-900 capitalize">{{ matri.nombres + " " + matri.apellidos  }}</div>
-                                                <div class="text-gray-500">ID: {{ matri.identificacion }}</div>
+                                                <div :class="[estadoMatricula(matri) ? 'text-gray-900':'text-gray-400','font-medium text-base capitalize']">
+                                                    {{ matri.nombres + " " + matri.apellidos  }}</div>
+                                                <div :class="estadoMatricula(matri) ? 'text-gray-500':'text-gray-400'">ID: {{ matri.identificacion }}</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm">
-                                        <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="tipos.find(({tipo})=>tipo === matri.tipo).color">
+                                        <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" 
+                                            :class="estadoMatricula(matri)
+                                                ?tipos.find(({tipo})=>tipo === matri.tipo).color
+                                                :'text-gray-400'">
                                             {{tipos.find(({tipo})=>tipo === matri.tipo).nombre}}
                                         </span>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm">
-                                        <span class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" :class="matri.estudiante_estado ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'">
-                                            {{ matri.estudiante_estado ? 'Activo':'Inactivo'  }}
+                                        <span 
+                                            class="inline-flex rounded-full px-2 text-xs font-semibold leading-5" 
+                                            :class="estadoMatricula(matri) ? (matri.estudiante_estado == 1 ? 'bg-green-100 text-green-800':'bg-red-100 text-red-800'):'bg-gray-200 text-gray-400'">
+                                            {{estadoMatricula(matri) ? (matri.estudiante_estado == 1 ? 'Activo':'Inactivo') :'Matricula inactiva'}}
                                         </span>
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-indigo-600 hover:text-indigo-900 hover:cursor-pointer">
                                         <div class="w-full h-9 truncate">
-                                            <button title="eliminar matricula" @click="abrir_ventana_conf(matri)" class="mt-0.5 h-7 px-2 rounded shadow shadow-pink-500 bg-pink-400  hover:bg-pink-600 font-semibold">
+                                            <button v-if="estadoMatricula(matri)" title="eliminar matricula" @click="abrir_ventana_conf(matri)" class="mt-0.5 h-7 px-2 rounded shadow shadow-pink-500 bg-pink-400  hover:bg-pink-600 font-semibold">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="text-white w-7 h-7">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
                                                 </svg>                                          
+                                            </button>
+                                            <button v-else 
+                                                title="activar matricula" 
+                                                class="bg-teal-500 font-semibold px-3 py-1 rounded-md text-white"
+                                                @click="active_(matri)"
+                                                >
+                                                Activar
                                             </button>
                                         </div>
                                     </td>
@@ -174,34 +190,32 @@
     </div>
 </template>
   
-<script>
+<script lang="js">
 
+    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Ventana from "@/components/framework/Ventana_Emergente.vue"
-    import Barra from "@/components/framework/Barra.vue"
+    import Navbar from "@/components/framework/Navbar.vue"
     import Lateral from "@/components/framework/Lateral.vue"
     import SelectorDirector from "@/components/framework/Selector_Docente.vue"
     import SelectorGrado from "@/components/framework/Selector_Grado.vue"
     import SelectorEstudiante from "@/components/framework/Selector_Estudiante.vue"
-    import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance } from "vue"
     import Store from "@/store"
-    import Aplicacion from "@/controllers/Aplicacion"
     import Matricula from "@/controllers/Matricula"
-    import Estudiante from "@/controllers/Estudiante"
     import Utilities from '@/utilities'
   
     export default defineComponent({
         'name':'Matriculas',
         'components':{
-            Ventana, Barra, Lateral, SelectorDirector, SelectorGrado, SelectorEstudiante
+            Ventana, Navbar, Lateral, SelectorDirector, SelectorGrado, SelectorEstudiante
         },
-        setup(props, {emit}){
+        setup(){
         
             //# data 
             const seccion = ref(0)
             const errores = ref([])
             const ventana_confirmacion = ref(false)
             const identificacion_ = ref('')
-            const estudiante = ref({'estudiante_id': 0, 'nombres': '', 'apellidos': '', 'identificacion': '0'})
+            const estudiante = ref({"estudiante_id":0,"nombres":"","apellidos":"","identificacion":"0"})
             const tipo_numero = ref(0)
             const tipos = ref([
                 {"tipo": 0, "nombre":"Inicial", "color":"text-teal-500"},
@@ -210,9 +224,12 @@
                 {"tipo": 3, "nombre":"Desertor", "color":"text-red-500"}
             ])
 
-            const matricula_eliminar = ref({})
+            const matricula_temporal = ref({})
             
             //# methods 
+
+            const estadoMatricula = (matricula)=> matricula.estado > 0 ? true : false
+            
 
             const set_seccion = (num)=>{
                 seccion.value = num
@@ -220,21 +237,26 @@
             }
 
             const abrir_ventana_conf = (json)=>{
-                matricula_eliminar.value = json
+                matricula_temporal.value = json
                 ventana_confirmacion.value = true
+
             }
 
-            const delete_ = (res)=>{
+            const accion_matricula = async (res)=>{
+
                 const { status, password } = res
                 if(status){
-                    matricula_eliminar.value.password = password
-                    Matricula.delete(matricula_eliminar.value)
-                    matricula_eliminar.value = {}
+                    Matricula.desactive({...matricula_temporal.value,"password":password})
+                    matricula_temporal.value = {}
                 }
                 ventana_confirmacion.value = false
             }
+            
+            const active_ = (matricula)=>{
+                Matricula.active(matricula)
+            }
 
-            const guardar = ()=>{
+            const guardar = async()=>{
 
                 errores.value = []
 
@@ -247,19 +269,22 @@
                     alert(errores.value[0])
                 }else{
                     
-                    Matricula.store({
+                    const matriculaq = await Matricula.store({
                         'estudiante_id': estudiante.value.estudiante_id,
                         'sede_id':  actual_sede.value.sede_id,
                         'lectivo_id': actual_lectivo.value.lectivo_id,
                         'grado_id': actual_grado.value.grado_id,
                         'tipo': tipo_numero.value,
                         'estado': 1
-                    },()=>{
+                    })
+                    
+                    if(matriculaq.status){
                         identificacion_.value = 0
                         seccion.value = 0
                         estudiante.value = {"estudiante_id":0,"nombres":"","apellidos":"","identificacion":"0"}
-                    })
-                    Utilities.show_save('Matricula creada')
+                        Utilities.show_save('Matricula creada')
+                    }
+
                 }
             }
 
@@ -279,7 +304,7 @@
       
             const verfificar_matriculas = ()=>{
                 if(matriculas.value.length && (matriculas.value[0].grado_id != actual_grado.value.grado_id) || !matriculas.value.length){
-                    Matricula.index(()=>{})
+                    Matricula.index()
                 }
             }
 
@@ -297,14 +322,16 @@
 
             watch(actual_grado,(value) => {
                 if(value.grado_id > 0 ) {
-                    Matricula.index(()=>{})
+                    Matricula.index()
                 }
             })
-
+            
+            
             return {
                 Utilities,
                 ventana_confirmacion,
-                delete_,
+                accion_matricula,
+                active_,
                 identificacion_,
                 tipos,
                 tipo_numero,
@@ -318,17 +345,16 @@
                 filter_estudiante,
                 filter_identificacion,
                 abrir_ventana_conf,
-                matricula_eliminar,
+                matricula_temporal,
                 set_seccion,
-                verfificar_matriculas
+                verfificar_matriculas,
+                estadoMatricula
             }
       
         },
         mounted(){
             this.$nextTick(()=>{
-                Aplicacion.check_login(()=>{
-                    this.verfificar_matriculas()
-                })
+                this.verfificar_matriculas()
             })
         }
     })

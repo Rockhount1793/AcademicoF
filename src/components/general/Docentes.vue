@@ -160,13 +160,11 @@
 </div>
 </template>
 
-<script>
+<script lang="js">
 import { watchEffect, watch, ref, defineComponent, computed, getCurrentInstance, reactive } from "vue"
 import Store from '@/store'
-import Aplicacion from '@/controllers/Aplicacion'
 import Docente from '@/controllers/Docente'
 import Utilities from '@/utilities'
-import $swal from 'sweetalert2'
 
 export default defineComponent({
     'name': 'Docentes',
@@ -237,7 +235,6 @@ export default defineComponent({
         }
 
         // # computed
-        const actual_sede = computed(() => Store.state.actual_sede)
         const docentes = computed(() => Store.state.docentes)
 
         const filter_docentes = computed(() => {
@@ -273,17 +270,11 @@ export default defineComponent({
     },
 
     mounted(){
-
         this.$nextTick(() => {
-
-            Aplicacion.check_login(() => {
-                if (!Store.state.docentes.length) {
-                    Docente.index()
-                }
-            })
-
+            if (!Store.state.docentes.length) {
+                Docente.index()
+            }
         })
-
     }
 
 })
