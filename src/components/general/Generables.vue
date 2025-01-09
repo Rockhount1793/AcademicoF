@@ -207,13 +207,13 @@
                 <!-- Fecha del certificado -->
                 <div class="w-full">
                     <p class="mx-2 font-semibold text-gray-500 text-md">Fecha del certificado:</p>
-                    <input id="datos_constancia_estudio_fecha" @change="set_fecha_constancia_estudio()" required type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                    <input id="datos_constancia_estudio_fecha" @change="(e)=>set_fecha_certificado_estudio(e.target.value)" required type="date" class="mx-2 font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                 </div>
             
                 <!-- Razón del certificado -->
                 <div class="w-full mt-3">
                     <p class="mx-2 font-semibold text-gray-500 text-md">Razón del certificado:</p>
-                    <input id="datos_constancia_estudio_razon" @change="set_razon_constancia_estudio()" required type="text" value="" class="mx-2 w-full font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                    <input id="datos_constancia_estudio_razon" @change="(e)=>set_razon_constancia_estudio(e.target.value)" required type="text" class="mx-2 w-full font-semibold text-gray-500 text-md border-gray-300 bg-white rounded cursor-pointer h-8 pl-2 pr-8 py-1  px-2 focus:outline-none shadow-md shadow-indigo-100 focus:border-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5">
                 </div>
 
             </div>
@@ -259,28 +259,22 @@
             let errores = ref([])
 
             let Matricula_Global = ref(undefined)
-            let fecha_constancia_estudio = ""
-            let razon_constancia_estudio = ""
-            let fecha_certificado_estudio = ""
+            let fecha_constancia_estudio = ref("")
+            let razon_constancia_estudio = ref("")
+            let fecha_certificado_estudio = ref("")
             let fecha_boletin = ""
             let director_id = 0
             let tipo_certificado = ref('')
             //# methods
             
             const clearform = ()=>{
-                 director_id = 0
-
-                let actual_generable_director = { 'docente_id': director_id }
-                Store.commit('set_actual_generable_director', actual_generable_director)
+                director_id = 0
+                Store.commit('set_actual_generable_director',{"docente_id":director_id })
                 set_tipo_certificado('')
-
-                if(tipo_certificado==='ESTUDIO')document.getElementById('datos_constancia_estudio_fecha').value = ""
-                if(tipo_certificado==='NOTAS') set_fecha_constancia_estudio()
-
-                if(tipo_certificado==='ESTUDIO') document.getElementById('datos_constancia_estudio_razon').value = ""
-                
+                if(tipo_certificado==='ESTUDIO') set_fecha_constancia_estudio("")
+                if(tipo_certificado==='NOTAS') set_fecha_constancia_estudio("")
+                if(tipo_certificado==='ESTUDIO') set_razon_constancia_estudio("")
                 Matricula_Global = undefined
-
             }
 
             //GENERAR BOLETINES
@@ -340,15 +334,15 @@
             const set_fecha_boletin = () => {
                 fecha_boletin = document.getElementById('fecha_boletin').value
             }
-            const set_fecha_constancia_estudio = () => {
-                fecha_constancia_estudio = document.getElementById('datos_constancia_estudio_fecha').value
+            const set_fecha_constancia_estudio = (fecha) => {
+                fecha_constancia_estudio.value = fecha
             }
-            const set_fecha_certificado_estudio = () => {
-                fecha_certificado_estudio = document.getElementById('datos_constancia_estudio_fecha').value
+            const set_fecha_certificado_estudio = (fecha) => {
+                fecha_certificado_estudio.value = fecha
             }
 
-            const set_razon_constancia_estudio = () => {
-                razon_constancia_estudio = document.getElementById('datos_constancia_estudio_razon').value
+            const set_razon_constancia_estudio = (razon) => {
+                razon_constancia_estudio.value = razon
             }
 
             const showAlert = ()=>{
@@ -370,19 +364,16 @@
                     if (actual_periodo.value.periodo <= 5) {
 
                         //Validar datos de interfaz
-                        if(fecha_certificado_estudio === "")
+                        if(fecha_certificado_estudio.value === "")
                         {
                             alert("La fecha del certificado de estudio es requerida, por favor seleccione una fecha!")
-                        }else if(razon_constancia_estudio === "")
+                        }else if(razon_constancia_estudio.value === "")
                         {
                             alert("La razón del certificado de estudio es requerida, no puede ser un texto vacío. Por favor digite la razón del certificado!")
                         }
                         else{
                             //Generar certificado
-
-                            let datos_certificado_estudio = { 'razon': razon_constancia_estudio, 'fecha': fecha_certificado_estudio }
-                            Store.commit('set_actual_datos_certificado_estudio', datos_certificado_estudio)
-                            
+                            Store.commit('set_actual_datos_certificado_estudio', { 'razon': razon_constancia_estudio.value, 'fecha': fecha_certificado_estudio.value })                            
                             Generable.certificado_estudio_file_front(matricula)
                         }
 
@@ -408,13 +399,13 @@
                 if (!errores.value.length) {
                     //Validar datos de interfaz
                     
-                    if(fecha_constancia_estudio === "")
+                    if(fecha_constancia_estudio.value === "")
                         {
-                            alert("La fecha del certificado de estudio es requerida, por favor seleccione una fecha!")
+                            alert("La fecha del certificado de notas es requerida, por favor seleccione una fecha!")
                         }else{
                             //Generar certificado
 
-                            let datos_certificado_notas = {'fecha': fecha_constancia_estudio }
+                            let datos_certificado_notas = {'fecha': fecha_constancia_estudio.value }
                             Store.commit('set_actual_datos_certificado_notas', datos_certificado_notas)
                             
                             generar_certificado(matricula)
@@ -553,6 +544,7 @@
                 matriculas,
                 Matricula_Global,
                 fecha_constancia_estudio,
+                fecha_certificado_estudio,
                 razon_constancia_estudio,
                 director_id,
                 set_director,

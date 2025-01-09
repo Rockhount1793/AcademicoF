@@ -22,9 +22,9 @@ const Controller = {
     
         if(Config.status === 'development'){
            console.log(error)
+        }else{
+            this.cerrar_sesion()
         }
-
-        this.cerrar_sesion()
 
     },
 
